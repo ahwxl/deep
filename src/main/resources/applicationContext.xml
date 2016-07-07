@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd"
+	default-lazy-init="true">
+
+	<context:component-scan base-package="com.bplow.deep"></context:component-scan>
+	
+	<context:annotation-config />
+
+	<tx:annotation-driven />
+
+	<beans profile="development">
+		<context:property-placeholder location="classpath*:*.properties" />
+
+		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+			destroy-method="close">
+			<!-- Connection Info -->
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<!-- Connection Pooling Info -->
+			<property name="maxActive" value="${jdbc.pool.maxActive}" />
+			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
+			<property name="minIdle" value="0" />
+			<property name="defaultAutoCommit" value="false" />
+			<!-- 心跳验证 -->
+			<property name="validationQuery" value="SELECT 1"></property>
+			<property name="testOnBorrow" value="true" />
+			<property name="testWhileIdle" value="true" />
+		</bean>
+
+		<!-- MYBATIS <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+			<property name="dataSource" ref="dataSource" /> <property name="configLocation" 
+			value="classpath:sqlmap/mybatis-config.xml" /> </bean> <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
+			<property name="basePackage" value="com.bplow.netconn.query.dao" /> </bean> -->
+
+		<!-- baseJdbcDao -->
+		<bean id="baseJdbcDao" class="com.bplow.netconn.base.dao.JdbcDaoSupport">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+
+		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+
+		<!-- ibatis -->
+		<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"
+			lazy-init="false">
+			<property name="configLocation" value="classpath:sqlmap/mybatis-config.xml" />
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+
+		<bean id="transactionManager"
+			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource"></property>
+		</bean>
+
+		<tx:annotation-driven transaction-manager="transactionManager" />
+
+		<bean id="transactionTemplate"
+			class="org.springframework.transaction.support.TransactionTemplate">
+			<property name="transactionManager" ref="transactionManager"></property>
+		</bean>
+
+		<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"
+			lazy-init="true" />
+
+		<bean id="nativeJdbcExtractor"
+			class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"
+			lazy-init="true" />
+
+	</beans>
+
+	<beans profile="production">
+		<context:property-placeholder
+			ignore-resource-not-found="true" location="classpath*:/application.properties" />
+
+		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+			destroy-method="close">
+			<!-- Connection Info -->
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<!-- Connection Pooling Info -->
+			<property name="maxActive" value="${jdbc.pool.maxActive}" />
+			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
+			<property name="minIdle" value="0" />
+			<property name="defaultAutoCommit" value="false" />
+			<!-- 心跳验证 -->
+			<property name="validationQuery" value="SELECT 1"></property>
+			<property name="testOnBorrow" value="true" />
+			<property name="testWhileIdle" value="true" />
+		</bean>
+
+		<!-- MYBATIS <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+			<property name="dataSource" ref="dataSource" /> <property name="configLocation" 
+			value="classpath:sqlmap/mybatis-config.xml" /> </bean> <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
+			<property name="basePackage" value="com.bplow.netconn.query.dao" /> </bean> -->
+
+		<!-- baseJdbcDao -->
+		<bean id="baseJdbcDao" class="com.bplow.netconn.base.dao.JdbcDaoSupport">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+
+		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+
+		<!-- ibatis -->
+		<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+			<property name="configLocation" value="classpath:sqlmap/mybatis-config.xml" />
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+
+		<bean id="transactionManager"
+			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource"></property>
+		</bean>
+
+		<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+
+		<bean id="transactionTemplate"
+			class="org.springframework.transaction.support.TransactionTemplate">
+			<property name="transactionManager" ref="transactionManager"></property>
+		</bean>
+
+		<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"
+			lazy-init="true" />
+
+		<bean id="nativeJdbcExtractor"
+			class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"
+			lazy-init="true" />
+	</beans>
+
+
+
+</beans>
