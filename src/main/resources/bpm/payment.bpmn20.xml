@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions id="definitions"
+             targetNamespace="http://activiti.org/bpmn20" 
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:activiti="http://activiti.org/bpmn">
+             
+<process id="forkJoin" name="forkJoin request">
+
+<startEvent id="theStart" />
+<sequenceFlow id="flow1" sourceRef="theStart" targetRef="fork" />
+
+<inclusiveGateway id="fork" />
+<sequenceFlow sourceRef="fork" targetRef="receivePayment">
+	<conditionExpression xsi:type="tFormalExpression">${paymentReceived ==
+		false}</conditionExpression>
+</sequenceFlow>
+<sequenceFlow sourceRef="fork" targetRef="shipOrder">
+	<conditionExpression xsi:type="tFormalExpression">${shipOrder == true}
+	</conditionExpression>
+</sequenceFlow>
+
+<userTask id="receivePayment" name="Receive Payment" />
+<sequenceFlow sourceRef="receivePayment" targetRef="join" />
+
+<userTask id="shipOrder" name="Ship Order" />
+<sequenceFlow sourceRef="shipOrder" targetRef="join" />
+
+<inclusiveGateway id="join" />
+<sequenceFlow sourceRef="join" targetRef="archiveOrder" />
+
+<userTask id="archiveOrder" name="Archive Order" />
+<sequenceFlow sourceRef="archiveOrder" targetRef="theEnd" />
+
+<endEvent id="theEnd" />
+
+</process>

@@ -17,13 +17,34 @@
 		<tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
 		<jackson.version>2.4.0</jackson.version>
 		<jettyVersion>9.0.2.v20130417</jettyVersion>
+		<mybatis-spring.version>1.3.0</mybatis-spring.version>
+		<mybatis.version>3.4.0</mybatis.version>
+		<servlet-api.version>2.5</servlet-api.version>
+		<mybatis-ehcache.version>1.0.3</mybatis-ehcache.version>
+		<ojdbc14.version>10.2.0.5.0</ojdbc14.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>javax.transaction-api</artifactId>
+			<version>1.2</version>
+		</dependency>
 		<!-- spring begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
 		<dependency>
@@ -54,6 +75,23 @@
 		<!-- spring end -->
 
 		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis-spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.caches</groupId>
+			<artifactId>mybatis-ehcache</artifactId>
+			<version>${mybatis-ehcache.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.1</version>
@@ -63,33 +101,94 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.35</version>
 		</dependency>
-		<!-- <dependency>
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc14</artifactId> 
+			<version>${ojdbc14.version}</version> <scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>org.lucee</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jdbc</artifactId>
 			<version>${tomcat-jdbc.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-			<version>${freemarker.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.apache.tomcat</groupId> <artifactId>tomcat-jdbc</artifactId> 
+			<version>${tomcat-jdbc.version}</version> <scope>runtime</scope> </dependency> 
+			<dependency> <groupId>org.freemarker</groupId> <artifactId>freemarker</artifactId> 
+			<version>${freemarker.version}</version> </dependency> -->
 		<!-- <dependency> <groupId>javax.jms</groupId> <artifactId>jms</artifactId> 
 			<version>1.1</version> </dependency> -->
 		<!-- <dependency> <groupId>org.apache.zookeeper</groupId> <artifactId>zookeeper</artifactId> 
 			<version>3.3.3</version> </dependency> -->
-		<!-- <dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>dubbo</artifactId>
-			<version>2.5.3</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.alibaba</groupId> <artifactId>dubbo</artifactId> 
+			<version>2.5.3</version> </dependency> -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>20040616</version>
+		</dependency>
+		<!-- activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>5.16.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>5.16.4</version>
+		</dependency>
+		<!-- 日志相关 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-archetype</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+
 
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
+			<version>4.12</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
@@ -175,17 +274,9 @@
 					</descriptorRefs>
 				</configuration>
 			</plugin>
-			<!--
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.9.v20130131</version>
-				<configuration>
-					<webApp>
-						<contextPath>/ads</contextPath>
-					</webApp>
-				</configuration>
-			</plugin>-->
+			<!-- <plugin> <groupId>org.mortbay.jetty</groupId> <artifactId>jetty-maven-plugin</artifactId> 
+				<version>8.1.9.v20130131</version> <configuration> <webApp> <contextPath>/ads</contextPath> 
+				</webApp> </configuration> </plugin> -->
 
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
@@ -194,7 +285,7 @@
 				<configuration>
 					<server>tomcat-development-server</server>
 					<port>8080</port>
-					<path>/ads</path>
+					<path>/deep</path>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -207,7 +298,7 @@
 					<scanIntervalSeconds>1000000</scanIntervalSeconds>
 					<contextXml>${project.basedir}/src/main/resources/jetty-context.xml</contextXml>
 					<webApp>
-						<contextPath>/ads</contextPath>
+						<contextPath>/deep</contextPath>
 					</webApp>
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">

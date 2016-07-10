@@ -9,18 +9,18 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     
     <!-- 拦截器 -->
-    <mvc:interceptors>
+    <!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/* -->
+    <!-- <mvc:interceptors>
         <mvc:interceptor>
-            <!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/* -->
-            <!-- <mvc:exclude-mapping path="/resources/**" /> -->
+            <mvc:exclude-mapping path="/resources/**" />
             <mvc:mapping path="/**"  />
             <ref bean="userAccessInterceptor" />
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors> -->
  
-    <bean id="userAccessInterceptor"
+    <!-- <bean id="userAccessInterceptor"
         class="com.bplow.netconn.query.interceptor.RequestStatisIntercaptor">
-    </bean>
+    </bean> -->
     
     <!--
     - The ContentNegotiatingViewResolver delegates to the InternalResourceViewResolver and BeanNameViewResolver,

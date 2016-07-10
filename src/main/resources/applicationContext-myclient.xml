@@ -4,6 +4,7 @@
 
 	<description>导入myclient中的applicationContext文件列表</description>
 
+    <import resource="bpm/applicationContext-bpm.xml" />
 	<!-- required 
 	<import resource="security/applicationContext-shiro.xml" />-->
 

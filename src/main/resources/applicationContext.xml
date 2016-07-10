@@ -46,20 +46,20 @@
 			<property name="basePackage" value="com.bplow.netconn.query.dao" /> </bean> -->
 
 		<!-- baseJdbcDao -->
-		<bean id="baseJdbcDao" class="com.bplow.netconn.base.dao.JdbcDaoSupport">
+		<!-- <bean id="baseJdbcDao" class="com.bplow.netconn.base.dao.JdbcDaoSupport">
 			<property name="dataSource" ref="dataSource" />
-		</bean>
+		</bean> -->
 
 		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 			<property name="dataSource" ref="dataSource" />
 		</bean>
 
-		<!-- ibatis -->
+		<!-- ibatis 
 		<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"
 			lazy-init="false">
 			<property name="configLocation" value="classpath:sqlmap/mybatis-config.xml" />
 			<property name="dataSource" ref="dataSource" />
-		</bean>
+		</bean>-->
 
 		<bean id="transactionManager"
 			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

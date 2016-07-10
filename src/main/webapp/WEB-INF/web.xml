@@ -19,7 +19,7 @@
 
 
 	<servlet>
-		<servlet-name>ADS</servlet-name>
+		<servlet-name>DEEP</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -29,7 +29,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>ADS</servlet-name>
+		<servlet-name>DEEP</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
