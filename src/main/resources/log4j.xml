@@ -69,22 +69,5 @@
 		<priority value="info" />
 		<appender-ref ref="STDOUT" />
 	</root>
-
-	<category name="org.springframework.web">
-		<priority value="info" />
-		<appender-ref ref="STDOUT" />
-	</category>
 	
-	<category name="com.ibatis">
-        <priority value="debug"/>
-        <level value="debug" />
-        <appender-ref ref="userRequest" />
-    </category>
-    
-    <category name="com.ibatis.common">
-        <priority value="debug"/>
-        <level value="debug" />
-        <appender-ref ref="userRequest" />
-    </category>
-
 </log4j:configuration>
