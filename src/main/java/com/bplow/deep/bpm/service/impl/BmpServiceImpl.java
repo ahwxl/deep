@@ -36,9 +36,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bplow.deep.bpm.service.BmpService;
+
 @Transactional
 @Service
-public class BmpService {
+public class BmpServiceImpl implements BmpService {
 
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 

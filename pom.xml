@@ -130,6 +130,11 @@
 			<version>2.5.3</version>
 		</dependency>
 		<dependency>
+		    <groupId>com.101tec</groupId>
+		    <artifactId>zkclient</artifactId>
+		    <version>0.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>

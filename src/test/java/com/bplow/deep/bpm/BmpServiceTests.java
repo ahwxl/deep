@@ -16,7 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-import com.bplow.deep.bpm.service.impl.BmpService;
+import com.bplow.deep.bpm.service.impl.BmpServiceImpl;
 
 /**
  * @desc 
@@ -31,7 +31,7 @@ import com.bplow.deep.bpm.service.impl.BmpService;
 public class BmpServiceTests {
 	
 	@Autowired
-	private BmpService bpmService;
+	private BmpServiceImpl bpmService;
 	
 	@Test
 	public void deployTest(){
