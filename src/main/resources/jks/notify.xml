@@ -1,0 +1,27 @@
+<MessageSuit><Message id="90738154"><Plain id="CCNotify">
+<transId>CCNotify</transId>
+<merId>800000000000043</merId>
+<serialNo>90738154</serialNo>
+<date>20160707 14:15:37</date>
+<fileURL></fileURL>
+<fileName>CCF_20160428_1.zip</fileName>
+<clearingDate>20160428</clearingDate>
+<digest>367f2ab9df171f8c430bb625d2a80a761ed63c1b253e45b03534b357f77c9b9362d90e6c37df318f06939020cf103f82cd2c35be4205fa4d25472f57a14915a27ce6e5e9ac2894945dc218bac630ef33fdbf669c2e773b68ef15a18a4c67812f459a8281c267a8a24f4088ec831f2379669d61328027491589802f52eefea40f</digest>
+</Plain><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+<ds:Reference URI="#CCNotify">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>ne/7xxMryvI4zTOP0pfbEX5mV9E=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+JtC3FxWBFwasMUCLxEusPnOQdOrGGlNdayN+yb9nrTVGPZFkDsFCotLI1WuhEDSt7N3pKEmVrGY8
+L2LG+SfsaOZ+1WUnI5x3Poi74WM9A9XTcTwcFWlh4IxQACtoXtU48XvGo83CIa7oCFATEebSIC7U
+01XXFcoA5P3OT6RLRBo=
+</ds:SignatureValue>
+</ds:Signature></Message></MessageSuit>
