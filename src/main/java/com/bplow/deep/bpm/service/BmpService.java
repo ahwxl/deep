@@ -10,6 +10,7 @@ package com.bplow.deep.bpm.service;
  */
 public interface BmpService {
 	
+	//部署
 	public String deploy(String xmlPath);
 
 }
