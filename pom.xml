@@ -22,6 +22,7 @@
 		<servlet-api.version>2.5</servlet-api.version>
 		<mybatis-ehcache.version>1.0.3</mybatis-ehcache.version>
 		<ojdbc14.version>10.2.0.4.0</ojdbc14.version>
+		<activiti.version>5.18.0</activiti.version>
 	</properties>
 
 	<dependencies>
@@ -163,12 +164,17 @@
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-engine</artifactId>
-			<version>5.16.4</version>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-layout</artifactId>
+			<version>${activiti.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-spring</artifactId>
-			<version>5.16.4</version>
+			<version>${activiti.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>

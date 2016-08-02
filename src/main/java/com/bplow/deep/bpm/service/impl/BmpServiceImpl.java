@@ -16,6 +16,8 @@ import java.util.zip.ZipInputStream;
 
 import javax.transaction.Transactional;
 
+import org.activiti.bpmn.BpmnAutoLayout;
+import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
@@ -31,6 +33,8 @@ import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.activiti.image.ProcessDiagramGenerator;
+import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -231,6 +235,21 @@ public class BmpServiceImpl implements BmpService {
 				processDefinition.getDeploymentId(), diagramResourceName);
 
 		return imageStream;
+	}
+	
+	public InputStream getImageInputStreamById(String processDefinitionKey){
+		ProcessDefinition processDefinition = repositoryService.getProcessDefinition(processDefinitionKey);
+        //        .processDefinitionKey(processDefinitionKey).listPage(0, 1).get(0);
+        ProcessDiagramGenerator processDiagramGenerator = new DefaultProcessDiagramGenerator();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
+
+        if (bpmnModel.getLocationMap().size() == 0) {
+            BpmnAutoLayout autoLayout = new BpmnAutoLayout(bpmnModel);
+            autoLayout.execute();
+        }
+
+        InputStream is = processDiagramGenerator.generateJpgDiagram(bpmnModel);
+        return is;
 	}
 
 	/**

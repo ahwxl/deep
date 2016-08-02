@@ -3,11 +3,17 @@
  */
 package com.bplow.deep.bpm;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,12 +58,30 @@ public class BmpServiceTests {
 	}
 	
 	@Test
-	public void completeTask(){
+	public void completeTaskTest(){
 		Map<String, Object> taskVariables = new HashMap<String, Object>();
 		taskVariables.put("vacationApproved", "false");
 		taskVariables.put("managerMotivation", "We have a tight deadline!");
 		
 		
+	}
+	
+	@Test
+	public void getImageInputStreamTest() throws FileNotFoundException, IOException{
+		
+		InputStream in = bpmService.getImageInputStream("createTimersProcess");
+		File file = new File("c:/log/bpm.jpg");
+		IOUtils.copy(in, new FileOutputStream(file));
+		in.close();
+	}
+	
+	@Test
+	public void getImageInputStreamByIdTest() throws FileNotFoundException, IOException{
+		
+		InputStream in = bpmService.getImageInputStreamById("vacationRequest:1:20003");
+		File file = new File("c:/log/bpm.jpg");
+		IOUtils.copy(in, new FileOutputStream(file));
+		in.close();
 	}
 
 }

@@ -8,7 +8,7 @@
 
     <import resource="bpm/applicationContext-bpm.xml" />
     
-    <import resource="spring/provider.xml" />
+    <!-- <import resource="spring/provider.xml" /> -->
 	<!-- required 
 	<import resource="security/applicationContext-shiro.xml" />-->
 
