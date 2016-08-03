@@ -41,9 +41,9 @@ public class BmpServiceTests {
 	
 	@Test
 	public void deployTest(){
-		bpmService.deploy("");
-		//InputStream is = this.getClass().getResourceAsStream("/bpm/vacationRequest.bpmn20.xml");
-		//bpmService.deploy("vacationRequest", is);
+		bpmService.deploy("bpm/vacationRequest.bpmn20.xml");
+//		InputStream is = this.getClass().getResourceAsStream("/bpm/vacationRequest.bpmn20.xml");
+//		bpmService.deploy("vacationRequest", is);
 	}
 	
 	@Test
@@ -69,7 +69,7 @@ public class BmpServiceTests {
 	@Test
 	public void getImageInputStreamTest() throws FileNotFoundException, IOException{
 		
-		InputStream in = bpmService.getImageInputStream("createTimersProcess");
+		InputStream in = bpmService.getImageInputStream("vacationRequest");
 		File file = new File("c:/log/bpm.jpg");
 		IOUtils.copy(in, new FileOutputStream(file));
 		in.close();
@@ -78,8 +78,8 @@ public class BmpServiceTests {
 	@Test
 	public void getImageInputStreamByIdTest() throws FileNotFoundException, IOException{
 		
-		InputStream in = bpmService.getImageInputStreamById("vacationRequest:1:20003");
-		File file = new File("c:/log/bpm.jpg");
+		InputStream in = bpmService.getImageInputStreamById("vacationRequest:1:2503");
+		File file = new File("d:/logs/bpm.jpg");
 		IOUtils.copy(in, new FileOutputStream(file));
 		in.close();
 	}

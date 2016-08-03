@@ -46,141 +46,135 @@ import com.bplow.deep.bpm.service.BmpService;
 @Service
 public class BmpServiceImpl implements BmpService {
 
-	private Logger log = LoggerFactory.getLogger(this.getClass());
+    private Logger          log = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	RepositoryService repositoryService;
+    @Autowired
+    RepositoryService       repositoryService;
 
-	@Autowired
-	RuntimeService runtimeService;
+    @Autowired
+    RuntimeService          runtimeService;
 
-	@Autowired
-	TaskService taskService;
+    @Autowired
+    TaskService             taskService;
 
-	@Autowired
-	private IdentityService identityService;
+    @Autowired
+    private IdentityService identityService;
 
-	/**
-	 * 部署流程定义文件 "bpm/vacationRequest.bpmn20.xml"
-	 * 
-	 * @param xmlPath
-	 * @return
-	 */
-	public String deploy(String xmlPath) {
+    /**
+     * 部署流程定义文件 "bpm/vacationRequest.bpmn20.xml"
+     * 
+     * @param xmlPath
+     * @return
+     */
+    public String deploy(String xmlPath) {
 
-		String deploymentId = repositoryService.createDeployment()
-				.addClasspathResource(xmlPath).deploy().getId();
-		return deploymentId;
-	}
+        String deploymentId = repositoryService.createDeployment().addClasspathResource(xmlPath)
+            .deploy().getId();
+        return deploymentId;
+    }
 
-	/**
-	 * 
-	 * @param name
-	 * @param is
-	 * @return
-	 */
-	public String deploy(String name, InputStream is) {
-		log.info("部署流程{}", name);
+    /**
+     * 
+     * @param name
+     * @param is
+     * @return
+     */
+    public String deploy(String name, InputStream is) {
+        log.info("部署流程{}", name);
 
-		return repositoryService.createDeployment().addInputStream(name, is)
-				.deploy().getId();
-	}
+        return repositoryService.createDeployment().addInputStream(name, is).deploy().getId();
+    }
 
-	public String deployByZip(String name, InputStream is) {
-		ZipInputStream inputStream = new ZipInputStream(is);
-		return repositoryService.createDeployment().name(name)
-				.addZipInputStream(inputStream).deploy().getId();
+    public String deployByZip(String name, InputStream is) {
+        ZipInputStream inputStream = new ZipInputStream(is);
+        return repositoryService.createDeployment().name(name).addZipInputStream(inputStream)
+            .deploy().getId();
 
-	}
+    }
 
-	/**
-	 * 启动流程实例
-	 * 
-	 * @param key
-	 * @return
-	 */
-	public String startProcessByKey(String key, Map<String, Object> variables) {
+    /**
+     * 启动流程实例
+     * 
+     * @param key
+     * @return
+     */
+    public String startProcessByKey(String key, Map<String, Object> variables) {
 
-		ProcessInstance processInstance = runtimeService
-				.startProcessInstanceByKey("vacationRequest", variables);
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
+            "vacationRequest", variables);
 
-		return processInstance.getId();
-	}
+        return processInstance.getId();
+    }
 
-	public String startProcessById(String id, Map<String, Object> variables) {
-		log.info("启动流程{},{}", id, variables);
+    public String startProcessById(String id, Map<String, Object> variables) {
+        log.info("启动流程{},{}", id, variables);
 
-		identityService.setAuthenticatedUserId("bono");
+        identityService.setAuthenticatedUserId("bono");
 
-		ProcessInstance processInstance = runtimeService
-				.startProcessInstanceById(id, variables);
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById(id, variables);
 
-		return processInstance.getProcessInstanceId();
-	}
+        return processInstance.getProcessInstanceId();
+    }
 
-	/**
-	 * 完成任务
-	 * 
-	 * @param processId
-	 * @param taskId
-	 */
-	public void completeTask(String processId, String taskId,
-			Map<String, Object> taskVariable) {
+    /**
+     * 完成任务
+     * 
+     * @param processId
+     * @param taskId
+     */
+    public void completeTask(String processId, String taskId, Map<String, Object> taskVariable) {
 
-		taskService.complete(taskId, taskVariable);
+        taskService.complete(taskId, taskVariable);
 
-	}
+    }
 
-	public void claimTask(String taskId, String userId) {
+    public void claimTask(String taskId, String userId) {
 
-		taskService.claim(taskId, userId);
-	}
+        taskService.claim(taskId, userId);
+    }
 
-	/**
-	 * 代办
-	 */
+    /**
+     * 代办
+     */
 
-	/**
-	 * 跳跃： 从一个节点跳跃到任意节点，不受线路的限制。 而且 complete 事件不能受影响。
-	 * 退回： 与 跳跃的差别就是在处理之前检查下任务是否处理过。
-	 * 驳回： 与退回一致，只是发起这不一样
-	 * 执行指定节点,建立在单执行线路上
-	 */
-	protected Void execute(CommandContext commandContext, TaskEntity task) {
+    /**
+     * 跳跃： 从一个节点跳跃到任意节点，不受线路的限制。 而且 complete 事件不能受影响。
+     * 退回： 与 跳跃的差别就是在处理之前检查下任务是否处理过。
+     * 驳回： 与退回一致，只是发起这不一样
+     * 执行指定节点,建立在单执行线路上
+     */
+    protected Void execute(CommandContext commandContext, TaskEntity task) {
 
-		String toTaskKey = null;
-		Map variables =null;
-		String type =null;
-		if (variables != null)
-			task.setExecutionVariables(variables);
+        String toTaskKey = null;
+        Map variables = null;
+        String type = null;
+        if (variables != null)
+            task.setExecutionVariables(variables);
 
-		ExecutionEntity execution = task.getExecution();
-		// 流程定义id
-		String procDefId = execution.getProcessDefinitionId();
-		// 获取服务
-		RepositoryServiceImpl repositoryService = (RepositoryServiceImpl) execution
-				.getEngineServices().getRepositoryService();
-		// 获取流程定义的所有节点
-		ProcessDefinitionImpl processDefinitionImpl = (ProcessDefinitionImpl) repositoryService
-				.getDeployedProcessDefinition(procDefId);
-		// 获取需要提交的节点
-		ActivityImpl toActivityImpl = processDefinitionImpl
-				.findActivity(toTaskKey);
+        ExecutionEntity execution = task.getExecution();
+        // 流程定义id
+        String procDefId = execution.getProcessDefinitionId();
+        // 获取服务
+        RepositoryServiceImpl repositoryService = (RepositoryServiceImpl) execution
+            .getEngineServices().getRepositoryService();
+        // 获取流程定义的所有节点
+        ProcessDefinitionImpl processDefinitionImpl = (ProcessDefinitionImpl) repositoryService
+            .getDeployedProcessDefinition(procDefId);
+        // 获取需要提交的节点
+        ActivityImpl toActivityImpl = processDefinitionImpl.findActivity(toTaskKey);
 
-		if (toActivityImpl == null) {
-			throw new ActivitiException(toTaskKey
-					+ " to ActivityImpl is null!");
-		} else {
-			task.fireEvent("complete");
-			Context.getCommandContext().getTaskEntityManager()
-					.deleteTask(task, type, false);
-			execution.removeTask(task);// 执行规划的线
-			execution.executeActivity(toActivityImpl);
-		}
-		return null;
-	}
-	
-	/** 
+        if (toActivityImpl == null) {
+            throw new ActivitiException(toTaskKey + " to ActivityImpl is null!");
+        } else {
+            task.fireEvent("complete");
+            Context.getCommandContext().getTaskEntityManager().deleteTask(task, type, false);
+            execution.removeTask(task);// 执行规划的线
+            execution.executeActivity(toActivityImpl);
+        }
+        return null;
+    }
+
+    /** 
      * 会签操作 
      *  
      * @param taskId 
@@ -188,57 +182,56 @@ public class BmpServiceImpl implements BmpService {
      * @param userCodes 
      *            会签人账号集合 
      * @throws Exception 
-     */  
-    public void jointProcess(String taskId, List<String> userCodes)  
-            throws Exception {  
-        for (String userCode : userCodes) {  
-            TaskEntity task = (TaskEntity) taskService.newTask(""/*IDGenerator.generateID()*/);  
-            task.setAssignee(userCode);  
-            task.setName("" + "-会签");  
+     */
+    public void jointProcess(String taskId, List<String> userCodes) throws Exception {
+        for (String userCode : userCodes) {
+            TaskEntity task = (TaskEntity) taskService.newTask(""/*IDGenerator.generateID()*/);
+            task.setAssignee(userCode);
+            task.setName("" + "-会签");
             task.setProcessDefinitionId(""/*findProcessDefinitionEntityByTaskId(  
-                    taskId).getId()*/);  
-            task.setProcessInstanceId(""/*findProcessInstanceByTaskId(taskId).getId()*/);  
-            task.setParentTaskId(taskId);  
-            task.setDescription("jointProcess");  
-            taskService.saveTask(task);  
-        }  
-    } 
+                                          taskId).getId()*/);
+            task.setProcessInstanceId(""/*findProcessInstanceByTaskId(taskId).getId()*/);
+            task.setParentTaskId(taskId);
+            task.setDescription("jointProcess");
+            taskService.saveTask(task);
+        }
+    }
 
-	/**
-	 * 暂停流程
-	 * 
-	 * @param key
-	 */
-	public void suspendProcess(String key) {
-		runtimeService.startProcessInstanceByKey("vacationRequest");
-	}
+    /**
+     * 暂停流程
+     * 
+     * @param key
+     */
+    public void suspendProcess(String key) {
+        runtimeService.startProcessInstanceByKey("vacationRequest");
+    }
 
-	/**
-	 * 删除流程
-	 */
-	public void deleletProcessById(String id) {
+    /**
+     * 删除流程
+     */
+    public void deleletProcessById(String id) {
 
-	}
+    }
 
-	/**
-	 * 获取部署的图片
-	 */
-	public InputStream getImageInputStream(String key) {
+    /**
+     * 获取部署的图片
+     */
+    public InputStream getImageInputStream(String key) {
 
-		ProcessDefinition processDefinition = repositoryService
-				.createProcessDefinitionQuery().processDefinitionKey(key)
-				.singleResult();
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
+            .processDefinitionKey(key).list().get(0);
 
-		String diagramResourceName = processDefinition.getDiagramResourceName();
+        String diagramResourceName = processDefinition.getDiagramResourceName();
 
-		InputStream imageStream = repositoryService.getResourceAsStream(
-				processDefinition.getDeploymentId(), diagramResourceName);
+        InputStream imageStream = repositoryService.getResourceAsStream(
+            processDefinition.getDeploymentId(), diagramResourceName);
 
-		return imageStream;
-	}
-	
-	public InputStream getImageInputStreamById(String processDefinitionKey){
-		ProcessDefinition processDefinition = repositoryService.getProcessDefinition(processDefinitionKey);
+        return imageStream;
+    }
+
+    public InputStream getImageInputStreamById(String processDefinitionKey) {
+        ProcessDefinition processDefinition = repositoryService
+            .getProcessDefinition(processDefinitionKey);
         //        .processDefinitionKey(processDefinitionKey).listPage(0, 1).get(0);
         ProcessDiagramGenerator processDiagramGenerator = new DefaultProcessDiagramGenerator();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
@@ -250,30 +243,29 @@ public class BmpServiceImpl implements BmpService {
 
         InputStream is = processDiagramGenerator.generateJpgDiagram(bpmnModel);
         return is;
-	}
+    }
 
-	/**
-	 * 获取流程实例列表
-	 */
+    /**
+     * 获取流程实例列表
+     */
 
-	/**
-	 * 获取单条流程实例
-	 */
+    /**
+     * 获取单条流程实例
+     */
 
-	/**
-	 * 获取实例任务
-	 */
-	public List getTaskListByGroup(String group) {
+    /**
+     * 获取实例任务
+     */
+    public List getTaskListByGroup(String group) {
 
-		List<Task> tasks = taskService.createTaskQuery()
-				.taskCandidateGroup(group).list();
+        List<Task> tasks = taskService.createTaskQuery().taskCandidateGroup(group).list();
 
-		return tasks;
+        return tasks;
 
-	}
+    }
 
-	/**
-	 * 获取历史任务列表
-	 */
+    /**
+     * 获取历史任务列表
+     */
 
 }
