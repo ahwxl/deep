@@ -219,7 +219,7 @@ public class BmpServiceImpl implements BmpService {
     public InputStream getImageInputStream(String key) {
 
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
-            .processDefinitionKey(key).list().get(0);
+            .processDefinitionKey(key).orderByDeploymentId().desc().list().get(0);
 
         String diagramResourceName = processDefinition.getDiagramResourceName();
 

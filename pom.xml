@@ -22,7 +22,7 @@
 		<servlet-api.version>2.5</servlet-api.version>
 		<mybatis-ehcache.version>1.0.3</mybatis-ehcache.version>
 		<ojdbc14.version>10.2.0.4.0</ojdbc14.version>
-		<activiti.version>5.18.0</activiti.version>
+		<activiti.version>5.16.4</activiti.version>
 	</properties>
 
 	<dependencies>
@@ -161,11 +161,11 @@
 			<version>20040616</version>
 		</dependency>
 		<!-- activiti -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-engine</artifactId>
 			<version>${activiti.version}</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-bpmn-layout</artifactId>
@@ -227,6 +227,22 @@
 		    <groupId>org.jasig.cas</groupId>
 		    <artifactId>cas-client-core</artifactId>
 		    <version>3.1.10</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.drools</groupId>
+		    <artifactId>drools-core</artifactId>
+		    <version>5.1.0.M2</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.uuid</groupId>
+		    <artifactId>java-uuid-generator</artifactId>
+		    <version>3.1.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.persistence</groupId>
+		    <artifactId>persistence-api</artifactId>
+		    <version>1.0.2</version>
 		</dependency>
 
 		<dependency>
