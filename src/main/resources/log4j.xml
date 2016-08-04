@@ -62,7 +62,7 @@
 
 	<logger name="com.ibatis" additivity="true">
 		<level value="DEBUG" />
-		<appender-ref ref="userRequest" />
+		<appender-ref ref="STDOUT" />
 	</logger>
 	
 	<root>

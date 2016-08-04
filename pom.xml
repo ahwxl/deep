@@ -75,7 +75,7 @@
 		</dependency>
 		<!-- spring end -->
 
-		<!-- DAO begin -->
+		<!-- DAO begin 
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
@@ -91,7 +91,7 @@
 			<artifactId>mybatis-ehcache</artifactId>
 			<version>${mybatis-ehcache.version}</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency>-->
 		<!-- DAO end -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>

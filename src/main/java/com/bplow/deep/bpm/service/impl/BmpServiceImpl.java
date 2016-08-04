@@ -216,10 +216,10 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取部署的图片
      */
-    public InputStream getImageInputStream(String key) {
+    public InputStream getImageInputStream(String deploymentId) {
 
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
-            .processDefinitionKey(key).orderByDeploymentId().desc().list().get(0);
+            .deploymentId(deploymentId).orderByDeploymentId().asc().singleResult();
 
         String diagramResourceName = processDefinition.getDiagramResourceName();
 
