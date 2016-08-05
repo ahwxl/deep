@@ -7,6 +7,10 @@
 			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [ %t ] %c:%L - %m%n" />
 		</layout>
 	</appender>
+	
+	<logger name="java.sql">
+		<level value="debug" />
+	</logger>
 
 	<logger name="org.apache.ibatis">
 		<level value="debug" />
