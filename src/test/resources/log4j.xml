@@ -1,73 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
-	<appender name="digest" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="../logs/digest.log" />
-		<param name="Append" value="true" />
+
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%d][%t]-%m%n" />
-		</layout>
-	</appender>
-	
-	<appender name="mediaDigest" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="../logbak/mediaDigest.log" />
-		<param name="Append" value="true" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%d][%m]%n" />
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [ %t ] %c:%L - %m%n" />
 		</layout>
 	</appender>
 
-	<appender name="error" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="../logs/error.log" />
-		<param name="Append" value="true" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
-		</layout>
-	</appender>
-
-	<appender name="userRequest" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="../logs/request.log" />
-		<param name="Append" value="true" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d [%t] - %m%n" />
-		</layout>
-	</appender>
-
-
-	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
-		</layout>
-	</appender>
-
-	<logger name="system_error" additivity="false">
-        <level value="INFO" />
-		<appender-ref ref="error" />
+	<logger name="org.apache.ibatis">
+		<level value="debug" />
 	</logger>
 
-	<logger name="system_request" additivity="false">
-		<level value="INFO" />
-		<appender-ref ref="userRequest" />
+	<logger name="com.ibatis.common.jdbc.SimpleDataSource">
+		<level value="debug" />
 	</logger>
 
-	<logger name="common-digest" additivity="false">
-		<level value="INFO" />
-		<appender-ref ref="digest" />
-	</logger>
-	
-	<logger name="media-digest" additivity="false">
-		<level value="INFO" />
-		<appender-ref ref="mediaDigest" />
-	</logger>
-
-	<logger name="com.ibatis" additivity="true">
-		<level value="DEBUG" />
-		<appender-ref ref="userRequest" />
+	<logger name="org.springframework.web">
+		<level value="debug" />
 	</logger>
 	
 	<root>
-		<priority value="info" />
-		<appender-ref ref="STDOUT" />
+		<level value="info" />
+		<appender-ref ref="stdout" />
 	</root>
 
 </log4j:configuration>

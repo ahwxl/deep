@@ -69,7 +69,7 @@ public class BmpServiceTests {
 	@Test
 	public void getImageInputStreamTest() throws FileNotFoundException, IOException{
 		
-		InputStream in = bpmService.getImageInputStream("17501");
+		InputStream in = bpmService.getImageInputStream("vacationRequest:1:2503");
 		File file = new File("c:/log/bpm.jpg");
 		IOUtils.copy(in, new FileOutputStream(file));
 		in.close();
