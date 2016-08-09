@@ -19,6 +19,11 @@ public class CasRealm extends AuthorizingRealm {
     private String casServerUrlPrefix;
     
     private String casService;
+    
+    @Override
+    protected void onInit() {
+        super.onInit();
+    }
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

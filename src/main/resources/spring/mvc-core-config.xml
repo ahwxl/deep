@@ -18,15 +18,9 @@
 
     <!--
         - POJOs labeled with the @Controller and @Service annotations are auto-detected.
-    
+    -->
     <context:component-scan
-            base-package="com.bplow.netconn.query.web"/>
-    <context:component-scan
-            base-package="com.bplow.netconn.newcms.web"/>
-    <context:component-scan
-            base-package="com.bplow.netconn.systemmng.web"/>
-    <context:component-scan
-            base-package="com.bplow.netconn.aom.web"/>-->
+            base-package="com.bplow.deep.bpm"/>
 
     <!-- <mvc:annotation-driven conversion-service="conversionService"/> -->
 	<mvc:annotation-driven>
