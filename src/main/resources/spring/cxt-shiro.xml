@@ -40,7 +40,7 @@
 	
 	<bean id="casFilter" class="com.bplow.deep.authority.CasFilter" />
 
-	<bean id="casRealm" class="com.bplow.deep.authority.CasRealm">
+	<bean id="myCasRealm" class="com.bplow.deep.authority.CasRealm">
 		<!-- <property name="defaultRoles" value="ROLE_USER" /> -->
 		<property name="casServerUrlPrefix" value="http://localhost:8989/cas-server-webapp" />
 		<!-- 客户端的回调地址设置，必须和下面的shiro-cas过滤器拦截的地址一致 -->
@@ -51,15 +51,15 @@
 	<bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory" />
 
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="casRealm" />
+		<property name="realm" ref="myCasRealm" />
 		<property name="subjectFactory" ref="casSubjectFactory" />
 	</bean>
 
-	<!-- <bean
+	<bean
 		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager" />
 		<property name="arguments" ref="securityManager" />
-	</bean> -->
+	</bean>
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
