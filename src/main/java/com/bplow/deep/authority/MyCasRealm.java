@@ -14,7 +14,7 @@ import org.jasig.cas.client.validation.Cas20ServiceTicketValidator;
 import org.jasig.cas.client.validation.TicketValidationException;
 import org.jasig.cas.client.validation.TicketValidator;
 
-public class CasRealm extends AuthorizingRealm {
+public class MyCasRealm extends AuthorizingRealm {
     
     private String casServerUrlPrefix;
     

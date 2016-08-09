@@ -40,7 +40,7 @@
 	
 	<bean id="casFilter" class="com.bplow.deep.authority.CasFilter" />
 
-	<bean id="myCasRealm" class="com.bplow.deep.authority.CasRealm">
+	<bean id="myCasRealm" class="com.bplow.deep.authority.MyCasRealm">
 		<!-- <property name="defaultRoles" value="ROLE_USER" /> -->
 		<property name="casServerUrlPrefix" value="http://localhost:8989/cas-server-webapp" />
 		<!-- 客户端的回调地址设置，必须和下面的shiro-cas过滤器拦截的地址一致 -->
