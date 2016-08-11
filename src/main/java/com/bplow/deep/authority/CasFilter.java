@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.cas.CasToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.apache.shiro.web.util.SavedRequest;
@@ -27,7 +26,7 @@ public class CasFilter extends AuthenticatingFilter{
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String ticket = httpRequest.getParameter("ticket");
         
-        return new CasToken(ticket);
+        return new MyCasToken(ticket);
     }
 
     @Override
@@ -88,6 +87,7 @@ public class CasFilter extends AuthenticatingFilter{
     protected boolean onLoginFailure(AuthenticationToken token,
             AuthenticationException ae, ServletRequest request,
             ServletResponse response) {
+        logger.info("{}",ae);
         // is user authenticated or in remember me mode ?
         Subject subject = getSubject(request, response);
         if (subject.isAuthenticated() || subject.isRemembered()) {
