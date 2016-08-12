@@ -51,10 +51,9 @@ public class MyCasRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
         MyCasToken castoken =  (MyCasToken)token;
 
-        TicketValidator ticketValidator = new Cas20ServiceTicketValidator("");
         try {
             Assertion casAssertion = ticketValidator.validate((String)castoken.getCredentials(),
-                "http://localhost:8989/cas-server-webapp");
+                this.casService);
 
             AttributePrincipal casPrincipal = casAssertion.getPrincipal();
             String userId = casPrincipal.getName();

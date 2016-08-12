@@ -16,7 +16,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<!-- 设定角色的登录链接，这里为cas登录页面的链接可配置回调地址 -->
 		<property name="loginUrl"
-			value="http://localhost:8989/cas-server-webapp/login?service=http://localhost:8080/deep/shiro-cas" />
+			value="http://localhost:8989/cas/login?service=http://localhost:8080/deep/shiro-cas" />
 		<property name="successUrl" value="/bpm/" />
 		<property name="filters">
 			<util:map>
@@ -42,9 +42,9 @@
 
 	<bean id="myCasRealm" class="com.bplow.deep.authority.MyCasRealm">
 		<!-- <property name="defaultRoles" value="ROLE_USER" /> -->
-		<property name="casServerUrlPrefix" value="http://localhost:8989/cas-server-webapp" />
+		<property name="casServerUrlPrefix" value="http://localhost:8989/cas" />
 		<!-- 客户端的回调地址设置，必须和下面的shiro-cas过滤器拦截的地址一致 -->
-		<property name="casService" value="http://localhost:8080/deep" />
+		<property name="casService" value="http://localhost:8080/deep/shiro-cas" />
 	</bean>
 	
 	<!-- 如果要实现cas的remember me的功能，需要用到下面这个bean，并设置到securityManager的subjectFactory中 -->
