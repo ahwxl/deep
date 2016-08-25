@@ -54,16 +54,21 @@ public class BmpServiceTests {
 		variables.put("numberOfDays", new Integer(4));
 		variables.put("vacationMotivation", "I'm really tired!");
 		
-		bpmService.startProcessById("vacationRequest:1:20003",variables);
+		bpmService.startProcessById("vacationRequest:1:2503",variables);
 	}
 	
 	@Test
 	public void completeTaskTest(){
+	    String processId = "";
+	    String taskId    = "5008";
+	    taskId    = "7505";
 		Map<String, Object> taskVariables = new HashMap<String, Object>();
-		taskVariables.put("vacationApproved", "false");
-		taskVariables.put("managerMotivation", "We have a tight deadline!");
+		//taskVariables.put("vacationApproved", "false");
+		//taskVariables.put("managerMotivation", "We have a tight deadline!");
 		
+		taskVariables.put("resendRequest", "true");
 		
+		bpmService.completeTask(processId, taskId, taskVariables);
 	}
 	
 	@Test

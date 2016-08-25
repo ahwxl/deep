@@ -19,6 +19,7 @@ import javax.transaction.Transactional;
 import org.activiti.bpmn.BpmnAutoLayout;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.ActivitiException;
+import org.activiti.engine.HistoryService;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -56,6 +57,9 @@ public class BmpServiceImpl implements BmpService {
 
     @Autowired
     TaskService             taskService;
+
+    @Autowired
+    HistoryService          historySerivce;
 
     @Autowired
     private IdentityService identityService;
@@ -128,13 +132,19 @@ public class BmpServiceImpl implements BmpService {
 
     }
 
+    /**
+     * 接收任务
+     * 
+     * @param taskId
+     * @param userId
+     */
     public void claimTask(String taskId, String userId) {
 
         taskService.claim(taskId, userId);
     }
 
     /**
-     * 代办
+     * 转办
      */
 
     /**
@@ -202,15 +212,16 @@ public class BmpServiceImpl implements BmpService {
      * 
      * @param key
      */
-    public void suspendProcess(String key) {
-        runtimeService.startProcessInstanceByKey("vacationRequest");
+    public void suspendProcess(String processInstanceId) {
+        runtimeService.suspendProcessInstanceById(processInstanceId);
     }
 
     /**
      * 删除流程
      */
-    public void deleletProcessById(String id) {
+    public void deleletProcessById(String processInstanceId, String deleteReason) {
 
+        runtimeService.deleteProcessInstance(processInstanceId, deleteReason);
     }
 
     /**
@@ -248,6 +259,13 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取流程实例列表
      */
+    public List getProcessList(int firstResult, int maxResults) {
+
+        List list = historySerivce.createHistoricProcessInstanceQuery().listPage(firstResult,
+            maxResults);
+
+        return list;
+    }
 
     /**
      * 获取单条流程实例
@@ -256,7 +274,7 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取实例任务
      */
-    public List getTaskListByGroup(String group) {
+    public List<Task> getTaskListByGroup(String group) {
 
         List<Task> tasks = taskService.createTaskQuery().taskCandidateGroup(group).list();
 
