@@ -8,7 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
@@ -22,6 +24,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import com.bplow.deep.bpm.domain.CounterSign;
 import com.bplow.deep.bpm.service.impl.BmpServiceImpl;
 
 /**
@@ -41,7 +44,7 @@ public class BmpServiceTests {
 	
 	@Test
 	public void deployTest(){
-		bpmService.deploy("bpm/vacationRequest.bpmn20.xml");
+		bpmService.deploy("bpm/countersign.bpmn20.xml");
 //		InputStream is = this.getClass().getResourceAsStream("/bpm/vacationRequest.bpmn20.xml");
 //		bpmService.deploy("vacationRequest", is);
 	}
@@ -54,14 +57,25 @@ public class BmpServiceTests {
 		variables.put("numberOfDays", new Integer(4));
 		variables.put("vacationMotivation", "I'm really tired!");
 		
-		bpmService.startProcessById("vacationRequest:1:2503",variables);
+		List<String> countersigns = new ArrayList<String>();
+		for(int i =0;i<5;i++){
+		    //CounterSign countersign = new CounterSign();
+		    //countersign.setAssignee("user"+i);
+		    //countersigns.add(countersign);
+		    countersigns.add("user"+i);
+		}
+		
+		variables.put("assigneeList", countersigns);
+		
+		//bpmService.startProcessById("vacationRequest:1:2503",variables);
+		bpmService.startProcessById("countersign:5:52504",variables);
 	}
 	
 	@Test
 	public void completeTaskTest(){
 	    String processId = "";
 	    String taskId    = "5008";
-	    taskId    = "7505";
+	    taskId    = "55022";
 		Map<String, Object> taskVariables = new HashMap<String, Object>();
 		//taskVariables.put("vacationApproved", "false");
 		//taskVariables.put("managerMotivation", "We have a tight deadline!");
@@ -83,8 +97,8 @@ public class BmpServiceTests {
 	@Test
 	public void getImageInputStreamByIdTest() throws FileNotFoundException, IOException{
 		
-		InputStream in = bpmService.getImageInputStreamById("vacationRequest:1:2503");
-		File file = new File("d:/logs/bpm.jpg");
+		InputStream in = bpmService.getImageInputStreamById("countersign:2:25004");
+		File file = new File("d:/logs/sign2.jpg");
 		IOUtils.copy(in, new FileOutputStream(file));
 		in.close();
 	}
