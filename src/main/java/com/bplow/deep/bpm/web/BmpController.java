@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class BmpController {
@@ -22,5 +23,20 @@ public class BmpController {
         logger.info("流程管理页面:{},sessionId={}",user,session.getId());
         return "bpm/index";
     }
+    
+    @RequestMapping(value="/bpm/deploy")
+    public String deploy(){
+       
+        return "bpm/deploy";
+    }
+    
+    @RequestMapping(value="/ajax/deploy")
+    @ResponseBody
+    public String tree(){
+        
+        return "{\"iTotalRecords\":100,\"iTotalDisplayRecords\":10,\"aaData\": [[\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\"],[\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\"],[\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\"]]"+
+     "}";
+    }
+    
 
 }

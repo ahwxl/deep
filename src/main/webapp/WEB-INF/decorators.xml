@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/layout/">
+
+	<excludes>
+		<pattern>*.json</pattern>
+		<pattern>/*/ajax/*</pattern>
+		<pattern>/*/template/*</pattern>
+		<pattern>/static/*</pattern>
+		<pattern>/help/*</pattern>
+		<pattern>/mvc/*</pattern>
+		<pattern>/index.html</pattern>
+		<pattern>/tabs-index.html</pattern>
+		<pattern>/unauthorized</pattern>
+	</excludes>
+
+<!-- 	<decorator name="default" page="default.vm">
+		<pattern>/*</pattern>
+	</decorator> -->
+
+	<decorator name="velocity" page="default.vm">
+		<pattern>/*</pattern>
+	</decorator>
+
+
+</decorators>

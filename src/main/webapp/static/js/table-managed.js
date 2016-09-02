@@ -11,8 +11,11 @@ var TableManaged = function () {
 
             // begin first table
             $('#sample_1').dataTable({
+            	"bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "/deep/ajax/deploy",
                 "aoColumns": [
-                  { "bSortable": false },
+                  { "sTitle": "Engine","bSortable": false },
                   null,
                   { "bSortable": false },
                   null,
