@@ -24,7 +24,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import com.bplow.deep.bpm.domain.AutoAppInfo;
 import com.bplow.deep.bpm.domain.CounterSign;
+import com.bplow.deep.bpm.mapper.AutoAppInfoMapper;
 import com.bplow.deep.bpm.service.impl.BmpServiceImpl;
 
 /**
@@ -41,6 +43,9 @@ public class BmpServiceTests {
 	
 	@Autowired
 	private BmpServiceImpl bpmService;
+	
+	@Autowired
+	private AutoAppInfoMapper autoAppInfoMapper;
 	
 	@Test
 	public void deployTest(){
@@ -102,5 +107,32 @@ public class BmpServiceTests {
 		IOUtils.copy(in, new FileOutputStream(file));
 		in.close();
 	}
+	
+	@Test
+	public void testInsert(){
+		for(int i=0;i<100;i++){
+			AutoAppInfo record = new AutoAppInfo();
+			record.setAppCode("paycore"+i);
+			record.setAppName("支付核心"+i);
+			autoAppInfoMapper.insert(record);
+		}
+	}
+	
+	@Test
+	public void testquery(){
+		AutoAppInfo record = new AutoAppInfo();
+		List<AutoAppInfo> list = autoAppInfoMapper.queryForPage(record);
+		
+		System.out.println(list.size());
+	}
+	
+	@Test
+	public void testDelete(){
+		AutoAppInfo record = new AutoAppInfo();
+		autoAppInfoMapper.delete("");
+		
+	}
+	
+	
 
 }

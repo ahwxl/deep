@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.bpm.mapper.AutoAppInfoMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.bpm.domain.AutoAppInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="app_code" jdbcType="VARCHAR" property="appCode" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="app_desc" jdbcType="VARCHAR" property="appDesc" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, app_code, app_name, app_desc, gmt_create, gmt_modify
+  </sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.bpm.domain.AutoAppInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from auto_app_info
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="id != null">
+             ID = #{id} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     order by GMT_MODIFY desc 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from auto_app_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from auto_app_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.bpm.domain.AutoAppInfo">
+    insert into auto_app_info (id, app_code, app_name, 
+      app_desc, gmt_create, gmt_modify
+      )
+    values (#{id,jdbcType=INTEGER}, #{appCode,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, 
+      #{appDesc,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+  <select id="countByExample" parameterType="com.bplow.deep.bpm.domain.AutoAppInfo" resultType="java.lang.Integer">
+    select count(*) from auto_app_info
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="!@isEmpty(id)">
+             ID = #{id} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+  </select>
+  
+  <update id="updateByExampleSelective" parameterType="map">
+    update auto_app_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.appCode != null">
+        app_code = #{record.appCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appName != null">
+        app_name = #{record.appName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appDesc != null">
+        app_desc = #{record.appDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gmtCreate != null">
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModify != null">
+        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+
+  </update>
+</mapper>
