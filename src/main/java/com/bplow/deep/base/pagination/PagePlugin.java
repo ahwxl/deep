@@ -34,9 +34,12 @@ public class PagePlugin implements Interceptor {
 
     private static String pageMatcher = PageConstant.PAGE_MATCHER_DEFAULT;
     private static String pageDialect = null;
+    
+    private static PageHelper pageHelper;
 
     public PagePlugin() {
         registerDefaultDBDialectPageSqlImplClass();
+        pageHelper = PageHelper.getPageHelper();
     }
 
     public PagePlugin(String pageMatcher) {
@@ -131,6 +134,8 @@ public class PagePlugin implements Interceptor {
                             Object ogj = invocation.getTarget();
 
                             pageInfo.setTotalCount(totalCount);
+                            
+                            pageHelper.setPageInfo(pageInfo);
                         }
                     } else {
                         LOGGER.error("PageSql implement of " + dialect + " not found. ");

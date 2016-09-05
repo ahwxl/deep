@@ -28,7 +28,7 @@
         </trim>
       </trim>
     </where>
-     order by GMT_MODIFY desc 
+     ORDER BY GMT_MODIFY DESC 
   </select>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -38,7 +38,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="delete" parameterType="java.lang.Integer">
     delete from auto_app_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -52,41 +52,28 @@
       )
   </insert>
   
-  <select id="countByExample" parameterType="com.bplow.deep.bpm.domain.AutoAppInfo" resultType="java.lang.Integer">
-    select count(*) from auto_app_info
-    <where>
-      <trim prefixOverrides="AND">
-        <trim prefix="AND">
-          <if test="!@isEmpty(id)">
-             ID = #{id} 
-          </if>
-        </trim>
-      </trim>
-    </where>
-  </select>
-  
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="update" parameterType="com.bplow.deep.bpm.domain.AutoAppInfo">
     update auto_app_info
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
       </if>
-      <if test="record.appCode != null">
-        app_code = #{record.appCode,jdbcType=VARCHAR},
+      <if test="appCode != null">
+        app_code = #{appCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.appName != null">
-        app_name = #{record.appName,jdbcType=VARCHAR},
+      <if test="appName != null">
+        app_name = #{appName,jdbcType=VARCHAR},
       </if>
-      <if test="record.appDesc != null">
-        app_desc = #{record.appDesc,jdbcType=VARCHAR},
+      <if test="appDesc != null">
+        app_desc = #{appDesc,jdbcType=VARCHAR},
       </if>
-      <if test="record.gmtCreate != null">
-        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.gmtModify != null">
-        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      <if test="gmtModify != null">
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
     </set>
-
+     WHERE ID = #{id} 
   </update>
 </mapper>

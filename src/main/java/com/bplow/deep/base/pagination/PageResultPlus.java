@@ -4,6 +4,7 @@
 package com.bplow.deep.base.pagination;
 
 import java.sql.Statement;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.ibatis.executor.resultset.DefaultResultSetHandler;
@@ -26,6 +27,12 @@ public class PageResultPlus implements Interceptor{
 
 	private static final Logger LOGGER = Logger.getLogger(PageResultPlus.class);
 	
+	private static PageHelper pageHelper;
+	
+	public PageResultPlus() {
+		pageHelper = PageHelper.getPageHelper();
+	}
+	
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
 		
@@ -33,9 +40,17 @@ public class PageResultPlus implements Interceptor{
 		
 		DefaultResultSetHandler drs = (DefaultResultSetHandler)invocation.getTarget();
 		Object obj = invocation.proceed();
-		Object param = invocation.getArgs()[0];
+		//Object param = invocation.getArgs()[0];
 		
-		return param;
+		PageInfo pageInfo = pageHelper.get();
+		
+		Pagination page = new Pagination();
+		page.setDatas((List)obj);
+		page.setPageNum(pageInfo.getPageNo());
+		page.setPageNum(pageInfo.getTotalCount());
+		page.setTotals(pageInfo.getTotalCount());
+		
+		return page;
 	}
 
 	@Override

@@ -24,8 +24,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.AutoAppInfo;
-import com.bplow.deep.bpm.domain.CounterSign;
 import com.bplow.deep.bpm.mapper.AutoAppInfoMapper;
 import com.bplow.deep.bpm.service.impl.BmpServiceImpl;
 
@@ -112,8 +112,8 @@ public class BmpServiceTests {
 	public void testInsert(){
 		for(int i=0;i<10;i++){
 			AutoAppInfo record = new AutoAppInfo();
-			record.setAppCode("paycore"+i);
-			record.setAppName("支付核心"+i);
+			record.setAppCode("paycoreA"+i);
+			record.setAppName("支付核心S"+i);
 			autoAppInfoMapper.insert(record);
 		}
 	}
@@ -121,17 +121,34 @@ public class BmpServiceTests {
 	@Test
 	public void testquery(){
 		AutoAppInfo record = new AutoAppInfo();
-		List<AutoAppInfo> list = autoAppInfoMapper.queryForPage(record);
+		Page<AutoAppInfo> list = autoAppInfoMapper.queryForPage(record);
 		
-		System.out.println(list.size());
+		System.out.println(list);
+	}
+	
+	@Test
+	public void testqueryOneRecord(){
+		
+		AutoAppInfo vo = autoAppInfoMapper.selectByPrimaryKey(1);
+		
+		System.out.println(vo.getGmtCreate());
 	}
 	
 	@Test
 	public void testDelete(){
 		AutoAppInfo record = new AutoAppInfo();
-		autoAppInfoMapper.delete("");
-		
+		autoAppInfoMapper.delete(1);
 	}
+	
+	@Test
+	public void testUpdate(){
+		AutoAppInfo record = new AutoAppInfo();
+		record.setAppCode("fininfo");
+		record.setId(10);
+		
+		autoAppInfoMapper.update(record);
+	}
+	
 	
 	
 

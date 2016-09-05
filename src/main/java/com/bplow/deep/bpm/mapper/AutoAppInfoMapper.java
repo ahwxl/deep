@@ -1,9 +1,6 @@
 package com.bplow.deep.bpm.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
+import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.AutoAppInfo;
 
 public interface AutoAppInfoMapper {
@@ -12,9 +9,11 @@ public interface AutoAppInfoMapper {
 
     int insert(AutoAppInfo record);
     
-    int delete(String record);
+    int delete(Integer record);
 
-    List<AutoAppInfo> queryForPage(AutoAppInfo example);
+    Page<AutoAppInfo> queryForPage(AutoAppInfo example);
+    
+    AutoAppInfo selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") AutoAppInfo record, @Param("example") AutoAppInfo example);
+    int update(AutoAppInfo record);
 }
