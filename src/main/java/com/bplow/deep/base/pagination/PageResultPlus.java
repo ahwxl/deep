@@ -32,21 +32,19 @@ public class PageResultPlus implements Interceptor{
 		LOGGER.debug("intercept -> invocation.target : " + invocation.getTarget());
 		
 		DefaultResultSetHandler drs = (DefaultResultSetHandler)invocation.getTarget();
-		//drs.
+		Object obj = invocation.proceed();
+		Object param = invocation.getArgs()[0];
 		
-		return invocation.proceed();
+		return param;
 	}
 
 	@Override
 	public Object plugin(Object target) {
-		// TODO Auto-generated method stub
 		return Plugin.wrap(target, this);
 	}
 
 	@Override
 	public void setProperties(Properties properties) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

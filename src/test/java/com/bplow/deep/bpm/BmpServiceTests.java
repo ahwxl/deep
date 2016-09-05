@@ -110,7 +110,7 @@ public class BmpServiceTests {
 	
 	@Test
 	public void testInsert(){
-		for(int i=0;i<100;i++){
+		for(int i=0;i<10;i++){
 			AutoAppInfo record = new AutoAppInfo();
 			record.setAppCode("paycore"+i);
 			record.setAppName("支付核心"+i);
