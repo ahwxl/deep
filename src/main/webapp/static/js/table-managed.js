@@ -13,21 +13,22 @@ var TableManaged = function () {
             $('#sample_1').dataTable({
             	"bProcessing": true,
                 "bServerSide": true,
-                "sAjaxSource": "/deep/ajax/deploy",
+                "sAjaxSource": "/deep/app/queryForPage",
                 "aoColumns": [
-                  { "sTitle": "Engine","bSortable": false },
-                  null,
-                  { "bSortable": false },
-                  null,
-                  { "bSortable": false },
-                  { "bSortable": false }
+                  //{ "sTitle": "编号","mData":"id","bSortable": false },
+                  { "sTitle": "应用code","mData":"appCode","bSortable": false },
+                  { "sTitle": "应用名称","mData":"appName","bSortable": false },
+                  { "sTitle": "地址","mData":"ipAddr","bSortable": false },
+                  { "sTitle": "描述","mData":"appDesc","bSortable": false },
+                  { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false },
+                  { "sTitle": "修改日期","mData":"gmtModify","bSortable": false }
                 ],
                 "aLengthMenu": [
                     [5, 15, 20, -1],
                     [5, 15, 20, "All"] // change per page values here
                 ],
                 // set the initial value
-                "iDisplayLength": 5,
+                "iDisplayLength": 10,
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
@@ -58,7 +59,7 @@ var TableManaged = function () {
             });
 
             jQuery('#sample_1_wrapper .dataTables_filter input').addClass("m-wrap medium"); // modify table search input
-            jQuery('#sample_1_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
+            //jQuery('#sample_1_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
             //jQuery('#sample_1_wrapper .dataTables_length select').select2(); // initialzie select2 dropdown
 
             // begin second table

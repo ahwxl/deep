@@ -25,6 +25,7 @@ public class MySQLPageSqlImpl extends AbstractPageSql {
                 pageInfo.setPageSize(10);
             }
             int start = (pageInfo.getPageNo() - 1) * pageInfo.getPageSize();
+            start = pageInfo.getiDisplayStart();
             int pageSize = pageInfo.getPageSize();
             sb.append(sql).append(" limit ").append(start).append(",").append(pageSize).append(" ");
         }

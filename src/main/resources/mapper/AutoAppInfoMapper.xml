@@ -6,13 +6,14 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="app_code" jdbcType="VARCHAR" property="appCode" />
     <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="ip_addr" jdbcType="VARCHAR" property="ipAddr" />
     <result column="app_desc" jdbcType="VARCHAR" property="appDesc" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, app_code, app_name, app_desc, gmt_create, gmt_modify
+    id, app_code, app_name,ip_addr, app_desc, gmt_create, gmt_modify
   </sql>
   
   <select id="queryForPage" parameterType="com.bplow.deep.bpm.domain.AutoAppInfo" resultMap="BaseResultMap">
@@ -22,13 +23,19 @@
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
+          <if test="appCode != null">
+             app_code like CONCAT(CONCAT('%', #{appCode}), '%')
+          </if>
+        </trim>
+        <trim prefix="AND">
           <if test="id != null">
              ID = #{id} 
           </if>
         </trim>
+        
       </trim>
     </where>
-     ORDER BY GMT_MODIFY DESC 
+     ORDER BY id DESC 
   </select>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -44,10 +51,10 @@
   </delete>
   
   <insert id="insert" parameterType="com.bplow.deep.bpm.domain.AutoAppInfo">
-    insert into auto_app_info (id, app_code, app_name, 
+    insert into auto_app_info (id, app_code, app_name, ip_addr,
       app_desc, gmt_create, gmt_modify
       )
-    values (#{id,jdbcType=INTEGER}, #{appCode,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{appCode,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, #{ipAddr,jdbcType=VARCHAR}, 
       #{appDesc,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
       )
   </insert>

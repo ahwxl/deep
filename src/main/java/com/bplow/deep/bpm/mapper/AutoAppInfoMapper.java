@@ -1,5 +1,7 @@
 package com.bplow.deep.bpm.mapper;
 
+import java.util.List;
+
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.AutoAppInfo;
 
@@ -11,7 +13,7 @@ public interface AutoAppInfoMapper {
     
     int delete(Integer record);
 
-    Page<AutoAppInfo> queryForPage(AutoAppInfo example);
+    List<AutoAppInfo> queryForPage(AutoAppInfo example);
     
     AutoAppInfo selectByPrimaryKey(Integer id);
 

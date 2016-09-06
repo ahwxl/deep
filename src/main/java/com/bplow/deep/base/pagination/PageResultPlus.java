@@ -39,18 +39,18 @@ public class PageResultPlus implements Interceptor{
 		LOGGER.debug("intercept -> invocation.target : " + invocation.getTarget());
 		
 		DefaultResultSetHandler drs = (DefaultResultSetHandler)invocation.getTarget();
-		Object obj = invocation.proceed();
+		//Object obj = invocation.proceed();
 		//Object param = invocation.getArgs()[0];
 		
-		PageInfo pageInfo = pageHelper.get();
+		//PageInfo pageInfo = pageHelper.get();
 		
-		Pagination page = new Pagination();
+		/*Pagination page = new Pagination();
 		page.setDatas((List)obj);
 		page.setPageNum(pageInfo.getPageNo());
 		page.setPageNum(pageInfo.getTotalCount());
-		page.setTotals(pageInfo.getTotalCount());
+		page.setTotals(pageInfo.getTotalCount());*/
 		
-		return page;
+		return invocation.proceed();
 	}
 
 	@Override

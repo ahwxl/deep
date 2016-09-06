@@ -8,6 +8,24 @@ public class PageInfo {
     private int pageSize = 10;
     private int totalPage;
     private int totalCount;
+    private int iDisplayStart;
+    private String sSearch;
+    
+    public String getsSearch() {
+        return sSearch;
+    }
+
+    public void setsSearch(String sSearch) {
+        this.sSearch = sSearch;
+    }
+
+    public int getiDisplayStart() {
+        return iDisplayStart;
+    }
+
+    public void setiDisplayStart(int iDisplayStart) {
+        this.iDisplayStart = iDisplayStart;
+    }
 
     public int getPageNo() {
         return pageNo;

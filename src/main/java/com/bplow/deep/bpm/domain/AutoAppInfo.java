@@ -11,6 +11,8 @@ public class AutoAppInfo extends PageInfo{
     private String appCode;
 
     private String appName;
+    
+    private String ipAddr;
 
     private String appDesc;
 
@@ -64,6 +66,14 @@ public class AutoAppInfo extends PageInfo{
 
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
+    }
+
+    public String getIpAddr() {
+        return ipAddr;
+    }
+
+    public void setIpAddr(String ipAddr) {
+        this.ipAddr = ipAddr;
     }
 
     /**

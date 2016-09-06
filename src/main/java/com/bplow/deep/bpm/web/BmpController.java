@@ -34,7 +34,7 @@ public class BmpController {
     @ResponseBody
     public String tree(){
         
-        return "{\"iTotalRecords\":100,\"iTotalDisplayRecords\":10,\"aaData\": [[\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\"],[\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\"],[\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\",\"Engine\"]]"+
+        return "{\"iTotalRecords\":100,\"iTotalDisplayRecords\":10,\"aaData\": [{\"a\":123,\"b\":568},{\"a\":123,\"b\":568}]"+
      "}";
     }
     

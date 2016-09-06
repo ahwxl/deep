@@ -560,7 +560,7 @@
 
 					<i class="icon-home"></i> 
 
-					<span class="title">Dashboard</span>
+					<span class="title">首页</span>
 
 					</a>
 
@@ -572,7 +572,7 @@
 
 					<i class="icon-th"></i> 
 
-					<span class="title">Data Tables</span>
+					<span class="title">服务器管理</span>
 
 					<span class="selected"></span>
 
@@ -584,17 +584,9 @@
 
 						<li >
 
-							<a href="table_basic.html">
+							<a href="app/queryForPage">
 
-							Basic Tables</a>
-
-						</li>
-
-						<li >
-
-							<a href="table_responsive.html">
-
-							Responsive Tables</a>
+							端口</a>
 
 						</li>
 
@@ -602,23 +594,7 @@
 
 							<a href="table_managed.html">
 
-							Managed Tables</a>
-
-						</li>
-
-						<li >
-
-							<a href="table_editable.html">
-
-							Editable Tables</a>
-
-						</li>
-
-						<li >
-
-							<a href="table_advanced.html">
-
-							Advanced Tables</a>
+							应用管理</a>
 
 						</li>
 

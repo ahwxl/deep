@@ -5,6 +5,9 @@ package com.bplow.deep.base.pagination;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+
 /**
  * @desc 
  * @author wangxiaolei
@@ -12,12 +15,16 @@ import java.util.List;
  */
 public class Pagination<T> implements Page<Object>{
 	
+    @JsonProperty("iTotalDisplayRecords")
 	public int pageSize;
 	
+    @JsonRawValue
 	public int pageNum;
 	
+	@JsonProperty("iTotalRecords")
 	public int totals;
 
+	@JsonProperty("aaData")
 	private List<T> datas;
 
 	@Override
