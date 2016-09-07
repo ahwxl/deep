@@ -11,8 +11,8 @@
 <head>
 
 	<meta charset="utf-8" />
-
-	<title>Metronic | Data Tables - Managed Tables</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>Test</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -554,7 +554,7 @@
 
 				</li>
 
-				<li class="start ">
+				<li class="start active">
 
 					<a href="index.html">
 
@@ -566,7 +566,7 @@
 
 				</li>
 				
-				<li class="active ">
+				<li class=" ">
 
 					<a href="javascript:;">
 
@@ -590,7 +590,7 @@
 
 						</li>
 
-						<li class="active">
+						<li class="">
 
 							<a href="table_managed.html">
 
@@ -602,7 +602,7 @@
 
 				</li>
 
-				<li class="last ">
+				<!-- <li class="last ">
 
 					<a href="charts.html">
 
@@ -612,7 +612,7 @@
 
 					</a>
 
-				</li>
+				</li>-->
 
 			</ul>
 

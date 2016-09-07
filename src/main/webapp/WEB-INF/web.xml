@@ -92,7 +92,6 @@
 	<servlet>
 		<servlet-name>velocity</servlet-name>
 		<servlet-class>com.opensymphony.module.sitemesh.velocity.VelocityDecoratorServlet</servlet-class>
-		<!-- <servlet-class>org.apache.struts2.sitemesh.VelocityDecoratorServlet</servlet-class> -->
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>velocity</servlet-name>
