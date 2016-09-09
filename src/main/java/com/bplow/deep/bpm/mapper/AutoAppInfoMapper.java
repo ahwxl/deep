@@ -5,7 +5,7 @@ import java.util.List;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.AutoAppInfo;
 
-public interface AutoAppInfoMapper {
+public interface AutoAppInfoMapper extends Page<Object>{
 	
     int countByExample(AutoAppInfo example);
 
@@ -13,7 +13,7 @@ public interface AutoAppInfoMapper {
     
     int delete(Integer record);
 
-    List<AutoAppInfo> queryForPage(AutoAppInfo example);
+    Page<AutoAppInfo> queryForPage(AutoAppInfo example);
     
     AutoAppInfo selectByPrimaryKey(Integer id);
 

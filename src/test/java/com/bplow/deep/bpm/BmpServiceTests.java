@@ -121,7 +121,10 @@ public class BmpServiceTests {
 	@Test
 	public void testquery(){
 		AutoAppInfo record = new AutoAppInfo();
-		List<AutoAppInfo> list = autoAppInfoMapper.queryForPage(record);
+		record.setPageSize(10);
+		record.setPageNo(1);
+		record.setiDisplayStart(1);
+		Page<AutoAppInfo> list = autoAppInfoMapper.queryForPage(record);
 		
 		System.out.println(list);
 	}
