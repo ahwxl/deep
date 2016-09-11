@@ -1,9 +1,10 @@
 package com.bplow.deep.bpm.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.base.pagination.Pagination;
 import com.bplow.deep.bpm.domain.AutoAppInfo;
 import com.bplow.deep.bpm.mapper.AutoAppInfoMapper;
@@ -18,10 +19,10 @@ public class ApplicationInfoServiceImpl implements ApplicationInfoService{
     @Override
     public Pagination queryForList(AutoAppInfo autoAppInfo) {
         
-        Page<AutoAppInfo> list = autoAppInfoMapper.queryForPage(autoAppInfo);
+        List<AutoAppInfo> list = autoAppInfoMapper.queryForPage(autoAppInfo);
         
         Pagination<AutoAppInfo> page = new Pagination<AutoAppInfo>();
-      //  page.setDatas(list);
+        page.setDatas(list);
         page.setTotals(autoAppInfo.getTotalCount());
         page.setPageSize(autoAppInfo.getTotalCount());
         

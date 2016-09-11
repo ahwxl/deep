@@ -13,6 +13,8 @@ var TableManaged = function () {
             $('#sample_1').dataTable({
             	"bProcessing": true,
                 "bServerSide": true,
+                "bFilter":true,
+                "bLengthChange":false,
                 "sAjaxSource": "/deep/app/queryForPage",
                 "aoColumns": [
                   //{ "sTitle": "编号","mData":"id","bSortable": false },
@@ -29,7 +31,7 @@ var TableManaged = function () {
                 ],
                 // set the initial value
                 "iDisplayLength": 10,
-                "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                //"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ records per page",
@@ -143,6 +145,15 @@ var TableManaged = function () {
             jQuery('#sample_3_wrapper .dataTables_filter input').addClass("m-wrap small"); // modify table search input
             jQuery('#sample_3_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
             jQuery('#sample_3_wrapper .dataTables_length select').select2(); // initialzie select2 dropdown
+            
+            
+            $(document).ready(function () {
+                var table = $('#sample_1').DataTable();
+                //给2个输入框添加blur事件调用draw方法执行自定义过滤函数
+                $('#min, #max').blur(function () {
+                    table.draw();
+                });
+            });
 
         }
 

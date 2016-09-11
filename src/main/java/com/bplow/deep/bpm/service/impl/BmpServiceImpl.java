@@ -28,6 +28,7 @@ import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
@@ -260,9 +261,13 @@ public class BmpServiceImpl implements BmpService {
      * 获取流程实例列表
      */
     public List getProcessList(int firstResult, int maxResults) {
+    	
+    	Long count = historySerivce.createHistoricProcessInstanceQuery().count();
 
         List list = historySerivce.createHistoricProcessInstanceQuery().listPage(firstResult,
             maxResults);
+        
+        //runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId);
 
         return list;
     }
@@ -270,6 +275,12 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取单条流程实例
      */
+    public ProcessInstance getProcessInstance(String processInstanceId){
+    	
+    	ProcessInstance obj = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+    	
+    	return obj;
+    }
 
     /**
      * 获取实例任务
@@ -285,5 +296,15 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取历史任务列表
      */
+    
+    /**
+     * 获取流程定义
+     */
+    public List getProcesDef(String def){
+    	
+    	List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().list();
+    	
+    	return list;
+    }
 
 }

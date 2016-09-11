@@ -570,7 +570,7 @@
 
 					<a href="javascript:;">
 
-					<i class="icon-th"></i> 
+					<i class="icon-th"></i>
 
 					<span class="title">服务器管理</span>
 
@@ -581,38 +581,39 @@
 					</a>
 
 					<ul class="sub-menu">
-
 						<li >
-
-							<a href="app/queryForPage">
-
-							端口</a>
-
+							<a href="app/queryForPage">端口</a>
 						</li>
-
 						<li class="">
-
-							<a href="table_managed.html">
-
-							应用管理</a>
-
+							<a href="table_managed.html">应用管理</a>
 						</li>
-
 					</ul>
-
 				</li>
 
-				<!-- <li class="last ">
+				<li class="last ">
 
-					<a href="charts.html">
+					<a href="javascript:;">
 
 					<i class="icon-bar-chart"></i> 
 
-					<span class="title">Visual Charts</span>
-
+					<span class="title">流程管理</span>
+					
+					<span class="selected"></span>
+                    <span class="arrow "></span>
 					</a>
+					<ul class="sub-menu">
+						<li >
+							<a href="app/queryForPage">我的申请</a>
+						</li>
+						<li class="">
+							<a href="table_managed.html">历史流程</a>
+						</li>
+						<li class="">
+							<a href="table_managed.html">流程类别</a>
+						</li>
+					</ul>
 
-				</li>-->
+				</li>
 
 			</ul>
 

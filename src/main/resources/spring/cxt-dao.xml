@@ -28,13 +28,12 @@
 
 	<bean id="testBeanSingleton" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="proxyInterfaces">
-			<value>com.bplow.deep.base.pagination.Page
+			<value>com.bplow.deep.bpm.mapper.AutoAppInfoMapper
 			</value>
 		</property>
 		<property name="singleton">
 			<value>true</value>
 		</property>
-		<property name="InterceptorNames"></property>
 		<property name="interceptorNames">
 			<list>
 				<value>pageResultInterceptor</value>

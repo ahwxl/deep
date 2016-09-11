@@ -15,18 +15,18 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.bpm.domain.AutoAppInfo;
-import com.bplow.deep.bpm.mapper.AutoAppInfoMapper;
 import com.bplow.deep.bpm.service.impl.BmpServiceImpl;
 
 /**
@@ -41,17 +41,21 @@ import com.bplow.deep.bpm.service.impl.BmpServiceImpl;
 @ActiveProfiles("development")
 public class BmpServiceTests {
 	
-	@Autowired
-	private BmpServiceImpl bpmService;
+	 private Logger          log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private AutoAppInfoMapper autoAppInfoMapper;
+	private BmpServiceImpl bpmService;
 	
 	@Test
 	public void deployTest(){
 		bpmService.deploy("bpm/countersign.bpmn20.xml");
-//		InputStream is = this.getClass().getResourceAsStream("/bpm/vacationRequest.bpmn20.xml");
-//		bpmService.deploy("vacationRequest", is);
+
+	}
+	
+	@Test
+	public void testDeployByInputstream(){
+		InputStream is = this.getClass().getResourceAsStream("/bpm/leave.bpmn20.xml");
+		bpmService.deploy("leave.bpmn20.xml", is);
 	}
 	
 	@Test
@@ -109,50 +113,26 @@ public class BmpServiceTests {
 	}
 	
 	@Test
-	public void testInsert(){
-		for(int i=0;i<10;i++){
-			AutoAppInfo record = new AutoAppInfo();
-			record.setAppCode("paycoreA"+i);
-			record.setAppName("支付核心S"+i);
-			autoAppInfoMapper.insert(record);
-		}
+	public void testGetprocessDef(){
+		
+		List list = bpmService.getProcesDef("");
+		log.info("{}",list);
 	}
 	
 	@Test
-	public void testquery(){
-		AutoAppInfo record = new AutoAppInfo();
-		record.setPageSize(10);
-		record.setPageNo(1);
-		record.setiDisplayStart(1);
-		Page<AutoAppInfo> list = autoAppInfoMapper.queryForPage(record);
+	public void testGetProcessList(){
 		
-		System.out.println(list);
+		List list = bpmService.getProcessList(0, 10);
+		
+		log.info("{}",list);
 	}
 	
 	@Test
-	public void testqueryOneRecord(){
+	public void testGetProcess(){
 		
-		AutoAppInfo vo = autoAppInfoMapper.selectByPrimaryKey(1);
+		ProcessInstance obj = bpmService.getProcessInstance("25001");
 		
-		System.out.println(vo.getGmtCreate());
+		log.info("{}",obj);
 	}
-	
-	@Test
-	public void testDelete(){
-		AutoAppInfo record = new AutoAppInfo();
-		autoAppInfoMapper.delete(1);
-	}
-	
-	@Test
-	public void testUpdate(){
-		AutoAppInfo record = new AutoAppInfo();
-		record.setAppCode("fininfo");
-		record.setId(10);
-		
-		autoAppInfoMapper.update(record);
-	}
-	
-	
-	
 
 }
