@@ -37,20 +37,6 @@ public class Pagination<T> implements Page<Object>{
 		return 0;
 	}
 
-	@Override
-	public int getPageTotals() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public List<T> getDatas() {
-		return datas;
-	}
-
-	public void setDatas(List<T> datas) {
-		this.datas = datas;
-	}
-
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
@@ -66,5 +52,15 @@ public class Pagination<T> implements Page<Object>{
 	public void setTotals(int totals) {
 		this.totals = totals;
 	}
+
+    @Override
+    public void setDatas(List datas) {
+        this.datas = datas;
+    }
+
+    public List<T> getDatas() {
+        return datas;
+    }
+
 	
 }

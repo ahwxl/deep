@@ -13,7 +13,7 @@ public interface AutoAppInfoMapper extends Page<Object>{
     
     int delete(Integer record);
 
-    List<AutoAppInfo> queryForPage(AutoAppInfo example);
+    Page<AutoAppInfo> queryForPage(AutoAppInfo example);
     
     AutoAppInfo selectByPrimaryKey(Integer id);
 

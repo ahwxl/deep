@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.AutoAppInfo;
 import com.bplow.deep.bpm.mapper.AutoAppInfoMapper;
 
@@ -49,7 +50,7 @@ public class ApplicationInfoServiceTest {
 		record.setPageSize(10);
 		record.setPageNo(1);
 		record.setiDisplayStart(1);
-		List<AutoAppInfo> list = autoAppInfoMapper.queryForPage(record);
+		Page<AutoAppInfo> list = autoAppInfoMapper.queryForPage(record);
 		
 		System.out.println(list);
 	}

@@ -3,6 +3,8 @@
  */
 package com.bplow.deep.base.pagination;
 
+import java.util.List;
+
 /**
  * @desc 
  * @author wangxiaolei
@@ -14,6 +16,14 @@ public interface Page<T> {
 	
 	int getPageNum();
 	
-	int getPageTotals();
+	int getTotals();
+	
+	void setPageNum(int pageNum);
+	
+	void setPageSize(int pageSize);
+	
+	void setTotals(int totals);
+	
+	void setDatas(List<T> datas);
 
 }
