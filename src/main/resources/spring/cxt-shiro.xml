@@ -28,16 +28,15 @@
 			<value>
 				/shiro-cas = casFilter
 				/admin/** = roles[ROLE_USER]
-				/bpm/** =   roles[ROLE_USER]
+				/bpm/** =user
 				/** = anon
 			</value>
 		</property>
 	</bean>
 
-	<!-- <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
-		<property name="failureUrl" value="/error.jsp" />
-	</bean> -->
-	
+	<!-- <bean id="casFilter" class="org.apache.shiro.cas.CasFilter"> <property 
+		name="failureUrl" value="/error.jsp" /> </bean> -->
+
 	<bean id="casFilter" class="com.bplow.deep.authority.CasFilter" />
 
 	<bean id="myCasRealm" class="com.bplow.deep.authority.MyCasRealm">
@@ -46,7 +45,7 @@
 		<!-- 客户端的回调地址设置，必须和下面的shiro-cas过滤器拦截的地址一致 -->
 		<property name="casService" value="http://localhost:8080/deep/shiro-cas" />
 	</bean>
-	
+
 	<!-- 如果要实现cas的remember me的功能，需要用到下面这个bean，并设置到securityManager的subjectFactory中 -->
 	<bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory" />
 
@@ -57,10 +56,21 @@
 
 	<bean
 		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-		<property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager" />
+		<property name="staticMethod"
+			value="org.apache.shiro.SecurityUtils.setSecurityManager" />
 		<property name="arguments" ref="securityManager" />
 	</bean>
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
+	<!-- AOP式方法级权限检查 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
 </beans>

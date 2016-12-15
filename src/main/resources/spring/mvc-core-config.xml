@@ -71,12 +71,22 @@
         - This bean resolves specific types of exceptions to corresponding logical 
         - view names for error views.
     -->
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <!-- view name resolved using bean of type InternalResourceViewResolver (declared in mvc-view-config.xml) -->
+    <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        view name resolved using bean of type InternalResourceViewResolver (declared in mvc-view-config.xml)
         <property name="defaultErrorView" value="exception"/>
-        <!-- results into 'WEB-INF/jsp/exception.jsp' -->
+        results into 'WEB-INF/jsp/exception.jsp'
         <property name="warnLogCategory" value="warn"/>
-        <!-- needed otherwise exceptions won't be logged anywhere -->
+        needed otherwise exceptions won't be logged anywhere
+    </bean> -->
+    
+    <!-- 将Controller抛出的异常转到特定View, 保持SiteMesh的装饰效果 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+		<property name="exceptionMappings">  
+			<props>
+				<prop key="org.apache.shiro.authz.UnauthorizedException">error/403</prop>
+				<prop key="java.lang.Throwable">error/500</prop>
+            </props>  
+		</property>  
     </bean>
 
 <!-- 	<bean id="conversionService"

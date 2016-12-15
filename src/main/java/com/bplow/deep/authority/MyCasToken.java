@@ -46,5 +46,11 @@ public class MyCasToken implements RememberMeAuthenticationToken{
     public void setRememberMe(boolean isRememberMe) {
         this.isRememberMe = isRememberMe;
     }
+
+    @Override
+    public String toString() {
+        return String.format("MyCasToken [ticket=%s, userId=%s, isRememberMe=%s]", ticket, userId,
+            isRememberMe);
+    }
     
 }

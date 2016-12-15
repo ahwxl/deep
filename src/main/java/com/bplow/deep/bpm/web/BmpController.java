@@ -1,6 +1,8 @@
 package com.bplow.deep.bpm.web;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +37,7 @@ public class BmpController {
 	 * 流程实例列表
 	 * @return
 	 */
+	@RequiresRoles("Admin")
 	@RequestMapping(value = "/bpm/processInstance")
 	public String index() {
 		logger.info("流程管理");
@@ -51,6 +54,7 @@ public class BmpController {
 	 * 
 	 * @return
 	 */
+	@RequiresPermissions("u2:add2")
 	@RequestMapping(value = "/bpm/deploy")
 	public String deploy() {
 

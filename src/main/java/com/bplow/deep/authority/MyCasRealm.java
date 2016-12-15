@@ -50,6 +50,7 @@ public class MyCasRealm extends AuthorizingRealm {
         Set<String> permissions = new HashSet<String>();
         permissions.add("user:delete");
         permissions.add("user:add");
+        permissions.add("u2:add2");
         info.addRole("ROLE_USER");
         info.addStringPermissions(permissions);
 
