@@ -602,14 +602,17 @@
                     <span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
+					    <li >
+							<a href="bpm/processType">起草申请</a>
+						</li>
+					    <li >
+							<a href="bpm/processInstancePage">流程列表</a>
+						</li>
 						<li >
-							<a href="app/queryForPage">我的申请</a>
+							<a href="bpm/queryForPage">任务列表</a>
 						</li>
-						<li class="">
-							<a href="table_managed.html">历史流程</a>
-						</li>
-						<li class="">
-							<a href="table_managed.html">流程类别</a>
+						<li >
+							<a href="bpm/queryForPage">我的申请</a>
 						</li>
 					</ul>
 

@@ -2,7 +2,9 @@ package com.bplow.deep.bpm.domain;
 
 import java.util.Date;
 
+import com.bplow.deep.base.jackson.CustomDateSerializer;
 import com.bplow.deep.base.pagination.PageInfo;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class AutoAppInfo extends PageInfo{
 	
@@ -52,6 +54,7 @@ public class AutoAppInfo extends PageInfo{
         this.appDesc = appDesc == null ? null : appDesc.trim();
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getGmtCreate() {
         return gmtCreate;
     }

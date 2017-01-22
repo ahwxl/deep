@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.bpm.mapper.BpmServiceMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.bpm.domain.ProcessInstanceInfo">
+    <id column="PROC_INST_ID_" jdbcType="INTEGER" property="processInstanceId" />
+    <result column="NAME_" jdbcType="VARCHAR" property="processName" />
+    <result column="proce_status" jdbcType="VARCHAR" property="processStatus" />
+    <result column="START_TIME_" jdbcType="VARCHAR" property="startDate" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, app_code, app_name,ip_addr, app_desc, gmt_create, gmt_modify
+  </sql>
+  
+  <select id="queryProcessInstanceItem" parameterType="com.bplow.deep.bpm.domain.ProcessInstanceInfo" resultMap="BaseResultMap">
+    select a.PROC_INST_ID_,a.PROC_DEF_ID_,a.START_TIME_,a.START_USER_ID_,a.NAME_ ,'' proce_status
+          from act_hi_procinst a
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="processInstanceId != null">
+             a.PROC_INST_ID_ like CONCAT(CONCAT('%', #{processInstanceId}), '%')
+          </if>
+        </trim>
+        
+      </trim>
+    </where>
+     ORDER BY a.START_TIME_ DESC 
+  </select>
+  
+</mapper>

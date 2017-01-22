@@ -9,7 +9,6 @@ package com.bplow.deep.bpm.service.impl;
  * @date 2016年7月9日 上午10:27:51
  */
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
@@ -28,7 +27,6 @@ import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
@@ -42,6 +40,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bplow.deep.base.domain.ServiceResult;
+import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.bpm.domain.ProcessInstanceInfo;
+import com.bplow.deep.bpm.mapper.BpmServiceMapper;
 import com.bplow.deep.bpm.service.BmpService;
 
 @Transactional
@@ -64,6 +66,9 @@ public class BmpServiceImpl implements BmpService {
 
     @Autowired
     private IdentityService identityService;
+    
+    @Autowired
+    private BpmServiceMapper bpmServiceMapper;
 
     /**
      * 部署流程定义文件 "bpm/vacationRequest.bpmn20.xml"
@@ -127,10 +132,14 @@ public class BmpServiceImpl implements BmpService {
      * @param processId
      * @param taskId
      */
-    public void completeTask(String processId, String taskId, Map<String, Object> taskVariable) {
+    public ServiceResult completeTask(String processId, String taskId,
+                                      Map<String, Object> taskVariable) {
+
+        ServiceResult result = new ServiceResult();
 
         taskService.complete(taskId, taskVariable);
 
+        return result;
     }
 
     /**
@@ -260,26 +269,32 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取流程实例列表
      */
-    public List getProcessList(int firstResult, int maxResults) {
-    	
-    	Long count = historySerivce.createHistoricProcessInstanceQuery().count();
+    public Page<ProcessInstanceInfo> queryProcessInstanceItem(ProcessInstanceInfo processInfo,
+                                                              int firstResult, int maxResults) {
+
+        /*Long count = historySerivce.createHistoricProcessInstanceQuery().count();
 
         List list = historySerivce.createHistoricProcessInstanceQuery().listPage(firstResult,
-            maxResults);
+            maxResults);*/
+        processInfo.setPageNo(firstResult);
+        processInfo.setPageSize(maxResults);
         
+        Page<ProcessInstanceInfo> processItem = bpmServiceMapper.queryProcessInstanceItem(processInfo);
+
         //runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId);
 
-        return list;
+        return processItem;
     }
 
     /**
      * 获取单条流程实例
      */
-    public ProcessInstance getProcessInstance(String processInstanceId){
-    	
-    	ProcessInstance obj = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
-    	
-    	return obj;
+    public ProcessInstanceInfo queryProcessInstance(ProcessInstanceInfo processInfo) {
+        ProcessInstanceInfo processInstance = new ProcessInstanceInfo();
+        ProcessInstance obj = runtimeService.createProcessInstanceQuery()
+            .processInstanceId(processInfo.getProcessInstanceId()).singleResult();
+
+        return processInstance;
     }
 
     /**
@@ -296,15 +311,25 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取历史任务列表
      */
-    
+
     /**
      * 获取流程定义
      */
-    public List getProcesDef(String def){
-    	
-    	List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().list();
-    	
-    	return list;
+    public List getProcesDef(String def) {
+
+        List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().list();
+
+        return list;
+    }
+
+    @Override
+    public ProcessInstanceInfo queryTask(ProcessInstanceInfo processInfo) {
+        return null;
+    }
+
+    @Override
+    public List<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo) {
+        return null;
     }
 
 }

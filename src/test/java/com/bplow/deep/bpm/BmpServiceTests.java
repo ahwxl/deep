@@ -27,6 +27,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.bpm.domain.ProcessInstanceInfo;
 import com.bplow.deep.bpm.service.impl.BmpServiceImpl;
 
 /**
@@ -122,15 +124,19 @@ public class BmpServiceTests {
 	@Test
 	public void testGetProcessList(){
 		
-		List list = bpmService.getProcessList(0, 10);
+	    ProcessInstanceInfo processInfo = new ProcessInstanceInfo();
+	    processInfo.setPageNo(0);
+	    processInfo.setPageSize(10);
+	    
+		Page<ProcessInstanceInfo> list = bpmService.queryProcessInstanceItem(processInfo, 0, 10);
 		
 		log.info("{}",list);
 	}
 	
 	@Test
 	public void testGetProcess(){
-		
-		ProcessInstance obj = bpmService.getProcessInstance("25001");
+	    ProcessInstanceInfo processInfo = new ProcessInstanceInfo();
+	    ProcessInstanceInfo obj = bpmService.queryProcessInstance(processInfo);
 		
 		log.info("{}",obj);
 	}

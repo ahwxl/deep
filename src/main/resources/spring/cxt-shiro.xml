@@ -28,7 +28,7 @@
 			<value>
 				/shiro-cas = casFilter
 				/admin/** = roles[ROLE_USER]
-				/bpm/** =user
+				/bpm/** =anon
 				/** = anon
 			</value>
 		</property>

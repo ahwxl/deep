@@ -134,6 +134,7 @@ public class MapperMethod {
     if(method.returnPage()){
         Pagination page = new Pagination();
         page.setDatas(list);
+        page.setTotals(list.size());
         collection = page;
     }else{
         collection = config.getObjectFactory().create(method.getReturnType());

@@ -19,6 +19,7 @@
 
 	<mappers>
 		<mapper resource="mapper/AutoAppInfoMapper.xml" />
+		<mapper resource="mapper/BpmServiceMapper.xml" />
 	</mappers>
 
 

@@ -32,7 +32,7 @@ public class ApplicationInfoController {
     public Page applist(AutoAppInfo autoAppInfo){
      
         autoAppInfo.setAppCode(autoAppInfo.getsSearch());
-        Pagination page = applicationInfoService.queryForList(autoAppInfo);
+        Page page = applicationInfoService.queryForList(autoAppInfo);
         
         return page;
     }

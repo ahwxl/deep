@@ -16,11 +16,9 @@ public class ApplicationInfoServiceImpl implements ApplicationInfoService{
     private AutoAppInfoMapper autoAppInfoMapper;
 
     @Override
-    public Pagination queryForList(AutoAppInfo autoAppInfo) {
+    public Page<AutoAppInfo> queryForList(AutoAppInfo autoAppInfo) {
         
-        Page<AutoAppInfo> list = autoAppInfoMapper.queryForPage(autoAppInfo);
-        
-        Pagination<AutoAppInfo> page = new Pagination<AutoAppInfo>();
+        Page<AutoAppInfo> page = autoAppInfoMapper.queryForPage(autoAppInfo);
         
         return page;
     }

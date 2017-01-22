@@ -1,0 +1,134 @@
+<DIV CLASS=content>
+			<DIV CLASS=R_clumn_1_box>
+	
+		<img class="arrow_1" src="/deep/static/image/title_arrow.png" /><span class="pageHead">审批模板选择</span>
+
+</DIV>
+<script language='javascript'>
+	var endPointTop = '/OAapp/bfapp';
+	var buffalo = new Buffalo(endPointTop);
+	var userId = 'admi';
+	var deptId = 'BM000001DN3C';
+</script>
+			<DIV CLASS=scroll_box_1>
+				
+						<table class="edit_label_table" cellpadding=0 cellspacing=0>
+							<tr>
+								<td class="main_table1_td1">
+									<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
+									财务类</strong> </td>
+							</tr>
+							<tr>
+								<td class="main_table1_td2">
+									<div style="width:170px" title="差旅费用报销单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT0000030OL1','SELECT');">差旅费用报销单</span></div><div style="width:170px" title="借支单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000004MRUO','SELECT');">借支单</span></div><div style="width:170px" title="部门预算申请表"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT0000055BWV','SELECT');">部门预算申请表</span></div><div style="width:170px" title="费用报销单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT0000294854','SELECT');">费用报销单</span></div><div style="width:170px" title="费用支出报销单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT0000308I2B','SELECT');">费用支出报销单</span></div><div style="width:170px" title="请款单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT00003373CJ','SELECT');">请款单</span></div>
+								</td>
+							</tr>
+						</table>
+					
+						<table class="edit_label_table" cellpadding=0 cellspacing=0>
+							<tr>
+								<td class="main_table1_td1">
+									<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
+									业务类（H5）</strong> </td>
+							</tr>
+							<tr>
+								<td class="main_table1_td2">
+									<div style="width:170px" title="报价审批单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000008VS2V','SELECT');">报价审批单</span></div><div style="width:170px" title="设备采购单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000011TGUS','SELECT');">设备采购单</span></div><div style="width:170px" title="软硬件故障维护表"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT0000126RR7','SELECT');">软硬件故障维护表</span></div><div style="width:170px" title="工作报告"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000014FX8R','SELECT');">工作报告</span></div>
+								</td>
+							</tr>
+						</table>
+					
+						<table class="edit_label_table" cellpadding=0 cellspacing=0>
+							<tr>
+								<td class="main_table1_td1">
+									<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
+									人事类</strong> </td>
+							</tr>
+							<tr>
+								<td class="main_table1_td2">
+									<div style="width:170px" title="转正申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_attendance_formal','SELECT');">转正申请单</span></div><div style="width:170px" title="离职申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_dimission_operation','SELECT');">离职申请单</span></div><div style="width:170px" title="入职申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_join_job_operation','SELECT');">入职申请单</span></div><div style="width:170px" title="调薪申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('salary_change_app','SELECT');">调薪申请单</span></div>
+								</td>
+							</tr>
+						</table>
+					
+						<table class="edit_label_table" cellpadding=0 cellspacing=0>
+							<tr>
+								<td class="main_table1_td1">
+									<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
+									考勤类</strong> </td>
+							</tr>
+							<tr>
+								<td class="main_table1_td2">
+									<div style="width:170px" title="补录考勤申请"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_work_app_record','SELECT');">补录考勤申请</span></div><div style="width:170px" title="串休申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_work_chuanxiu','SELECT');">串休申请单</span></div><div style="width:170px" title="加班申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_work_app_add','SELECT');">加班申请单</span></div><div style="width:170px" title="销假申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_work_app_cancel','SELECT');">销假申请单</span></div><div style="width:170px" title="请假申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_work_app_leave','SELECT');">请假申请单</span></div><div style="width:170px" title="外出申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_work_egress','SELECT');">外出申请单</span></div><div style="width:170px" title="调休申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('hr_work_tiaoxiu','SELECT');">调休申请单</span></div><div style="width:170px" title="出差申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT0000437PVQ','SELECT');">出差申请单</span></div>
+								</td>
+							</tr>
+						</table>
+					
+						<table class="edit_label_table" cellpadding=0 cellspacing=0>
+							<tr>
+								<td class="main_table1_td1">
+									<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
+									工程类</strong> </td>
+							</tr>
+							<tr>
+								<td class="main_table1_td2">
+									<div style="width:170px" title="工程合同审批单"><img width="16" height="16" class="fl" src="/deep/static/image/w2.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000016F86B','SELECT');">工程合同审批单</span></div><div style="width:170px" title="合同费用请款"><img width="16" height="16" class="fl" src="/deep/static/image/w2.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000017NHS8','SELECT');">合同费用请款</span></div><div style="width:170px" title="工程决算造价确认书 "><img width="16" height="16" class="fl" src="/deep/static/image/w2.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT0000208FL3','SELECT');">工程决算造价确认书 </span></div>
+								</td>
+							</tr>
+						</table>
+					
+						<table class="edit_label_table" cellpadding=0 cellspacing=0>
+							<tr>
+								<td class="main_table1_td1">
+									<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
+									行政类</strong> </td>
+							</tr>
+							<tr>
+								<td class="main_table1_td2">
+									<div style="width:170px" title="（H5）业务招待费申请表"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000009U0TT','SELECT');">（H5）业务招待费...</span></div><div style="width:170px" title="项目任务单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT00001085JN','SELECT');">项目任务单</span></div>
+								</td>
+							</tr>
+						</table>
+					
+						<table class="edit_label_table" cellpadding=0 cellspacing=0>
+							<tr>
+								<td class="main_table1_td1">
+									<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
+									销售合同类</strong> </td>
+							</tr>
+							<tr>
+								<td class="main_table1_td2">
+									<div style="width:170px" title="合同审批单"><img width="16" height="16" class="fl" src="/deep/static/image/w2.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000013F038','SELECT');">合同审批单</span></div>
+								</td>
+							</tr>
+						</table>
+					
+						<table class="edit_label_table" cellpadding=0 cellspacing=0>
+							<tr>
+								<td class="main_table1_td1">
+									<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
+									备用表单（仅供参考）</strong> </td>
+							</tr>
+							<tr>
+								<td class="main_table1_td2">
+									<div style="width:170px" title="用印申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000036UF82','SELECT');">用印申请单</span></div><div style="width:170px" title="员工转正审批表"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000038EV13','SELECT');">员工转正审批表</span></div><div style="width:170px" title="付款申请单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT000039K767','SELECT');">付款申请单</span></div>
+								</td>
+							</tr>
+						</table>
+					
+					<table class="edit_label_table" cellpadding=0 cellspacing=0>
+						<tr>
+							<td class="main_table1_td1">
+								<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
+								无类别模板</strong> </td>
+						</tr>
+						<tr>
+							<td class="main_table1_td2">
+								<div style="width:170px" title="经费报销单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT00005214T7','SELECT');">经费报销单</span></div>
+							</td>
+						</tr>
+					</table>
+				
+				
+			</div>
+		</div>

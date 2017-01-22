@@ -6,17 +6,22 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bplow.deep.bpm.service.BmpService;
+
 @Controller
 public class BmpController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	@Autowired
+	private BmpService bmpService;
 	
 	/**
 	 * 流程实例列表
@@ -30,15 +35,16 @@ public class BmpController {
 		Session session = SecurityUtils.getSubject().getSession(true);
 
 		logger.info("流程管理页面:{},sessionId={}", user, session.getId());
-		return "bpm/index";
+		return "bpm/processInstancePage";
 	}
 	
 	/**
 	 * 流程实例列表
 	 * @return
 	 */
-	@RequiresRoles("Admin")
+	//@RequiresRoles("Admin")
 	@RequestMapping(value = "/bpm/processInstance")
+	@ResponseBody
 	public String index() {
 		logger.info("流程管理");
 
@@ -48,6 +54,12 @@ public class BmpController {
 		logger.info("流程管理页面:{},sessionId={}", user, session.getId());
 		return "bpm/index";
 	}
+	
+	@RequestMapping(value = "/bpm/processType")
+    public String processType() {
+
+        return "bpm/processType";
+    }
 
 	/**
 	 * 流程定义页面
