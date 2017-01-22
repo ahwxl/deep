@@ -121,7 +121,7 @@
 							<td class="main_table1_td1">
 								<img border="0" class="fl" src="/deep/static/image/arrowwrite.png" /><strong>
 								无类别模板</strong> </td>
-						</tr>
+						</tr> 
 						<tr>
 							<td class="main_table1_td2">
 								<div style="width:170px" title="经费报销单"><img width="16" height="16" class="fl" src="/deep/static/image/explmark.png" />&nbsp;<span onmouseout="this.style.cssText='text-decoration:none;cursor: pointer; '" onmouseover="this.style.cssText='text-decoration:underline;cursor: pointer; '" onclick="submitSelect('TraceT00005214T7','SELECT');">经费报销单</span></div>
