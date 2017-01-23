@@ -27,7 +27,7 @@ public interface BmpService {
 	public void claimTask(String taskId, String userId);
 	
 	//流程列表
-	public Page<ProcessInstanceInfo> queryProcessInstanceItem(ProcessInstanceInfo processInfo,int firstResult, int maxResults);
+	public Page<ProcessInstanceInfo> queryProcessInstanceItem(ProcessInstanceInfo processInfo);
 	//流程实例
 	public ProcessInstanceInfo queryProcessInstance(ProcessInstanceInfo processInfo);
 	

@@ -128,7 +128,7 @@ public class BmpServiceTests {
 	    processInfo.setPageNo(0);
 	    processInfo.setPageSize(10);
 	    
-		Page<ProcessInstanceInfo> list = bpmService.queryProcessInstanceItem(processInfo, 0, 10);
+		Page<ProcessInstanceInfo> list = bpmService.queryProcessInstanceItem(processInfo);
 		
 		log.info("{}",list);
 	}

@@ -5,10 +5,6 @@
 
 </DIV>
 <script language='javascript'>
-	var endPointTop = '/OAapp/bfapp';
-	var buffalo = new Buffalo(endPointTop);
-	var userId = 'admi';
-	var deptId = 'BM000001DN3C';
 </script>
 			<DIV CLASS=scroll_box_1>
 				

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.bpm.domain.ProcessInstanceInfo;
 import com.bplow.deep.bpm.service.BmpService;
 
 @Controller
@@ -35,7 +37,7 @@ public class BmpController {
 		Session session = SecurityUtils.getSubject().getSession(true);
 
 		logger.info("流程管理页面:{},sessionId={}", user, session.getId());
-		return "bpm/processInstancePage";
+		return "bpm/processInstance";
 	}
 	
 	/**
@@ -45,14 +47,16 @@ public class BmpController {
 	//@RequiresRoles("Admin")
 	@RequestMapping(value = "/bpm/processInstance")
 	@ResponseBody
-	public String index() {
-		logger.info("流程管理");
+	public Page<ProcessInstanceInfo> index(ProcessInstanceInfo processInfo) {
+		logger.info("查询流水实例请求:{}",processInfo);
 
 		Object user = SecurityUtils.getSubject().getPrincipal();
 		Session session = SecurityUtils.getSubject().getSession(true);
+		
+		Page<ProcessInstanceInfo> page = bmpService.queryProcessInstanceItem(processInfo);
 
-		logger.info("流程管理页面:{},sessionId={}", user, session.getId());
-		return "bpm/index";
+		logger.info("查询流水实例返回:{},sessionId={}", user, session.getId());
+		return page;
 	}
 	
 	@RequestMapping(value = "/bpm/processType")

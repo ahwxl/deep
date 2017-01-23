@@ -269,15 +269,12 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取流程实例列表
      */
-    public Page<ProcessInstanceInfo> queryProcessInstanceItem(ProcessInstanceInfo processInfo,
-                                                              int firstResult, int maxResults) {
+    public Page<ProcessInstanceInfo> queryProcessInstanceItem(ProcessInstanceInfo processInfo) {
 
         /*Long count = historySerivce.createHistoricProcessInstanceQuery().count();
 
         List list = historySerivce.createHistoricProcessInstanceQuery().listPage(firstResult,
             maxResults);*/
-        processInfo.setPageNo(firstResult);
-        processInfo.setPageSize(maxResults);
         
         Page<ProcessInstanceInfo> processItem = bpmServiceMapper.queryProcessInstanceItem(processInfo);
 

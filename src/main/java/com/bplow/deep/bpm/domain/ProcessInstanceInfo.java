@@ -3,7 +3,9 @@ package com.bplow.deep.bpm.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.bplow.deep.base.jackson.CustomDateSerializer;
 import com.bplow.deep.base.pagination.PageInfo;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * 流程实例信息
@@ -66,6 +68,7 @@ public class ProcessInstanceInfo extends PageInfo implements Serializable{
         this.currentProcessUserId = currentProcessUserId;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getStartDate() {
         return startDate;
     }
