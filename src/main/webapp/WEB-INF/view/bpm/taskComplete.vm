@@ -1,0 +1,228 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="row-fluid">
+	<div class="span12">
+	</div>
+</div>
+<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->
+
+				<div class="row-fluid">
+
+					<div class="span12">
+
+<div class="portlet box blue">
+
+										<div class="portlet-title">
+
+											<div class="caption"><i class="icon-reorder"></i>请假申请</div>
+
+											<div class="tools">
+
+												<a href="javascript:;" class="collapse"></a>
+
+												<a href="#portlet-config" data-toggle="modal" class="config"></a>
+
+												<a href="javascript:;" class="reload"></a>
+
+												<a href="javascript:;" class="remove"></a>
+
+											</div>
+
+										</div>
+
+										<div class="portlet-body form">
+
+											<!-- BEGIN FORM-->
+
+											<form action="/deep/bpm/completeTask" method="post" class="horizontal-form">
+											<input type="text" id="taskId" name="taskId" value="${process.taskId}" />
+											<input type="hidden" id="employeeName" name="wangxiaolei" />
+											
+											    <h3 class="form-section">审批</h3>
+											    <!--/row-->
+
+												<div class="row-fluid">
+
+													<!--/span-->
+
+													<div class="span6 ">
+
+														<div class="control-group">
+
+															<label class="control-label"></label>
+
+															<div class="controls">                                                
+
+																<label class="radio">
+
+																<input type="radio" name="vacationApproved" value="true" checked/>
+
+																同意
+
+																</label>
+
+																<label class="radio">
+
+																<input type="radio" name="vacationApproved" value="false"  />
+
+																驳回
+
+																</label>  
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
+												
+												<!--/row-->        
+
+												<div class="row-fluid">
+
+													<div class="span6 ">
+
+														<div class="control-group">
+
+															<label class="control-label">意见</label>
+
+															<div class="controls">
+
+																<textarea class="span6 m-wrap" rows="3" name="managerMotivation" style="margin: 0px; width: 546px; height: 77px;" >同意</textarea>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+												</div>
+												
+												<div class="form-actions">
+
+													<button type="submit" class="btn blue"><i class="icon-ok"></i> 保存</button>
+													
+													<button type="submit" class="btn blue"><i class="icon-ok"></i> 提交申请</button>
+
+													<button type="button" class="btn">取消</button>
+
+												</div>
+
+												<!--/row-->
+
+												<h3 class="form-section">请假单</h3>
+
+												<div class="row-fluid">
+
+													<div class="span6 ">
+
+														<div class="control-group">
+
+															<label class="control-label" for="firstName">事由</label>
+
+															<div class="controls">
+
+																<input type="text" id="firstName" name="vacationMotivation" class="m-wrap span12" placeholder="Chee Kin" value="回家探亲">
+
+																<span class="help-block"></span>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+													<div class="span6 ">
+
+														<div class="control-group error">
+
+															<label class="control-label" for="lastName">天数</label>
+
+															<div class="controls">
+
+																<input type="text" id="lastName" name="numberOfDays" class="m-wrap span12" placeholder="Lim" value="3">
+
+																<span class="help-block"></span>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
+
+												<!--/row-->
+
+												<div class="row-fluid">
+
+													<div class="span6 ">
+
+														<div class="control-group">
+
+															<label class="control-label" >类型</label>
+
+															<div class="controls">
+
+																<select  class="m-wrap span12">
+
+																	<option value="">年假</option>
+
+																	<option value="">事假</option>
+
+																</select>
+
+																<span class="help-block">Select your gender.</span>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+													<div class="span6 ">
+
+														<div class="control-group">
+
+															<label class="control-label" >Date of Birth</label>
+
+															<div class="controls">
+
+																<input type="text" class="m-wrap span12"  placeholder="dd/mm/yyyy">
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
+
+												<!--/row-->        
+
+											</form>
+
+											<!-- END FORM--> 
+
+										</div>
+
+									</div>
+
+
+					</div>
+
+				</div>
+
+				<!-- END PAGE CONTENT-->

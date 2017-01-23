@@ -1,135 +1,162 @@
 <!-- BEGIN PAGE HEADER-->
+<div class="row-fluid">
+	<div class="span12">
+	</div>
+</div>
+<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->
 
 				<div class="row-fluid">
 
 					<div class="span12">
 
-						<!-- BEGIN STYLE CUSTOMIZER -->
+<div class="portlet box blue">
 
-						<div class="color-panel hidden-phone">
+										<div class="portlet-title">
 
-							<div class="color-mode-icons icon-color"></div>
+											<div class="caption"><i class="icon-reorder"></i>请假申请</div>
 
-							<div class="color-mode-icons icon-color-close"></div>
+											<div class="tools">
 
-							<div class="color-mode">
+												<a href="javascript:;" class="collapse"></a>
 
-								<p>THEME COLOR</p>
+												<a href="#portlet-config" data-toggle="modal" class="config"></a>
 
-								<ul class="inline">
+												<a href="javascript:;" class="reload"></a>
 
-									<li class="color-black current color-default" data-style="default"></li>
+												<a href="javascript:;" class="remove"></a>
 
-									<li class="color-blue" data-style="blue"></li>
+											</div>
 
-									<li class="color-brown" data-style="brown"></li>
+										</div>
 
-									<li class="color-purple" data-style="purple"></li>
+										<div class="portlet-body form">
 
-									<li class="color-grey" data-style="grey"></li>
+											<!-- BEGIN FORM-->
 
-									<li class="color-white color-light" data-style="light"></li>
+											<form action="/deep/bpm/createProcessInstanceAction" method="post" class="horizontal-form">
+											<input type="text" id="key" name="key" value="${processInfo.key}" />
+											<input type="hidden" id="employeeName" name="wangxiaolei" />
 
-								</ul>
+												<h3 class="form-section">请假单</h3>
 
-								<label>
+												<div class="row-fluid">
 
-									<span>Layout</span>
+													<div class="span6 ">
 
-									<select class="layout-option m-wrap small">
+														<div class="control-group">
 
-										<option value="fluid" selected>Fluid</option>
+															<label class="control-label" for="firstName">事由</label>
 
-										<option value="boxed">Boxed</option>
+															<div class="controls">
 
-									</select>
+																<input type="text" id="firstName" name="vacationMotivation" class="m-wrap span12" placeholder="Chee Kin" value="回家探亲">
 
-								</label>
+																<span class="help-block"></span>
 
-								<label>
+															</div>
 
-									<span>Header</span>
+														</div>
 
-									<select class="header-option m-wrap small">
+													</div>
 
-										<option value="fixed" selected>Fixed</option>
+													<!--/span-->
 
-										<option value="default">Default</option>
+													<div class="span6 ">
 
-									</select>
+														<div class="control-group error">
 
-								</label>
+															<label class="control-label" for="lastName">天数</label>
 
-								<label>
+															<div class="controls">
 
-									<span>Sidebar</span>
+																<input type="text" id="lastName" name="numberOfDays" class="m-wrap span12" placeholder="Lim" value="3">
 
-									<select class="sidebar-option m-wrap small">
+																<span class="help-block"></span>
 
-										<option value="fixed">Fixed</option>
+															</div>
 
-										<option value="default" selected>Default</option>
+														</div>
 
-									</select>
+													</div>
 
-								</label>
+													<!--/span-->
 
-								<label>
+												</div>
 
-									<span>Footer</span>
+												<!--/row-->
 
-									<select class="footer-option m-wrap small">
+												<div class="row-fluid">
 
-										<option value="fixed">Fixed</option>
+													<div class="span6 ">
 
-										<option value="default" selected>Default</option>
+														<div class="control-group">
 
-									</select>
+															<label class="control-label" >类型</label>
 
-								</label>
+															<div class="controls">
 
-							</div>
+																<select  class="m-wrap span12">
 
-						</div>
+																	<option value="">年假</option>
 
-						<!-- END BEGIN STYLE CUSTOMIZER -->  
+																	<option value="">事假</option>
 
-						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+																</select>
 
-						<h3 class="page-title">
+																<span class="help-block">Select your gender.</span>
 
-							Managed Tables <small>managed table samples</small>
+															</div>
 
-						</h3>
+														</div>
 
-						<ul class="breadcrumb">
+													</div>
 
-							<li>
+													<!--/span-->
 
-								<i class="icon-home"></i>
+													<div class="span6 ">
 
-								<a href="index.html">Home</a> 
+														<div class="control-group">
 
-								<i class="icon-angle-right"></i>
+															<label class="control-label" >Date of Birth</label>
 
-							</li>
+															<div class="controls">
 
-							<li>
+																<input type="text" class="m-wrap span12"  placeholder="dd/mm/yyyy">
 
-								<a href="#">Data Tables</a>
+															</div>
 
-								<i class="icon-angle-right"></i>
+														</div>
 
-							</li>
+													</div>
 
-							<li><a href="#">Managed Tables</a></li>
+													<!--/span-->
 
-						</ul>
+												</div>
 
-						<!-- END PAGE TITLE & BREADCRUMB-->
+												<!--/row-->        
+
+												<div class="form-actions">
+
+													<button type="submit" class="btn blue"><i class="icon-ok"></i> 保存</button>
+													
+													<button type="submit" class="btn blue"><i class="icon-ok"></i> 提交申请</button>
+
+													<button type="button" class="btn">取消</button>
+
+												</div>
+
+											</form>
+
+											<!-- END FORM--> 
+
+										</div>
+
+									</div>
+
 
 					</div>
 
 				</div>
 
-				<!-- END PAGE HEADER-->
+				<!-- END PAGE CONTENT-->

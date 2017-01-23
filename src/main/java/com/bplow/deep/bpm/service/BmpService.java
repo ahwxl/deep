@@ -31,7 +31,7 @@ public interface BmpService {
 	//流程实例
 	public ProcessInstanceInfo queryProcessInstance(ProcessInstanceInfo processInfo);
 	
-	public List<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo);
+	public Page<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo);
 	
 	public ProcessInstanceInfo queryTask(ProcessInstanceInfo processInfo);
 }

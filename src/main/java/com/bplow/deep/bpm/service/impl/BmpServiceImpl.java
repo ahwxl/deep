@@ -111,7 +111,7 @@ public class BmpServiceImpl implements BmpService {
     public String startProcessByKey(String key, Map<String, Object> variables) {
 
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
-            "vacationRequest", variables);
+            key, variables);//vacationRequest
 
         return processInstance.getId();
     }
@@ -321,12 +321,26 @@ public class BmpServiceImpl implements BmpService {
 
     @Override
     public ProcessInstanceInfo queryTask(ProcessInstanceInfo processInfo) {
-        return null;
+        ProcessInstanceInfo process = new ProcessInstanceInfo();
+        Task task = taskService.createTaskQuery().taskId(processInfo.getTaskId()).singleResult();
+        
+        process.setTaskId(task.getId());
+        process.setActiviteName(task.getName());
+        process.setProcessInstanceId(task.getProcessInstanceId());
+        process.setKey(task.getTaskDefinitionKey());
+        
+        return process;
     }
 
+    /**
+     * 任务列表
+     */
     @Override
-    public List<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo) {
-        return null;
+    public Page<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo) {
+        
+        Page<ProcessInstanceInfo> task = bpmServiceMapper.queryTasks(processInfo);
+        
+        return task;
     }
 
 }

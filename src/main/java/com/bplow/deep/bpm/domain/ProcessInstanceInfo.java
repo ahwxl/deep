@@ -18,6 +18,7 @@ public class ProcessInstanceInfo extends PageInfo implements Serializable{
     /**  */
     private static final long serialVersionUID = -2937509678062965968L;
     
+    private String key;
     private String processInstanceId;
     private String taskId;
     private String processName;
@@ -99,6 +100,14 @@ public class ProcessInstanceInfo extends PageInfo implements Serializable{
 
     public void setActiviteName(String activiteName) {
         this.activiteName = activiteName;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
 }

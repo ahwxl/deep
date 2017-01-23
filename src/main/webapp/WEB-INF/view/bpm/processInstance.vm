@@ -1,11 +1,17 @@
                <!-- BEGIN PAGE HEADER-->
+
 				<div class="row-fluid">
+
 					<div class="span12">
+
 					</div>
+
 				</div>
+
 				<!-- END PAGE HEADER-->
 
 				<!-- BEGIN PAGE CONTENT-->
+
 				<div class="row-fluid">
 
 					<div class="span12">
@@ -16,7 +22,7 @@
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-globe"></i>任务列表</div>
+								<div class="caption"><i class="icon-globe"></i>流程实例列表</div>
 
 								<div class="tools">
 
@@ -68,6 +74,7 @@
 
 											<td class="center hidden-480">12 Jan 2012</td>
 
+
 										</tr>
 
 									</tbody>
@@ -98,4 +105,4 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-	<script type="text/javascript" src="/deep/static/js/module/taskitem.js?verion=20170112"></script>
+				<script type="text/javascript" src="/deep/static/js/module/processtype.js"></script>
