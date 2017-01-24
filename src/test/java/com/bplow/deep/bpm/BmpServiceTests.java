@@ -61,6 +61,19 @@ public class BmpServiceTests {
 	}
 	
 	@Test
+	public void startPrcocessByKeyTest(){
+	    
+	    String key = "vacationRequest";
+	    
+	    Map<String, Object> variables = new HashMap<String, Object>();
+        variables.put("employeeName", "Kermit");
+        variables.put("numberOfDays", new Integer(4));
+        variables.put("vacationMotivation", "I'm really tired!");
+	    
+	    bpmService.startProcessByKey(key, variables);
+	}
+	
+	@Test
 	public void startProcessTest(){
 		
 		Map<String, Object> variables = new HashMap<String, Object>();

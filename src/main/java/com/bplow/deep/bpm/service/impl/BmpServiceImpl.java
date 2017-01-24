@@ -32,6 +32,7 @@ import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.runtime.ProcessInstanceBuilder;
 import org.activiti.engine.task.Task;
 import org.activiti.image.ProcessDiagramGenerator;
 import org.activiti.image.impl.DefaultProcessDiagramGenerator;
@@ -50,23 +51,23 @@ import com.bplow.deep.bpm.service.BmpService;
 @Service
 public class BmpServiceImpl implements BmpService {
 
-    private Logger          log = LoggerFactory.getLogger(this.getClass());
+    private Logger           log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    RepositoryService       repositoryService;
+    RepositoryService        repositoryService;
 
     @Autowired
-    RuntimeService          runtimeService;
+    RuntimeService           runtimeService;
 
     @Autowired
-    TaskService             taskService;
+    TaskService              taskService;
 
     @Autowired
-    HistoryService          historySerivce;
+    HistoryService           historySerivce;
 
     @Autowired
-    private IdentityService identityService;
-    
+    private IdentityService  identityService;
+
     @Autowired
     private BpmServiceMapper bpmServiceMapper;
 
@@ -105,13 +106,21 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 启动流程实例
      * 
-     * @param key
+     * @param key   vacationRequest
      * @return
      */
     public String startProcessByKey(String key, Map<String, Object> variables) {
 
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
-            key, variables);//vacationRequest
+        /*ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
+            key, variables);*/
+
+        ProcessInstanceBuilder processBuilder = runtimeService.createProcessInstanceBuilder();
+        for (Map.Entry<String, Object> entry : variables.entrySet()) {
+            processBuilder.addVariable(entry.getKey(), entry.getValue());
+        }
+
+        ProcessInstance processInstance = processBuilder.processDefinitionKey(key).tenantId("wxl")
+            .processInstanceName("请假流程-小王").start();
 
         return processInstance.getId();
     }
@@ -251,8 +260,8 @@ public class BmpServiceImpl implements BmpService {
     }
 
     public InputStream getImageInputStreamById(ProcessInstanceInfo processInfo) {
-        ProcessDefinition processDefinition = repositoryService
-            .getProcessDefinition(processInfo.getKey());
+        ProcessDefinition processDefinition = repositoryService.getProcessDefinition(processInfo
+            .getKey());
         //        .processDefinitionKey(processDefinitionKey).listPage(0, 1).get(0);
         ProcessDiagramGenerator processDiagramGenerator = new DefaultProcessDiagramGenerator();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
@@ -275,8 +284,9 @@ public class BmpServiceImpl implements BmpService {
 
         List list = historySerivce.createHistoricProcessInstanceQuery().listPage(firstResult,
             maxResults);*/
-        
-        Page<ProcessInstanceInfo> processItem = bpmServiceMapper.queryProcessInstanceItem(processInfo);
+
+        Page<ProcessInstanceInfo> processItem = bpmServiceMapper
+            .queryProcessInstanceItem(processInfo);
 
         //runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId);
 
@@ -323,12 +333,12 @@ public class BmpServiceImpl implements BmpService {
     public ProcessInstanceInfo queryTask(ProcessInstanceInfo processInfo) {
         ProcessInstanceInfo process = new ProcessInstanceInfo();
         Task task = taskService.createTaskQuery().taskId(processInfo.getTaskId()).singleResult();
-        
+
         process.setTaskId(task.getId());
         process.setActiviteName(task.getName());
         process.setProcessInstanceId(task.getProcessInstanceId());
         process.setKey(task.getTaskDefinitionKey());
-        
+
         return process;
     }
 
@@ -337,9 +347,9 @@ public class BmpServiceImpl implements BmpService {
      */
     @Override
     public Page<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo) {
-        
+
         Page<ProcessInstanceInfo> task = bpmServiceMapper.queryTasks(processInfo);
-        
+
         return task;
     }
 
