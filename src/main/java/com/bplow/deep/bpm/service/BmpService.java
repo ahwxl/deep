@@ -3,6 +3,7 @@
  */
 package com.bplow.deep.bpm.service;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -34,4 +35,6 @@ public interface BmpService {
 	public Page<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo);
 	
 	public ProcessInstanceInfo queryTask(ProcessInstanceInfo processInfo);
+	//流程图
+	public InputStream getImageInputStreamById(ProcessInstanceInfo processInfo);
 }

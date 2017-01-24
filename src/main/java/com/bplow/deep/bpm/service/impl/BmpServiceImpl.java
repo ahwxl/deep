@@ -250,9 +250,9 @@ public class BmpServiceImpl implements BmpService {
         return imageStream;
     }
 
-    public InputStream getImageInputStreamById(String processDefinitionKey) {
+    public InputStream getImageInputStreamById(ProcessInstanceInfo processInfo) {
         ProcessDefinition processDefinition = repositoryService
-            .getProcessDefinition(processDefinitionKey);
+            .getProcessDefinition(processInfo.getKey());
         //        .processDefinitionKey(processDefinitionKey).listPage(0, 1).get(0);
         ProcessDiagramGenerator processDiagramGenerator = new DefaultProcessDiagramGenerator();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());

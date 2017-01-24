@@ -9,7 +9,7 @@ $('#sample_1').dataTable({
                   { "sTitle": "申请时间","mData":"startDate","bSortable": false },
                   { "sTitle": "当前状态","mData":"processStatus","bSortable": false },
                   { "sTitle": "流水号","mData":"processInstanceId","bSortable": false },
-                  { "sTitle": "操作","mData":"processInstanceId","bSortable": false }
+                  { "sTitle": "操作","mData":"endDate","bSortable": false }
                 ],
                 "aLengthMenu": [
                     [5, 15, 20, -1],
@@ -28,13 +28,22 @@ $('#sample_1').dataTable({
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [0]
+                        'aTargets': [4],
+                        fnRender: function (setobj, data) {
+                        	return "<a class=' btn green'  data-toggle='modal' href='#stack1' trigger='alert('0000')'>流程</a>";
+                            //return "<a href='/deep/bpm/taskCompletePage?taskId="+data+"'>"+data+"</a>";
+                        }
                     }
                 ]
             });
             
             $(document).ready(function () {
                 var table = $('#sample_1').DataTable();
+                
+                $('#stack1').on('show', function (e) {
+                	var url = "/deep/bpm/viewProcessDefImage?key=countersign:5:52504";
+                    $("#myprocessimage").attr("src",url);
+                })
                 //给2个输入框添加blur事件调用draw方法执行自定义过滤函数
                 $('#min, #max').blur(function () {
                     table.draw();

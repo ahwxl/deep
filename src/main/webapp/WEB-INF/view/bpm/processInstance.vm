@@ -91,8 +91,9 @@
 
 				</div>
 
-				<div class="row-fluid"></div>
-
+				<div class="row-fluid">
+				</div>
+				
 				<!-- END PAGE CONTENT-->
 				
 				<!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -105,4 +106,29 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-				<script type="text/javascript" src="/deep/static/js/module/processtype.js"></script>
+<script type="text/javascript" src="/deep/static/js/module/processtype.js"></script>
+<div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
+
+									<div class="modal-header">
+
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+										<h3>流程图</h3>
+
+									</div>
+
+									<div class="modal-body">
+
+										<img id="myprocessimage" border="0" class="fl" src="#" />
+
+									</div>
+
+									<div class="modal-footer">
+
+										<button type="button" data-dismiss="modal" class="btn">Close</button>
+
+										<button type="button" class="btn red">Ok</button>
+
+									</div>
+
+								</div>

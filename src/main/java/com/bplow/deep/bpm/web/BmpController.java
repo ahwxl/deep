@@ -1,10 +1,15 @@
 package com.bplow.deep.bpm.web;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -145,14 +150,13 @@ public class BmpController {
     public String createProcessInstanceAction(ProcessInstanceInfo processInfo,
                                               HttpServletRequest httpRequest, Model view) {
 
-        Map<String ,String[]> map = httpRequest.getParameterMap();
-        Map<String,Object> variables = new HashMap<String,Object>();
+        Map<String, String[]> map = httpRequest.getParameterMap();
+        Map<String, Object> variables = new HashMap<String, Object>();
         for (Map.Entry<String, String[]> entry : map.entrySet()) {
             System.out.println(entry.getKey() + "--->" + entry.getValue()[0]);
             variables.put(entry.getKey(), entry.getValue()[0]);
         }
 
-        
         bmpService.startProcessByKey(processInfo.getKey(), variables);
 
         return "{result:ok}";
@@ -186,10 +190,10 @@ public class BmpController {
      */
     @RequestMapping(value = "/bpm/completeTask")
     @ResponseBody
-    public String completeTask(ProcessInstanceInfo processInfo,HttpServletRequest httpRequest) {
-        
-        Map<String ,String[]> map = httpRequest.getParameterMap();
-        Map<String,Object> taskVariable = new HashMap<String,Object>();
+    public String completeTask(ProcessInstanceInfo processInfo, HttpServletRequest httpRequest) {
+
+        Map<String, String[]> map = httpRequest.getParameterMap();
+        Map<String, Object> taskVariable = new HashMap<String, Object>();
         for (Map.Entry<String, String[]> entry : map.entrySet()) {
             System.out.println(entry.getKey() + "--->" + entry.getValue()[0]);
             taskVariable.put(entry.getKey(), entry.getValue()[0]);
@@ -207,7 +211,7 @@ public class BmpController {
     @RequestMapping(value = "/bpm/viewProcessInstance")
     public String viewProcessInstance() {
 
-        return "";
+        return " ";
     }
 
     /**
@@ -219,6 +223,22 @@ public class BmpController {
     public String viewHistoryProcessTask() {
 
         return "";
+    }
+
+    //流程图
+    @RequestMapping(value = "/bpm/viewProcessDefImage")
+    public void viewProcessDefImage(ProcessInstanceInfo processInfo,
+                                      HttpServletRequest httpRequest, HttpServletResponse response) throws IOException {
+        
+        InputStream input = bmpService.getImageInputStreamById(processInfo);
+        
+        OutputStream output = response.getOutputStream();
+        
+        IOUtils.copy(input, output);
+        output.flush();
+        output.close();
+        input.close();
+
     }
 
     @RequestMapping(value = "/ajax/deploy")

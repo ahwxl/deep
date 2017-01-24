@@ -108,7 +108,7 @@ public class BmpServiceTests {
 	@Test
 	public void getImageInputStreamByIdTest() throws FileNotFoundException, IOException{
 		
-		InputStream in = bpmService.getImageInputStreamById("countersign:2:25004");
+		InputStream in = bpmService.getImageInputStreamById(null);//countersign:2:25004
 		File file = new File("d:/logs/sign2.jpg");
 		IOUtils.copy(in, new FileOutputStream(file));
 		in.close();
