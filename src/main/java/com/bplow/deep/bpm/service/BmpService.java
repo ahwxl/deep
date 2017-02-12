@@ -27,6 +27,8 @@ public interface BmpService {
 	//接受任务
 	public void claimTask(String taskId, String userId);
 	
+	//查询流程创建表单
+	public String queryProcessStartForm(ProcessInstanceInfo processInfo);
 	//流程列表
 	public Page<ProcessInstanceInfo> queryProcessInstanceItem(ProcessInstanceInfo processInfo);
 	//流程实例

@@ -66,6 +66,7 @@ public class BmpServiceTests {
 	    String key = "vacationRequest";
 	    
 	    Map<String, Object> variables = new HashMap<String, Object>();
+	    variables.put("_name", "请假流程-汪小磊");
         variables.put("employeeName", "Kermit");
         variables.put("numberOfDays", new Integer(4));
         variables.put("vacationMotivation", "I'm really tired!");
@@ -99,10 +100,10 @@ public class BmpServiceTests {
 	public void completeTaskTest(){
 	    String processId = "";
 	    String taskId    = "5008";
-	    taskId    = "55022";
+	    taskId    = "25007";
 		Map<String, Object> taskVariables = new HashMap<String, Object>();
-		//taskVariables.put("vacationApproved", "false");
-		//taskVariables.put("managerMotivation", "We have a tight deadline!");
+		taskVariables.put("vacationApproved", "false");
+		taskVariables.put("managerMotivation", "We have a tight deadline!");
 		
 		taskVariables.put("resendRequest", "true");
 		
@@ -152,6 +153,17 @@ public class BmpServiceTests {
 	    ProcessInstanceInfo obj = bpmService.queryProcessInstance(processInfo);
 		
 		log.info("{}",obj);
+	}
+	@Test
+	public void testQueryProcessStartForm(){
+		
+		 ProcessInstanceInfo processInfo = new ProcessInstanceInfo();
+		 processInfo.setKey("countersign");
+		 //processInfo.setProcessDefineId("countersign:1:87504");
+		 
+		 String formkey = bpmService.queryProcessStartForm(processInfo);
+		 
+		 log.info("{}",formkey);
 	}
 
 }

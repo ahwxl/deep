@@ -4,6 +4,7 @@
   
   <resultMap id="BaseResultMap" type="com.bplow.deep.bpm.domain.ProcessInstanceInfo">
     <id column="PROC_INST_ID_" jdbcType="INTEGER" property="processInstanceId" />
+    <result column="PROC_DEF_ID_" jdbcType="VARCHAR" property="processDefineId" />
     <result column="NAME_" jdbcType="VARCHAR" property="processName" />
     <result column="proce_status" jdbcType="VARCHAR" property="processStatus" />
     <result column="START_TIME_" jdbcType="VARCHAR" property="startDate" />
@@ -17,7 +18,7 @@
     <result column="CREATE_TIME_" jdbcType="VARCHAR" property="startDate" />
   </resultMap>
   
-  <select id="queryProcessInstanceItem" parameterType="com.bplow.deep.bpm.domain.ProcessInstanceInfo" resultMap="BaseResultMap">
+  <select id="queryProcessInstanceItemForPage" parameterType="com.bplow.deep.bpm.domain.ProcessInstanceInfo" resultMap="BaseResultMap">
     select a.PROC_INST_ID_,a.PROC_DEF_ID_,a.START_TIME_,a.START_USER_ID_,a.NAME_ ,'' proce_status
           from act_hi_procinst a
     <where>
@@ -33,7 +34,7 @@
      ORDER BY a.START_TIME_ DESC 
   </select>
   
-  <select id="queryTasks" parameterType="com.bplow.deep.bpm.domain.ProcessInstanceInfo" resultMap="TaskResultMap">
+  <select id="queryTasksForPage" parameterType="com.bplow.deep.bpm.domain.ProcessInstanceInfo" resultMap="TaskResultMap">
   select t.ID_,t.PROC_INST_ID_,t.PROC_DEF_ID_,t.NAME_,t.DESCRIPTION_,t.CREATE_TIME_,t.ASSIGNEE_,'' proce_status
   from act_ru_task t
   <where>

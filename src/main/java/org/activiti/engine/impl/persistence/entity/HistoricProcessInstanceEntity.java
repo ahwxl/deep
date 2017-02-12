@@ -54,7 +54,8 @@ public class HistoricProcessInstanceEntity extends HistoricScopeInstanceEntity i
     startUserId = Authentication.getAuthenticatedUserId();
     startActivityId = processInstance.getActivityId();
     superProcessInstanceId = processInstance.getSuperExecution() != null ? processInstance.getSuperExecution().getProcessInstanceId() : null;
-    
+    name = (String)processInstance.getVariables().get("_name");
+    Map<String,VariableInstanceEntity> map = processInstance.getVariableInstances();
     // Inherit tenant id (if applicable)
     if (processInstance.getTenantId() != null) {
     	tenantId = processInstance.getTenantId();

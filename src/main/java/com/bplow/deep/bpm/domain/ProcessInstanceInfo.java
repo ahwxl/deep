@@ -20,6 +20,7 @@ public class ProcessInstanceInfo extends PageInfo implements Serializable{
     
     private String key;
     private String processInstanceId;
+    private String processDefineId;
     private String taskId;
     private String processName;
     private String activiteName;
@@ -109,5 +110,13 @@ public class ProcessInstanceInfo extends PageInfo implements Serializable{
     public void setKey(String key) {
         this.key = key;
     }
+
+	public String getProcessDefineId() {
+		return processDefineId;
+	}
+
+	public void setProcessDefineId(String processDefineId) {
+		this.processDefineId = processDefineId;
+	}
 
 }

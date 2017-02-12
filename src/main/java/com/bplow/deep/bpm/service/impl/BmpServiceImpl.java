@@ -18,6 +18,7 @@ import javax.transaction.Transactional;
 import org.activiti.bpmn.BpmnAutoLayout;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.ActivitiException;
+import org.activiti.engine.FormService;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
@@ -67,6 +68,9 @@ public class BmpServiceImpl implements BmpService {
 
     @Autowired
     private IdentityService  identityService;
+    
+    @Autowired
+    private FormService formService;
 
     @Autowired
     private BpmServiceMapper bpmServiceMapper;
@@ -119,7 +123,7 @@ public class BmpServiceImpl implements BmpService {
             processBuilder.addVariable(entry.getKey(), entry.getValue());
         }
 
-        ProcessInstance processInstance = processBuilder.processDefinitionKey(key).tenantId("wxl")
+        ProcessInstance processInstance = processBuilder.processDefinitionKey(key)
             .processInstanceName("请假流程-小王").start();
 
         return processInstance.getId();
@@ -286,7 +290,7 @@ public class BmpServiceImpl implements BmpService {
             maxResults);*/
 
         Page<ProcessInstanceInfo> processItem = bpmServiceMapper
-            .queryProcessInstanceItem(processInfo);
+            .queryProcessInstanceItemForPage(processInfo);
 
         //runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId);
 
@@ -348,9 +352,19 @@ public class BmpServiceImpl implements BmpService {
     @Override
     public Page<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo) {
 
-        Page<ProcessInstanceInfo> task = bpmServiceMapper.queryTasks(processInfo);
+        Page<ProcessInstanceInfo> task = bpmServiceMapper.queryTasksForPage(processInfo);
 
         return task;
     }
+
+	@Override
+	public String queryProcessStartForm(ProcessInstanceInfo processInfo) {
+		
+		ProcessDefinition pd= repositoryService.createProcessDefinitionQuery().processDefinitionKey(processInfo.getKey()).singleResult();
+		
+		String formKey = formService.getStartFormData(pd.getId()).getFormKey();
+		
+		return formKey;
+	}
 
 }

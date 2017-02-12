@@ -46,15 +46,15 @@
 
 										<tr>
 
-											<th ><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
+											<th class="hidden-580"></th>
 
-											<th>Username</th>
+											<th></th>
 
-											<th class="hidden-480">Email</th>
+											<th></th>
 
-											<th class="hidden-480">Points</th>
+											<th></th>
 
-											<th class="hidden-480">Joined</th>
+											<th></th>
 
 										</tr>
 
@@ -64,15 +64,15 @@
 
 										<tr class="odd gradeX">
 
-											<td><input type="checkbox" class="checkboxes" value="1" /></td>
+											<td></td>
 
-											<td>shuxer</td>
+											<td></td>
 
-											<td class="hidden-480"><a href="mailto:shuxer@gmail.com">shuxer@gmail.com</a></td>
+											<td></td>
 
-											<td class="hidden-480">120</td>
+											<td></td>
 
-											<td class="center hidden-480">12 Jan 2012</td>
+											<td></td>
 
 
 										</tr>
@@ -106,7 +106,7 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/process-instance.js"></script>
+<script type="text/javascript" src="/deep/static/js/module/process-instance.js?20170214"></script>
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
