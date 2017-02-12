@@ -589,7 +589,7 @@
 
 				</li>
 
-				<li class="start active">
+				<li class="start">
 
 					<a href="/deep">
 
@@ -625,7 +625,7 @@
 					</ul>
 				</li>
 
-				<li class="last ">
+				<li class="last active">
 
 					<a href="javascript:;">
 

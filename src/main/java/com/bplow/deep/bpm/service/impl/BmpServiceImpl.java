@@ -360,7 +360,7 @@ public class BmpServiceImpl implements BmpService {
 	@Override
 	public String queryProcessStartForm(ProcessInstanceInfo processInfo) {
 		
-		ProcessDefinition pd= repositoryService.createProcessDefinitionQuery().processDefinitionKey(processInfo.getKey()).singleResult();
+		ProcessDefinition pd= repositoryService.createProcessDefinitionQuery().processDefinitionKey(processInfo.getKey()).latestVersion().singleResult();
 		
 		String formKey = formService.getStartFormData(pd.getId()).getFormKey();
 		

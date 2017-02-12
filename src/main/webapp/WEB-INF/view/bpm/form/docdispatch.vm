@@ -1,0 +1,165 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="row-fluid">
+	<div class="span12">
+	</div>
+</div>
+<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->
+
+				<div class="row-fluid">
+
+					<div class="span12">
+
+<div class="portlet box blue">
+
+										<div class="portlet-title">
+
+											<div class="caption"><i class="icon-reorder"></i>文档分发(会签)</div>
+
+											<div class="tools">
+
+												<a href="javascript:;" class="collapse"></a>
+
+												<a href="#portlet-config" data-toggle="modal" class="config"></a>
+
+												<a href="javascript:;" class="reload"></a>
+
+												<a href="javascript:;" class="remove"></a>
+
+											</div>
+
+										</div>
+
+										<div class="portlet-body form">
+
+											<!-- BEGIN FORM-->
+
+											<form action="/deep/bpm/createProcessInstanceAction" method="post" class="horizontal-form">
+											<input type="text" id="key" name="key" value="${processInfo.key}" />
+											<input type="hidden" id="employeeName" name="wangxiaolei" />
+
+												<h3 class="form-section">会签</h3>
+
+												<div class="row-fluid">
+
+													<div class="span6 ">
+
+														<div class="control-group">
+
+															<label class="control-label" for="firstName">公文名称</label>
+
+															<div class="controls">
+
+																<input type="text" id="firstName" name="vacationMotivation" class="m-wrap span12" placeholder="Chee Kin" value="最新会议指示">
+
+																<span class="help-block"></span>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+													<div class="span6 ">
+
+														<div class="control-group error">
+
+															<label class="control-label" for="lastName">完成天数</label>
+
+															<div class="controls">
+
+																<input type="text" id="lastName" name="numbers" class="m-wrap span12" placeholder="Lim" value="3">
+
+																<span class="help-block"></span>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
+
+												<!--/row-->
+
+												<div class="row-fluid">
+
+													<div class="span6 ">
+
+														<div class="control-group">
+
+															<label class="control-label" >处理人员(多选)</label>
+
+															<div class="controls">
+
+																<select name="assigneeList"  class="span12 select2_sample1" multiple>
+																	<option value=""></option>
+																	<optgroup label="人事部">
+																		<option>wangxiaolei</option>
+																		<option>chengxiaofei</option>
+																	</optgroup>
+																	<optgroup label="技术部">
+																		<option>wangmingchao</option>
+																		<option>wangyang</option>
+																	</optgroup>
+																</select>
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+													<div class="span6 ">
+
+														<div class="control-group">
+
+															<label class="control-label" >最后完成日期</label>
+
+															<div class="controls">
+
+																<input type="text" class="m-wrap span12"  placeholder="dd/mm/yyyy">
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
+
+												<!--/row-->        
+
+												<div class="form-actions">
+
+													<button type="submit" class="btn blue"><i class="icon-ok"></i> 保存</button>
+													
+													<button type="submit" class="btn blue"><i class="icon-ok"></i> 提交申请</button>
+
+													<button type="button" class="btn">取消</button>
+
+												</div>
+
+											</form>
+
+											<!-- END FORM--> 
+
+										</div>
+
+									</div>
+
+
+					</div>
+
+				</div>
+
+				<!-- END PAGE CONTENT-->
+<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
+<script type="text/javascript" src="/deep/static/js/module/createProcess.js"></script>

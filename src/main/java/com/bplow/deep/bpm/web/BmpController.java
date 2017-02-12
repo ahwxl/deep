@@ -3,7 +3,9 @@ package com.bplow.deep.bpm.web;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -137,8 +139,10 @@ public class BmpController {
     public String createProcessInstancePage(ProcessInstanceInfo processInfo, Model view) {
 
         view.addAttribute("processInfo", processInfo);
+        
+       String formKey = bmpService.queryProcessStartForm(processInfo);
 
-        return "bpm/createProcessInstance";
+        return formKey!= null?"bpm/form/"+formKey:"bpm/createProcessInstance";
     }
 
     /**
@@ -152,9 +156,18 @@ public class BmpController {
 
         Map<String, String[]> map = httpRequest.getParameterMap();
         Map<String, Object> variables = new HashMap<String, Object>();
+        //会签参数处理
         for (Map.Entry<String, String[]> entry : map.entrySet()) {
             System.out.println(entry.getKey() + "--->" + entry.getValue()[0]);
+            if("assigneeList".equalsIgnoreCase(entry.getKey())){
+            	List<String> asignList = new ArrayList<String>();
+            	for(String tmp : entry.getValue()){
+            		asignList.add(tmp);
+            	}
+            	variables.put("assigneeList", asignList);
+            }else{
             variables.put(entry.getKey(), entry.getValue()[0]);
+            }
         }
 
         bmpService.startProcessByKey(processInfo.getKey(), variables);
