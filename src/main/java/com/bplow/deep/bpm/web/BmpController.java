@@ -202,7 +202,6 @@ public class BmpController {
      * @return
      */
     @RequestMapping(value = "/bpm/completeTask")
-    @ResponseBody
     public String completeTask(ProcessInstanceInfo processInfo, HttpServletRequest httpRequest) {
 
         Map<String, String[]> map = httpRequest.getParameterMap();

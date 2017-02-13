@@ -26,7 +26,7 @@ public class ProcessInstanceInfo extends PageInfo implements Serializable{
     private String activiteName;
     private String processStatus;
     private String currentActive;
-    private String currentProcessUserId;
+    private String assignee;//受理人
     private Date   startDate;
     private Date   endDate;
 
@@ -60,14 +60,6 @@ public class ProcessInstanceInfo extends PageInfo implements Serializable{
 
     public void setCurrentActive(String currentActive) {
         this.currentActive = currentActive;
-    }
-
-    public String getCurrentProcessUserId() {
-        return currentProcessUserId;
-    }
-
-    public void setCurrentProcessUserId(String currentProcessUserId) {
-        this.currentProcessUserId = currentProcessUserId;
     }
 
     @JsonSerialize(using = CustomDateSerializer.class)
@@ -117,6 +109,14 @@ public class ProcessInstanceInfo extends PageInfo implements Serializable{
 
 	public void setProcessDefineId(String processDefineId) {
 		this.processDefineId = processDefineId;
+	}
+
+	public String getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(String assignee) {
+		this.assignee = assignee;
 	}
 
 }

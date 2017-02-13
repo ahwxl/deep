@@ -16,6 +16,7 @@
     <result column="NAME_" jdbcType="VARCHAR" property="processName" />
     <result column="proce_status" jdbcType="VARCHAR" property="processStatus" />
     <result column="CREATE_TIME_" jdbcType="VARCHAR" property="startDate" />
+    <result column="ASSIGNEE_" jdbcType="VARCHAR" property="assignee" />
   </resultMap>
   
   <select id="queryProcessInstanceItemForPage" parameterType="com.bplow.deep.bpm.domain.ProcessInstanceInfo" resultMap="BaseResultMap">
