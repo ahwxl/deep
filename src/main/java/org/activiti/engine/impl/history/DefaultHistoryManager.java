@@ -120,7 +120,8 @@ public void recordProcessInstanceEnd(String processInstanceId, String deleteReas
 public void recordProcessInstanceStart(ExecutionEntity processInstance) {
     if(isHistoryLevelAtLeast(HistoryLevel.ACTIVITY)) {
       HistoricProcessInstanceEntity historicProcessInstance = new HistoricProcessInstanceEntity(processInstance);
-      
+      //wangxiaolei
+      historicProcessInstance.setName(processInstance.getName());
       // Insert historic process-instance
       getDbSqlSession().insert(historicProcessInstance);
   

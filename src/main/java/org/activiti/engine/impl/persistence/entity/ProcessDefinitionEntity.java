@@ -113,7 +113,8 @@ public class ProcessDefinitionEntity extends ProcessDefinitionImpl implements Pr
     if (authenticatedUserId != null) {
       processInstance.addIdentityLink(authenticatedUserId, null, IdentityLinkType.STARTER);
     }
-    
+    //wangxiaolei
+    processInstance.setName(this.name+"-"+authenticatedUserId);
     Context.getCommandContext().getHistoryManager()
       .recordProcessInstanceStart(processInstance);
     

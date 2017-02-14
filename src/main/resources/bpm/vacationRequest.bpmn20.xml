@@ -5,7 +5,7 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:activiti="http://activiti.org/bpmn">
   
-  <process id="vacationRequest" name="Vacation request">
+  <process id="vacationRequest" name="请假申请流程">
   
     <startEvent id="request" activiti:initiator="employeeName">
       <extensionElements>
