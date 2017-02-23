@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.stock.mapper.SkTransactionRecordMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.stock.domain.SkTransactionRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="stock_id" jdbcType="VARCHAR" property="stockId" />
+    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="transaction_type" jdbcType="VARCHAR" property="transactionType" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, stock_id, stock_name, amount, price, transaction_type, gmt_create, gmt_modify
+  </sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkTransactionRecord" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sk_transaction_record
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="id != null">
+             ID = #{id} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sk_transaction_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sk_transaction_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkTransactionRecord">
+    insert into sk_transaction_record (id, stock_id, stock_name, 
+      amount, price, transaction_type, 
+      gmt_create, gmt_modify)
+    values (#{id,jdbcType=VARCHAR}, #{stockId,jdbcType=VARCHAR}, #{stockName,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{transactionType,jdbcType=VARCHAR}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <update id="update" parameterType="com.bplow.deep.stock.domain.SkTransactionRecord">
+    update sk_transaction_record
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="stockId != null">
+        stock_id = #{stockId,jdbcType=VARCHAR},
+      </if>
+      <if test="stockName != null">
+        stock_name = #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="transactionType != null">
+        transaction_type = #{transactionType,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null">
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+     WHERE ID = #{id} 
+  </update>
+</mapper>

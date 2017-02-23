@@ -20,6 +20,8 @@
 	<mappers>
 		<mapper resource="mapper/AutoAppInfoMapper.xml" />
 		<mapper resource="mapper/BpmServiceMapper.xml" />
+		<mapper resource="mapper/SkTransactionRecordMapper.xml" />
+		<mapper resource="mapper/SkWarehousePositonMapper.xml" />
 	</mappers>
 
 

@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.hamcrest.core.IsInstanceOf;
 
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.base.pagination.PageInfo;
@@ -42,15 +43,20 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     if (Object.class.equals(method.getDeclaringClass())) {
       return method.invoke(this, args);
     }
-    
-    PageInfo pageInfo =(PageInfo) args[0];
-    
+    Object tmpobj =args[0];
     final MapperMethod mapperMethod = cachedMapperMethod(method);
-    Page<T> page = (Page<T>)mapperMethod.execute(sqlSession, args);
-    page.setTotals(pageInfo.getTotalCount());
-    page.setPageSize(pageInfo.getTotalCount());
-    page.setPageNum(pageInfo.getPageNo());
-    return page;
+    Class returntype = method.getReturnType();
+    if(tmpobj instanceof PageInfo && Page.class.equals(returntype)){
+        PageInfo pageInfo =(PageInfo) args[0];
+        Page<T> page = (Page<T>)mapperMethod.execute(sqlSession, args);
+        page.setTotals(pageInfo.getTotalCount());
+        page.setPageSize(pageInfo.getTotalCount());
+        page.setPageNum(pageInfo.getPageNo());
+        return page;
+    }else{
+      return  mapperMethod.execute(sqlSession, args);
+    }
+    
   }
 
   private MapperMethod cachedMapperMethod(Method method) {
