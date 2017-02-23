@@ -35,7 +35,7 @@
 											<!-- BEGIN FORM-->
 
 											<form action="/deep/bpm/completeTask" method="post" class="horizontal-form">
-											<input type="text" id="taskId" name="taskId" value="${process.taskId}" />
+											<input type="hidden" id="taskId" name="taskId" value="${process.taskId}" />
 											<input type="hidden" id="employeeName" name="wangxiaolei" />
 											
 											    <h3 class="form-section">审批</h3>
@@ -106,9 +106,11 @@
 
 													<button type="submit" class="btn blue"><i class="icon-ok"></i> 保存</button>
 													
-													<button type="submit" class="btn blue"><i class="icon-ok"></i> 提交申请</button>
+													<button type="submit" class="btn black"><i class="icon-ok"></i> 提交申请</button>
+													
+													<button type="submit" class="btn yellow"><i class="icon-ok"></i> 加签</button>
 
-													<button type="button" class="btn">取消</button>
+													<button type="button" class="btn red">取消</button>
 
 												</div>
 
@@ -194,7 +196,7 @@
 
 														<div class="control-group">
 
-															<label class="control-label" >Date of Birth</label>
+															<label class="control-label" >请假日期</label>
 
 															<div class="controls">
 

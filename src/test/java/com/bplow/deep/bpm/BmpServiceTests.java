@@ -100,7 +100,7 @@ public class BmpServiceTests {
 	public void completeTaskTest(){
 	    String processId = "";
 	    String taskId    = "5008";
-	    taskId    = "25007";
+	    taskId    = "100019";
 		Map<String, Object> taskVariables = new HashMap<String, Object>();
 		taskVariables.put("vacationApproved", "false");
 		taskVariables.put("managerMotivation", "We have a tight deadline!");
