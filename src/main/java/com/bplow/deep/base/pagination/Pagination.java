@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonRawValue;
  * @author wangxiaolei
  * @date 2016年9月5日 下午10:38:37
  */
-public class Pagination<T> implements Page<Object>{
+public class Pagination<T> implements Page<T>{
 	
     @JsonProperty("iTotalDisplayRecords")
 	public int pageSize;
@@ -54,7 +54,7 @@ public class Pagination<T> implements Page<Object>{
 	}
 
     @Override
-    public void setDatas(List datas) {
+    public void setDatas(List<T> datas) {
         this.datas = datas;
     }
 

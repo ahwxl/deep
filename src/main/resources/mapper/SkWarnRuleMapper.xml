@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.stock.mapper.SkWarnRuleMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.stock.domain.SkWarnRule">
+    <id column="rule_id" jdbcType="VARCHAR" property="ruleId" />
+    <result column="scripte" jdbcType="VARCHAR" property="scripte" />
+    <result column="rule_msg" jdbcType="VARCHAR" property="ruleMsg" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    rule_id, scripte, rule_msg, status, gmt_create, gmt_modify
+  </sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkWarnRule" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sk_warn_rule
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="ruleId != null">
+             rule_id = #{ruleId} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sk_warn_rule
+    where rule_id = #{ruleId,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sk_warn_rule
+    where rule_id = #{ruleId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkWarnRule">
+    insert into sk_warn_rule (rule_id, scripte, rule_msg, 
+      status, gmt_create, gmt_modify
+      )
+    values (#{ruleId,jdbcType=VARCHAR}, #{scripte,jdbcType=VARCHAR}, #{ruleMsg,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+  <update id="update" parameterType="com.bplow.deep.stock.domain.SkWarnRule">
+    update sk_warn_rule
+    <set>
+      <if test="ruleId != null">
+        rule_id = #{ruleId,jdbcType=VARCHAR},
+      </if>
+      <if test="scripte != null">
+        scripte = #{scripte,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleMsg != null">
+        rule_msg = #{ruleMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null">
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+     WHERE ID = #{id} 
+  </update>
+</mapper>

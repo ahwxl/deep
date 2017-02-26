@@ -1,14 +1,20 @@
 package com.bplow.deep.bpm.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.bplow.deep.base.jackson.CustomDateSerializer;
 import com.bplow.deep.base.pagination.PageInfo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-public class AutoAppInfo extends PageInfo{
+public class AutoAppInfo extends PageInfo implements Serializable{
 	
-    private Integer id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String appCode;
 

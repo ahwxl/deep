@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.stock.mapper.SkScheduleTaskMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.stock.domain.SkScheduleTask">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="group_id" jdbcType="VARCHAR" property="groupId" />
+    <result column="job_id" jdbcType="VARCHAR" property="jobId" />
+    <result column="trigger_name" jdbcType="VARCHAR" property="triggerName" />
+    <result column="task_param" jdbcType="VARCHAR" property="taskParam" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, group_id, job_id, trigger_name, task_param, gmt_create, gmt_modify, status
+  </sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkScheduleTask" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sk_schedule_task
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="id != null">
+             ID = #{id} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sk_schedule_task
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sk_schedule_task
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkScheduleTask">
+    insert into sk_schedule_task (id, group_id, job_id, 
+      trigger_name, task_param, gmt_create, 
+      gmt_modify, status)
+    values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{jobId,jdbcType=VARCHAR}, 
+      #{triggerName,jdbcType=VARCHAR}, #{taskParam,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="update" parameterType="com.bplow.deep.stock.domain.SkScheduleTask">
+    update sk_schedule_task
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null">
+        job_id = #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerName != null">
+        trigger_name = #{triggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskParam != null">
+        task_param = #{taskParam,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null">
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+     WHERE ID = #{id} 
+  </update>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.stock.mapper.SkWarnLogMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.stock.domain.SkWarnLog">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="rule_id" jdbcType="VARCHAR" property="ruleId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="stock_id" jdbcType="VARCHAR" property="stockId" />
+    <result column="warn_msg" jdbcType="VARCHAR" property="warnMsg" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, rule_id, user_id, stock_id, warn_msg, gmt_create
+  </sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkWarnLog" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sk_warn_log
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="id != null">
+             ID = #{id} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sk_warn_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sk_warn_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkWarnLog">
+    insert into sk_warn_log (id, rule_id, user_id, 
+      stock_id, warn_msg, gmt_create
+      )
+    values (#{id,jdbcType=VARCHAR}, #{ruleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{stockId,jdbcType=VARCHAR}, #{warnMsg,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+  <update id="update" parameterType="com.bplow.deep.stock.domain.SkWarnLog">
+    update sk_warn_log
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleId != null">
+        rule_id = #{ruleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="stockId != null">
+        stock_id = #{stockId,jdbcType=VARCHAR},
+      </if>
+      <if test="warnMsg != null">
+        warn_msg = #{warnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+     WHERE ID = #{id} 
+  </update>
+</mapper>

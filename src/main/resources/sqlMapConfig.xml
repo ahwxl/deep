@@ -22,7 +22,12 @@
 		<mapper resource="mapper/BpmServiceMapper.xml" />
 		<mapper resource="mapper/SkTransactionRecordMapper.xml" />
 		<mapper resource="mapper/SkWarehousePositonMapper.xml" />
+		<mapper resource="mapper/SkCustomerWarnMapper.xml" />
+		<mapper resource="mapper/SkScheduleTaskMapper.xml" />
+		<mapper resource="mapper/SkSendSmsLogMapper.xml" />
+		<mapper resource="mapper/SkWarnLogMapper.xml" />
+		<mapper resource="mapper/SkWarnRuleMapper.xml" />
+		<mapper resource="mapper/SysUserMapper.xml" />
 	</mappers>
-
 
 </configuration>

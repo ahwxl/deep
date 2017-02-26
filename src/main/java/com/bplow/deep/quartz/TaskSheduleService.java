@@ -1,10 +1,13 @@
 package com.bplow.deep.quartz;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
+import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
@@ -45,23 +48,31 @@ public class TaskSheduleService {
     /**
      * 创建表达式任务
      * @throws SchedulerException
+     * @throws ClassNotFoundException 
      */
-    public void createCronTask() throws SchedulerException {
+    public void createCronTask(String groupName,String jobName,String triggerName,String cron,Map<String,Serializable> parament) throws SchedulerException, ClassNotFoundException {
 
-        JobDetail job = JobBuilder.newJob(ObserverJob.class).withIdentity("job1", "group1")
+    	Class className = Class.forName("com.bplow.deep.quartz.job.ObserverJob");
+    	
+        @SuppressWarnings("unchecked")
+		JobDetail job = JobBuilder.newJob(className).withIdentity(jobName, groupName)
             .build();
-
+        
+        for (Map.Entry<String, Serializable> entry : parament.entrySet()) {
+        	job.getJobDataMap().put(entry.getKey(), entry.getValue());
+        }
+        
         CronTrigger trigger = (CronTrigger) TriggerBuilder.newTrigger()
-            .withIdentity("trigger1", "group1")
-            .withSchedule(CronScheduleBuilder.cronSchedule("0/20 * * * * ?")).build();
-
+            .withIdentity(triggerName, groupName)
+            .withSchedule(CronScheduleBuilder.cronSchedule(cron/*"0/20 * * * * ?"*/)).build();
+        
         Date ft = clusterQuartzScheduler.getScheduler().scheduleJob(job, trigger);
 
-        logger.info("任務創建：{0}", ft);
+        logger.info("创建任务：{}", ft);
     }
 
     /**
-     *
+     *修改任务
      *
      * @param triggerName
      * @param triggerGroup

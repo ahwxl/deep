@@ -1,11 +1,17 @@
 package com.bplow.deep.stock.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.bplow.deep.base.pagination.PageInfo;
 
-public class SkTransactionRecord extends PageInfo{
-    private String id;
+public class SkTransactionRecord extends PageInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4020524387566830712L;
+
+	private String id;
 
     private String stockId;
 
@@ -133,4 +139,13 @@ public class SkTransactionRecord extends PageInfo{
         result = prime * result + ((getGmtModify() == null) ? 0 : getGmtModify().hashCode());
         return result;
     }
+
+	@Override
+	public String toString() {
+		return String
+				.format("SkTransactionRecord [id=%s, stockId=%s, stockName=%s, amount=%s, price=%s, transactionType=%s, gmtCreate=%s, gmtModify=%s]",
+						id, stockId, stockName, amount, price, transactionType,
+						gmtCreate, gmtModify);
+	}
+    
 }

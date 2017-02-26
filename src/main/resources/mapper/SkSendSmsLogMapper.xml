@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.stock.mapper.SkSendSmsLogMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.stock.domain.SkSendSmsLog">
+    <id column="sms_id" jdbcType="VARCHAR" property="smsId" />
+    <result column="send_mobile" jdbcType="VARCHAR" property="sendMobile" />
+    <result column="send_cnt" jdbcType="VARCHAR" property="sendCnt" />
+    <result column="parament" jdbcType="VARCHAR" property="parament" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    sms_id, send_mobile, send_cnt, parament, gmt_create, status
+  </sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkSendSmsLog" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sk_send_sms_log
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="id != null">
+             ID = #{id} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sk_send_sms_log
+    where sms_id = #{smsId,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sk_send_sms_log
+    where sms_id = #{smsId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkSendSmsLog">
+    insert into sk_send_sms_log (sms_id, send_mobile, send_cnt, 
+      parament, gmt_create, status
+      )
+    values (#{smsId,jdbcType=VARCHAR}, #{sendMobile,jdbcType=VARCHAR}, #{sendCnt,jdbcType=VARCHAR}, 
+      #{parament,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <update id="update" parameterType="com.bplow.deep.stock.domain.SkSendSmsLog">
+    update sk_send_sms_log
+    <set>
+      <if test="smsId != null">
+        sms_id = #{smsId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendMobile != null">
+        send_mobile = #{sendMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="sendCnt != null">
+        send_cnt = #{sendCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="parament != null">
+        parament = #{parament,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+     WHERE ID = #{id} 
+  </update>
+</mapper>

@@ -624,8 +624,37 @@
 						</li>
 					</ul>
 				</li>
+				<li class=" active">
 
-				<li class="last active">
+					<a href="javascript:;">
+
+					<i class="icon-th"></i>
+
+					<span class="title">调度管理</span>
+
+					<span class="selected"></span>
+
+					<span class="arrow open"></span>
+
+					</a>
+
+					<ul class="sub-menu">
+						<li >
+							<a href="job/joblist">任务列表</a>
+						</li>
+						<li >
+							<a href="stock/">持仓</a>
+						</li>
+						<li >
+							<a href="job/joblist">任务列表</a>
+						</li>
+						<li >
+							<a href="job/joblist">任务列表</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="last ">
 
 					<a href="javascript:;">
 

@@ -71,7 +71,7 @@ public class QueryStockPriceRealTimeServiceImpl implements
 	        	String[] fieldArray = aimStr.split(",");
 	        	if(fieldArray.length > 5){
 	        		stock.setCurrentPrice(new BigDecimal(fieldArray[1]));
-	        		stock.setWave(new BigDecimal(fieldArray[2]));
+	        		stock.setWave(new BigDecimal(fieldArray[3]));
 	        	}
 	        }
 

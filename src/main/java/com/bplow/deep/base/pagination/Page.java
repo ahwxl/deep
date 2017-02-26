@@ -25,5 +25,7 @@ public interface Page<T> {
 	void setTotals(int totals);
 	
 	void setDatas(List<T> datas);
+	
+	List<T> getDatas();
 
 }

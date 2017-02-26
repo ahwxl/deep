@@ -335,6 +335,13 @@
 			<artifactId>quartz</artifactId>
 			<version>2.2.3</version>
 		</dependency>
+		<dependency>
+			<groupId>com.taobao</groupId>
+			<artifactId>taobao-sdk-java-auto_1455552377940</artifactId>
+			<version>20160607</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/taobao-sdk-java-auto_1455552377940-20160607.jar</systemPath>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -461,5 +468,14 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<targetPath>lib/</targetPath>
+				<directory>lib/</directory>
+				<includes>
+					<include>**/taobao-sdk-java-auto_1455552377940-20160607.jar</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 </project>

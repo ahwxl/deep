@@ -24,7 +24,7 @@ public class ObserverServiceTest {
     @Test
     public void testObserver(){
         
-        observerService.observer("");
+        observerService.observer("wxl","sh600078");
         
     }
     

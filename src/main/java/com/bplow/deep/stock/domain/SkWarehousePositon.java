@@ -2,7 +2,9 @@ package com.bplow.deep.stock.domain;
 
 import java.util.Date;
 
-public class SkWarehousePositon {
+import com.bplow.deep.base.pagination.PageInfo;
+
+public class SkWarehousePositon extends PageInfo{
     private String stockId;
 
     private String stockName;

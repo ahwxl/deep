@@ -32,7 +32,7 @@ public class SkTransactionRecordMapperTest {
     
     @Test
     public void testInsert(){
-        for(int i=0;i<10;i++){
+        for(int i=0;i<12;i++){
             SkTransactionRecord record = new SkTransactionRecord();
             record.setId(UUID.randomUUID().toString().replace("-",""));
             record.setStockId("600078");
@@ -53,5 +53,12 @@ public class SkTransactionRecordMapperTest {
        logger.info("插入记录数:{}",page);
     }
     
+    @Test
+    public void testSelectByOne(){
+    	
+    	SkTransactionRecord record =	skTransactionRecordMapper.selectByPrimaryKey("12637e57426d46bf85b08ba534677482");
+    	
+    	logger.info("查询结果:{}",record);
+    }
 
 }
