@@ -47,7 +47,9 @@ create table sk_customer_warn
    user_id              varchar(32),
    rule_id              varchar(32),
    stock_id             varchar(32),
+   status               varchar(2),
    gmt_create           timestamp,
+   GMT_MODIFY           timestamp,
    primary key (id)
 );
 

@@ -38,6 +38,7 @@ public class JobController {
 	}
 	
 	@RequestMapping(value = "/job/queryJobList")
+	@ResponseBody
 	public Page<SkScheduleTask> queryJobList(HttpServletRequest httpRequest, Model view,SkScheduleTask task){
 		
 		Page<SkScheduleTask>  page= jobService.queryScheduleTaskList(task);
@@ -51,7 +52,7 @@ public class JobController {
 		
 		jobService.createJob(task);
 		
-		return "";
+		return "job/joblist";
 	}
 	
 	
@@ -61,6 +62,14 @@ public class JobController {
 		
 		
 		return "";
+	}
+	
+	@RequestMapping(value = "/job/pauseJob")
+    @ResponseBody
+	public String pauseJob(SkScheduleTask task,HttpServletRequest httpRequest, Model view){
+	    
+	    
+	    return "";
 	}
 
 }
