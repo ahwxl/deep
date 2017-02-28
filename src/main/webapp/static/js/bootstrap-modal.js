@@ -53,7 +53,8 @@
 		},
 		
 		confirm:function(){
-			
+			var myform = this.$element.find('.modal-body');
+			this.options.confirm && this.options.confirm.call(myform);
 		},
 
 		toggle: function () {

@@ -50,9 +50,10 @@ public class JobController {
 	@ResponseBody
 	public String createJob(SkScheduleTask task,HttpServletRequest httpRequest, Model view){
 		
+		task.setStatus("1");
 		jobService.createJob(task);
 		
-		return "job/joblist";
+		return "创建成功！";
 	}
 	
 	

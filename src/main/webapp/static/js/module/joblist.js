@@ -5,7 +5,7 @@ $('#sample_1').dataTable({
                 "bLengthChange":false,
                 "sAjaxSource": "/deep/job/queryJobList",
                 "aoColumns": [
-                  { "sTitle": "组名称","mData":"groupId","bSortable": false,"sWidth":"400"},
+                  { "sTitle": "组名称","mData":"groupId","bSortable": false,"sWidth":"400",height:"20"},
                   { "sTitle": "任务名称","mData":"jobId","bSortable": false,"sWidth":100 },
                   { "sTitle": "出发器名称","mData":"triggerName","bSortable": false },
                   { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false },
@@ -42,9 +42,18 @@ $('#sample_1').dataTable({
             	$(document).off('click.modal').on('click.modal.data-api', '[1data-toggle="modal"]', function ( e ) {
                 	var procDefId = $(this).attr('procDefId');
                 	//alert(procDefId);
-                	var url = "/deep/bpm/viewProcessDefImage?key="+procDefId;
-                    $("#myprocessimage").attr("src",url);
-                    $('#stack1').modal('toggle');
+                    $('#stack1').modal({
+                    	confirm:function(formvalue){
+                    		var param = $('#myform').serialize();
+                    		$.post("/deep/job/createJob",
+                    				param,
+                    			function(data){
+                    			   alert(data);
+                    		    }
+                    		);
+                    	}
+                    	
+                    });
                 })
                 //给2个输入框添加blur事件调用draw方法执行自定义过滤函数
                 $('#min, #max').blur(function () {
