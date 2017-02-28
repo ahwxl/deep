@@ -37,6 +37,9 @@
 
 			this.$element = $(element)
 				.delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this));
+			
+			this.$element = $(element)
+			.delegate('[data-dismiss="confirm"]', 'click.dismiss.modal', $.proxy(this.confirm, this));
 
 			this.options.remote && this.$element.find('.modal-body').load(this.options.remote);
 
@@ -47,6 +50,10 @@
 				manager : $(manager).modalmanager().data('modalmanager');
 
 			manager.appendModal(this);
+		},
+		
+		confirm:function(){
+			
 		},
 
 		toggle: function () {
