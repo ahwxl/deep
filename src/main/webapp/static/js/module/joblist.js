@@ -4,6 +4,20 @@ $('#sample_1').dataTable({
                 "bFilter":true,
                 "bLengthChange":false,
                 "sAjaxSource": "/deep/job/queryJobList",
+                "fnServerParams":{'bbbb':'454545555555555555'},
+                "oSearch": {"sSearch":"初始化1","abc":"123"},
+           		"bStateSave": true,
+       		    "fnStateLoadParams": function (oSettings, oData) {
+       		        //oData.oSearch.sSearch = "aabb=6666666666666";
+       		        //oData.oSearch = {"processId": "5665454555555","sSearch":"000"};
+       		    	
+       		    },
+           		"aoSearchCols": [
+           		     		           null,
+           		     		           { "sSearchaa": "My filter" },
+           		     		           null,
+           		     		           { "groupId": "^[0-9]", "bEscapeRegex": false }
+           		     		  ],
                 "aoColumns": [
                   { "sTitle": "组名称","mData":"groupId","bSortable": false,"sWidth":"400",height:"20"},
                   { "sTitle": "任务名称","mData":"jobId","bSortable": false,"sWidth":100 },

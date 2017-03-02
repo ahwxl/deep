@@ -1636,6 +1636,7 @@
 			{
 				iPushFeature = 0;
 				cOption = aDom[i];
+				//alert(cOption);
 				
 				if ( cOption == '<' )
 				{

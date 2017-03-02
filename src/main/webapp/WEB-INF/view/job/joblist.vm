@@ -38,7 +38,50 @@
 
 							</div>
 
-							<div class="portlet-body">
+							<div class="portlet-body form">
+							       <form action="#" class="horizontal-form">
+							                   <div class="row-fluid">
+
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label" for="firstName">任务名称</label>
+
+															<div class="controls">
+
+																<input type="text" id="firstName" class="m-wrap span12" placeholder="Chee Kin">
+
+																<span class="help-block">This is inline help</span>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+													<div class="span6 ">
+
+														<div class="control-group error">
+
+															<label class="control-label" for="lastName">Last Name</label>
+
+															<div class="controls">
+
+																<input type="text" id="lastName" class="m-wrap span12" placeholder="Lim">
+
+																<span class="help-block">This field has error.</span>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
+							         </form>
 
 								<table class="table table-striped table-bordered table-hover" id="sample_1">
 
@@ -100,13 +143,13 @@
 
 	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
 
-	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170212"></script>
 
 	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/joblist.js?20170212"></script>
+<script type="text/javascript" src="/deep/static/js/module/joblist.js?20170310"></script>
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
