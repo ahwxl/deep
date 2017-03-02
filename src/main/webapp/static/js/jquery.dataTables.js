@@ -1703,8 +1703,8 @@
 				else if ( cOption == 'f' && oSettings.oFeatures.bFilter )
 				{
 					/* Filter */
-					nTmp = _fnFeatureHtmlFilter( oSettings );
-					iPushFeature = 1;
+					//nTmp = _fnFeatureHtmlFilter( oSettings );
+					//iPushFeature = 1;
 				}
 				else if ( cOption == 'r' && oSettings.oFeatures.bProcessing )
 				{
@@ -1919,6 +1919,12 @@
 			var iColumns = oSettings.aoColumns.length;
 			var aoData = [], mDataProp, aaSort, aDataSort;
 			var i, j;
+			/*wxl*/
+			if(oSettings.serverparam){
+				for(var p in oSettings.serverparam){
+					aoData.push( { "name": p,          "value": oSettings.serverparam[p]} );
+				}
+			}
 			
 			aoData.push( { "name": "sEcho",          "value": oSettings.iDraw } );
 			aoData.push( { "name": "iColumns",       "value": iColumns } );
@@ -2110,8 +2116,9 @@
 				/* Now do the filter */
 				if ( val != oPreviousSearch.sSearch )
 				{
-					_fnFilterComplete( oSettings, { 
-						"sSearch": val, 
+					_fnFilterComplete( oSettings, {
+						"sSearch": val,
+						"abc":'77777777777777777777777',/*wxl*/
 						"bRegex": oPreviousSearch.bRegex,
 						"bSmart": oPreviousSearch.bSmart ,
 						"bCaseInsensitive": oPreviousSearch.bCaseInsensitive 

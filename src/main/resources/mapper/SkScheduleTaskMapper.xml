@@ -28,6 +28,16 @@
              ID = #{id} 
           </if>
         </trim>
+        <trim prefix="AND">
+          <if test="groupId != null">
+             group_id like concat('%', #{groupId}, '%')
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="jobId != null">
+             job_id like concat('%', #{jobId}, '%')
+          </if>
+        </trim>
       </trim>
     </where>
      ORDER BY GMT_MODIFY DESC 

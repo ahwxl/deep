@@ -1,4 +1,20 @@
-$('#sample_1').dataTable({
+$.fn.serializeObject = function() {
+ var o = {};
+ var a = this.serializeArray();
+ $.each(a, function() {
+ if (o[this.name] !== undefined) {
+ if (!o[this.name].push) {
+ o[this.name] = [o[this.name]];
+}
+ o[this.name].push(this.value || '');
+ } else {
+ o[this.name] = this.value || '';
+}
+});
+ return o;
+};
+
+var mygridtab = $('#sample_1').dataTable({
             	"bProcessing": true,
                 "bServerSide": true,
                 "bFilter":true,
@@ -7,9 +23,21 @@ $('#sample_1').dataTable({
                 "fnServerParams":{'bbbb':'454545555555555555'},
                 "oSearch": {"sSearch":"初始化1","abc":"123"},
            		"bStateSave": true,
+           		"oFeatures":{'sDom':''},
        		    "fnStateLoadParams": function (oSettings, oData) {
-       		        //oData.oSearch.sSearch = "aabb=6666666666666";
-       		        //oData.oSearch = {"processId": "5665454555555","sSearch":"000"};
+       		    	
+       		    	$("#mySubmit").bind("click", function(){
+       		    		var oSettings = mygridtab.fnSettings();
+       		    		oSettings.serverparam=$('#searchform').serializeObject();
+       		    		oSettings.sDom='';
+       		    		mygridtab.fnFilter('张是');
+       		    		/*mygridtab.fnFilter( oSettings, {
+    						"sSearch": val, 
+    						"bRegex": oPreviousSearch.bRegex,
+    						"bSmart": oPreviousSearch.bSmart ,
+    						"bCaseInsensitive": oPreviousSearch.bCaseInsensitive 
+    					} );*/
+       		    	});
        		    	
        		    },
            		"aoSearchCols": [
