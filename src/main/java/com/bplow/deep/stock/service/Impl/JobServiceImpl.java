@@ -5,6 +5,8 @@ package com.bplow.deep.stock.service.Impl;
 
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import com.bplow.deep.stock.service.JobService;
  */
 @Service
 public class JobServiceImpl implements JobService{
+    
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private SkScheduleTaskMapper skScheduleTaskMapper;
