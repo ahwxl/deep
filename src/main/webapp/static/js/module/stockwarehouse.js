@@ -3,7 +3,7 @@ var mygridtab = $('#transactions').dataTable({
                 "bServerSide": true,
                 "bFilter":true,
                 "bLengthChange":false,
-                "sAjaxSource": "/deep/stock/queryTransList",
+                "sAjaxSource": "/deep/stock/stockWareHouseList",
                 "fnServerParams":{'bbbb':''},
                 "oSearch": {"sSearch":"初始化1","abc":"123"},
            		"bStateSave": true,
@@ -27,7 +27,6 @@ var mygridtab = $('#transactions').dataTable({
                   { "sTitle": "名称","mData":"stockName","bSortable": false,"sWidth":100 },
                   { "sTitle": "数量","mData":"amount","bSortable": false },
                   { "sTitle": "价格","mData":"price","bSortable": false },
-                  { "sTitle": "交易类型","mData":"transactionType","bSortable": false,"sWidth":60 },
                   { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false },
                   { "sTitle": "操作","mData":"gmtModify","bSortable": false }
                 ],
@@ -48,18 +47,11 @@ var mygridtab = $('#transactions').dataTable({
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [6],
+                        'aTargets': [5],
                         fnRender: function (setobj, data) {
                         	var delhtml = "<a class='' id='{0}' data-toggle='delete' >{1}</a>".format(setobj.aData['id'],"删除");
                         	return delhtml;
                         }
-                    },{
-                    	'aTargets': [4],
-                    	fnRender: function (setobj, data) {
-                    		if(data == '1'){
-                    			return "<a  class='red'>买入</a>";
-                    		}else return "<a  class='blue'>卖出</a>";
-                    	}
                     }
                 ]
             });

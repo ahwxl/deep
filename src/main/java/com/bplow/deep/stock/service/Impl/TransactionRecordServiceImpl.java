@@ -1,5 +1,7 @@
 package com.bplow.deep.stock.service.Impl;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class TransactionRecordServiceImpl implements TransactionRecordService{
     @Override
     public SkTransactionRecord createTransactionRecord(SkTransactionRecord record) {
         
+    	record.setId(UUID.randomUUID().toString().replace("-", ""));
         transactionRecordMapper.insert(record);
         
         return record;

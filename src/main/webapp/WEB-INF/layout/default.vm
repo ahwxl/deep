@@ -640,19 +640,19 @@
 
 					<ul class="sub-menu">
 						<li >
-							<a href="job/joblist">任务列表</a>
+							<a href="/deep/job/joblist">任务列表</a>
 						</li>
 						<li >
-							<a href="stock/stockWareHouse">持仓</a>
+							<a href="/deep/stock/stockWareHouse">持仓</a>
 						</li>
 						<li >
-							<a href="stock/translist">交易记录</a>
+							<a href="/deep/stock/translist">交易记录</a>
 						</li>
 						<li >
-							<a href="stock/customerWarRule">股票规则</a>
+							<a href="/deep/stock/customerWarRule">股票规则</a>
 						</li>
 						<li >
-							<a href="stock/customerWarRule">规则管理</a>
+							<a href="/deep/stock/customerWarRule">规则管理</a>
 						</li>
 					</ul>
 				</li>

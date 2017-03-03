@@ -29,13 +29,18 @@
           </if>
         </trim>
         <trim prefix="AND">
-          <if test="stockId != null">
+          <if test="stockId != null and stockId != '' ">
              stock_id = #{stockId} 
           </if>
         </trim>
         <trim prefix="AND">
-          <if test="stockName != null">
+          <if test="stockName != null  and stockName != '' ">
              stock_name like concat('%', #{stockName}, '%')
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="transactionType != null  and transactionType != '' ">
+             transaction_type = #{transactionType}
           </if>
         </trim>
       </trim>
@@ -50,7 +55,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   
-  <delete id="delete" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sk_transaction_record
     where id = #{id,jdbcType=VARCHAR}
   </delete>

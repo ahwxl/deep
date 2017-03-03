@@ -52,7 +52,7 @@ public class StockTransactionRecordController {
 
         transactionRecordService.deleteTransactionRecord(record);
 
-        return "添加成功";
+        return "删除成功";
     }
 
 }

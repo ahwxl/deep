@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.stock.domain.SkWarehousePositon;
 import com.bplow.deep.stock.service.StockWareHouseService;
 
 
@@ -28,19 +30,31 @@ public class StockController {
         return "stock/stockWarehouse";
     }
     
+    @RequestMapping(value = "/stockWareHouseList")
+    @ResponseBody
+    public Page<SkWarehousePositon> queryList(HttpServletRequest httpRequest, Model view,SkWarehousePositon record){
+    	
+    	Page<SkWarehousePositon> page = stockWareHouseService.queryWarehouse(record);
+    	
+    	return page;
+    }
+    
     @RequestMapping(value = "/addStock")
     @ResponseBody
-    public String addStock(){
+    public String addStock(HttpServletRequest httpRequest, Model view,SkWarehousePositon record){
         
+    	stockWareHouseService.createWarehouse(record);
         
-        return "";
+        return "添加成功！";
     }
     
     @RequestMapping(value = "/delStock")
     @ResponseBody
-    public String delStock(){
+    public String delStock(HttpServletRequest httpRequest, Model view,SkWarehousePositon record){
+    	
+    	stockWareHouseService.deleleWarehouse(record);
         
-        return "";
+        return "刪除成功！";
     }
     
 }

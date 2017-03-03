@@ -46,14 +46,15 @@
 
 										<tr>
 
-											<th class="hidden-580"></th>
-
 											<th></th>
 
 											<th></th>
 
 											<th></th>
 
+											<th></th>
+
+											<th></th>
 											<th></th>
 
 										</tr>
@@ -73,7 +74,7 @@
 											<td></td>
 
 											<td></td>
-
+                                            <td></td>
 
 										</tr>
 
@@ -106,7 +107,7 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/process-instance.js?20170214"></script>
+<script type="text/javascript" src="/deep/static/js/module/stockwarehouse.js?20170214"></script>
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
