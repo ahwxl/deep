@@ -59,10 +59,11 @@ public class JobController {
 	
 	@RequestMapping(value = "/job/delJob")
 	@ResponseBody
-	public String delJob(HttpServletRequest httpRequest, Model view){
+	public String delJob(SkScheduleTask task,HttpServletRequest httpRequest, Model view){
 		
+	    jobService.deleteJob(task);
 		
-		return "";
+		return "删除成功";
 	}
 	
 	@RequestMapping(value = "/job/pauseJob")

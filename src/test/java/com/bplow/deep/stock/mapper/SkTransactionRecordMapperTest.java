@@ -1,5 +1,6 @@
 package com.bplow.deep.stock.mapper;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -32,12 +33,14 @@ public class SkTransactionRecordMapperTest {
     
     @Test
     public void testInsert(){
-        for(int i=0;i<12;i++){
+        for(int i=0;i<11;i++){
             SkTransactionRecord record = new SkTransactionRecord();
             record.setId(UUID.randomUUID().toString().replace("-",""));
-            record.setStockId("600078");
-            record.setStockName("澄星股份");
-            
+            record.setStockId("000600");
+            record.setStockName("建投能源");
+            record.setAmount(1600l);
+            record.setPrice(11.916);
+            record.setGmtCreate(new Date());
             int rows =skTransactionRecordMapper.insert(record);
             logger.info("插入记录:{}",rows);
         }

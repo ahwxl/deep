@@ -3,7 +3,9 @@ package com.bplow.deep.stock.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.bplow.deep.base.jackson.CustomDateSerializer;
 import com.bplow.deep.base.pagination.PageInfo;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SkTransactionRecord extends PageInfo implements Serializable{
     /**
@@ -75,6 +77,7 @@ public class SkTransactionRecord extends PageInfo implements Serializable{
         this.transactionType = transactionType == null ? null : transactionType.trim();
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getGmtCreate() {
         return gmtCreate;
     }
@@ -83,6 +86,7 @@ public class SkTransactionRecord extends PageInfo implements Serializable{
         this.gmtCreate = gmtCreate;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getGmtModify() {
         return gmtModify;
     }

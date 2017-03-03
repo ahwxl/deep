@@ -28,6 +28,16 @@
              ID = #{id} 
           </if>
         </trim>
+        <trim prefix="AND">
+          <if test="stockId != null">
+             stock_id = #{stockId} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="stockName != null">
+             stock_name like concat('%', #{stockName}, '%')
+          </if>
+        </trim>
       </trim>
     </where>
      ORDER BY GMT_MODIFY DESC 
