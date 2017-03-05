@@ -15,22 +15,17 @@
 
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 
-						<div class="portlet box light-grey">
+						<div class="portlet box purple">
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-globe"></i>交易记录</div>
+								<div class="caption"><i class="icon-globe"></i>脚本管理</div>
 
-								<div class="tools">
-                                    <a href="javascript:;" id="mySubmit" class="blue">查询</a>
-                                    <a href="javascript:;" 1data-toggle='modal' >添加</a>
-									<a href="javascript:;" class="collapse"></a>
+								<div class="actions">
 
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
+									<a href="#" id="mySubmit" class="btn green"><i class="icon-search"></i> 查询</a>
 
-									<a href="javascript:;" class="reload"></a>
-
-									<a href="javascript:;" class="remove"></a>
+									<a href="#" 1data-toggle='modal' class="btn yellow"><i class="icon-plus"></i> 添加</a>
 
 								</div>
 
@@ -73,26 +68,6 @@
 													</div>
 
 													<!--/span-->
-													<div class="span6">
-													<div class="control-group">
-
-													<label class="control-label">交易类型</label>
-
-													<div class="controls">
-
-														<select  class="" name="transactionType">
-
-															<option value="1">买入</option>
-
-															<option value="0">卖出</option>
-
-														</select>
-
-													</div>
-													</div>
-
-												</div>
-												<!--/span-->
 			                                    
 												</div>
 											
@@ -103,8 +78,6 @@
 									<thead>
 
 										<tr>
-											<th class="hidden-580 "></th>
-											<th></th>
 											<th></th>
 											<th></th>
 											<th></th>
@@ -127,9 +100,6 @@
 											<td></td>
 
 											<td></td>
-											
-											<td></td>
-                                            <td></td>
 
 										</tr>
 
@@ -162,14 +132,14 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/transactions.js?20170308"></script>
+<script type="text/javascript" src="/deep/static/js/module/warnrules.js?20170316"></script>
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
 
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 
-										<h3>创建记录</h3>
+										<h3>添加脚本</h3>
 
 									</div>
                                     <!-- modal-body begin-->
@@ -178,62 +148,41 @@
 
 											<!-- BEGIN FORM-->
 
-											<form action="#" name="myform" id="myform" class="">
+											<form action="#" name="myform" id="myform" class="form-horizontal">
 
 												<div class="control-group">
 
-													<label class="control-label">编号</label>
-
-													<div class="">
-
-														<input type="text" class="" name="stockId" value=""/>
-
-													</div>
-
-												</div>
-
-												<div class="control-group">
-
-													<label class="control-label">股票名称</label>
+													<label class="control-label">脚本编号</label>
 
 													<div class="controls">
 
-														<input type="text" class="" name="stockName"  value=""/>
+														<input type="text" class="" name="ruleId"  value=""/>
 
 													</div>
 
-												</div>
-
-												<div class="control-group">
-
-													<label class="control-label">交易类型</label>
-
-													<div class="controls">
-
-														<select  class="" name="transactionType">
-
-															<option value="1">买入</option>
-
-															<option value="0">卖出</option>
-
-														</select>
-
-													</div>
-
-												</div>
-
-												<div class="control-group">
-													<label class="control-label" >数量</label>
-													<div class="controls">
-														<input type="text" class="" name="amount" value=""> 
-													</div>
 												</div>
 												
 												<div class="control-group">
-													<label class="control-label" >价格</label>
+
+													<label class="control-label">脚本内容</label>
+
 													<div class="controls">
-														<input type="text" class="" name="price" value=""> 
+
+                                                        <textarea name="scripte" class="span3 m-wrap" rows="5"></textarea>
 													</div>
+
+												</div>
+
+												<div class="control-group">
+
+													<label class="control-label">提示信息</label>
+
+													<div class="controls">
+
+														<textarea name="ruleMsg" class="span3 m-wrap" rows="3"></textarea>
+
+													</div>
+
 												</div>
 
 											</form>

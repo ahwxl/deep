@@ -9,6 +9,7 @@
     <result column="stock_id" jdbcType="VARCHAR" property="stockId" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
   </resultMap>
   
   <sql id="Base_Column_List">
@@ -38,17 +39,17 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   
-  <delete id="delete" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sk_customer_warn
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   
   <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkCustomerWarn">
     insert into sk_customer_warn (id, user_id, rule_id, 
-      stock_id, status, gmt_create
+      stock_id, status, gmt_create,gmt_modify
       )
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{ruleId,jdbcType=VARCHAR}, 
-      #{stockId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}
+      #{stockId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
       )
   </insert>
   

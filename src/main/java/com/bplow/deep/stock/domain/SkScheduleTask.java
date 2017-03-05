@@ -7,6 +7,7 @@ import com.bplow.deep.base.pagination.PageInfo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SkScheduleTask extends PageInfo{
+	
     private String id;
 
     private String groupId;
@@ -24,6 +25,10 @@ public class SkScheduleTask extends PageInfo{
     private Date gmtModify;
 
     private String status;
+    
+    private String userId;
+    
+    private String stockId;
 
     public String getId() {
         return id;
@@ -97,6 +102,22 @@ public class SkScheduleTask extends PageInfo{
 
 	public void setCron(String cron) {
 		this.cron = cron;
+	}
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getStockId() {
+		return stockId;
+	}
+
+	public void setStockId(String stockId) {
+		this.stockId = stockId;
 	}
 
 	/**

@@ -10,6 +10,13 @@ import com.bplow.deep.stock.domain.SkWarnRule;
 import com.bplow.deep.stock.mapper.SkWarnRuleMapper;
 import com.bplow.deep.stock.service.WarnRuleService;
 
+/**
+ * 规则管理
+ * @desc 
+ * @author wangxiaolei
+ * @date 2017年3月4日 上午9:07:49
+ */
+
 @Service
 public class WarnRuleServiceImpl implements WarnRuleService{
     

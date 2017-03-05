@@ -38,7 +38,7 @@
     where rule_id = #{ruleId,jdbcType=VARCHAR}
   </select>
   
-  <delete id="delete" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sk_warn_rule
     where rule_id = #{ruleId,jdbcType=VARCHAR}
   </delete>

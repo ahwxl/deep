@@ -18,14 +18,15 @@ public class ObserverJob implements Job{
     	
 		try {
 			schCtx = context.getScheduler().getContext();
-			String taskId = context.getJobDetail().getJobDataMap().getString("taskId");
+			//String taskId = context.getJobDetail().getJobDataMap().getString("taskId");
+			String userId = context.getJobDetail().getJobDataMap().getString("userId");
 			String stockId = context.getJobDetail().getJobDataMap().getString("stockId");
 			
 			ApplicationContext appCtx = (ApplicationContext)schCtx.get("applicationContext");
 			
 			ObserverService service = (ObserverService)appCtx.getBean("observerService");
 			
-			service.observer(taskId,stockId);
+			service.observer(userId,stockId);
 			
 		} catch (SchedulerException e) {
 			e.printStackTrace();

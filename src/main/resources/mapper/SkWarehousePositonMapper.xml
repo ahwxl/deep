@@ -26,8 +26,8 @@
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
-          <if test="id != null">
-             ID = #{id} 
+          <if test="stockId != null and stockId != ''">
+             stock_id = #{stockId} 
           </if>
         </trim>
       </trim>
@@ -42,7 +42,7 @@
     where stock_id = #{stockId,jdbcType=VARCHAR}
   </select>
   
-  <delete id="delete" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sk_warehouse_positon
     where stock_id = #{stockId,jdbcType=VARCHAR}
   </delete>

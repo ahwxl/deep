@@ -50,7 +50,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   
-  <delete id="delete" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sk_schedule_task
     where id = #{id,jdbcType=VARCHAR}
   </delete>

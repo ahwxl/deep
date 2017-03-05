@@ -28,6 +28,7 @@
 		<mapper resource="mapper/SkWarnLogMapper.xml" />
 		<mapper resource="mapper/SkWarnRuleMapper.xml" />
 		<mapper resource="mapper/SysUserMapper.xml" />
+		<mapper resource="mapper/SkDaySwrichMapper.xml" />
 	</mappers>
 
 </configuration>

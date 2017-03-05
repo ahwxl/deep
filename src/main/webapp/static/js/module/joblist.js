@@ -1,42 +1,3 @@
-$.fn.serializeObject = function() {
- var o = {};
- var a = this.serializeArray();
- $.each(a, function() {
- if (o[this.name] !== undefined) {
- if (!o[this.name].push) {
- o[this.name] = [o[this.name]];
-}
- o[this.name].push(this.value || '');
- } else {
- o[this.name] = this.value || '';
-}
-});
- return o;
-};
-
-String.prototype.format = function(args) {
-    var result = this;
-    if (arguments.length > 0) {    
-        if (arguments.length == 1 && typeof (args) == "object") {
-            for (var key in args) {
-                if(args[key]!=undefined){
-                    var reg = new RegExp("({" + key + "})", "g");
-                    result = result.replace(reg, args[key]);
-                }
-            }
-        }
-        else {
-            for (var i = 0; i < arguments.length; i++) {
-                if (arguments[i] != undefined) {
-                    var reg = new RegExp("({[" + i + "]})", "g");
-                    result = result.replace(reg, arguments[i]);
-                }
-            }
-        }
-    }
-    return result;
-}
-
 var mygridtab = $('#sample_1').dataTable({
             	"bProcessing": true,
                 "bServerSide": true,
@@ -70,11 +31,11 @@ var mygridtab = $('#sample_1').dataTable({
            		     		           { "groupId": "^[0-9]", "bEscapeRegex": false }
            		     		  ],
                 "aoColumns": [
-                  { "sTitle": "组名称","mData":"groupId","bSortable": false,"sWidth":"400",height:"20"},
+                  { "sTitle": "组名称","mData":"groupId","bSortable": false,"sWidth":"300",height:"20"},
                   { "sTitle": "任务名称","mData":"jobId","bSortable": false,"sWidth":100 },
                   { "sTitle": "出发器名称","mData":"triggerName","bSortable": false },
-                  { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false },
-                  { "sTitle": "操作","mData":"status","bSortable": false }
+                  { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false,"sWidth":150 },
+                  { "sTitle": "操作","mData":"status","bSortable": false,"sWidth":110 }
                 ],
                 "aLengthMenu": [
                     [5, 15, 20, -1],
@@ -95,8 +56,8 @@ var mygridtab = $('#sample_1').dataTable({
                         'bSortable': false,
                         'aTargets': [4],
                         fnRender: function (setobj, data) {
-                        	var htmlstr = "<a class=' btn green' name='showProcessImage' id='showProcessImage'  1data-toggle='modal' procDefId='"+setobj.aData['processDefineId']+"' href='javascript:void(0)' trigger='alert('0000')'>流程</a>&nbsp;";
-                        	var delhtml = "<a class=' btn green' id='{0}' data-toggle='delete' >{1}</a>".format(setobj.aData['id'],"删除");
+                        	var htmlstr = "<a class=' mini purple' name='showProcessImage' id='showProcessImage'  1data-toggle='modal' procDefId='"+setobj.aData['processDefineId']+"' href='javascript:void(0)'><i class='icon-edit'></i> 修改</a>";
+                        	var delhtml = "<a class=' mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>".format(setobj.aData['id'],"删除");
                         	return htmlstr+delhtml;
                         }
                     }
@@ -107,7 +68,7 @@ var mygridtab = $('#sample_1').dataTable({
                 //var table = $('#sample_1').DataTable();
             	//动态创建的元素 通过绑定到 document
             	$(document).off('click.modal').on('click.modal.data-api', '[1data-toggle^="modal"]', function ( e ) {
-                	var procDefId = $(this).attr('procDefId');
+                	//var procDefId = $(this).attr('procDefId');
                 	//alert(procDefId);
                     $('#stack1').modal({
                     	confirm:function(formvalue){
@@ -115,6 +76,7 @@ var mygridtab = $('#sample_1').dataTable({
                     		$.post("/deep/job/createJob",
                     				param,
                     			function(data){
+                    			   mygridtab.fnDraw();
                     			   alert(data);
                     		    }
                     		);
@@ -123,12 +85,13 @@ var mygridtab = $('#sample_1').dataTable({
                     });
                 });
             	
-            	$(document).off('click.modal').on('click.modal.data-api', '[data-toggle="delete"]', function ( e ) {
+            	$(document).off('click.modal2').on('click.modal2.data-api', '[data-toggle="delete"]', function ( e ) {
             		var id = $(this).attr('id');
             		
             		$.post("/deep/job/delJob",
             				"id="+id,
             			function(data){
+            			   mygridtab.fnDraw();
             			   alert(data);
             		    }
             		);

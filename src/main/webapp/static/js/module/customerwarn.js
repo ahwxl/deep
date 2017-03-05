@@ -3,7 +3,7 @@ var mygridtab = $('#transactions').dataTable({
                 "bServerSide": true,
                 "bFilter":true,
                 "bLengthChange":false,
-                "sAjaxSource": "/deep/stock/stockWareHouseList",
+                "sAjaxSource": "/deep/warn/customerWarnList",
                 "fnServerParams":{'bbbb':''},
                 "oSearch": {"sSearch":"初始化1","abc":"123"},
            		"bStateSave": true,
@@ -23,12 +23,11 @@ var mygridtab = $('#transactions').dataTable({
            		     		           { "groupId": "^[0-9]", "bEscapeRegex": false }
            		     		  ],
                 "aoColumns": [
-                  { "sTitle": "编号","mData":"stockId","bSortable": false,"sWidth":"100",height:"20"},
-                  { "sTitle": "名称","mData":"stockName","bSortable": false,"sWidth":100 },
-                  { "sTitle": "数量","mData":"amount","bSortable": false },
-                  { "sTitle": "价格","mData":"todayPrice","bSortable": false },
+                  { "sTitle": "用户编号","mData":"userId","bSortable": false,"sWidth":"200"},
+                  { "sTitle": "规则编号","mData":"ruleId","bSortable": false,"sWidth":200 },
+                  { "sTitle": "股票编号","mData":"stockId","bSortable": false,"sWidth":200 },
                   { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false },
-                  { "sTitle": "操作","mData":"gmtModify","bSortable": false }
+                  { "sTitle": "操作","mData":"id","bSortable": false }
                 ],
                 "aLengthMenu": [
                     [5, 15, 20, -1],
@@ -47,9 +46,9 @@ var mygridtab = $('#transactions').dataTable({
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [5],
+                        'aTargets': [4],
                         fnRender: function (setobj, data) {
-                        	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'>{1}</i></a>&nbsp;<a class='' id='{0}' data-toggle='modify' ><i class='icon-edit'>{2}</i></a>".format(setobj.aData['stockId'],"删除","修改");
+                        	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'>{1}</i></a>&nbsp;<a class='mini purple' id='{0}' data-toggle='modify' ><i class='icon-edit'>{2}</i></a>".format(setobj.aData['id'],"删除","修改");
                         	return delhtml;
                         }
                     }
@@ -60,12 +59,11 @@ var mygridtab = $('#transactions').dataTable({
                 //var table = $('#sample_1').DataTable();
             	//动态创建的元素 通过绑定到 document
             	$(document).off('click.modal').on('click.modal.data-api', '[1data-toggle^="modal"]', function ( e ) {
-                	var procDefId = $(this).attr('procDefId');
-                	//alert(procDefId);
+                	//var procDefId = $(this).attr('procDefId');
                     $('#stack1').modal({
                     	confirm:function(formvalue){
                     		var param = $('#myform').serialize();
-                    		$.post("/deep/stock/addStock",
+                    		$.post("/deep/warn/createCustomerWarn",
                     				param,
                     			function(data){
                     			   mygridtab.fnDraw();
@@ -80,8 +78,8 @@ var mygridtab = $('#transactions').dataTable({
             	$(document).off('click.modal2').on('click.modal2.data-api', '[data-toggle="delete"]', function ( e ) {
             		var id = $(this).attr('id');
             		
-            		$.post("/deep/stock/delStock",
-            				"stockId="+id,
+            		$.post("/deep/warn/delCustomerWarn",
+            				"id="+id,
             			function(data){
             			   mygridtab.fnDraw();
             			   alert(data);

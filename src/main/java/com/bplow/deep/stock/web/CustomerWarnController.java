@@ -23,14 +23,14 @@ public class CustomerWarnController {
     @Autowired
     CustomerWarnService customerWarnService;
     
-    @RequestMapping(value = "/warnListPage")
+    @RequestMapping(value = "/customerWarnPage")
     public String jobPage(HttpServletRequest httpRequest, Model view){
         logger.info("任务列表页面:");
         
         return "stock/customerWarn";
     }
     
-    @RequestMapping(value="/warnList")
+    @RequestMapping(value="/customerWarnList")
     @ResponseBody
     public Page<SkCustomerWarn> queryCustomerwarn(HttpServletRequest httpRequest, Model view,SkCustomerWarn warn){
     	
@@ -53,7 +53,7 @@ public class CustomerWarnController {
     @ResponseBody
     public String delCustomerWarn(HttpServletRequest httpRequest, Model view,SkCustomerWarn warn){
     	
-    	customerWarnService.createCustomerWarn(warn);
+    	customerWarnService.deleteCustomerWarn(warn);
     	
     	return "删除成功";
     }

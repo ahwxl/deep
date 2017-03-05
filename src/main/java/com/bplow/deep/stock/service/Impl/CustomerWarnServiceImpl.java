@@ -1,5 +1,8 @@
 package com.bplow.deep.stock.service.Impl;
 
+import java.util.Date;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,9 @@ public class CustomerWarnServiceImpl implements CustomerWarnService{
     @Override
     public int createCustomerWarn(SkCustomerWarn warn) {
         
+    	warn.setId(UUID.randomUUID().toString().replace("-", ""));
+    	warn.setStatus("0");
+    	warn.setGmtModify(new Date());
         skCustomerWarnMapper.insert(warn);
         
         return 0;

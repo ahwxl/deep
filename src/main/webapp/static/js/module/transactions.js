@@ -50,7 +50,7 @@ var mygridtab = $('#transactions').dataTable({
                         'bSortable': false,
                         'aTargets': [6],
                         fnRender: function (setobj, data) {
-                        	var delhtml = "<a class='' id='{0}' data-toggle='delete' >{1}</a>".format(setobj.aData['id'],"删除");
+                        	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>".format(setobj.aData['id'],"删除");
                         	return delhtml;
                         }
                     },{
@@ -76,6 +76,7 @@ var mygridtab = $('#transactions').dataTable({
                     		$.post("/deep/stock/createTrans",
                     				param,
                     			function(data){
+                    			   mygridtab.fnDraw();
                     			   alert(data);
                     		    }
                     		);
@@ -90,6 +91,7 @@ var mygridtab = $('#transactions').dataTable({
             		$.post("/deep/stock/delTrans",
             				"id="+id,
             			function(data){
+            			   mygridtab.fnDraw();
             			   alert(data);
             		    }
             		);

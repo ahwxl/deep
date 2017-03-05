@@ -2,9 +2,12 @@ package com.bplow.deep.stock.domain;
 
 import java.util.Date;
 
+import com.bplow.deep.base.jackson.CustomDateSerializer;
 import com.bplow.deep.base.pagination.PageInfo;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SkWarnRule extends PageInfo{
+	
     private String ruleId;
 
     private String scripte;
@@ -49,6 +52,7 @@ public class SkWarnRule extends PageInfo{
         this.status = status == null ? null : status.trim();
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getGmtCreate() {
         return gmtCreate;
     }
@@ -57,6 +61,7 @@ public class SkWarnRule extends PageInfo{
         this.gmtCreate = gmtCreate;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getGmtModify() {
         return gmtModify;
     }

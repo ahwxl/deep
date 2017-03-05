@@ -64,18 +64,20 @@ create table sk_warn_rule
    primary key (rule_id)
 );
 
-create table sk_schedule_task
-(
-   id                   varchar(32) not null,
-   group_id             varchar(32),
-   job_id               varchar(32),
-   trigger_name         varchar(32),
-   task_param           varchar(200),
-   gmt_create           timestamp,
-   gmt_modify           timestamp,
-   status               varchar(2),
-   primary key (id)
-);
+CREATE TABLE `sk_schedule_task` (
+	`id` VARCHAR(32) NOT NULL,
+	`group_id` VARCHAR(32) NULL DEFAULT NULL,
+	`job_id` VARCHAR(32) NULL DEFAULT NULL,
+	`trigger_name` VARCHAR(32) NULL DEFAULT NULL,
+	`task_param` VARCHAR(200) NULL DEFAULT NULL,
+	`gmt_create` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`gmt_modify` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`status` VARCHAR(2) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
 create table sys_user
 (
@@ -99,6 +101,21 @@ create table sk_send_sms_log
    send_cnt             varchar(200),
    parament             varchar(200),
    gmt_create           timestamp,
+   gmt_modify           timestamp,
    status               varchar(1),
    primary key (sms_id)
 );
+
+create table Sk_Day_Swrich
+(
+   id                   varchar(32) not null,
+   yester_day           varchar(32),
+   today                varchar(32),
+   tommory              varchar(32),
+   primary key (id)
+);
+
+
+
+
+INSERT INTO `sk_day_swrich` (`id`, `yester_day`, `today`, `tommory`) VALUES ('1', '2017-3-1', '2017-03-05', '11');

@@ -1,5 +1,7 @@
 package com.bplow.deep;
 
+import java.math.BigDecimal;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -33,6 +35,8 @@ public class AppTest
      */
     public void testApp()
     {
+    	BigDecimal num = new BigDecimal("-0.156").abs();
+    	System.out.println(num.doubleValue());
         assertTrue( true );
     }
 }

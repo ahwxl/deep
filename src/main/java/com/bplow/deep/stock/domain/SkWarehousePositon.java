@@ -2,9 +2,12 @@ package com.bplow.deep.stock.domain;
 
 import java.util.Date;
 
+import com.bplow.deep.base.jackson.CustomDateSerializer;
 import com.bplow.deep.base.pagination.PageInfo;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SkWarehousePositon extends PageInfo{
+	
     private String stockId;
 
     private String stockName;
@@ -79,6 +82,7 @@ public class SkWarehousePositon extends PageInfo{
         this.sortBy = sortBy;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getGmtCreate() {
         return gmtCreate;
     }
@@ -87,6 +91,7 @@ public class SkWarehousePositon extends PageInfo{
         this.gmtCreate = gmtCreate;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getGmtModify() {
         return gmtModify;
     }

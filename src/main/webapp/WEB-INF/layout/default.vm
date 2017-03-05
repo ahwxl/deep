@@ -649,10 +649,10 @@
 							<a href="/deep/stock/translist">交易记录</a>
 						</li>
 						<li >
-							<a href="/deep/stock/customerWarRule">股票规则</a>
+							<a href="/deep/warn/customerWarnPage">股票规则</a>
 						</li>
 						<li >
-							<a href="/deep/stock/customerWarRule">规则管理</a>
+							<a href="/deep/warn/warnRulePage">规则脚本管理</a>
 						</li>
 					</ul>
 				</li>

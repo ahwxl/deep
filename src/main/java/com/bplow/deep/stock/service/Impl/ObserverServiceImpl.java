@@ -36,7 +36,7 @@ import com.bplow.deep.stock.vo.Message;
 import com.bplow.deep.stock.vo.StockInfo;
 
 /**
- * @desc 
+ * @desc   一个任务只能 对于一个用户 和 一个股票
  * @author wangxiaolei
  * @date 2017年2月23日 下午9:48:22
  */
@@ -74,11 +74,11 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 	private SkSendSmsLogMapper skSendSmsLogMapper;
 	
 	@Override
-	public void observer(String taskId,String stockid) {
+	public void observer(String _userId,String stockid) {
 		long starttime = System.currentTimeMillis();
-		logger.info("服务执行----------------->用户[{}],股票[{}]:",taskId,stockid);
+		logger.info("服务执行----------------->用户[{}],股票[{}]:",_userId,stockid);
 		
-		String userId = taskId;
+		String userId = _userId;
 		String stockId =stockid;
 		
 		//获取用户信息
@@ -100,7 +100,7 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 		Map<String,Serializable> parament = new HashMap<String,Serializable>();
 		
 		parament.put("currentPrice", aimStock.getCurrentPrice());
-		parament.put("wave", aimStock.getWave());
+		parament.put("wave", aimStock.getWave().abs());
 		parament.put("aimPrice", aimStock.getYesterPrice());
 		
 		if(null != customerRules){
@@ -149,22 +149,7 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		
-		//获取所有用户  自定义规则 集合
-		SkCustomerWarn customerWarn = new SkCustomerWarn();
-		customerWarn.setPageSize(10000);
-		
-		Page<SkCustomerWarn> cusomerWarnPage =skCustomerWarnMapper.queryForPage(customerWarn);
-		
-		List<SkCustomerWarn> customerWarns = cusomerWarnPage.getDatas();
-		
-		for(SkCustomerWarn customer :customerWarns){
-			List<SkCustomerWarn> customers = customerWarnMap.get(customer.getUserId());
-			if(null == customers){
-				customers = new ArrayList<SkCustomerWarn>();
-				customerWarnMap.put(customer.getUserId(), customers);
-			}
-			customers.add(customer);
-		}
+		refresh();
 		
 		//获取所有规则定义
 		SkWarnRule skWarnRule = new SkWarnRule();
@@ -177,6 +162,26 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 			rulesMap.put(rule.getRuleId(), rule);
 		}
 		
+	}
+
+	@Override
+	public void refresh() {
+		//获取所有用户  自定义规则 集合
+				SkCustomerWarn customerWarn = new SkCustomerWarn();
+				customerWarn.setPageSize(10000);
+				
+				Page<SkCustomerWarn> cusomerWarnPage =skCustomerWarnMapper.queryForPage(customerWarn);
+				
+				List<SkCustomerWarn> customerWarns = cusomerWarnPage.getDatas();
+				
+				for(SkCustomerWarn customer :customerWarns){
+					List<SkCustomerWarn> customers = customerWarnMap.get(customer.getUserId());
+					if(null == customers){
+						customers = new ArrayList<SkCustomerWarn>();
+						customerWarnMap.put(customer.getUserId(), customers);
+					}
+					customers.add(customer);
+				}
 	}
 
 }

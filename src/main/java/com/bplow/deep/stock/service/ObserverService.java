@@ -11,5 +11,7 @@ package com.bplow.deep.stock.service;
 public interface ObserverService {
 	
 	public void observer(String taskId,String stockId);
+	
+	public void refresh();
 
 }

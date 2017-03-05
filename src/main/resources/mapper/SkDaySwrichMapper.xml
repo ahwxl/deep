@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.stock.mapper.SkDaySwrichMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.stock.domain.SkDaySwrich">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="yester_day" jdbcType="VARCHAR" property="yesterDay" />
+    <result column="today" jdbcType="VARCHAR" property="today" />
+    <result column="tommory" jdbcType="VARCHAR" property="tommory" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, yester_day, today, tommory
+  </sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkDaySwrich" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sk_day_swrich
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="id != null">
+             ID = #{id} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sk_day_swrich
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sk_day_swrich
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkDaySwrich">
+    insert into sk_day_swrich (id, yester_day, today, 
+      tommory)
+    values (#{id,jdbcType=VARCHAR}, #{yesterDay,jdbcType=VARCHAR}, #{today,jdbcType=VARCHAR}, 
+      #{tommory,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="update" parameterType="com.bplow.deep.stock.domain.SkDaySwrich">
+    update sk_day_swrich
+    <set>
+      <if test="yesterDay != null">
+        yester_day = #{yesterDay,jdbcType=VARCHAR},
+      </if>
+      <if test="today != null">
+        today = #{today,jdbcType=VARCHAR},
+      </if>
+      <if test="tommory != null">
+        tommory = #{tommory,jdbcType=VARCHAR},
+      </if>
+    </set>
+     WHERE ID = #{id} 
+  </update>
+</mapper>

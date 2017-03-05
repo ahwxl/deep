@@ -50,7 +50,7 @@ public class TaskSheduleService {
      * @throws SchedulerException
      * @throws ClassNotFoundException 
      */
-    public void createCronTask(String groupName,String jobName,String triggerName,String cron,Map<String,Serializable> parament) throws SchedulerException, ClassNotFoundException {
+    public CronTrigger createCronTask(String groupName,String jobName,String triggerName,String cron,Map<String,Serializable> parament) throws SchedulerException, ClassNotFoundException {
 
     	Class className = Class.forName("com.bplow.deep.quartz.job.ObserverJob");
     	
@@ -69,6 +69,8 @@ public class TaskSheduleService {
         Date ft = clusterQuartzScheduler.getScheduler().scheduleJob(job, trigger);
 
         logger.info("创建任务：{}", ft);
+        
+        return trigger;
     }
 
     /**
