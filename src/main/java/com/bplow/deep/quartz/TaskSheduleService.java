@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;
@@ -50,9 +51,14 @@ public class TaskSheduleService {
      * @throws SchedulerException
      * @throws ClassNotFoundException 
      */
-    public CronTrigger createCronTask(String groupName,String jobName,String triggerName,String cron,Map<String,Serializable> parament) throws SchedulerException, ClassNotFoundException {
+    public CronTrigger createCronTask(String groupName,String jobName,String triggerName,String cron,String jobBean,Map<String,Serializable> parament) throws SchedulerException, ClassNotFoundException {
 
-    	Class className = Class.forName("com.bplow.deep.quartz.job.ObserverJob");
+    	Class className = null;
+    	if(StringUtils.isNotEmpty(jobBean)){
+    		className = Class.forName(jobBean);//
+    	}else{
+    		className = Class.forName("com.bplow.deep.quartz.job.ObserverJob");
+    	}
     	
         @SuppressWarnings("unchecked")
 		JobDetail job = JobBuilder.newJob(className).withIdentity(jobName, groupName)

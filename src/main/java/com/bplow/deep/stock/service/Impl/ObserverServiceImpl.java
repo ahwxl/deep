@@ -20,11 +20,13 @@ import org.springframework.stereotype.Service;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.stock.domain.SkCustomerWarn;
 import com.bplow.deep.stock.domain.SkSendSmsLog;
+import com.bplow.deep.stock.domain.SkWarehousePositon;
 import com.bplow.deep.stock.domain.SkWarnLog;
 import com.bplow.deep.stock.domain.SkWarnRule;
 import com.bplow.deep.stock.domain.SysUser;
 import com.bplow.deep.stock.mapper.SkCustomerWarnMapper;
 import com.bplow.deep.stock.mapper.SkSendSmsLogMapper;
+import com.bplow.deep.stock.mapper.SkWarehousePositonMapper;
 import com.bplow.deep.stock.mapper.SkWarnLogMapper;
 import com.bplow.deep.stock.mapper.SkWarnRuleMapper;
 import com.bplow.deep.stock.service.ObserverService;
@@ -73,6 +75,9 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 	@Autowired
 	private SkSendSmsLogMapper skSendSmsLogMapper;
 	
+	@Autowired
+    SkWarehousePositonMapper skWarehousePositonMapper;
+	
 	@Override
 	public void observer(String _userId,String stockid) {
 		long starttime = System.currentTimeMillis();
@@ -87,10 +92,18 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 		user = systemUserService.queryUser(user);
 		
 		//实时获取股票价格
-		StockInfo stockInfo = new StockInfo();
-		stockInfo.setStockId(stockId);
+//		StockInfo stockInfo = new StockInfo();
+//		stockInfo.setStockId(stockId);
 		
-		StockInfo aimStock = queryStockPriceRealTimeSerivce.queryPrice(stockInfo);
+		SkWarehousePositon position = skWarehousePositonMapper.selectByPrimaryKey(stockId);
+		
+		//StockInfo aimStock = queryStockPriceRealTimeSerivce.queryPrice(stockInfo);
+		
+		StockInfo aimStock = queryStockPriceRealTimeSerivce.getStockInfoMap().get(position.getStockName());
+		
+		if(aimStock == null){
+			return ;
+		}
 		
 		//获取股票昨日信息
 		

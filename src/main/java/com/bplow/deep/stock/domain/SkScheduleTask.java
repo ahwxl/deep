@@ -29,6 +29,8 @@ public class SkScheduleTask extends PageInfo{
     private String userId;
     
     private String stockId;
+    
+    private String jobBean;
 
     public String getId() {
         return id;
@@ -118,6 +120,14 @@ public class SkScheduleTask extends PageInfo{
 
 	public void setStockId(String stockId) {
 		this.stockId = stockId;
+	}
+	
+	public String getJobBean() {
+		return jobBean;
+	}
+
+	public void setJobBean(String jobBean) {
+		this.jobBean = jobBean;
 	}
 
 	/**

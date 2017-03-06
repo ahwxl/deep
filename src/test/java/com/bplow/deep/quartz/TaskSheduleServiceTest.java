@@ -41,7 +41,7 @@ public class TaskSheduleServiceTest {
 		map.put("taskId", "wxl");
 		map.put("stockId", "sh600078");
 		
-		taskSheduleService.createCronTask("group1","job1","trigger1","0/3 * * * * ?",map);
+		taskSheduleService.createCronTask("group1","job1","trigger1","0/3 * * * * ?",null,map);
 		
 		System.out.println("");
 	}

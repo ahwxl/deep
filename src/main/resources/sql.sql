@@ -15,7 +15,7 @@ ENGINE=InnoDB
 
 
 CREATE TABLE `sk_warehouse_positon` (
-	`stock_id` VARCHAR(6) NOT NULL,
+	`stock_id` VARCHAR(32) NOT NULL,
 	`stock_name` VARCHAR(32) NULL DEFAULT NULL,
 	`amount` BIGINT(20) NULL DEFAULT NULL,
 	`yester_price` DOUBLE NULL DEFAULT NULL,
@@ -119,3 +119,4 @@ create table Sk_Day_Swrich
 
 
 INSERT INTO `sk_day_swrich` (`id`, `yester_day`, `today`, `tommory`) VALUES ('1', '2017-3-1', '2017-03-05', '11');
+INSERT INTO `sk_warehouse_positon` (`stock_id`, `stock_name`, `amount`, `yester_price`, `today_price`, `market_value`, `sort_by`, `gmt_create`, `gmt_modify`) VALUES ('sh600078', '澄星股份', 10000, 7.136, NULL, NULL, NULL, '2017-03-06 23:04:46', '2017-03-05 17:03:22');

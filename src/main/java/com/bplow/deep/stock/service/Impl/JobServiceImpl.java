@@ -52,7 +52,7 @@ public class JobServiceImpl implements JobService{
 		try {
 			switchDayService.switchDay();
 			
-			CronTrigger trigger = taskSheduleService.createCronTask(task.getGroupId(), task.getJobId(), task.getTriggerName(), task.getCron(), parament);
+			CronTrigger trigger = taskSheduleService.createCronTask(task.getGroupId(), task.getJobId(), task.getTriggerName(), task.getCron(),task.getJobBean(), parament);
 		    
 			task.setId(UUID.randomUUID().toString().replace("-", ""));
 			task.setTaskParam(trigger.getKey().getName());

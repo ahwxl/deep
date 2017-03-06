@@ -3,6 +3,8 @@
  */
 package com.bplow.deep.stock.service;
 
+import java.util.Map;
+
 import com.bplow.deep.stock.vo.StockInfo;
 
 /**
@@ -14,5 +16,9 @@ public interface QueryStockPriceRealTimeSerivce {
 	
 	
 	public StockInfo queryPrice(StockInfo stockInfo);
+	
+	public String queryPrice(String url);
+	
+	public Map<String, StockInfo> getStockInfoMap();
 
 }
