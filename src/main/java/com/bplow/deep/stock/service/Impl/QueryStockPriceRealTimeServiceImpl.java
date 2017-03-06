@@ -51,9 +51,9 @@ public class QueryStockPriceRealTimeServiceImpl implements
 	public StockInfo queryPrice(StockInfo stockInfo) {
 		StockInfo stock = new StockInfo();
 
-		url = url + "s_" + stockInfo.getStockId();
+		String requestUrl = url + "s_" + stockInfo.getStockId();
 
-		String responseMsg = request(url);
+		String responseMsg = request(requestUrl);
 		
 		Pattern p = Pattern.compile("\"(.*?)\"");
 		Matcher m = p.matcher(responseMsg);
@@ -89,9 +89,9 @@ public class QueryStockPriceRealTimeServiceImpl implements
 		
 		if(sb.length() == 0 ) return null;
 		
-		url = url+sb.substring(0,sb.length()-1);
+		String requestUrl =  url+sb.substring(0,sb.length()-1);
 		
-		String responseMsg = request(url);
+		String responseMsg = request(requestUrl);
 		
 		String[] stockArrayStr = responseMsg.split("\n");
 		
