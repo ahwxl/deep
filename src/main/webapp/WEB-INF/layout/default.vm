@@ -80,7 +80,7 @@
 
 	<script src="/deep/static/js/jquery.uniform.min.js" type="text/javascript" ></script>
 	
-	<script src="/deep/static/js/bootstrap-modal.js" type="text/javascript" ></script>
+	<script src="/deep/static/js/bootstrap-modal.js?20170307" type="text/javascript" ></script>
     <script src="/deep/static/js/module/toolkit.js" type="text/javascript" ></script>
 	<script src="/deep/static/js/bootstrap-modalmanager.js" type="text/javascript" ></script>
 

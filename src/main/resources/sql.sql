@@ -6,12 +6,14 @@ CREATE TABLE `sk_transaction_record` (
 	`price` DOUBLE NULL DEFAULT NULL,
 	`transaction_type` VARCHAR(1) NULL DEFAULT NULL,
 	`gmt_create` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`transaction_date` VARCHAR(32) NOT NULL,
 	`gmt_modify` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
 	PRIMARY KEY (`id`)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
 
 
 CREATE TABLE `sk_warehouse_positon` (

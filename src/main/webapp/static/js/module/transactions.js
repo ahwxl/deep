@@ -28,7 +28,7 @@ var mygridtab = $('#transactions').dataTable({
                   { "sTitle": "数量","mData":"amount","bSortable": false },
                   { "sTitle": "价格","mData":"price","bSortable": false },
                   { "sTitle": "交易类型","mData":"transactionType","bSortable": false,"sWidth":60 },
-                  { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false },
+                  { "sTitle": "交易日期","mData":"transactionDate","bSortable": false },
                   { "sTitle": "操作","mData":"gmtModify","bSortable": false }
                 ],
                 "aLengthMenu": [
@@ -97,4 +97,8 @@ var mygridtab = $('#transactions').dataTable({
             		);
             		
             	});
+            	
+            	if (jQuery().datepicker) {
+                    $('.date-picker').datepicker('yyyy-mm-dd');
+                }
             });

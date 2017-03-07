@@ -63,7 +63,7 @@
   
   <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkTransactionRecord">
     insert into sk_transaction_record (id, stock_id, stock_name, 
-      amount, price, transaction_type, transaction_date
+      amount, price, transaction_type, transaction_date,
       gmt_create, gmt_modify)
     values (#{id,jdbcType=VARCHAR}, #{stockId,jdbcType=VARCHAR}, #{stockName,jdbcType=VARCHAR}, 
       #{amount,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{transactionType,jdbcType=VARCHAR}, 
