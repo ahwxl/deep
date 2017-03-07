@@ -9,12 +9,13 @@
     <result column="amount" jdbcType="BIGINT" property="amount" />
     <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="transaction_type" jdbcType="VARCHAR" property="transactionType" />
+    <result column="transaction_date" jdbcType="VARCHAR" property="transactionDate" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, stock_id, stock_name, amount, price, transaction_type, gmt_create, gmt_modify
+    id, stock_id, stock_name, amount, price, transaction_type,transaction_date, gmt_create, gmt_modify
   </sql>
   
   <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkTransactionRecord" resultMap="BaseResultMap">
@@ -62,11 +63,11 @@
   
   <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkTransactionRecord">
     insert into sk_transaction_record (id, stock_id, stock_name, 
-      amount, price, transaction_type, 
+      amount, price, transaction_type, transaction_date
       gmt_create, gmt_modify)
     values (#{id,jdbcType=VARCHAR}, #{stockId,jdbcType=VARCHAR}, #{stockName,jdbcType=VARCHAR}, 
       #{amount,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{transactionType,jdbcType=VARCHAR}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP})
+      #{transactionDate,jdbcType=VARCHAR},#{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP})
   </insert>
   
   <update id="update" parameterType="com.bplow.deep.stock.domain.SkTransactionRecord">

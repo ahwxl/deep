@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.stock.domain.SkWarehousePositon;
 import com.bplow.deep.stock.mapper.SkWarehousePositonMapper;
-import com.bplow.deep.stock.mapper.SkWarnRuleMapper;
 import com.bplow.deep.stock.service.StockWareHouseService;
 
 @Service

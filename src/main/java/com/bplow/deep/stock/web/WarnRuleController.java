@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.stock.domain.SkCustomerWarn;
 import com.bplow.deep.stock.domain.SkWarnRule;
 import com.bplow.deep.stock.service.WarnRuleService;
 

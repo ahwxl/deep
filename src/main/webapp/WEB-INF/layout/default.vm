@@ -640,7 +640,7 @@
 
 					<ul class="sub-menu">
 						<li >
-							<a href="/deep/job/joblist">任务列表</a>
+							<a href="/deep/job/joblist">任务</a>
 						</li>
 						<li >
 							<a href="/deep/stock/stockWareHouse">持仓</a>
@@ -652,7 +652,7 @@
 							<a href="/deep/warn/customerWarnPage">股票规则</a>
 						</li>
 						<li >
-							<a href="/deep/warn/warnRulePage">规则脚本管理</a>
+							<a href="/deep/warn/warnRulePage">规则脚本</a>
 						</li>
 					</ul>
 				</li>

@@ -158,8 +158,11 @@
 	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
+	<script type="text/javascript" src="/deep/static/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="/deep/static/js/jquery.fancybox.pack.js"></script>
+	
 				
-<script type="text/javascript" src="/deep/static/js/module/transactions.js?20170309"></script>
+<script type="text/javascript" src="/deep/static/js/module/transactions.js?20170311"></script>
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
@@ -230,6 +233,15 @@
 													<label class="control-label" >价格</label>
 													<div class="controls">
 														<input type="text" class="" name="price" value=""> 
+													</div>
+												</div>
+												
+												<div class="control-group">
+													<label class="control-label" >交易日期</label>
+													<div class="controls">
+													   <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+														<input type="text" class="m-wrap m-ctrl-medium date-picker" name="transactionDate" value=""> 
+													   </div>
 													</div>
 												</div>
 

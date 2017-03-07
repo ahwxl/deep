@@ -7,6 +7,7 @@ import com.bplow.deep.base.jackson.CustomDateSerializer;
 import com.bplow.deep.base.pagination.PageInfo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+
 public class SkTransactionRecord extends PageInfo implements Serializable{
     /**
 	 * 
@@ -24,7 +25,9 @@ public class SkTransactionRecord extends PageInfo implements Serializable{
     private Double price;
 
     private String transactionType;
-
+    
+    private String transactionDate;
+    
     private Date gmtCreate;
 
     private Date gmtModify;
@@ -75,6 +78,14 @@ public class SkTransactionRecord extends PageInfo implements Serializable{
 
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType == null ? null : transactionType.trim();
+    }
+    
+    public String getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
     @JsonSerialize(using = CustomDateSerializer.class)

@@ -97,6 +97,11 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 		
 		SkWarehousePositon position = skWarehousePositonMapper.selectByPrimaryKey(stockId);
 		
+		if(null == position){
+		    logger.warn("股票池中没有找到stockId[{}],任务",stockId);
+		    return ;
+		}
+		
 		//StockInfo aimStock = queryStockPriceRealTimeSerivce.queryPrice(stockInfo);
 		
 		StockInfo aimStock = queryStockPriceRealTimeSerivce.getStockInfoMap().get(position.getStockName());

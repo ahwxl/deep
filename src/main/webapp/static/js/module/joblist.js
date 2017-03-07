@@ -56,8 +56,8 @@ var mygridtab = $('#sample_1').dataTable({
                         'bSortable': false,
                         'aTargets': [4],
                         fnRender: function (setobj, data) {
-                        	var htmlstr = "<a class=' mini purple' name='showProcessImage' id='showProcessImage'  1data-toggle='modal' procDefId='"+setobj.aData['processDefineId']+"' href='javascript:void(0)'><i class='icon-edit'></i> 修改</a>";
-                        	var delhtml = "<a class=' mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>".format(setobj.aData['id'],"删除");
+                        	var htmlstr = "<a class=' mini purple' name='showProcessImage' id='showProcessImage'  1data-toggle='modal' procDefId='"+setobj.aData['processDefineId']+"' href='javascript:void(0)'><i class='icon-edit'></i>修改</a>";
+                        	var delhtml = "<a class=' mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i>{1}</a>".format(setobj.aData['id'],"删除");
                         	return htmlstr+delhtml;
                         }
                     }
@@ -97,12 +97,9 @@ var mygridtab = $('#sample_1').dataTable({
             		);
             		
             	});
-                //给2个输入框添加blur事件调用draw方法执行自定义过滤函数
-                $('#min, #max').blur(function () {
-                    table.draw();
-                });
-            });
-            
-            $("a[name='showProcessImage']").click(function(){
-            	alert( $(this).attr('procDefId'));
+            	
+            	if (jQuery().datepicker) {
+                    $('.date-picker').datepicker();
+                }
+            	
             });
