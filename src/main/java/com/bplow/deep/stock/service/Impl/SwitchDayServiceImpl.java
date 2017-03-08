@@ -17,7 +17,7 @@ import com.bplow.deep.stock.service.SwitchDayService;
  * @author wangxiaolei
  * @date 2017年3月5日 下午11:35:18
  */
-@Service
+@Service("switchDayService")
 public class SwitchDayServiceImpl implements SwitchDayService{
 
 	@Autowired

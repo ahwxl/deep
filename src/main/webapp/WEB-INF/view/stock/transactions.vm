@@ -241,7 +241,7 @@
 													<label class="control-label" >交易日期</label>
 													<div class="controls">
 													   <div class="input-append date date-picker" data-date="2017-03-01" data-date-format="yyyy-MM-dd" >
-														<input type="text" class="m-wrap m-ctrl-medium date-picker" name="transactionDate" value=""> 
+														<input type="text" class="m-wrap m-ctrl-medium" name="transactionDate" value=""> 
 													   </div>
 													</div>
 											    </div>

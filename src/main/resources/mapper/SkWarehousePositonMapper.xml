@@ -12,11 +12,13 @@
     <result column="sort_by" jdbcType="BIGINT" property="sortBy" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+    <result column="except_amount" jdbcType="BIGINT" property="exceptAmount" />
+    <result column="except_price" jdbcType="DOUBLE" property="exceptPrice" />
   </resultMap>
   
   <sql id="Base_Column_List">
     stock_id, stock_name, amount, yester_price, today_price, market_value, sort_by, gmt_create, 
-    gmt_modify
+    gmt_modify,except_amount,except_price
   </sql>
   
   <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkWarehousePositon" resultMap="BaseResultMap">
@@ -50,11 +52,12 @@
   <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkWarehousePositon">
     insert into sk_warehouse_positon (stock_id, stock_name, amount, 
       yester_price, today_price, market_value, 
-      sort_by, gmt_create, gmt_modify
+      sort_by, gmt_create, gmt_modify,except_amount,except_price
       )
     values (#{stockId,jdbcType=VARCHAR}, #{stockName,jdbcType=VARCHAR}, #{amount,jdbcType=BIGINT}, 
       #{yesterPrice,jdbcType=DOUBLE}, #{todayPrice,jdbcType=DOUBLE}, #{marketValue,jdbcType=DOUBLE}, 
-      #{sortBy,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
+      #{sortBy,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP},
+      #{exceptAmount,jdbcType=BIGINT},#{exceptPrice,jdbcType=DOUBLE}
       )
   </insert>
   

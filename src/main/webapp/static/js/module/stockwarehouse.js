@@ -27,6 +27,8 @@ var mygridtab = $('#transactions').dataTable({
                   { "sTitle": "名称","mData":"stockName","bSortable": false,"sWidth":100 },
                   { "sTitle": "数量","mData":"amount","bSortable": false },
                   { "sTitle": "价格","mData":"todayPrice","bSortable": false },
+                  { "sTitle": "期望价格","mData":"exceptPrice","bSortable": false },
+                  { "sTitle": "期望数量","mData":"exceptAmount","bSortable": false },
                   { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false },
                   { "sTitle": "操作","mData":"gmtModify","bSortable": false }
                 ],
@@ -47,7 +49,7 @@ var mygridtab = $('#transactions').dataTable({
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [5],
+                        'aTargets': [7],
                         fnRender: function (setobj, data) {
                         	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'>{1}</i></a>&nbsp;<a class='' id='{0}' data-toggle='modify' ><i class='icon-edit'>{2}</i></a>".format(setobj.aData['stockId'],"删除","修改");
                         	return delhtml;

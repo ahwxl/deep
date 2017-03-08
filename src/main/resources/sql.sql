@@ -6,7 +6,7 @@ CREATE TABLE `sk_transaction_record` (
 	`price` DOUBLE NULL DEFAULT NULL,
 	`transaction_type` VARCHAR(1) NULL DEFAULT NULL,
 	`gmt_create` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	`transaction_date` VARCHAR(32) NOT NULL,
+	`transaction_date` VARCHAR(32) DEFAULT NULL,
 	`gmt_modify` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
 	PRIMARY KEY (`id`)
 )
@@ -31,6 +31,10 @@ CREATE TABLE `sk_warehouse_positon` (
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
+ALTER TABLE `sk_warehouse_positon`
+	ADD COLUMN `except_price` DOUBLE NULL AFTER `market_value`,
+	ADD COLUMN `except_amount` BIGINT NULL AFTER `except_price`;
 
 create table sk_warn_log
 (
