@@ -23,13 +23,13 @@ var mygridtab = $('#transactions').dataTable({
            		     		           { "groupId": "^[0-9]", "bEscapeRegex": false }
            		     		  ],
                 "aoColumns": [
-                  { "sTitle": "编号","mData":"stockId","bSortable": false,"sWidth":"100",height:"20"},
-                  { "sTitle": "名称","mData":"stockName","bSortable": false,"sWidth":100 },
-                  { "sTitle": "数量","mData":"amount","bSortable": false },
-                  { "sTitle": "价格","mData":"todayPrice","bSortable": false },
-                  { "sTitle": "期望价格","mData":"exceptPrice","bSortable": false },
-                  { "sTitle": "期望数量","mData":"exceptAmount","bSortable": false },
-                  { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false },
+                  { "sTitle": "编号","mData":"stockId","bSortable": false,"sWidth":"60",height:"20"},
+                  { "sTitle": "名称","mData":"stockName","bSortable": false,"sWidth":70 },
+                  { "sTitle": "数量","mData":"amount","bSortable": false,"sWidth":70 },
+                  { "sTitle": "价格","mData":"todayPrice","bSortable": false,"sWidth":70 },
+                  { "sTitle": "期望价格","mData":"exceptPrice","bSortable": false,"sWidth":"60" },
+                  { "sTitle": "期望数量","mData":"exceptAmount","bSortable": false,"sWidth":"60" },
+                  { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false,"sWidth":"150" },
                   { "sTitle": "操作","mData":"gmtModify","bSortable": false }
                 ],
                 "aLengthMenu": [

@@ -7,8 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.bplow.deep.base.jackson.JsonHelper;
 import com.bplow.deep.stock.service.SendMessageService;
 import com.bplow.deep.stock.vo.Message;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
@@ -40,7 +42,18 @@ public class SendMessageServiceImpl implements SendMessageService {
         req.setSmsTemplateCode("SMS_48730177");
 
         req.setSmsFreeSignName("内容管理");
-        req.setSmsParamString("{\"taskId\":\"201702240000008\",\"taskName\":\"文静，测试进行中\",\"date\":\"20170226\"}");
+        String smsParamentString = null;
+        if(null == msg.getParament()){
+        	smsParamentString = "{\"taskId\":\"201702240000008\",\"taskName\":\"文静，测试进行中\",\"date\":\"20170226\"}";
+        }else{
+        	try {
+				smsParamentString = JsonHelper.toString(msg.getParament());
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+        }
+        
+        req.setSmsParamString(smsParamentString);
 
         AlibabaAliqinFcSmsNumSendResponse rsp;
         try {

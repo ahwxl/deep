@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.base.utils.DateUtils;
 import com.bplow.deep.stock.domain.SkCustomerWarn;
 import com.bplow.deep.stock.domain.SkSendSmsLog;
 import com.bplow.deep.stock.domain.SkWarehousePositon;
@@ -114,19 +115,20 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 		
 		//获取用户对 该股票 所有规则  放入map,命中则删除该规则标记位
 		
-		List<SkCustomerWarn> customerRules = customerWarnMap.get(userId);
+		List<SkCustomerWarn> customerRules = customerWarnMap.get(userId+stockId);
 		Map<String,Serializable> parament = new HashMap<String,Serializable>();
 		
 		parament.put("currentPrice", aimStock.getCurrentPrice());
 		parament.put("wave", aimStock.getWave().abs());
-		parament.put("aimPrice", aimStock.getYesterPrice());
+		//parament.put("aimPrice", aimStock.getYesterPrice());
+		parament.put("exceptPrice", position.getExceptPrice());
 		
 		if(null != customerRules){
 			for(SkCustomerWarn skCustomerWarn : customerRules){
 				if("1".equals(skCustomerWarn.getStatus())){//该规则已命中，跳到下一个规则
 					continue;
 				}
-				
+				//获取规则
 				SkWarnRule warnRule = rulesMap.get(skCustomerWarn.getRuleId());
 				
 				if(null == warnRule || StringUtils.isBlank(warnRule.getScripte())){
@@ -140,14 +142,22 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 					
 					//发送短信
 					if(null == user || StringUtils.isNotBlank(user.getMobile())){
-						Message msg = new Message();
-						msg.setMobile(user.getMobile());
-						//sendMessageService.sendMessage(msg);
 						SkSendSmsLog smsLog = new SkSendSmsLog();
 						smsLog.setSmsId(UUID.randomUUID().toString().replace("-", ""));
 						smsLog.setSendMobile(user.getMobile());
 						smsLog.setSendCnt(warnRule.getRuleMsg());
 						skSendSmsLogMapper.insert(smsLog);
+						
+						Message msg = new Message();
+						msg.setMobile(user.getMobile());
+						
+						Map<String,Serializable> smsParam = new HashMap<String,Serializable>();
+						smsParam.put("taskId", smsLog.getSmsId()+stockId);
+						smsParam.put("taskName", warnRule.getRuleMsg());
+						smsParam.put("date", DateUtils.getShortDay());
+						msg.setParament(smsParam);
+						
+						//sendMessageService.sendMessage(msg);
 					}
 					
 					//记录日志
@@ -193,10 +203,10 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 				List<SkCustomerWarn> customerWarns = cusomerWarnPage.getDatas();
 				
 				for(SkCustomerWarn customer :customerWarns){
-					List<SkCustomerWarn> customers = customerWarnMap.get(customer.getUserId());
+					List<SkCustomerWarn> customers = customerWarnMap.get(customer.getUserId()+customer.getStockId());
 					if(null == customers){
 						customers = new ArrayList<SkCustomerWarn>();
-						customerWarnMap.put(customer.getUserId(), customers);
+						customerWarnMap.put(customer.getUserId()+customer.getStockId(), customers);
 					}
 					customers.add(customer);
 				}

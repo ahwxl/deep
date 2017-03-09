@@ -50,7 +50,7 @@ var mygridtab = $('#transactions').dataTable({
                         'bSortable': false,
                         'aTargets': [6],
                         fnRender: function (setobj, data) {
-                        	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>".format(setobj.aData['id'],"删除");
+                        	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete'><i class='icon-trash'></i>{1}</a>".format(setobj.aData['id'],"删除");
                         	return delhtml;
                         }
                     },{

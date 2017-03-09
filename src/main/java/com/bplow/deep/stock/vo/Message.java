@@ -3,6 +3,7 @@
  */
 package com.bplow.deep.stock.vo;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -15,7 +16,7 @@ public class Message {
 	private String messageId;
 	private String mobile;
 	private String content;
-	private Map<String,String> parament;
+	private Map<String,Serializable> parament;
 	
 	public String getMessageId() {
 		return messageId;
@@ -35,10 +36,10 @@ public class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Map<String, String> getParament() {
+	public Map<String, Serializable> getParament() {
 		return parament;
 	}
-	public void setParament(Map<String, String> parament) {
+	public void setParament(Map<String, Serializable> parament) {
 		this.parament = parament;
 	}
 	
