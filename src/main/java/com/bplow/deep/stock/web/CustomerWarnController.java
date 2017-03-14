@@ -27,7 +27,7 @@ public class CustomerWarnController {
     public String jobPage(HttpServletRequest httpRequest, Model view){
         logger.info("任务列表页面:");
         
-        return "stock/customerWarn";
+        return "stock/customerwarn";
     }
     
     @RequestMapping(value="/customerWarnList")

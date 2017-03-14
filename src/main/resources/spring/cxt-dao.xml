@@ -13,7 +13,7 @@
 	default-lazy-init="true">
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:sqlMapConfig.xml" />
+		<property name="configLocation" value="classpath:/sqlMapConfig.xml" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="com.bplow.deep.bpm.domain,com.bplow.deep.stock.domain" />
 	</bean>
