@@ -342,6 +342,21 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/taobao-sdk-java-auto_1455552377940-20160607.jar</systemPath>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.15</version>
+		</dependency>
+		<dependency>  
+          <groupId>org.apache.poi</groupId>  
+          <artifactId>poi-ooxml-schemas</artifactId>  
+          <version>3.15</version>
+        </dependency>  
+        <dependency>  
+            <groupId>org.apache.poi</groupId>  
+            <artifactId>poi-ooxml</artifactId>  
+            <version>3.15</version>
+        </dependency>
 
 		<dependency>
 			<groupId>junit</groupId>

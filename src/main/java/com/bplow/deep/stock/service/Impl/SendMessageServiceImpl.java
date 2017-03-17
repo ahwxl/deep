@@ -3,11 +3,16 @@
  */
 package com.bplow.deep.stock.service.Impl;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.bplow.deep.base.jackson.JsonHelper;
+import com.bplow.deep.base.utils.DateUtils;
 import com.bplow.deep.stock.service.SendMessageService;
 import com.bplow.deep.stock.vo.Message;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -70,7 +75,12 @@ public class SendMessageServiceImpl implements SendMessageService {
 
         SendMessageServiceImpl obj = new SendMessageServiceImpl();
         Message msg = new Message();
+        Map<String,Serializable> smsParam = new HashMap<String,Serializable>();
+        smsParam.put("taskId", "11");
+        smsParam.put("taskName", "22");
+        smsParam.put("date", DateUtils.getShortDay());
         msg.setMobile("13681858154");
+        msg.setParament(smsParam);
         obj.sendMessage(msg);
     }
 
