@@ -152,7 +152,7 @@ public class ObserverServiceImpl implements ObserverService,InitializingBean{
 						msg.setMobile(user.getMobile());
 						
 						Map<String,Serializable> smsParam = new HashMap<String,Serializable>();
-						smsParam.put("taskId", smsLog.getSmsId()+stockId);
+						smsParam.put("taskId", "ds"+stockId);
 						smsParam.put("taskName", warnRule.getRuleMsg());
 						smsParam.put("date", DateUtils.getShortDay());
 						msg.setParament(smsParam);
