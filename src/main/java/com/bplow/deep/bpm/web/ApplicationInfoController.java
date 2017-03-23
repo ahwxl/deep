@@ -1,5 +1,8 @@
 package com.bplow.deep.bpm.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,12 @@ public class ApplicationInfoController {
     
     @RequestMapping(value="/app/queryForPage")
     @ResponseBody
-    public Page applist(AutoAppInfo autoAppInfo){
+    public Page applist(AutoAppInfo autoAppInfo,HttpServletRequest httpRequest){
+        
+        HttpSession session = httpRequest.getSession();
+        logger.info("sessionId:{}",session.getId());
+        
+        session.setAttribute("wxl", "汪小二");
      
         autoAppInfo.setAppCode(autoAppInfo.getsSearch());
         Page page = applicationInfoService.queryForList(autoAppInfo);

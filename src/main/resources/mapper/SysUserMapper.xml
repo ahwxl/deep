@@ -11,12 +11,14 @@
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
   </resultMap>
   
   <sql id="Base_Column_List">
-    user_id, user_name, password, sex, email, mobile, status, remark, gmt_create, gmt_modify
+    user_id, user_name, password, sex, email, mobile, status, remark, salt, gmt_create, 
+    gmt_modify
   </sql>
   
   <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SysUser" resultMap="BaseResultMap">
@@ -50,12 +52,12 @@
   <insert id="insert" parameterType="com.bplow.deep.stock.domain.SysUser">
     insert into sys_user (user_id, user_name, password, 
       sex, email, mobile, status, 
-      remark, gmt_create, gmt_modify
-      )
+      remark, salt, gmt_create, 
+      gmt_modify)
     values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{sex,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
-      )
+      #{remark,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP})
   </insert>
   
   <update id="update" parameterType="com.bplow.deep.stock.domain.SysUser">
@@ -84,6 +86,9 @@
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},

@@ -4,6 +4,7 @@
 package com.bplow.deep.stock.web;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,9 @@ public class JobController {
 	
 	@RequestMapping(value = "/job/joblist")
 	public String jobPage(HttpServletRequest httpRequest, Model view){
-		logger.info("任务列表页面:");
+	    HttpSession session = httpRequest.getSession();
+        String wxl = (String)session.getAttribute("wxl");
+		logger.info("任务列表页面:sessionId:{}:{}",session.getId(),wxl);
 		
 		return "job/joblist";
 	}
@@ -40,7 +43,10 @@ public class JobController {
 	@RequestMapping(value = "/job/queryJobList")
 	@ResponseBody
 	public Page<SkScheduleTask> queryJobList(HttpServletRequest httpRequest, Model view,SkScheduleTask task){
-		
+	    HttpSession session = httpRequest.getSession();
+        String wxl = (String)session.getAttribute("wxl");
+        logger.info("查询任务列表:sessionId:{}:{}",session.getId(),wxl);
+        
 		Page<SkScheduleTask>  page= jobService.queryScheduleTaskList(task);
 		
 		return page;
