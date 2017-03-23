@@ -2,6 +2,7 @@
 <decorators defaultdir="/WEB-INF/layout/">
 
 	<excludes>
+	    <pattern>/login.jsp</pattern>
 		<pattern>*.json</pattern>
 		<pattern>/*/ajax/*</pattern>
 		<pattern>/*/template/*</pattern>

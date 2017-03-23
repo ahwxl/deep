@@ -124,7 +124,7 @@ public class SysUser extends PageInfo implements User{
 
     @Override
     public String getCredentialsSalt() {
-        return null;
+        return this.userName+this.salt;
     }
 
 }

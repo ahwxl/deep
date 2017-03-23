@@ -6,9 +6,11 @@
 
     <import resource="spring/cxt-dao.xml" />
     
-    <import resource="spring/cxt-session.xml" />
+    <!-- <import resource="spring/cxt-session.xml" /> -->
 
-    <import resource="spring/cxt-shiro.xml" />
+    <!-- <import resource="spring/cxt-shiro.xml" /> -->
+    
+    <import resource="spring/cxt-shiro-web.xml" />
     
     <import resource="spring/cxt-quartz.xml" />
 

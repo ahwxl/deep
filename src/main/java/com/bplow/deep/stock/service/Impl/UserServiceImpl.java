@@ -11,7 +11,7 @@ import com.bplow.deep.stock.domain.SysUser;
 import com.bplow.deep.stock.mapper.SysUserMapper;
 import com.bplow.deep.stock.service.UserService;
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
