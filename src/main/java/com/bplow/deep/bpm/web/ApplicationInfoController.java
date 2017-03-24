@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.base.pagination.Pagination;
 import com.bplow.deep.bpm.domain.AutoAppInfo;
 import com.bplow.deep.bpm.service.ApplicationInfoService;
 
@@ -32,7 +31,7 @@ public class ApplicationInfoController {
     
     @RequestMapping(value="/app/queryForPage")
     @ResponseBody
-    public Page applist(AutoAppInfo autoAppInfo,HttpServletRequest httpRequest){
+    public Page<AutoAppInfo> applist(AutoAppInfo autoAppInfo,HttpServletRequest httpRequest){
         
         HttpSession session = httpRequest.getSession();
         logger.info("sessionId:{}",session.getId());
@@ -40,7 +39,7 @@ public class ApplicationInfoController {
         session.setAttribute("wxl", "汪小二");
      
         autoAppInfo.setAppCode(autoAppInfo.getsSearch());
-        Page page = applicationInfoService.queryForList(autoAppInfo);
+        Page<AutoAppInfo> page = applicationInfoService.queryForList(autoAppInfo);
         
         return page;
     }

@@ -615,7 +615,7 @@
 
 					<ul class="sub-menu">
 						<li >
-							<a href="app/queryForPage">端口</a>
+							<a href="$cxt">端口</a>
 						</li>
 						<li class="">
 							<a href="$cxt">应用管理</a>
