@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private SysUserMapper sysUserMapper;
 
+    @Autowired
     private PasswordHelper passwordHelper;
 
     public void setPasswordHelper(PasswordHelper passwordHelper) {
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
         //加密密码
         passwordHelper.encryptPassword(user);
+        user.setSalt("123456");
         sysUserMapper.insert((SysUser)user);
         return null;
     }
@@ -90,6 +92,11 @@ public class UserServiceImpl implements UserService {
      */
     public Set<String> findPermissions(String username) {
         return null;
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        sysUserMapper.delete(user.getUserId());
     }
 
 }

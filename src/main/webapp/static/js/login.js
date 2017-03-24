@@ -52,7 +52,7 @@ var Login = function () {
             		$.post("/deep/checkLogin.do",
             				param,
             			function(data){
-            			window.location.href = "/";
+            			window.location.href = "/deep/";
             		    }
             		);
 	                

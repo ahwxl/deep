@@ -13,5 +13,5 @@ public interface SysUserMapper {
 
     int insert(SysUser record);
 
-    int deleteByPrimaryKey(String userId);
+    int delete(String userId);
 }

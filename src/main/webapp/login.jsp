@@ -192,7 +192,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="/deep/static/js/app.js" type="text/javascript"></script>
-	<script src="/deep/static/js/login.js?20170325" type="text/javascript"></script>
+	<script src="/deep/static/js/login.js?20170326" type="text/javascript"></script>
 	<!-- END PAGE LEVEL SCRIPTS --> 
 	<script>
 		jQuery(document).ready(function() {     

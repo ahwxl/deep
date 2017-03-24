@@ -40,6 +40,7 @@ public class LoginController {
             if (!currentUser.isAuthenticated()){//使用shiro来验证  
                 token.setRememberMe(true);  
                 currentUser.login(token);//验证角色和权限  
+                request.getSession().setAttribute("userId", username);
             }  
             System.out.println("result: " + result);  
             result = "index";//验证成功  
