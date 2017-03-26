@@ -6,6 +6,9 @@ package com.bplow.deep.stock.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +38,11 @@ public class JobController {
 	public String jobPage(HttpServletRequest httpRequest, Model view){
 	    HttpSession session = httpRequest.getSession();
         String wxl = (String)session.getAttribute("wxl");
-		logger.info("任务列表页面:sessionId:{}:{}",session.getId(),wxl);
+        
+        Subject subject =SecurityUtils.getSubject(); 
+        Session shiroSession = subject.getSession();
+        
+		logger.info("任务列表页面:sessionId:{}:{}:",session.getId(),shiroSession.getId(),wxl);
 		
 		return "job/joblist";
 	}
@@ -47,6 +54,10 @@ public class JobController {
         String wxl = (String)session.getAttribute("wxl");
         logger.info("查询任务列表:sessionId:{}:{}",session.getId(),wxl);
         
+        Subject subject =SecurityUtils.getSubject(); 
+        Session shiroSession = subject.getSession();
+        String userId = (String)shiroSession.getAttribute("userId");
+        task.setUserId(userId);
 		Page<SkScheduleTask>  page= jobService.queryScheduleTaskList(task);
 		
 		return page;

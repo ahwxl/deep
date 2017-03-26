@@ -33,7 +33,6 @@ public class UserServiceTest {
         user.setEmail("javawxl@126.com");
         user.setUserId("cxf");
         user.setMobile("13681858154");
-        user.setSalt("123456");
         user.setStatus("1");
         user.setPassword("123456");
         

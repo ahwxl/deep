@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
         //加密密码
         passwordHelper.encryptPassword(user);
-        user.setSalt("123456");
+        user.setStatus("1");
         sysUserMapper.insert((SysUser)user);
         return null;
     }

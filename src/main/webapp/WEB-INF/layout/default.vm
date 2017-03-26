@@ -12,7 +12,7 @@
 
 	<meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-	<title>Test</title>
+	<title>航道</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -619,6 +619,38 @@
 						</li>
 						<li class="">
 							<a href="$cxt">应用管理</a>
+						</li>
+					</ul>
+				</li>
+				<li class="active ">
+
+					<a href="javascript:;">
+
+					<i class="icon-th"></i>
+
+					<span class="title">系统管理</span>
+
+					<span class="selected"></span>
+
+					<span class="arrow open"></span>
+
+					</a>
+
+					<ul class="sub-menu">
+						<li class="">
+							<a href="$cxt/sysmng/organizationPage">部门</a>
+						</li>
+						<li >
+							<a href="$cxt/sysmng/usersPage">用户</a>
+						</li>
+						<li class="">
+							<a href="$cxt/sysmng/rolesPage">角色</a>
+						</li>
+						<li >
+							<a href="$cxt/sysmng/permissionPage">权限</a>
+						</li>
+						<li class="">
+							<a href="$cxt/sysmng/resourcePage">资源</a>
 						</li>
 					</ul>
 				</li>

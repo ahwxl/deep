@@ -120,6 +120,8 @@
 			    /static/** = anon
 				/index.jsp = anon
 				/checkLogin.do = anon
+				/register.do = anon
+				/resetpass.do = anon
 				/unauthorized.jsp = anon
 				/login.jsp = authc
 				/logout = logout

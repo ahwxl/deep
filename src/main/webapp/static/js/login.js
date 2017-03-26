@@ -134,7 +134,7 @@ var Login = function () {
 	            focusInvalid: false, // do not focus the last invalid input
 	            ignore: "",
 	            rules: {
-	                username: {
+	            	userName: {
 	                    required: true
 	                },
 	                password: {
@@ -181,7 +181,14 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                window.location.href = "index.html";
+	            	var param = $('#register-form').serialize();
+            		$.post("/deep/register.do",
+            				param,
+            			function(data){
+            			    window.location.href = "/deep/";
+            			    alert('注册成功！');
+            		    }
+            		);
 	            }
 	        });
 

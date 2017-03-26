@@ -94,6 +94,7 @@ CREATE TABLE `sk_schedule_task` (
 	`job_id` VARCHAR(32) NULL DEFAULT NULL,
 	`trigger_name` VARCHAR(32) NULL DEFAULT NULL,
 	`task_param` VARCHAR(200) NULL DEFAULT NULL,
+	`user_id` VARCHAR(32) NULL DEFAULT NULL,
 	`gmt_create` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`gmt_modify` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`status` VARCHAR(2) NULL DEFAULT NULL,
@@ -102,6 +103,7 @@ CREATE TABLE `sk_schedule_task` (
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
 
 create table sys_user
 (

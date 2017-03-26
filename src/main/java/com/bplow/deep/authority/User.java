@@ -10,6 +10,8 @@ public interface User {
     
     void setSalt(String salt);
     
+    void setStatus(String status);
+    
     boolean getLocked();
     
     String getUserId();

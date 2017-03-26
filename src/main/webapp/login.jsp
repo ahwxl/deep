@@ -106,7 +106,7 @@
 		</form>
 		<!-- END FORGOT PASSWORD FORM -->
 		<!-- BEGIN REGISTRATION FORM -->
-		<form class="form-vertical register-form" action="index.html">
+		<form class="form-vertical register-form" id="register-form" action="index.html">
 			<h3 class="">Sign Up</h3>
 			<p>Enter your account details below:</p>
 			<div class="control-group">
@@ -114,7 +114,7 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-user"></i>
-						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username"/>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="userName"/>
 					</div>
 				</div>
 			</div>
@@ -145,7 +145,7 @@
 						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" name="email"/>
 					</div>
 				</div>
-			</div>
+			</div>						<div class="control-group">				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->				<label class="control-label visible-ie8 visible-ie9">mobile</label>				<div class="controls">					<div class="input-icon left">						<i class="icon-envelope"></i>						<input class="m-wrap placeholder-no-fix" type="text" placeholder="mobile" name="mobile"/>					</div>				</div>			</div>
 			<div class="control-group">
 				<div class="controls">
 					<label class="checkbox">
@@ -192,7 +192,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="/deep/static/js/app.js" type="text/javascript"></script>
-	<script src="/deep/static/js/login.js?20170326" type="text/javascript"></script>
+	<script src="/deep/static/js/login.js?20170328" type="text/javascript"></script>
 	<!-- END PAGE LEVEL SCRIPTS --> 
 	<script>
 		jQuery(document).ready(function() {     

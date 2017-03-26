@@ -28,8 +28,8 @@
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
-          <if test="id != null">
-             ID = #{id} 
+          <if test="userId != null">
+             user_id = #{userId} 
           </if>
         </trim>
       </trim>

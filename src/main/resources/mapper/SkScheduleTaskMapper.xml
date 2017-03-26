@@ -8,13 +8,14 @@
     <result column="job_id" jdbcType="VARCHAR" property="jobId" />
     <result column="trigger_name" jdbcType="VARCHAR" property="triggerName" />
     <result column="task_param" jdbcType="VARCHAR" property="taskParam" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
     <result column="status" jdbcType="VARCHAR" property="status" />
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, group_id, job_id, trigger_name, task_param, gmt_create, gmt_modify, status
+    id, group_id, job_id, trigger_name, task_param, user_id, gmt_create, gmt_modify, status
   </sql>
   
   <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkScheduleTask" resultMap="BaseResultMap">
@@ -23,6 +24,11 @@
     from sk_schedule_task
     <where>
       <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="userId != null and userId != ''">
+             user_id = #{userId} 
+          </if>
+        </trim>
         <trim prefix="AND">
           <if test="id != null">
              ID = #{id} 
@@ -57,10 +63,10 @@
   
   <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkScheduleTask">
     insert into sk_schedule_task (id, group_id, job_id, 
-      trigger_name, task_param, gmt_create, 
+      trigger_name, task_param,user_id, gmt_create, 
       gmt_modify, status)
     values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{jobId,jdbcType=VARCHAR}, 
-      #{triggerName,jdbcType=VARCHAR}, #{taskParam,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{triggerName,jdbcType=VARCHAR}, #{taskParam,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtModify,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
   </insert>
   

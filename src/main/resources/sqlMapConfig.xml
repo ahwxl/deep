@@ -29,6 +29,15 @@
 		<mapper resource="mapper/SkWarnRuleMapper.xml" />
 		<mapper resource="mapper/SysUserMapper.xml" />
 		<mapper resource="mapper/SkDaySwrichMapper.xml" />
+		
+		<mapper resource="mapper/SysOrganizationMapper.xml" />
+		<mapper resource="mapper/SysOrganizationUserMapper.xml" />
+		<mapper resource="mapper/SysPermissionMapper.xml" />
+		<mapper resource="mapper/SysPermissionResourceMapper.xml" />
+		<mapper resource="mapper/SysRoleMapper.xml" />
+		<mapper resource="mapper/SysRolePermissionMapper.xml" />
+		<mapper resource="mapper/SysUserRoleMapper.xml" />
+		<mapper resource="mapper/SysResourceMapper.xml" />
 	</mappers>
 
 </configuration>
