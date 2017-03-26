@@ -34,7 +34,7 @@
 
 	<link href="$cxt/static/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 
-	<link href="$cxt/static/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="$cxt/static/css/default.css?20170326" rel="stylesheet" type="text/css" id="style_color"/>
 
 	<link href="$cxt/static/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 

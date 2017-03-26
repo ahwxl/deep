@@ -22,9 +22,9 @@ var mygridtab = $('#transactions').dataTable({
            		     		  ],
                 "aoColumns": [
                   { "sTitle": "名称","mData":"roleName","bSortable": false},
-                  { "sTitle": "状态","mData":"status","bSortable": false,"sWidth":200 },
+                  { "sTitle": "状态","mData":"status","bSortable": false,"sWidth":50 },
                   { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false,"sWidth":130 },
-                  { "sTitle": "修改日期","mData":"gmtModify","bSortable": false,"sWidth":50 },
+                  { "sTitle": "修改日期","mData":"gmtModify","bSortable": false,"sWidth":130 },
                   { "sTitle": "操作","mData":"roleId","bSortable": false }
                 ],
                 "aLengthMenu": [
