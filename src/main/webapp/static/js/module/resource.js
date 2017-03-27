@@ -21,6 +21,7 @@ var mygridtab = $('#transactions').dataTable({
            		     		           { "groupId": "^[0-9]", "bEscapeRegex": false }
            		     		  ],
                 "aoColumns": [
+                  { "bSortable": false,"sSortDataType": "dom-checkbox","sDefaultContent":"<input type=\"checkbox\" class=\"checkboxes\" value=\"1\" />" },
                   { "sTitle": "名称","mData":"resourceName","bSortable": false},
                   { "sTitle": "地址","mData":"url","bSortable": false,"sWidth":200 },
                   { "sTitle": "类型","mData":"resourceType","bSortable": false,"sWidth":50 },
@@ -43,8 +44,11 @@ var mygridtab = $('#transactions').dataTable({
                     }
                 },
                 "aoColumnDefs": [{
+                    'bSortable': false,"sSortDataType": "dom-checkbox",
+                    'aTargets': [0]
+                },{
                         'bSortable': false,
-                        'aTargets': [4],
+                        'aTargets': [5],
                         fnRender: function (setobj, data) {
                         	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {2}</a>".format(setobj.aData['resourceId'],"删除","修改");
                         	return delhtml;
@@ -85,4 +89,17 @@ var mygridtab = $('#transactions').dataTable({
             		);
             		
             	});
+            	
+            	jQuery('#sample_1 .group-checkable').change(function () {
+                    var set = jQuery(this).attr("data-set");
+                    var checked = jQuery(this).is(":checked");
+                    jQuery(set).each(function () {
+                        if (checked) {
+                            $(this).attr("checked", true);
+                        } else {
+                            $(this).attr("checked", false);
+                        }
+                    });
+                    jQuery.uniform.update(set);
+                }); 
             });
