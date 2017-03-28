@@ -3,11 +3,15 @@
  */
 package com.bplow.deep.sysmng.web;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.base.utils.DateUtils;
 import com.bplow.deep.sysmng.domain.SysOrganization;
 import com.bplow.deep.sysmng.domain.SysPermission;
 import com.bplow.deep.sysmng.domain.SysPermissionResource;
@@ -63,7 +68,13 @@ public class SysmngController {
 	@RequestMapping(value = "/resourcePage")
 	public String resourceListPage(HttpServletRequest httpRequest, Model view) {
 
-		logger.info("");
+		logger.info("查看资源");
+		Subject subject =SecurityUtils.getSubject();
+        Session shiroSession = subject.getSession(false);
+        
+        Date date = shiroSession.getStartTimestamp();
+        logger.info("sessionDate:>>>>>>>[{}][{}][{}]",shiroSession.getId(),DateUtils.formatDate(date),shiroSession.getTimeout());
+        
 
 		return "sys/resource";
 	}

@@ -44,8 +44,8 @@ public class LoginController {
 		Subject currentUser = SecurityUtils.getSubject();  
         try {  
             if (!currentUser.isAuthenticated()){//使用shiro来验证  
-                token.setRememberMe(true);  
-                currentUser.login(token);//验证角色和权限  
+                token.setRememberMe(false);
+                currentUser.login(token);//验证角色和权限
                 request.getSession().setAttribute("userId", username);
             }  
             result = "index";//验证成功  

@@ -159,4 +159,9 @@ public class DateUtils {
         sd.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         return sd.format(new Date(timestamp));
     }
+    
+    public static String formatDate(Date date){
+        SimpleDateFormat sd = new SimpleDateFormat(DATE_FULL_STR);
+        return sd.format(date);
+    }
 }

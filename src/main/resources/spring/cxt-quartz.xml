@@ -38,7 +38,7 @@
 		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
 		<property name="jobDetail" ref="timerJobDetail" />
 		<!-- 每次执行间隔5分钟 -->
-		<property name="repeatInterval" value="300000" />
+		<property name="repeatInterval" value="1800000" />
 	</bean>
 
 	<!-- JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群  -->
