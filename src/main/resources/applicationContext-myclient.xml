@@ -9,6 +9,7 @@
     <!-- <import resource="spring/cxt-session.xml" /> -->
 
     <!-- <import resource="spring/cxt-shiro.xml" /> -->
+    <import resource="spring/cxt-redis.xml" />
     
     <import resource="spring/cxt-shiro-web.xml" />
     

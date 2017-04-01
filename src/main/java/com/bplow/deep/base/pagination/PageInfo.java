@@ -1,9 +1,14 @@
 package com.bplow.deep.base.pagination;
 
+import java.io.Serializable;
+
 /**
  * Created by ajan on 2016/7/31.
  */
-public class PageInfo {
+public class PageInfo implements Serializable{
+    /**  */
+    private static final long serialVersionUID = 1238074254814244084L;
+    
     private int pageNo = 1;
     private int pageSize = 10;
     private int totalPage;

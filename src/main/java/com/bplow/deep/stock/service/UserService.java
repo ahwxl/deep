@@ -2,6 +2,9 @@ package com.bplow.deep.stock.service;
 
 import java.util.Set;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+
 import com.bplow.deep.authority.User;
 
 public interface UserService {
@@ -12,6 +15,7 @@ public interface UserService {
      */
     public User createUser(User user);
     
+    @CacheEvict(value = "manual", allEntries=true)
     public void deleteUser(User user);
 
     /**
@@ -41,6 +45,7 @@ public interface UserService {
      * @param username
      * @return
      */
+    @Cacheable(value="manual", key="#username")
     public User findByUsername(String username);
 
     /**

@@ -10,16 +10,19 @@ import org.springframework.beans.factory.InitializingBean;
 import redis.clients.jedis.JedisShardInfo;
 import redis.clients.jedis.ShardedJedisPool;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class RedisManagerFactoryBean implements FactoryBean<ShardedJedisPool>, InitializingBean, DisposableBean{
-    
+public class RedisManagerFactoryBean implements FactoryBean<ShardedJedisPool>, InitializingBean,
+                                    DisposableBean {
+
     private ShardedJedisPool shardedJedisPool;
-    
-    private String redisServers;
-    
+
+    private String           redisServers;
+
     public void setRedisServers(String redisServers) {
         this.redisServers = redisServers;
     }
@@ -31,36 +34,53 @@ public class RedisManagerFactoryBean implements FactoryBean<ShardedJedisPool>, I
 
     @Override
     public void afterPropertiesSet() throws Exception {
+
+        GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(Feature.ALLOW_SINGLE_QUOTES, true);
+        objectMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+
+        List<JedisShardInfo> shards = objectMapper.readValue(redisServers,
+            new JedisShardServerReference<List<JedisShardServer>>());
+
+        shardedJedisPool = new ShardedJedisPool(poolConfig, shards);
     }
 
     @Override
     public ShardedJedisPool getObject() throws Exception {
-        
-        GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
-        
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(Feature.ALLOW_SINGLE_QUOTES, true);
-        //objectMapper.setVisibility(FIELD, Visibility.ANY);
-        
-        List<JedisShardInfo> shards = objectMapper.readValue(redisServers, new JedisShardServerReference<JedisShardInfo>());
-        
-        shardedJedisPool = new ShardedJedisPool(poolConfig,shards);
-        
-        return shardedJedisPool;
+
+        return this.shardedJedisPool;
     }
 
     @Override
     public Class<?> getObjectType() {
-        return null;
+        return (this.shardedJedisPool != null ? this.shardedJedisPool.getClass()
+            : ShardedJedisPool.class);
     }
 
     @Override
     public boolean isSingleton() {
-        return false;
+        return true;
     }
-    
-    class JedisShardServerReference<T> extends TypeReference<JedisShardInfo>{
-        
+
+    class JedisShardServerReference<T> extends TypeReference<List<JedisShardServer>> {
+
+        public JedisShardServerReference() {
+            super();
+        }
+    }
+
+    static class  JedisShardServer extends JedisShardInfo {
+
+        public JedisShardServer() {
+            super("");
+        }
+
+        public JedisShardServer(String host) {
+            super(host);
+        }
+
     }
 
 }
