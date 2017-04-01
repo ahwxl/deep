@@ -36,6 +36,14 @@ public class RedisManagerFactoryBean implements FactoryBean<ShardedJedisPool>, I
     public void afterPropertiesSet() throws Exception {
 
         GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+        poolConfig.setMaxTotal(10);
+        poolConfig.setMaxIdle(10);
+        poolConfig.setMinIdle(5);
+        poolConfig.setMaxWaitMillis(10000);
+        poolConfig.setLifo(true);
+        poolConfig.setTestOnBorrow(true);
+        poolConfig.setTestOnReturn(true);
+        poolConfig.setTestWhileIdle(true);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(Feature.ALLOW_SINGLE_QUOTES, true);

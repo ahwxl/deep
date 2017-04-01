@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleValueWrapper;
 
@@ -14,11 +16,13 @@ import redis.clients.jedis.ShardedJedisPool;
 
 public class RedisCache implements Cache {
 
-    private RedisSerializer<Object>  redisSerializer;
+    private Logger                  logger = LoggerFactory.getLogger(getClass());
 
-    private ShardedJedisPool shardedJedisPool;
+    private RedisSerializer<Object> redisSerializer;
 
-    private String           name;
+    private ShardedJedisPool        shardedJedisPool;
+
+    private String                  name;
 
     public RedisCache(ShardedJedisPool shardedJedisPool, String name,
                       RedisSerializer<Object> redisSerializer) {
@@ -44,26 +48,45 @@ public class RedisCache implements Cache {
 
     @Override
     public ValueWrapper get(Object key) {
-        ShardedJedis jedis = this.shardedJedisPool.getResource();
-        byte[] value = jedis.get((this.name+key).getBytes());
+        long startTime = System.currentTimeMillis();
+        ShardedJedis shardedJedis = null;
+        Object element = null;
+        try {
+            shardedJedis = this.shardedJedisPool.getResource();
+            byte[] value = shardedJedis.get((this.name + key).getBytes());
 
-        if (null == value) {
-            return null;
+            if (null == value) {
+                return null;
+            }
+
+            element = redisSerializer.deserialize(value);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            shardedJedisPool.returnResource(shardedJedis);
         }
 
-        Object element = redisSerializer.deserialize(value);
-
-        shardedJedisPool.returnResource(jedis);
-        //jedis.close();
+        //shardedJedis.close();
+        logger.debug("获取缓存数据耗时:{}", System.currentTimeMillis() - startTime);
         return (element != null ? new SimpleValueWrapper(element) : null);
     }
 
     @Override
     public void put(Object key, Object value) {
-        ShardedJedis jedis = this.shardedJedisPool.getResource();
-        jedis.set((this.name + key).getBytes(), redisSerializer.serialize(value));
+        logger.info("开始获取缓存资源》》》");
+        ShardedJedis shardedJedis = null;
+        try {
+            shardedJedis = this.shardedJedisPool.getResource();
+            logger.info("<<<等到资源");
+            shardedJedis.set((this.name + key).getBytes(), redisSerializer.serialize(value));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            shardedJedis.close();
+        }
 
-        jedis.close();
+        //shardedJedis.close();
     }
 
     @Override
@@ -75,16 +98,26 @@ public class RedisCache implements Cache {
 
     @Override
     public void clear() {
-        String key = this.name +"*";
-        ShardedJedis shardedJedis = this.shardedJedisPool.getResource();
-        Jedis jedis;
-        String script = "table.foreach(redis.call('KEYS', KEYS[1]), function(index, value) redis.call('DEL',value); end);";
-        for(Iterator<Jedis> i$ = shardedJedis.getAllShards().iterator(); i$.hasNext(); jedis.eval(script, Arrays.asList(new String[] { key }),Collections.EMPTY_LIST)){
-                   jedis = i$.next();
+        String key = this.name + "*";
+        ShardedJedis shardedJedis = null;
+        try {
+            shardedJedis = this.shardedJedisPool.getResource();
+            Jedis jedis;
+            String script = "table.foreach(redis.call('KEYS', KEYS[1]), function(index, value) redis.call('DEL',value); end);";
+            for (Iterator<Jedis> i$ = shardedJedis.getAllShards().iterator(); i$.hasNext(); jedis.eval(
+                script, Arrays.asList(new String[] { key }), Collections.EMPTY_LIST)) {
+                jedis = i$.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if(null != shardedJedis){
+                shardedJedis.close();
+            }
         }
         
-        shardedJedis.close();
         
+
     }
 
 }

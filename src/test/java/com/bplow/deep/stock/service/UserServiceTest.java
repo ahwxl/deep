@@ -29,15 +29,20 @@ public class UserServiceTest {
     @Test
     public void testCreateUser() {
 
+        for(int i=1;i<10000;i++){
+            
+        
         SysUser user = new SysUser();
 
         user.setEmail("javawxl@126.com");
-        user.setUserId("cxf");
+        user.setUserId("gc"+i);
         user.setMobile("13681858154");
         user.setStatus("1");
         user.setPassword("123456");
 
         userService.createUser(user);
+        
+        }
 
     }
 

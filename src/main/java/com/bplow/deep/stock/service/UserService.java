@@ -13,6 +13,7 @@ public interface UserService {
      * 创建用户
      * @param user
      */
+    @Cacheable(value="manual", key="#user.userId")
     public User createUser(User user);
     
     @CacheEvict(value = "manual", allEntries=true)
