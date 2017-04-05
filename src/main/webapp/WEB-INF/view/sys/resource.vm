@@ -78,7 +78,7 @@
 									<thead>
 
 										<tr>
-										    <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
+										    <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#transactions .checkboxes" /></th>
 											<th></th>
 											<th></th>
 											<th></th>
@@ -278,7 +278,7 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/resource.js?20170320"></script>
+<script type="text/javascript" src="/deep/static/js/module/resource.js?20170321"></script>
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">

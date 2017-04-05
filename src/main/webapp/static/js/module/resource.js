@@ -90,7 +90,7 @@ var mygridtab = $('#transactions').dataTable({
             		
             	});
             	
-            	jQuery('#sample_1 .group-checkable').change(function () {
+            	jQuery('#transactions .group-checkable').change(function () {
                     var set = jQuery(this).attr("data-set");
                     var checked = jQuery(this).is(":checked");
                     jQuery(set).each(function () {

@@ -13,10 +13,10 @@ public interface UserService {
      * 创建用户
      * @param user
      */
-    @Cacheable(value="manual", key="#user.userId")
+    //@Cacheable(value="manual", key="#user.userId")
     public User createUser(User user);
     
-    @CacheEvict(value = "manual", allEntries=true)
+    //@CacheEvict(value = "manual", allEntries=true)
     public void deleteUser(User user);
 
     /**
@@ -46,7 +46,7 @@ public interface UserService {
      * @param username
      * @return
      */
-    @Cacheable(value="manual", key="#username")
+    //@Cacheable(value="manual", key="#username")
     public User findByUsername(String username);
 
     /**
