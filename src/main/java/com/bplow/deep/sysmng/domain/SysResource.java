@@ -4,12 +4,18 @@ import java.util.Date;
 
 import com.bplow.deep.base.jackson.CustomDateSerializer;
 import com.bplow.deep.base.pagination.PageInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SysResource extends PageInfo{
 	
+    /**  */
+    private static final long serialVersionUID = 5912346030584062800L;
+
+    @JsonProperty("id")
     private String resourceId;
 
+    @JsonProperty("name")
     private String resourceName;
 
     private String parentResourceId;
@@ -25,6 +31,11 @@ public class SysResource extends PageInfo{
     private Date gmtCreate;
 
     private Date gmtModify;
+    
+    private boolean open;
+    
+    @JsonProperty("isParent")
+    private boolean isParent = true;
 
     public String getResourceId() {
         return resourceId;
@@ -98,6 +109,22 @@ public class SysResource extends PageInfo{
 
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
+    }
+    
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
+
+    public boolean isParent() {
+        return isParent;
+    }
+
+    public void setParent(boolean isParent) {
+        this.isParent = isParent;
     }
 
     /**

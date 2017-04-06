@@ -129,6 +129,16 @@ public class SysmngController {
 
 		return res;
 	}
+	
+	@RequestMapping(value = "/queryResForTree")
+    @ResponseBody
+    public List<SysResource> queryResListForTree(HttpServletRequest httpRequest, Model view,
+            SysResource resource) {
+
+        List<SysResource> res = resourceService.queryResource(resource);
+
+        return res;
+    }
 
 	// 权限
 	@RequestMapping(value = "/permissionPage")
@@ -138,6 +148,14 @@ public class SysmngController {
 
 		return "sys/permission";
 	}
+	
+	@RequestMapping(value = "/permissionResPage")
+    public String permissionResListPage(HttpServletRequest httpRequest, Model view) {
+
+        logger.info("权限资源关系");
+
+        return "sys/permission-res";
+    }
 
 	@RequestMapping(value = "/permissionList")
 	@ResponseBody
@@ -149,7 +167,7 @@ public class SysmngController {
 
 		return page;
 	}
-
+	
 	@RequestMapping(value = "/addPerm")
 	@ResponseBody
 	public String addPerm(HttpServletRequest httpRequest, Model view,

@@ -3,7 +3,7 @@ var mygridtab = $('#transactions').dataTable({
                 "bServerSide": true,
                 "bFilter":true,
                 "bLengthChange":false,
-                "sAjaxSource": "/deep/sysmng/resourceList",
+                "sAjaxSource": "/deep/sysmng/permissionList",
            		"bStateSave": true,
            		"oFeatures":{'sDom':''},
        		    "fnStateLoadParams": function (oSettings, oData) {
@@ -21,12 +21,11 @@ var mygridtab = $('#transactions').dataTable({
            		     		           { "groupId": "^[0-9]", "bEscapeRegex": false }
            		     		  ],
                 "aoColumns": [
-                  { "bSortable": false,"sSortDataType": "dom-checkbox","sDefaultContent":"<input type=\"checkbox\" class=\"checkboxes\" value=\"1\" />" },
-                  { "sTitle": "名称","mData":"name","bSortable": false},
-                  { "sTitle": "地址","mData":"url","bSortable": false,"sWidth":200 },
-                  { "sTitle": "类型","mData":"resourceType","bSortable": false,"sWidth":50 },
+                  { "sTitle": "名称","mData":"permissionName","bSortable": false},
+                  { "sTitle": "描述","mData":"remark","bSortable": false,"sWidth":200 },
                   { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false,"sWidth":130 },
-                  { "sTitle": "操作","mData":"gmtModify","bSortable": false }
+                  { "sTitle": "修改日期","mData":"gmtModify","bSortable": false,"sWidth":130 },
+                  { "sTitle": "操作","mData":"permissionId","bSortable": false }
                 ],
                 "aLengthMenu": [
                     [5, 15, 20, -1],
@@ -44,13 +43,10 @@ var mygridtab = $('#transactions').dataTable({
                     }
                 },
                 "aoColumnDefs": [{
-                    'bSortable': false,"sSortDataType": "dom-checkbox",
-                    'aTargets': [0]
-                },{
                         'bSortable': false,
-                        'aTargets': [5],
+                        'aTargets': [4],
                         fnRender: function (setobj, data) {
-                        	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {2}</a>".format(setobj.aData['id'],"删除","修改");
+                        	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {2}</a>".format(setobj.aData['permissionId'],"删除","修改");
                         	return delhtml;
                         }
                     }
@@ -65,7 +61,7 @@ var mygridtab = $('#transactions').dataTable({
                     $('#stack1').modal({
                     	confirm:function(formvalue){
                     		var param = $('#myform').serialize();
-                    		$.post("/deep/sysmng/addRes",
+                    		$.post("/deep/sysmng/addPerm",
                     				param,
                     			function(data){
                     			   mygridtab.fnDraw();
@@ -80,8 +76,8 @@ var mygridtab = $('#transactions').dataTable({
             	$(document).off('click.modal2').on('click.modal2.data-api', '[data-toggle="delete"]', function ( e ) {
             		var id = $(this).attr('id');
             		
-            		$.post("/deep/sysmng/delRes",
-            				"resourceId="+id,
+            		$.post("/deep/sysmng/delPerm",
+            				"permissionId="+id,
             			function(data){
             			   mygridtab.fnDraw();
             			   alert(data);
@@ -90,16 +86,32 @@ var mygridtab = $('#transactions').dataTable({
             		
             	});
             	
-            	jQuery('#transactions .group-checkable').change(function () {
-                    var set = jQuery(this).attr("data-set");
-                    var checked = jQuery(this).is(":checked");
-                    jQuery(set).each(function () {
-                        if (checked) {
-                            $(this).attr("checked", true);
-                        } else {
-                            $(this).attr("checked", false);
-                        }
-                    });
-                    jQuery.uniform.update(set);
-                }); 
+            	var setting = {
+            			check: {
+            				enable: true
+            			},
+            			view: {
+            				dblClickExpand: false,
+            				showLine: true,
+            				selectedMulti: false
+            			},
+            			async: {
+            				enable: true,
+            				url:"/deep/sysmng/queryResForTree",
+            				autoParam:["id", "name=n", "level=lv"],
+            				otherParam:{"otherParam":"zTreeAsyncTest"},
+            				dataFilter: filter
+            			}
+            		};
+
+            		function filter(treeId, parentNode, childNodes) {
+            			if (!childNodes) return null;
+            			for (var i=0, l=childNodes.length; i<l; i++) {
+            				childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+            			}
+            			return childNodes;
+            		}
+
+            		$.fn.zTree.init($("#resourceTree"), setting);
+            	
             });

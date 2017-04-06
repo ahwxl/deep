@@ -3,6 +3,8 @@
  */
 package com.bplow.deep.sysmng.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +62,13 @@ public class ResourceServiceImpl implements ResourceService{
 	public void updateResource(SysResource resource) {
 		sysResourceMapper.update(resource);
 	}
+
+    @Override
+    public List<SysResource> queryResource(SysResource resource) {
+        
+       List<SysResource> res = sysResourceMapper.queryResource(resource);
+        
+        return res;
+    }
 
 }

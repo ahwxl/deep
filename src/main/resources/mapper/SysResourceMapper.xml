@@ -35,6 +35,22 @@
      ORDER BY GMT_MODIFY DESC 
   </select>
   
+  <select id="queryResource" parameterType="com.bplow.deep.sysmng.domain.SysResource" resultMap="BaseResultMap">
+  select
+    <include refid="Base_Column_List" />
+    from sys_resource
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="resourceId != null">
+             resource_id = #{resourceId} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SysPermission extends PageInfo{
 	
+    /**  */
+    private static final long serialVersionUID = 3324078993898961750L;
+
     private String permissionId;
 
     private String permissionName;
