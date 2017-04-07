@@ -8,6 +8,7 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+    <result column="checked" jdbcType="INTEGER" property="checked" />
   </resultMap>
   
   <sql id="Base_Column_List">
@@ -15,19 +16,23 @@
   </sql>
   
   <select id="queryForPage" parameterType="com.bplow.deep.sysmng.domain.SysPermission" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from sys_permission
+    select a.*,
+    (select count(1) from sys_permission_resource b where b.permission_id = a.permission_id 
+    <if test="resourceId != null and resourceId != ''">
+            and b.resource_id = #{resourceId}
+    </if>
+    ) checked
+    from sys_permission a
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
           <if test="permissionId != null">
-             permission_id = #{permissionId} 
+             a.permission_id = #{permissionId} 
           </if>
         </trim>
       </trim>
     </where>
-     ORDER BY GMT_MODIFY DESC 
+     ORDER BY a.GMT_MODIFY DESC 
   </select>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">

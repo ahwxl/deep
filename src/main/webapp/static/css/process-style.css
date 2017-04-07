@@ -87,3 +87,8 @@
     float: right;
     height: 40px;
 }
+
+#transactions_wrapper .row-fluid{
+	height: 0;
+    display: none;
+}

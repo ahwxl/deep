@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bplow.deep.base.pagination.Page;
@@ -135,6 +137,9 @@ public class SysmngController {
     public List<SysResource> queryResListForTree(HttpServletRequest httpRequest, Model view,
             SysResource resource) {
 
+	    if(StringUtils.isBlank(resource.getParentResourceId())){
+	        resource.setParentResourceId("0");
+	    }
         List<SysResource> res = resourceService.queryResource(resource);
 
         return res;
@@ -212,7 +217,7 @@ public class SysmngController {
 	@RequestMapping(value = "/addPermRes")
 	@ResponseBody
 	public String addPermRes(HttpServletRequest httpRequest, Model view,
-			SysPermission permission, String resourceIds) {
+			SysPermission permission,@RequestParam("resourceIds")String resourceIds) {
 
 		permissionService.addPermRes(permission.getPermissionId(), resourceIds);
 

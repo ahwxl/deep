@@ -21,11 +21,11 @@ var mygridtab = $('#transactions').dataTable({
            		     		           { "groupId": "^[0-9]", "bEscapeRegex": false }
            		     		  ],
                 "aoColumns": [
-                  { "sTitle": "名称","mData":"permissionName","bSortable": false},
-                  { "sTitle": "描述","mData":"remark","bSortable": false,"sWidth":200 },
+                  { "sTitle": "编码","mData":"permissionId","bSortable": false},
+                  { "sTitle": "名称","mData":"permissionName","bSortable": false,"sWidth":200 },
                   { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false,"sWidth":130 },
                   { "sTitle": "修改日期","mData":"gmtModify","bSortable": false,"sWidth":130 },
-                  { "sTitle": "操作","mData":"permissionId","bSortable": false }
+                  { "sTitle": "操作","mData":"remark","bSortable": false }
                 ],
                 "aLengthMenu": [
                     [5, 15, 20, -1],
@@ -75,7 +75,6 @@ var mygridtab = $('#transactions').dataTable({
             	
             	$(document).off('click.modal2').on('click.modal2.data-api', '[data-toggle="delete"]', function ( e ) {
             		var id = $(this).attr('id');
-            		
             		$.post("/deep/sysmng/delPerm",
             				"permissionId="+id,
             			function(data){

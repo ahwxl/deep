@@ -35,7 +35,7 @@ public class SysResource extends PageInfo{
     private boolean open;
     
     @JsonProperty("isParent")
-    private boolean isParent = true;
+    private boolean isParent;
 
     public String getResourceId() {
         return resourceId;

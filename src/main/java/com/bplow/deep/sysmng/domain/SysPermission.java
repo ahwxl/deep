@@ -20,6 +20,10 @@ public class SysPermission extends PageInfo{
     private Date gmtCreate;
 
     private Date gmtModify;
+    
+    private boolean checked;
+    
+    private String resourceId;
 
     public String getPermissionId() {
         return permissionId;
@@ -61,6 +65,22 @@ public class SysPermission extends PageInfo{
 
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
+    }
+    
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public String getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(String resourceId) {
+        this.resourceId = resourceId;
     }
 
     /**

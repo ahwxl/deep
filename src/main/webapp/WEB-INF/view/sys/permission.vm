@@ -37,7 +37,7 @@
 							                   <div class="row-fluid">
 													<div class="span6 ">
 														<div class="control-group">
-															<label class="control-label" for="firstName">股票编号</label>
+															<label class="control-label" for="firstName">编号</label>
 
 															<div class="controls">
 
@@ -55,7 +55,7 @@
 
 														<div class="control-group">
 
-															<label class="control-label" for="lastName">规则编号</label>
+															<label class="control-label" for="lastName">权限名称</label>
 
 															<div class="controls">
 
@@ -126,7 +126,8 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/permission.js?20170312"></script>
+<script type="text/javascript" src="/deep/static/js/module/permission.js?20170314"></script>
+
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">

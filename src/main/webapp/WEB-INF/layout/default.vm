@@ -34,7 +34,7 @@
 
 	<link href="$cxt/static/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 
-	<link href="$cxt/static/css/default.css?20170326" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="$cxt/static/css/default.css?20170327" rel="stylesheet" type="text/css" id="style_color"/>
 
 	<link href="$cxt/static/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
@@ -45,7 +45,7 @@
 	<link rel="stylesheet" type="text/css" href="$cxt/static/css/select2_metro.css" />
 
 	<link rel="stylesheet" href="$cxt/static/css/DT_bootstrap.css" />
-	<link rel="stylesheet" href="$cxt/static/css/process-style.css" />
+	<link rel="stylesheet" href="$cxt/static/css/process-style.css?20170407" />
 
 	<!-- END PAGE LEVEL STYLES -->
 
