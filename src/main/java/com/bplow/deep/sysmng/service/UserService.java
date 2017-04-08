@@ -1,4 +1,4 @@
-package com.bplow.deep.stock.service;
+package com.bplow.deep.sysmng.service;
 
 import java.util.Set;
 
@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.bplow.deep.authority.User;
+import com.bplow.deep.base.pagination.Page;
 
 public interface UserService {
 
@@ -18,6 +19,10 @@ public interface UserService {
     
     //@CacheEvict(value = "manual", allEntries=true)
     public void deleteUser(User user);
+    
+    public void updateUser(User user);
+    
+    public Page<User> queryUserForPage(User user);
 
     /**
      * 修改密码

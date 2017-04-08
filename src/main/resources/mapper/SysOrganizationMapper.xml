@@ -6,6 +6,7 @@
     <id column="organization_id" jdbcType="VARCHAR" property="organizationId" />
     <result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="parent_org_id" jdbcType="VARCHAR" property="parentOrgId" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
@@ -22,8 +23,13 @@
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
-          <if test="organizationId != null">
+          <if test="organizationId != null and organizationId != ''">
              organization_id = #{organizationId} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="organizationName != null and organizationName != ''">
+             organization_name like CONCAT(CONCAT('%', #{organizationName}), '%') 
           </if>
         </trim>
       </trim>
@@ -55,9 +61,6 @@
   <update id="update" parameterType="com.bplow.deep.sysmng.domain.SysOrganization">
     update sys_organization
     <set>
-      <if test="organizationId != null">
-        organization_id = #{organizationId,jdbcType=VARCHAR},
-      </if>
       <if test="organizationName != null">
         organization_name = #{organizationName,jdbcType=VARCHAR},
       </if>
@@ -67,13 +70,8 @@
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
+        gmt_modify = now()
     </set>
-     WHERE ID = #{id} 
+     WHERE organization_id = #{organizationId} 
   </update>
 </mapper>

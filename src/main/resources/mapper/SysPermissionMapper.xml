@@ -26,8 +26,18 @@
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
-          <if test="permissionId != null">
+          <if test="permissionId != null and permissionId != ''">
              a.permission_id = #{permissionId} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="permissionName != null and permissionName !=''">
+             a.permission_name like CONCAT(CONCAT('%', #{permissionName}), '%') 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="remark != null and remark !=''">
+             a.remark like CONCAT(CONCAT('%', #{remark}), '%') 
           </if>
         </trim>
       </trim>
@@ -57,22 +67,14 @@
   <update id="update" parameterType="com.bplow.deep.sysmng.domain.SysPermission">
     update sys_permission
     <set>
-      <if test="permissionId != null">
-        permission_id = #{permissionId,jdbcType=VARCHAR},
-      </if>
       <if test="permissionName != null">
         permission_name = #{permissionName,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
+        gmt_modify = now()
     </set>
-     WHERE ID = #{id} 
+     WHERE permission_id = #{permissionId} 
   </update>
 </mapper>

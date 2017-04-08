@@ -3,6 +3,7 @@
  */
 package com.bplow.deep.sysmng.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bplow.deep.base.dto.SelectNode;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.sysmng.domain.SysResource;
 import com.bplow.deep.sysmng.mapper.SysResourceMapper;
@@ -70,5 +72,22 @@ public class ResourceServiceImpl implements ResourceService{
         
         return res;
     }
+
+	@Override
+	public List<SelectNode> queryResourceToSelect(SysResource resource) {
+		
+		List<SysResource> res = sysResourceMapper.queryResource(resource);
+		List<SelectNode> nodes = new ArrayList<SelectNode>();
+		
+		for(SysResource sysresource : res){
+			SelectNode node = new SelectNode();
+			node.setId(sysresource.getResourceId());
+			node.setText(sysresource.getResourceName());
+			
+			nodes.add(node);
+		}
+		
+		return nodes;
+	}
 
 }

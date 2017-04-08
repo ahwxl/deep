@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bplow.deep.authority.User;
+import com.bplow.deep.base.dto.SelectNode;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.base.utils.DateUtils;
+import com.bplow.deep.stock.domain.SysUser;
 import com.bplow.deep.sysmng.domain.SysOrganization;
 import com.bplow.deep.sysmng.domain.SysPermission;
 import com.bplow.deep.sysmng.domain.SysPermissionResource;
@@ -34,6 +37,7 @@ import com.bplow.deep.sysmng.service.OrganizationService;
 import com.bplow.deep.sysmng.service.PermissionService;
 import com.bplow.deep.sysmng.service.ResourceService;
 import com.bplow.deep.sysmng.service.RoleService;
+import com.bplow.deep.sysmng.service.UserService;
 
 /**
  * @desc 系统管理
@@ -58,12 +62,71 @@ public class SysmngController {
 	@Autowired
 	OrganizationService organizationService;
 	
+	@Autowired
+	UserService userService;
+	
+	//用户
 	@RequestMapping(value = "/usersPage")
-	public String userListPage(HttpServletRequest httpRequest, Model view){
+	public String userListPage(HttpServletRequest httpRequest, Model view,SysUser user){
 		
 		logger.info("");
 		
 		return "sys/user";
+	}
+	
+	@RequestMapping(value = "/userList")
+	@ResponseBody
+	public Page<User> userList(HttpServletRequest httpRequest, Model view,SysUser user){
+		
+		logger.info("");
+		
+		Page<User> users = userService.queryUserForPage(user);
+		
+		return users;
+	}
+	
+	@RequestMapping(value = "/delUser")
+	@ResponseBody
+	public String delUser(HttpServletRequest httpRequest, Model view,SysUser user){
+		
+		logger.info("");
+		
+		userService.deleteUser(user);
+		
+		return "success";
+	}
+	
+	@RequestMapping(value = "/addUser")
+	@ResponseBody
+	public String addUser(HttpServletRequest httpRequest, Model view,SysUser user){
+		
+		logger.info("");
+		
+		userService.createUser(user);
+		
+		return "success";
+	}
+	
+	@RequestMapping(value = "/queryUser")
+	@ResponseBody
+	public User queryUser(HttpServletRequest httpRequest, Model view,SysUser sysuser){
+		
+		logger.info("");
+		
+		User user = userService.findByUsername(sysuser.getUserId());
+		
+		return user;
+	}
+	
+	@RequestMapping(value = "/updateUser")
+	@ResponseBody
+	public String updateUser(HttpServletRequest httpRequest, Model view,SysUser sysuser){
+		
+		logger.info("");
+		
+		userService.updateUser(sysuser);
+		
+		return "success";
 	}
 
 	// 资源
@@ -141,6 +204,16 @@ public class SysmngController {
 	        resource.setParentResourceId("0");
 	    }
         List<SysResource> res = resourceService.queryResource(resource);
+
+        return res;
+    }
+	
+	@RequestMapping(value = "/queryResForSelect")
+    @ResponseBody
+    public List<SelectNode> queryResListForSelect(HttpServletRequest httpRequest, Model view,
+            SysResource resource) {
+
+        List<SelectNode> res = resourceService.queryResourceToSelect(resource);
 
         return res;
     }
@@ -366,6 +439,7 @@ public class SysmngController {
 	public String addOrg(HttpServletRequest httpRequest, Model view,
 			SysOrganization organization) {
 
+		organization.setOrganizationId(UUID.randomUUID().toString().replace("-", ""));
 		organizationService.addOrganization(organization);
 
 		return "ok";

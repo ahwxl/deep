@@ -41,7 +41,7 @@
 
 															<div class="controls">
 
-																<input type="text" name="stockId" id="stockId" value="" class="m-wrap" placeholder="">
+																<input type="text" name="resourceName" id="resourceName" value="" class="m-wrap" placeholder="">
 
 															</div>
 
@@ -59,7 +59,7 @@
 
 															<div class="controls">
 
-																<input type="text" name="ruleId" id="ruleId" value="" class="m-wrap" placeholder="">
+																<input type="text" name="remark" id="remark" value="" class="m-wrap" placeholder="">
 
 															</div>
 
@@ -120,7 +120,7 @@
 				
 				<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
+	<script type="text/javascript" src="/deep/static/js/select2-403.min.js"></script>
 
 	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170218"></script>
 
@@ -128,7 +128,8 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/resource.js?20170322"></script>
+<script type="text/javascript" src="/deep/static/js/module/resource.js?20170325"></script>
+
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
@@ -145,7 +146,7 @@
 											<!-- BEGIN FORM-->
 
 											<form action="#" name="myform" id="myform" class="form-horizontal">
-
+                                            <input type="hidden" class="" name="resourceId" value=""/>
 												<div class="control-group">
 
 													<label class="control-label">资源名称</label>
@@ -177,7 +178,9 @@
 
 													<div class="controls">
 
-														<input type="text" class="" name="parentResourceId"  value=""/>
+														<select class="select2_parent_resource" name="parentResourceId">
+														    <option value="0">顶级</option>
+														</select>
 
 													</div>
 
@@ -186,7 +189,10 @@
 												<div class="control-group">
 													<label class="control-label" >类型</label>
 													<div class="controls">
-														<input type="text" class="" name="resourceType" value=""> 
+														<select class="select2_resourceType" name="resourceType">
+														<option value="1">菜单</option>
+														<option value="2">操作</option>
+														</select>
 													</div>
 												</div>
 

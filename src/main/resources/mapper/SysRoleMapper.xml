@@ -52,22 +52,14 @@
   <update id="update" parameterType="com.bplow.deep.sysmng.domain.SysRole">
     update sys_role
     <set>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=VARCHAR},
-      </if>
       <if test="roleName != null">
         role_name = #{roleName,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
+        gmt_modify = now()
     </set>
-     WHERE ID = #{id} 
+     WHERE role_id = #{roleId} 
   </update>
 </mapper>

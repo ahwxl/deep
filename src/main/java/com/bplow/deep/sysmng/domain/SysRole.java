@@ -8,7 +8,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SysRole extends PageInfo{
 	
-    private String roleId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3837174655690720861L;
+
+	private String roleId;
 
     private String roleName;
 

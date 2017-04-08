@@ -1,4 +1,4 @@
-package com.bplow.deep.stock.service.Impl;
+package com.bplow.deep.sysmng.service.impl;
 
 import java.util.Set;
 
@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.bplow.deep.authority.PasswordHelper;
 import com.bplow.deep.authority.User;
+import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.stock.domain.SysUser;
 import com.bplow.deep.stock.mapper.SysUserMapper;
-import com.bplow.deep.stock.service.UserService;
+import com.bplow.deep.sysmng.service.UserService;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -98,5 +99,18 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(User user) {
         sysUserMapper.delete(user.getUserId());
     }
+
+	@Override
+	public Page<User> queryUserForPage(User user) {
+		
+		Page<User> users = this.sysUserMapper.queryForPage((SysUser)user);
+		
+		return users;
+	}
+
+	@Override
+	public void updateUser(User user) {
+	   this.sysUserMapper.update((SysUser)user);
+	}
 
 }

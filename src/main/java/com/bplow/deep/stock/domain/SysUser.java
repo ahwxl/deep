@@ -3,11 +3,18 @@ package com.bplow.deep.stock.domain;
 import java.util.Date;
 
 import com.bplow.deep.authority.User;
+import com.bplow.deep.base.jackson.CustomDateSerializer;
 import com.bplow.deep.base.pagination.PageInfo;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SysUser extends PageInfo implements User{
 
-    private String userId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String userId;
 
     private String userName;
 
@@ -101,6 +108,7 @@ public class SysUser extends PageInfo implements User{
         this.salt = salt == null ? null : salt.trim();
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getGmtCreate() {
         return gmtCreate;
     }
@@ -109,6 +117,7 @@ public class SysUser extends PageInfo implements User{
         this.gmtCreate = gmtCreate;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getGmtModify() {
         return gmtModify;
     }

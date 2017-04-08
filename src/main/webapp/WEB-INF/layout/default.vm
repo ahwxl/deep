@@ -34,7 +34,7 @@
 
 	<link href="$cxt/static/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 
-	<link href="$cxt/static/css/default.css?20170327" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="$cxt/static/css/default.css?20170328" rel="stylesheet" type="text/css" id="style_color"/>
 
 	<link href="$cxt/static/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
@@ -45,7 +45,7 @@
 	<link rel="stylesheet" type="text/css" href="$cxt/static/css/select2_metro.css" />
 
 	<link rel="stylesheet" href="$cxt/static/css/DT_bootstrap.css" />
-	<link rel="stylesheet" href="$cxt/static/css/process-style.css?20170407" />
+	<link rel="stylesheet" href="$cxt/static/css/process-style.css?20170408" />
 
 	<!-- END PAGE LEVEL STYLES -->
 
@@ -626,13 +626,13 @@
 						</li>
 					</ul>
 				</li>
-				<li class="active ">
+				<li class="" name="系统管理">
 
 					<a href="javascript:;">
 
-					<i class="icon-th"></i>
+					<i class="icon-link"></i>
 
-					<span class="title">系统管理</span>
+					<span class="title" >系统管理</span>
 
 					<span class="selected"></span>
 
@@ -641,31 +641,31 @@
 					</a>
 
 					<ul class="sub-menu">
-						<li class="">
+						<li class="" name="部门">
 							<a href="$cxt/sysmng/organizationPage">部门</a>
 						</li>
-						<li >
+						<li name="用户">
 							<a href="$cxt/sysmng/usersPage">用户</a>
 						</li>
-						<li class="">
+						<li class="" name="角色">
 							<a href="$cxt/sysmng/rolesPage">角色</a>
 						</li>
-						<li >
+						<li name="权限">
 							<a href="$cxt/sysmng/permissionPage">权限</a>
 						</li>
-						<li >
+						<li class="" name="权限资源">
 							<a href="$cxt/sysmng/permissionResPage">权限资源</a>
 						</li>
-						<li class="">
+						<li class="" name="资源">
 							<a href="$cxt/sysmng/resourcePage">资源</a>
 						</li>
 					</ul>
 				</li>
-				<li class=" active">
+				<li class="">
 
 					<a href="javascript:;">
 
-					<i class="icon-th"></i>
+					<i class="icon-usd"></i>
 
 					<span class="title">调度管理</span>
 

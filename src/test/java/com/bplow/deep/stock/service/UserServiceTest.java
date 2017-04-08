@@ -13,6 +13,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.bplow.deep.authority.User;
 import com.bplow.deep.stock.domain.SysUser;
+import com.bplow.deep.sysmng.service.UserService;
 
 @ContextConfiguration(locations = { "/applicationContext.xml", "/spring/cxt-dao.xml",
                                    "/spring/cxt-redis.xml" })

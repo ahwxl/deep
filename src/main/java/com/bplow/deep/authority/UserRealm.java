@@ -7,7 +7,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
-import com.bplow.deep.stock.service.UserService;
+import com.bplow.deep.sysmng.service.UserService;
 
 public class UserRealm extends AuthorizingRealm {
 

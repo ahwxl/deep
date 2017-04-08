@@ -28,8 +28,13 @@
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
-          <if test="userId != null">
+          <if test="userId != null and userId != ''">
              user_id = #{userId} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="userName != null and userName != ''">
+             user_name like CONCAT(CONCAT('%', #{userName}), '%') 
           </if>
         </trim>
       </trim>
@@ -63,9 +68,6 @@
   <update id="update" parameterType="com.bplow.deep.stock.domain.SysUser">
     update sys_user
     <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
@@ -90,13 +92,8 @@
       <if test="salt != null">
         salt = #{salt,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
+        gmt_modify = now()
     </set>
-     WHERE ID = #{id} 
+     WHERE user_id = #{userId} 
   </update>
 </mapper>

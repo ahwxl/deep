@@ -5,6 +5,7 @@ package com.bplow.deep.sysmng.service;
 
 import java.util.List;
 
+import com.bplow.deep.base.dto.SelectNode;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.sysmng.domain.SysResource;
 
@@ -22,6 +23,8 @@ public interface ResourceService {
 	public SysResource addResoucre(SysResource resource);
 	
 	public List<SysResource> queryResource(SysResource resource);
+	
+	public List<SelectNode> queryResourceToSelect(SysResource resource);
 	
 	public void deleteResource(SysResource resource);
 	

@@ -33,6 +33,16 @@
 						resource_id = #{resourceId}
 					</if>
 				</trim>
+				<trim prefix="AND">
+					<if test="resourceName != null and resourceName !=''">
+						resource_name like CONCAT(CONCAT('%', #{resourceName}), '%') 
+					</if>
+				</trim>
+				<trim prefix="AND">
+					<if test="remark != null and remark !=''">
+						remark like CONCAT(CONCAT('%', #{remark}), '%') 
+					</if>
+				</trim>
 			</trim>
 		</where>
 		ORDER BY GMT_MODIFY DESC
@@ -40,16 +50,16 @@
 
 	<select id="queryResource" parameterType="com.bplow.deep.sysmng.domain.SysResource"
 		resultMap="BaseResultMap">
-		select a.resource_id,a.resource_name,(
-		select count(1) from sys_resource b where b.parent_resource_id =
-		a.resource_id
+		select a.resource_id,a.resource_name,
+		(
+		select count(1) from sys_resource b where b.parent_resource_id = a.resource_id
 		) parent
 
 		from sys_resource a
 		<where>
 			<trim prefixOverrides="AND">
 				<trim prefix="AND">
-					<if test="resourceId != null">
+					<if test="resourceId != null and resourceId !=''">
 						a.resource_id = #{resourceId}
 					</if>
 				</trim>
@@ -92,9 +102,6 @@
 	<update id="update" parameterType="com.bplow.deep.sysmng.domain.SysResource">
 		update sys_resource
 		<set>
-			<if test="resourceId != null">
-				resource_id = #{resourceId,jdbcType=VARCHAR},
-			</if>
 			<if test="resourceName != null">
 				resource_name = #{resourceName,jdbcType=VARCHAR},
 			</if>
@@ -113,13 +120,8 @@
 			<if test="sortby != null">
 				sortby = #{sortby,jdbcType=INTEGER},
 			</if>
-			<if test="gmtCreate != null">
-				gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="gmtModify != null">
-				gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-			</if>
+				gmt_modify = now()
 		</set>
-		WHERE ID = #{id}
+		WHERE resource_id = #{resourceId}
 	</update>
 </mapper>
