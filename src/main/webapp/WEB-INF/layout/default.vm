@@ -653,11 +653,20 @@
 						<li name="权限">
 							<a href="$cxt/sysmng/permissionPage">权限</a>
 						</li>
-						<li class="" name="权限资源">
-							<a href="$cxt/sysmng/permissionResPage">权限资源</a>
-						</li>
 						<li class="" name="资源">
 							<a href="$cxt/sysmng/resourcePage">资源</a>
+						</li>
+						<li class="" name="机构-用户">
+							<a href="$cxt/sysmng/permissionResPage">机构-用户</a>
+						</li>
+						<li class="" name="用户-角色">
+							<a href="$cxt/sysmng/permissionResPage">用户-角色</a>
+						</li>
+						<li class="" name="角色-权限">
+							<a href="$cxt/sysmng/permissionResPage">角色-权限</a>
+						</li>
+						<li class="" name="权限-资源">
+							<a href="$cxt/sysmng/permissionResPage">权限-资源</a>
 						</li>
 					</ul>
 				</li>
