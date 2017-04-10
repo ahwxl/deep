@@ -15,5 +15,5 @@ public interface SysPermissionResourceMapper {
 
     int insert(SysPermissionResource record);
     
-    int delete(String permissionId, String resourceId);
+    int delete(SysPermissionResource record);
 }

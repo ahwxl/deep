@@ -1,6 +1,7 @@
 package com.bplow.deep.sysmng.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysPermissionResource {
     private String permissionId;
@@ -10,6 +11,8 @@ public class SysPermissionResource {
     private Date gmtCreate;
 
     private Date gmtModify;
+    
+    private List<String> delIds;
 
     public String getPermissionId() {
         return permissionId;
@@ -41,6 +44,14 @@ public class SysPermissionResource {
 
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
+    }
+    
+    public List<String> getDelIds() {
+        return delIds;
+    }
+
+    public void setDelIds(List<String> delIds) {
+        this.delIds = delIds;
     }
 
     /**

@@ -23,8 +23,6 @@
 								
 								<div class="actions">
 
-									<a href="#" id="mySubmit" class="btn green"><i class="icon-search"></i> 查询</a>
-
 									<a href="#" 1data-toggle='modal' class="btn yellow"><i class="icon-plus"></i> 添加</a>
 									
 									<a href="#" id="save" class="btn red"><i class="icon-save"></i> 保存</a>
@@ -76,10 +74,42 @@
                                         <div class="caption">
                                             <i class="fa fa-picture"></i>权限 </div>
                                         <div class="tools">
-                                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                                            <a href="#" id="mySubmit" class="btn green"><i class="icon-search"></i> 查询</a>
                                         </div>
                                     </div>
-                                    <div class="portlet-body">
+                                    <div class="portlet-body form">
+                                        <form action="#" name="searchform" id="searchform" class="form-horizontal ">
+                                        <input type="text" name="resourceId" value="" />
+                                        <input type="text" name="permissionName2" id="permissionName2" value="" >
+                                        <div class="row-fluid">
+													<div class="span5 ">
+														<div class="control-group">
+															<label class="control-label" for="firstName">编码</label>
+
+															<div class="controls">
+
+																<input type="text" name="permissionId" id="permissionId" value="" placeholder="">
+
+															</div>
+
+														</div>
+
+													</div>
+													<div class="span5 ">
+														<div class="control-group">
+															<label class="control-label" for="firstName">名称</label>
+
+															<div class="controls">
+
+																<input type="text" name="permissionName" id="permissionName" value="" placeholder="">
+
+															</div>
+
+														</div>
+
+													</div>
+										</div>
+										</form>
                                         <div class="table-scrollable">
                                             <table id="permissionTable" class="table table-condensed table-hover">
                                                 <thead>
@@ -114,7 +144,7 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/permission-res.js?20170321"></script>
+<script type="text/javascript" src="/deep/static/js/module/permission-res.js?20170323"></script>
 
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 

@@ -45,9 +45,13 @@
      ORDER BY GMT_MODIFY DESC 
   </select>
   
-  <delete id="delete" parameterType="java.lang.String">
+  <delete id="delete" parameterType="com.bplow.deep.sysmng.domain.SysPermissionResource">
    delete from sys_permission_resource
-    where permission_id = #{permissionId,jdbcType=VARCHAR}
+    where resource_id = #{resourceId} and  permission_id in 
+    <foreach item="id" index="index" collection="delIds"
+      open="(" separator="," close=")">
+        #{id}
+  </foreach>
   </delete>
   
   <insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysPermissionResource">

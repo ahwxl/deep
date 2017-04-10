@@ -3,6 +3,7 @@
  */
 package com.bplow.deep.sysmng.service.impl;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -77,9 +78,17 @@ public class PermissionServiceImpl implements PermissionService{
 	}
 
 	@Override
-	public void addPermRes(String permissionId, String resourceIds) {
+	public void addPermRes(String permissionId, String resourceIds,String delPermIds) {
 
 		String[] resArray = resourceIds.split(",");
+		String[] permIds  = delPermIds.split(",");
+		
+		List<String> permIdsList = Arrays.asList(permIds);
+		
+		SysPermissionResource delPermRes = new SysPermissionResource();
+		delPermRes.setDelIds(permIdsList);
+		
+		sysPermissionResourceMapper.delete(delPermRes);
 		
 		for(String resId : resArray){
 			SysPermissionResource permRes = new SysPermissionResource();
@@ -90,13 +99,16 @@ public class PermissionServiceImpl implements PermissionService{
 			sysPermissionResourceMapper.insert(permRes);
 		}
 		
+		
+		
 	}
 
 	@Override
 	public void delPermRes(String permissionId, String resourceId) {
 
-		
-		sysPermissionResourceMapper.delete(permissionId,resourceId);
+	    SysPermissionResource delPermRes = new SysPermissionResource();
+	    
+		sysPermissionResourceMapper.delete(delPermRes);
 	}
 
 }

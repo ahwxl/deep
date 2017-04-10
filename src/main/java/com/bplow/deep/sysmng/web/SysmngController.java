@@ -290,9 +290,9 @@ public class SysmngController {
 	@RequestMapping(value = "/addPermRes")
 	@ResponseBody
 	public String addPermRes(HttpServletRequest httpRequest, Model view,
-			SysPermission permission,@RequestParam("resourceIds")String resourceIds) {
+			SysPermission permission,@RequestParam("resourceIds")String resourceIds,@RequestParam("delIds")String delIds) {
 
-		permissionService.addPermRes(permission.getPermissionId(), resourceIds);
+		permissionService.addPermRes(permission.getPermissionId(), resourceIds,delIds);
 
 		return "success";
 	}
