@@ -79,10 +79,10 @@
                                     </div>
                                     <div class="portlet-body form">
                                         <form action="#" name="searchform" id="searchform" class="form-horizontal ">
-                                        <input type="text" name="resourceId" value="" />
-                                        <input type="text" name="permissionName2" id="permissionName2" value="" >
+                                        <input type="hidden" name="resourceId" value="" />
+                                        <input type="hidden" name="permissionName2" id="permissionName2" value="" >
                                         <div class="row-fluid">
-													<div class="span5 ">
+													<div class="span7 ">
 														<div class="control-group">
 															<label class="control-label" for="firstName">编码</label>
 
@@ -95,7 +95,7 @@
 														</div>
 
 													</div>
-													<div class="span5 ">
+													<div class="span6 ">
 														<div class="control-group">
 															<label class="control-label" for="firstName">名称</label>
 
@@ -144,7 +144,7 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/permission-res.js?20170323"></script>
+<script type="text/javascript" src="/deep/static/js/module/permission-res.js?20170324"></script>
 
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 

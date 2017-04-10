@@ -219,6 +219,8 @@ $(document).ready(function() {
 									checklist.push($(this).val());
 								});
 						var selectIds = checklist.join(",");
+						selectIds = relobj.getAddEl();
+						var delIds = relobj.getDelEl();
 						
 						var treeObj = $.fn.zTree.getZTreeObj("resourceTree");
 						var nodes = treeObj.getCheckedNodes(true);
@@ -245,9 +247,9 @@ $(document).ready(function() {
 							async:true,
 							method:'POST',
 							contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-							data:'resourceIds='+resourceIds+"&permissionId="+selectIds,
+							data:'resourceIds='+resourceIds+"&permissionId="+selectIds+"&delIds="+delIds,
 							dataType : 'json',
-							error :function(resp){alert(resp)},
+							error:function(resp){alert('error')},
 							success:function(resp){
 								alert('success');
 							}
@@ -276,9 +278,9 @@ $(document).ready(function() {
 				}else{
 					relobj.del($(that).val());
 				}
-				$('#searchform input[name="permissionId"]').val(relobj.getAddEl());
-				$('#searchform input[name="permissionName"]').val(relobj.getDelEl());
-				$('#searchform input[name="permissionName2"]').val(relobj.getCheckedEl());
+				//$('#searchform input[name="permissionId"]').val(relobj.getAddEl());
+				//$('#searchform input[name="permissionName"]').val(relobj.getDelEl());
+				//$('#searchform input[name="permissionName2"]').val(relobj.getCheckedEl());
 			});
 			$(".page-sidebar-menu li[name='系统管理']").addClass("active");
         	$(".page-sidebar-menu li[name='权限-资源']").addClass("active");

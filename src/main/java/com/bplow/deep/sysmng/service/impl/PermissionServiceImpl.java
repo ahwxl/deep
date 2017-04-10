@@ -7,10 +7,12 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.sysmng.domain.SysPermission;
@@ -25,6 +27,7 @@ import com.bplow.deep.sysmng.service.PermissionService;
  * @date 2017年3月26日 下午3:11:37
  */
 @Service
+@Transactional
 public class PermissionServiceImpl implements PermissionService{
 	
 	Logger logger =LoggerFactory.getLogger(this.getClass());
@@ -78,22 +81,26 @@ public class PermissionServiceImpl implements PermissionService{
 	}
 
 	@Override
-	public void addPermRes(String permissionId, String resourceIds,String delPermIds) {
+	public void addPermRes(String permissionId, String resourceId,String delPermIds) {
 
-		String[] resArray = resourceIds.split(",");
+		String[] permArray = permissionId.split(",");
 		String[] permIds  = delPermIds.split(",");
 		
 		List<String> permIdsList = Arrays.asList(permIds);
 		
 		SysPermissionResource delPermRes = new SysPermissionResource();
 		delPermRes.setDelIds(permIdsList);
+		delPermRes.setResourceId(resourceId);
 		
-		sysPermissionResourceMapper.delete(delPermRes);
+		if(permIdsList.size()>0)sysPermissionResourceMapper.delete(delPermRes);
 		
-		for(String resId : resArray){
+		for(String permId : permArray){
+			if(StringUtils.isBlank(permId)){
+				continue;
+			}
 			SysPermissionResource permRes = new SysPermissionResource();
-			permRes.setPermissionId(permissionId);
-			permRes.setResourceId(resId);
+			permRes.setPermissionId(permId);
+			permRes.setResourceId(resourceId);
 			permRes.setGmtModify(new Date());
 			
 			sysPermissionResourceMapper.insert(permRes);
