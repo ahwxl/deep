@@ -214,16 +214,15 @@ $(document).ready(function() {
 			// 添加资源与权限对应关系  一对一
 			$("#save").click(function() {
 						var checklist = [];
-						$("#permissionTable>tbody>tr>td input[type=checkbox]:checked")
+						$("#rolesTable>tbody>tr>td input[type=checkbox]:checked")
 								.each(function(e) {
 									checklist.push($(this).val());
 								});
 						var selectIds = checklist.join(",");
+						alert(selectIds);
 						selectIds = relobj.getAddEl();
 						var delIds = relobj.getDelEl();
 						
-						var treeObj = $.fn.zTree.getZTreeObj("resourceTree");
-						var nodes = treeObj.getCheckedNodes(true);
 						var leafNodes = [];//选择的叶子节点
 						
 						for(var node in nodes){
