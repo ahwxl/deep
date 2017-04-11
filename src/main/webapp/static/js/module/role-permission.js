@@ -93,7 +93,7 @@ $(document).ready(function() {
 									"fnRender":function(a,b,c,aData){
 										if(a.aData['checked']==true){
 											relobj.addSelectEl(a.aData['permissionId']);
-											$('#searchform input[name="permissionName2"]').val(relobj.getCheckedEl());
+											$('#searchform input[name="permissionId"]').val(relobj.getCheckedEl());
 										}
 										return "<input type='checkbox' {0} class='group-checkable-sub' value='{1}' />".format(a.aData['checked']==true?"checked":"",a.aData['permissionId']);
 									},
@@ -117,7 +117,7 @@ $(document).ready(function() {
 						],
 						// set the initial value
 						"iDisplayLength" : 10,
-						// "sDom":
+						//"sDom":"",
 						// "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
 						"sPaginationType" : "bootstrap",
 						"oLanguage" : {
@@ -133,101 +133,83 @@ $(document).ready(function() {
 						} ]
 					});
 			
-			// 动态创建的元素 通过绑定到 document
-			$(document).off('click.modal').on(
-					'click.modal.data-api',
-					'[1data-toggle^="modal"]',
-					function(e) {
-						var procDefId = $(this).attr('procDefId');
-						$('#stack1').modal(
+			var rolesTable = $('#rolesTable').dataTable(
+					{
+						"bProcessing" : true,
+						"bServerSide" : true,
+						"bFilter" : true,
+						"bLengthChange" : false,
+						"sAjaxSource" : "/deep/sysmng/roleList",
+						"bStateSave" : true,
+						"oFeatures" : {
+							'sDom' : ''
+						},
+						"fnStateLoadParams" : function(oSettings, oData) {
+							$("#searchRoleBtn").bind("click",
+									function() {
+										relobj = new relation();
+										var oSettings = rolesTable.fnSettings();
+										oSettings.serverparam = $('#searchRoleForm').serializeObject();
+										oSettings.sDom = '';
+										rolesTable.fnFilter('11');
+									});
+						},
+						"fnPreDrawCallback":function(oSettings){
+							//alert('初始');
+							//relobj = new relation();
+						},
+						"aoSearchCols" : [ null, {
+							"sSearchaa" : "My filter"
+						}, null, {
+							"groupId" : "^[0-9]",
+							"bEscapeRegex" : false
+						} ],
+						"aoColumns" : [
 								{
-									confirm : function(formvalue) {
-										var param = $('#myform').serialize();
-										$.post("/deep/sysmng/addPerm", param,
-												function(data) {
-													mygridtab.fnDraw();
-													alert(data);
-												});
-									}
-
-								});
+									"bSortable" : false,
+									"sWidth" : 20,
+									"sSortDataType" : "dom-checkbox",
+									"fnRender":function(a,b,c,aData){
+										if(a.aData['checked']==true){
+											//relobj.addSelectEl(a.aData['permissionId']);
+											//$('#searchform input[name="permissionName2"]').val(relobj.getCheckedEl());
+										}
+										return "<input type='checkbox' {0} class='group-checkable-sub' value='{1}' />".format(a.aData['checked']==true?"checked":"",a.aData['roleId']);
+									},
+									"sDefaultContent" : "<input type=\"checkbox\" class=\"group-checkable\" value=\"1\" />"
+								}, {
+									"sTitle" : "编码",
+									"mData" : "roleId",
+									"bSortable" : false,
+									"sWidth" : 200
+								}, {
+									"sTitle" : "名称",
+									"mData" : "roleName",
+									"bSortable" : false,
+									"sWidth" : 130
+								} ],
+						"aLengthMenu" : [ [ 5, 15, 20, -1 ], [ 5, 15, 20, "All" ] // change
+						// per
+						// page
+						// values
+						// here
+						],
+						// set the initial value
+						"iDisplayLength" : 10,
+						// "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+						"sPaginationType" : "bootstrap",
+						"oLanguage" : {
+							"sLengthMenu" : "_MENU_ records per page",
+							"oPaginate" : {
+								"sPrevious" : "Prev",
+								"sNext" : "Next"
+							}
+						},
+						"aoColumnDefs" : [ {
+							'bSortable' : false,
+							'aTargets' : [ 0 ]
+						} ]
 					});
-
-			$(document).off('click.modal2').on(
-					'click.modal2.data-api',
-					'[data-toggle="delete"]',
-					function(e) {
-						var id = $(this).attr('id');
-
-						$.post("/deep/sysmng/delPerm", "permissionId=" + id,
-								function(data) {
-									mygridtab.fnDraw();
-									alert(data);
-								});
-
-					});
-
-			// 系统资源树展示
-			var setting = {
-				check : {
-					enable : true,
-					chkboxType: { "Y": "p", "N": "ps" }
-				},
-				data: {
-					/*simpleData: {
-						enable: true,
-						idKey: "resourceId",
-						pIdKey: "parentResourceId",
-						rootPId: null,
-					},*/
-					 key:{
-						  url:"#"
-					 }
-				},
-				view : {
-					dblClickExpand : false,
-					showLine : true,
-					selectedMulti : false
-				},
-				async : {
-					enable : true,
-					url : "/deep/sysmng/queryResForTree",
-					autoParam : [ "id=parentResourceId", "name=n", "level=lv" ],
-					otherParam : {
-						"otherParam" : "zTreeAsyncTest"
-					},
-					dataFilter : filter
-				},
-				callback: {
-							beforeCheck : function zTreeBeforeCheck(treeId,treeNode) {
-								var treeObj = $.fn.zTree
-										.getZTreeObj("resourceTree");
-								if (!treeNode.checked) {
-									treeObj.checkAllNodes(false);
-								}
-							},
-							onCheck: onClick
-				}
-			};
-			
-			function onClick(event, treeId, treeNode, clickFlag){
-				event.stopPropagation();
-				$('#searchform input[name="resourceId"]').val(treeNode.id);
-				$("#mySubmit").trigger("click");
-			}
-
-			function filter(treeId, parentNode, childNodes) {
-				if (!childNodes)
-					return null;
-				for (var i = 0, l = childNodes.length; i < l; i++) {
-					childNodes[i].name = childNodes[i].name
-							.replace(/\.n/g, '.');
-				}
-				return childNodes;
-			}
-
-			//初始化资源树
-			$.fn.zTree.init($("#resourceTree"), setting);
 
 			// 添加资源与权限对应关系  一对一
 			$("#save").click(function() {
@@ -288,6 +270,7 @@ $(document).ready(function() {
 									}
 								});
 					});
+			
 			//选择权限单选按钮点击
 			$(document).off('change.modal-check').on("change.modal-check",".group-checkable-sub", function(){
 				var that = this;
@@ -301,6 +284,6 @@ $(document).ready(function() {
 				//$('#searchform input[name="permissionName2"]').val(relobj.getCheckedEl());
 			});
 			$(".page-sidebar-menu li[name='系统管理']").addClass("active");
-        	$(".page-sidebar-menu li[name='权限-资源']").addClass("active");
+        	$(".page-sidebar-menu li[name='角色-权限']").addClass("active");
         	
 		});

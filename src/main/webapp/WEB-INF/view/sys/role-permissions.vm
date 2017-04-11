@@ -1,8 +1,6 @@
                <!-- BEGIN PAGE HEADER-->
-
 				<div class="row-fluid">
-					<div class="span12">
-					</div>
+					<div class="span12"></div>
 				</div>
 
 				<!-- END PAGE HEADER-->
@@ -19,12 +17,10 @@
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-globe">权限-资源管理</i></div>
+								<div class="caption"><i class="icon-globe">角色-权限管理</i></div>
 								
 								<div class="actions">
 
-									<a href="#" 1data-toggle='modal' class="btn yellow"><i class="icon-plus"></i> 添加</a>
-									
 									<a href="#" id="save" class="btn red"><i class="icon-save"></i> 保存</a>
 
 								</div>
@@ -54,14 +50,41 @@
                                 <div class="portlet box green">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="fa fa-comments"></i>资源 </div>
+                                            <i class="fa fa-comments"></i>角色 </div>
                                         <div class="tools">
-                                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                                            <a href="#" id="searchRoleBtn" class="btn green"><i class="icon-search"></i> 查询</a>
                                         </div>
                                     </div>
-                                    <div class="portlet-body">
+                                    <div class="portlet-body form">
+                                        <form action="#" name="searchRoleForm" id="searchRoleForm" class="form-horizontal ">
+                                        <input type="hidden" name="roleId" value="" />
+                                        <div class="row-fluid">
+													<div class="span6 ">
+														<div class="control-group">
+															<div class="controls">
+																<input type="text" name="roleName" value="" placeholder="角色名称">
+															</div>
+														</div>
+													</div>
+										</div>
+										</form>
                                         <div class="table-scrollable">
-                                            <ul id="resourceTree" class="ztree"></ul>
+                                           <table id="rolesTable" class="table table-condensed table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#transactions .checkboxes" /></th>
+                                                        <th> 编码 </th>
+                                                        <th> 名称 </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -79,8 +102,7 @@
                                     </div>
                                     <div class="portlet-body form">
                                         <form action="#" name="searchform" id="searchform" class="form-horizontal ">
-                                        <input type="hidden" name="resourceId" value="" />
-                                        <input type="hidden" name="permissionName2" id="permissionName2" value="" >
+                                        <input type="hidden" name="roleId" value="" />
                                         <div class="row-fluid">
 													<div class="span6 ">
 														<div class="control-group">
@@ -109,9 +131,9 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>  </td>
-                                                        <td>  </td>
-                                                        <td>  </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -131,68 +153,4 @@
 	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
-				
-<script type="text/javascript" src="/deep/static/js/module/permission-res.js?20170327"></script>
-
-<div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
-
-									<div class="modal-header">
-
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-
-										<h3>自</h3>
-
-									</div>
-                                    <!-- modal-body begin-->
-									<div class="modal-body">
-										  <div class="form">
-
-											<!-- BEGIN FORM-->
-
-											<form action="#" name="myform" id="myform" class="form-horizontal">
-
-												<div class="control-group">
-
-													<label class="control-label">编号</label>
-
-													<div class="controls">
-
-														<input type="text" class="" name="permissionId" value=""/>
-
-													</div>
-
-												</div>
-
-												<div class="control-group">
-
-													<label class="control-label">名称</label>
-
-													<div class="controls">
-
-														<input type="text" class="" name="permissionName"  value=""/>
-
-													</div>
-
-												</div>
-
-												<div class="control-group">
-													<label class="control-label" >描述</label>
-													<div class="controls">
-														<input type="text" class="" name="remark" value=""> 
-													</div>
-												</div>
-
-											</form>
-
-											<!-- END FORM-->  
-
-										</div>
-									</div>
-									<!-- modal-body begin-->
-
-									<div class="modal-footer">
-										<button type="button" data-dismiss="modal" class="btn">Close</button>
-										<button type="button" data-dismiss="confirm" class="btn red">Ok</button>
-									</div>
-
-								</div>
+    <script type="text/javascript" src="/deep/static/js/module/role-permission.js?20170302"></script>

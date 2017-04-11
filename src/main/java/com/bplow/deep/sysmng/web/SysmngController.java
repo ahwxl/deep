@@ -128,6 +128,13 @@ public class SysmngController {
 		
 		return "success";
 	}
+	
+	@RequestMapping(value = "/userRolePage")
+    public String userRolePage(HttpServletRequest httpRequest, Model view){
+        
+        
+        return "user-role";
+    }
 
 	// 资源
 	@RequestMapping(value = "/resourcePage")
@@ -294,7 +301,7 @@ public class SysmngController {
 
 		permissionService.addPermRes(permission.getPermissionId(), resourceIds,delIds);
 
-		return "success";
+		return "{\"responseMsg\":\"success\"}";
 	}
 
 	// 查询权限与资源对应关系
@@ -377,6 +384,13 @@ public class SysmngController {
 		SysRole r = roleService.queryRole(role);
 
 		return r;
+	}
+	
+	@RequestMapping(value = "/rolePermissionPage")
+	public String rolePermissionPage(HttpServletRequest httpRequest, Model view){
+	    
+	    
+	    return "sys/role-permissions";
 	}
 
 	// 添加权限对应的角色 多对多 关系
@@ -474,5 +488,12 @@ public class SysmngController {
 
 		return r;
 	}
+	
+	@RequestMapping(value = "/organizationUserPage")
+    public String organizationUserPage(HttpServletRequest httpRequest, Model view,
+            SysOrganization organization) {
+
+        return "organization-user";
+    }
 
 }

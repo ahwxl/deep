@@ -18,9 +18,7 @@
   <select id="queryForPage" parameterType="com.bplow.deep.sysmng.domain.SysPermission" resultMap="BaseResultMap">
     select a.*,
     (select count(1) from sys_permission_resource b where b.permission_id = a.permission_id 
-    <if test="resourceId != null and resourceId != ''">
             and b.resource_id = #{resourceId}
-    </if>
     ) checked
     from sys_permission a
     <where>

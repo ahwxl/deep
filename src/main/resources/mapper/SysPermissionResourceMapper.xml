@@ -44,15 +44,15 @@
     </where>
      ORDER BY GMT_MODIFY DESC 
   </select>
-  
-  <delete id="delete" parameterType="com.bplow.deep.sysmng.domain.SysPermissionResource">
-   delete from sys_permission_resource
-    where resource_id = #{resourceId} and  permission_id in 
-    <foreach item="id" index="index" collection="delIds"
-      open="(" separator="," close=")">
-        #{id}
-  </foreach>
-  </delete>
+
+	<delete id="delete" parameterType="com.bplow.deep.sysmng.domain.SysPermissionResource">
+		delete from sys_permission_resource
+		where resource_id = #{resourceId} and permission_id in
+		<foreach item="id" index="index" collection="delIds" open="("
+			separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
   
   <insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysPermissionResource">
     insert into sys_permission_resource (permission_id, resource_id, gmt_create, 
