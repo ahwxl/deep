@@ -17,9 +17,21 @@
   
   <select id="queryForPage" parameterType="com.bplow.deep.sysmng.domain.SysPermission" resultMap="BaseResultMap">
     select a.*,
+    <choose>
+    <when test="roleId !=null and roleId != ''">
+    (select count(1) from sys_role_permission b where b.permission_id = a.permission_id
+            and b.role_id = #{roleId}
+    ) checked
+    </when>
+    <when test="resourceId !=null and resourceId != ''">
     (select count(1) from sys_permission_resource b where b.permission_id = a.permission_id 
             and b.resource_id = #{resourceId}
     ) checked
+    </when>
+    <otherwise>
+    0 checked
+    </otherwise>
+    </choose>
     from sys_permission a
     <where>
       <trim prefixOverrides="AND">

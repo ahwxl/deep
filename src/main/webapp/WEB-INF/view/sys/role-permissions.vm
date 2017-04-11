@@ -102,7 +102,7 @@
                                     </div>
                                     <div class="portlet-body form">
                                         <form action="#" name="searchform" id="searchform" class="form-horizontal ">
-                                        <input type="hidden" name="roleId" value="" />
+                                        <input type="text" name="roleId" value="" />
                                         <div class="row-fluid">
 													<div class="span6 ">
 														<div class="control-group">
@@ -153,4 +153,4 @@
 	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
-    <script type="text/javascript" src="/deep/static/js/module/role-permission.js?20170302"></script>
+    <script type="text/javascript" src="/deep/static/js/module/role-permission.js?20170305"></script>

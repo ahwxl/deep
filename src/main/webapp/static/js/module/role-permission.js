@@ -93,9 +93,9 @@ $(document).ready(function() {
 									"fnRender":function(a,b,c,aData){
 										if(a.aData['checked']==true){
 											relobj.addSelectEl(a.aData['permissionId']);
-											$('#searchform input[name="permissionId"]').val(relobj.getCheckedEl());
+											//$('#searchform input[name="permissionId"]').val(relobj.getCheckedEl());
 										}
-										return "<input type='checkbox' {0} class='group-checkable-sub' value='{1}' />".format(a.aData['checked']==true?"checked":"",a.aData['permissionId']);
+										return "<input type='checkbox' {0} class='group-checkable-sub' name='permission' value='{1}' />".format(a.aData['checked']==true?"checked":"",a.aData['permissionId']);
 									},
 									"sDefaultContent" : "<input type=\"checkbox\" class=\"group-checkable\" value=\"1\" />"
 								}, {
@@ -174,7 +174,7 @@ $(document).ready(function() {
 											//relobj.addSelectEl(a.aData['permissionId']);
 											//$('#searchform input[name="permissionName2"]').val(relobj.getCheckedEl());
 										}
-										return "<input type='checkbox' {0} class='group-checkable-sub' value='{1}' />".format(a.aData['checked']==true?"checked":"",a.aData['roleId']);
+										return "<input type='checkbox' {0} class='group-checkable-sub' name='role' value='{1}' />".format(a.aData['checked']==true?"checked":"",a.aData['roleId']);
 									},
 									"sDefaultContent" : "<input type=\"checkbox\" class=\"group-checkable\" value=\"1\" />"
 								}, {
@@ -269,13 +269,22 @@ $(document).ready(function() {
 									$(this).trigger("change");
 									}
 								});
-					});
-			
+			});
 			//选择权限单选按钮点击
-			$(document).off('change.modal-check').on("change.modal-check",".group-checkable-sub", function(){
+			$(document).off('change.modal-check').on("change.modal-check",'.group-checkable-sub[name=permission]', function(){
 				var that = this;
 				if(that.checked){
 					relobj.add($(that).val());
+				}else{
+					relobj.del($(that).val());
+				}
+			});
+			//选择权限单选按钮点击
+			$(document).off('change.modal-check').on("change.modal-check",'.group-checkable-sub[name=role]', function(){
+				var that = this;
+				if(that.checked){
+					$('#searchform input[name="roleId"]').val($(that).val());
+					$("#mySubmit").trigger("click");
 				}else{
 					relobj.del($(that).val());
 				}
