@@ -28,7 +28,7 @@ public interface RoleService {
 	
 	public List<SysRolePermission> queryRolePerms(String roleId);
 	
-	public void addRolePerm(String roleId,String permIds);
+	public void addRolePerm(String roleId,String permIds,String delIds);
 	
 	public void delRolePerm(SysRolePermission rolePerm);
 	

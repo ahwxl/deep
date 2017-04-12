@@ -1,8 +1,10 @@
 package com.bplow.deep.sysmng.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysUserRole {
+    
     private String userId;
 
     private String roleId;
@@ -10,6 +12,8 @@ public class SysUserRole {
     private Date gmtCreate;
 
     private Date gmtModify;
+    
+    private List<String> roleIds;
 
     public String getUserId() {
         return userId;
@@ -41,6 +45,14 @@ public class SysUserRole {
 
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
+    }
+    
+    public List<String> getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(List<String> roleIds) {
+        this.roleIds = roleIds;
     }
 
     /**

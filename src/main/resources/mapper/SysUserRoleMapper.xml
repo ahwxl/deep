@@ -20,7 +20,7 @@
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
-          <if test="userId != null">
+          <if test="userId != null and userId != ''">
              user_id = #{userId} 
           </if>
         </trim>
@@ -29,7 +29,15 @@
      ORDER BY GMT_MODIFY DESC 
   </select>
   
-  
+  <delete id="delete" parameterType="java.lang.String">
+  delete from sys_user_role
+    where user_id = #{userId,jdbcType=VARCHAR}
+    and role_id in
+		<foreach item="id" index="index" collection="roleIdList" open="("
+			separator="," close=")">
+			#{id}
+		</foreach>
+  </delete>
   
   <insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysUserRole">
     insert into sys_user_role (user_id, role_id, gmt_create, 

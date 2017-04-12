@@ -2,11 +2,9 @@ package com.bplow.deep.sysmng.service;
 
 import java.util.Set;
 
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-
 import com.bplow.deep.authority.User;
 import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.sysmng.domain.SysUserRole;
 
 public interface UserService {
 
@@ -21,6 +19,8 @@ public interface UserService {
     public void deleteUser(User user);
     
     public void updateUser(User user);
+    
+    public void addUserRole(SysUserRole userRole,String roleIds,String delIds);
     
     public Page<User> queryUserForPage(User user);
 

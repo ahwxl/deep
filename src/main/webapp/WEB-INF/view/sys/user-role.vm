@@ -17,7 +17,7 @@
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-globe">角色-权限管理</i></div>
+								<div class="caption"><i class="icon-globe">用户-角色管理</i></div>
 								
 								<div class="actions">
 
@@ -50,26 +50,26 @@
                                 <div class="portlet box green">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="fa fa-comments"></i>角色 </div>
+                                            <i class="fa fa-comments"></i>用户</div>
                                         <div class="tools">
                                             <a href="#" id="searchRoleBtn" class="btn green"><i class="icon-search"></i> 查询</a>
                                         </div>
                                     </div>
                                     <div class="portlet-body form">
-                                        <form action="#" name="searchRoleForm" id="searchRoleForm" class="form-horizontal ">
-                                        <input type="hidden" name="roleId" value="" />
+                                        <form action="#" name="searchUserForm" id="searchUserForm" class="form-horizontal ">
+                                        <input type="hidden" name="userId" value="" />
                                         <div class="row-fluid">
 													<div class="span6 ">
 														<div class="control-group">
 															<div class="controls">
-																<input type="text" name="roleName" value="" placeholder="角色名称">
+																<input type="text" name="userName" value="" placeholder="用户名称">
 															</div>
 														</div>
 													</div>
 										</div>
 										</form>
                                         <div class="table-scrollable">
-                                           <table id="rolesTable" class="table table-condensed table-hover">
+                                           <table id="userTable" class="table table-condensed table-hover">
                                                 <thead>
                                                     <tr>
                                                         <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#transactions .checkboxes" /></th>
@@ -95,14 +95,14 @@
                                 <div class="portlet box red">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="fa fa-picture"></i>权限 </div>
+                                            <i class="fa fa-picture"></i>角色 </div>
                                         <div class="tools">
                                             <a href="#" id="mySubmit" class="btn green"><i class="icon-search"></i> 查询</a>
                                         </div>
                                     </div>
                                     <div class="portlet-body form">
                                         <form action="#" name="searchform" id="searchform" class="form-horizontal ">
-                                        <input type="hidden" name="roleId" value="" />
+                                        <input type="text" name="userId" value="" />
                                         <div class="row-fluid">
 													<div class="span6 ">
 														<div class="control-group">
@@ -121,7 +121,7 @@
 										</div>
 										</form>
                                         <div class="table-scrollable">
-                                            <table id="permissionTable" class="table table-condensed table-hover">
+                                            <table id="rolesTable" class="table table-condensed table-hover">
                                                 <thead>
                                                     <tr>
                                                         <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#transactions .checkboxes" /></th>
@@ -153,4 +153,5 @@
 	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
-    <script type="text/javascript" src="/deep/static/js/module/role-permission.js?20170308"></script>
+    <script type="text/javascript" src="/deep/static/js/module/user-role.js?20170301"></script>
+    

@@ -10,4 +10,6 @@ public interface SysUserRoleMapper {
     int update(SysUserRole record);
 
     int insert(SysUserRole record);
+    
+    int delete(SysUserRole record);
 }

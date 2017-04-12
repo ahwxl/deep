@@ -3,8 +3,10 @@
  */
 package com.bplow.deep.sysmng.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	SysRoleMapper sysRoleMapper;
-
+	
 	@Autowired
 	SysRolePermissionMapper sysRolePermissionMapper;
 
@@ -79,16 +81,29 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public void addRolePerm(String roleId, String permIds) {
+	public void addRolePerm(String roleId, String permIds,String delIds) {
 		String[] permArray = permIds.split(",");
 		
+		String[] delPermArray = delIds.split(",");
+		List<String> delList = Arrays.asList(delPermArray);
+		
+		
+		if(delList.size() > 0){
+		    SysRolePermission record = new SysRolePermission();
+	        record.setRoleId(roleId);
+	        record.setPermissionIdList(delList);
+	        
+	        sysRolePermissionMapper.delete(record);
+		}
 		for(String permissionId : permArray){
+		    if(StringUtils.isBlank(permissionId)){
+		        continue;
+		    }
 			SysRolePermission rolePerm = new SysRolePermission();
 			rolePerm.setPermissionId(permissionId);
 			rolePerm.setRoleId(roleId);
 			
 			sysRolePermissionMapper.insert(rolePerm);
-			
 		}
 
 	}

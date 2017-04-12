@@ -1,7 +1,10 @@
 package com.bplow.deep.sysmng.service.impl;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,16 +13,21 @@ import com.bplow.deep.authority.User;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.stock.domain.SysUser;
 import com.bplow.deep.stock.mapper.SysUserMapper;
+import com.bplow.deep.sysmng.domain.SysUserRole;
+import com.bplow.deep.sysmng.mapper.SysUserRoleMapper;
 import com.bplow.deep.sysmng.service.UserService;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private SysUserMapper sysUserMapper;
+    private SysUserMapper     sysUserMapper;
 
     @Autowired
-    private PasswordHelper passwordHelper;
+    private SysUserRoleMapper sysUserRoleMapper;
+
+    @Autowired
+    private PasswordHelper    passwordHelper;
 
     public void setPasswordHelper(PasswordHelper passwordHelper) {
         this.passwordHelper = passwordHelper;
@@ -33,7 +41,7 @@ public class UserServiceImpl implements UserService {
         //加密密码
         passwordHelper.encryptPassword(user);
         user.setStatus("1");
-        sysUserMapper.insert((SysUser)user);
+        sysUserMapper.insert((SysUser) user);
         return null;
     }
 
@@ -43,7 +51,7 @@ public class UserServiceImpl implements UserService {
      * @param newPassword
      */
     public void changePassword(String userId, String newPassword) {
-        SysUser user =sysUserMapper.selectByPrimaryKey(userId);
+        SysUser user = sysUserMapper.selectByPrimaryKey(userId);
         user.setPassword(newPassword);
         passwordHelper.encryptPassword(user);
         sysUserMapper.update(user);
@@ -57,7 +65,6 @@ public class UserServiceImpl implements UserService {
     public void correlationRoles(String userId, Long... roleIds) {
         //userDao.correlationRoles(userId, roleIds);
     }
-
 
     /**
      * 移除用户-角色关系
@@ -100,17 +107,45 @@ public class UserServiceImpl implements UserService {
         sysUserMapper.delete(user.getUserId());
     }
 
-	@Override
-	public Page<User> queryUserForPage(User user) {
-		
-		Page<User> users = this.sysUserMapper.queryForPage((SysUser)user);
-		
-		return users;
-	}
+    @Override
+    public Page<User> queryUserForPage(User user) {
 
-	@Override
-	public void updateUser(User user) {
-	   this.sysUserMapper.update((SysUser)user);
-	}
+        Page<User> users = this.sysUserMapper.queryForPage((SysUser) user);
+
+        return users;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        this.sysUserMapper.update((SysUser) user);
+    }
+
+    @Override
+    public void addUserRole(SysUserRole userRole, String roleIds, String delIds) {
+
+        String[] roleArray = roleIds.split(",");
+
+        String[] delPermArray = delIds.split(",");
+        List<String> delList = Arrays.asList(delPermArray);
+
+        if (delList.size() > 0) {
+            SysUserRole record = new SysUserRole();
+            record.setUserId(userRole.getUserId());
+            record.setRoleIds(delList);
+
+            sysUserRoleMapper.delete(record);
+        }
+        for (String roleId : roleArray) {
+            if (StringUtils.isBlank(roleId)) {
+                continue;
+            }
+            SysUserRole userRoleTmp = new SysUserRole();
+            userRoleTmp.setUserId(userRole.getUserId());
+            userRoleTmp.setRoleId(roleId);
+
+            sysUserRoleMapper.insert(userRoleTmp);
+        }
+
+    }
 
 }

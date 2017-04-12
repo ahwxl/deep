@@ -53,24 +53,24 @@ $(document).ready(function() {
 	}
 			// var table = $('#sample_1').DataTable();
 	        var relobj = new relation();
-			var permissionTable = $('#permissionTable').dataTable(
+			var userTable = $('#userTable').dataTable(
 					{
 						"bProcessing" : true,
 						"bServerSide" : true,
 						"bFilter" : true,
 						"bLengthChange" : false,
-						"sAjaxSource" : "/deep/sysmng/permissionList",
+						"sAjaxSource" : "/deep/sysmng/userList",
 						"bStateSave" : true,
 						"oFeatures" : {
 							'sDom' : ''
 						},
 						"fnStateLoadParams" : function(oSettings, oData) {
-							$("#mySubmit").bind(
+							$("#searchRoleBtn").bind(
 									"click",
 									function() {
 										relobj = new relation();
-										var oSettings = permissionTable.fnSettings();
-										oSettings.serverparam = $('#searchform').serializeObject();
+										var oSettings = userTable.fnSettings();
+										oSettings.serverparam = $('#searchUserForm').serializeObject();
 										oSettings.sDom = '';
 										permissionTable.fnFilter('11');
 									});
@@ -95,17 +95,17 @@ $(document).ready(function() {
 											relobj.addSelectEl(a.aData['permissionId']);
 											//$('#searchform input[name="permissionId"]').val(relobj.getCheckedEl());
 										}
-										return "<input type='checkbox' {0} class='group-checkable-sub' name='permission' value='{1}' />".format(a.aData['checked']==true?"checked":"",a.aData['permissionId']);
+										return "<input type='checkbox' {0} class='group-checkable-sub' name='user' value='{1}' />".format(a.aData['checked']==true?"checked":"",a.aData['userId']);
 									},
 									"sDefaultContent" : "<input type=\"checkbox\" class=\"group-checkable\" value=\"1\" />"
 								}, {
 									"sTitle" : "编码",
-									"mData" : "permissionId",
+									"mData" : "userId",
 									"bSortable" : false,
 									"sWidth" : 200
 								}, {
 									"sTitle" : "名称",
-									"mData" : "remark",
+									"mData" : "userName",
 									"bSortable" : false,
 									"sWidth" : 130
 								} ],
@@ -145,11 +145,11 @@ $(document).ready(function() {
 							'sDom' : ''
 						},
 						"fnStateLoadParams" : function(oSettings, oData) {
-							$("#searchRoleBtn").bind("click",
+							$("#mySubmit").bind("click",
 									function() {
 										relobj = new relation();
 										var oSettings = rolesTable.fnSettings();
-										oSettings.serverparam = $('#searchRoleForm').serializeObject();
+										oSettings.serverparam = $('#searchform').serializeObject();
 										oSettings.sDom = '';
 										rolesTable.fnFilter('11');
 									});
@@ -229,7 +229,7 @@ $(document).ready(function() {
 						var delIds = relobj.getDelEl();
 						
 						$.ajax({
-							url:'/deep/sysmng/addRolePerm',
+							url:'/deep/sysmng/addUserRole',
 							async:true,
 							method:'POST',
 							contentType:'application/x-www-form-urlencoded; charset=UTF-8',
@@ -244,7 +244,7 @@ $(document).ready(function() {
 			});
 
 			//权限列表第一个 checkbox 全选 动作
-			$("#permissionTable th input:checkbox").on("click",
+			$("#rolesTable th input:checkbox").on("click",
 					function() {
 						var that = this;
 						$(this).closest("table").find("tr > td:first-child input:checkbox").each(
@@ -257,8 +257,8 @@ $(document).ready(function() {
 									}
 								});
 			});
-			//选择权限单选按钮点击
-			$(document).off('change.modal-check2').on("change.modal-check2",'.group-checkable-sub[name=permission]', function(){
+			//选择角色单选按钮点击
+			$(document).off('change.modal-check2').on("change.modal-check2",'.group-checkable-sub[name=role]', function(){
 				var that = this;
 				if(that.checked){
 					relobj.add($(that).val());
@@ -266,8 +266,8 @@ $(document).ready(function() {
 					relobj.del($(that).val());
 				}
 			});
-			//选择[角色]单选按钮点击
-			$(document).off('change.modal-check').on("change.modal-check",'.group-checkable-sub[name=role]', function(){
+			//选择[用户]单选按钮点击
+			$(document).off('change.modal-check').on("change.modal-check",'.group-checkable-sub[name=user]', function(){
 				var checked = this.checked;
 				//取消其他行被选中
 				$(this).closest("table").find("tr > td:first-child input:checkbox").each(
@@ -277,13 +277,13 @@ $(document).ready(function() {
 				
 				if(checked){
 					this.checked = true;
-					$('#searchform input[name="roleId"]').val($(this).val());
+					$('#searchform input[name="userId"]').val($(this).val());
 					$("#mySubmit").trigger("click");
 				}else{
 					//relobj.del($(that).val());
 				}
 			});
 			$(".page-sidebar-menu li[name='系统管理']").addClass("active");
-        	$(".page-sidebar-menu li[name='角色-权限']").addClass("active");
+        	$(".page-sidebar-menu li[name='用户-角色']").addClass("active");
         	
 		});

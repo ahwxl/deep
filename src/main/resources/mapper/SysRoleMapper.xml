@@ -16,18 +16,28 @@
   
   <select id="queryForPage" parameterType="com.bplow.deep.sysmng.domain.SysRole" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
-    from sys_role
+    a.*,
+    <choose>
+    <when test="userId !=null and userId != ''">
+    (select count(1) from sys_role_permission b where b.role_id = a.role_id
+            and b.user_id = #{userId}
+    ) checked
+    </when>
+    <otherwise>
+    0 checked
+    </otherwise>
+    </choose>
+    from sys_role a
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
           <if test="roleId != null">
-             role_id = #{roleId} 
+             a.role_id = #{roleId} 
           </if>
         </trim>
       </trim>
     </where>
-     ORDER BY GMT_MODIFY DESC 
+     ORDER BY a.GMT_MODIFY DESC 
   </select>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">

@@ -48,6 +48,11 @@
   <delete id="delete" parameterType="java.lang.String">
   delete from sys_role_permission
     where role_id = #{roleId,jdbcType=VARCHAR}
+    and permission_id in
+		<foreach item="id" index="index" collection="permissionIdList" open="("
+			separator="," close=")">
+			#{id}
+		</foreach>
   </delete>
   
   <insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysRolePermission">

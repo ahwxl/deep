@@ -33,6 +33,7 @@ import com.bplow.deep.sysmng.domain.SysPermissionResource;
 import com.bplow.deep.sysmng.domain.SysResource;
 import com.bplow.deep.sysmng.domain.SysRole;
 import com.bplow.deep.sysmng.domain.SysRolePermission;
+import com.bplow.deep.sysmng.domain.SysUserRole;
 import com.bplow.deep.sysmng.service.OrganizationService;
 import com.bplow.deep.sysmng.service.PermissionService;
 import com.bplow.deep.sysmng.service.ResourceService;
@@ -133,7 +134,18 @@ public class SysmngController {
     public String userRolePage(HttpServletRequest httpRequest, Model view){
         
         
-        return "user-role";
+        return "sys/user-role";
+    }
+	
+	// 添加权限对应的资源 一对一 关系
+    @RequestMapping(value = "/addUserRole")
+    @ResponseBody
+    public String addUserRole(HttpServletRequest httpRequest, Model view,
+            SysUserRole userRole,@RequestParam("roleIds")String roleIds,@RequestParam("delIds")String delIds) {
+
+        userService.addUserRole(userRole, roleIds, delIds);
+
+        return "{\"responseMsg\":\"success\"}";
     }
 
 	// 资源
@@ -397,11 +409,11 @@ public class SysmngController {
 	@RequestMapping(value = "/addRolePerm")
 	@ResponseBody
 	public String addRolePerm(HttpServletRequest httpRequest, Model view,
-			SysRole role, String permIds) {
+			SysRole role,@RequestParam("permIds") String permIds,@RequestParam("delIds")String delIds) {
 
-		roleService.addRolePerm(role.getRoleId(), permIds);
+		roleService.addRolePerm(role.getRoleId(), permIds,delIds);
 
-		return "success";
+		return "{\"responseMsg\":\"success\"}";
 	}
 
 	// 查询权限与资源对应关系
