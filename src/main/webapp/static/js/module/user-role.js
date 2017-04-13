@@ -99,7 +99,7 @@ $(document).ready(function() {
 									},
 									"sDefaultContent" : "<input type=\"checkbox\" class=\"group-checkable\" value=\"1\" />"
 								}, {
-									"sTitle" : "编码",
+									"sTitle" : "用户ID",
 									"mData" : "userId",
 									"bSortable" : false,
 									"sWidth" : 200
@@ -171,14 +171,14 @@ $(document).ready(function() {
 									"sSortDataType" : "dom-checkbox",
 									"fnRender":function(a,b,c,aData){
 										if(a.aData['checked']==true){
-											//relobj.addSelectEl(a.aData['permissionId']);
+											relobj.addSelectEl(a.aData['roleId']);
 											//$('#searchform input[name="permissionName2"]').val(relobj.getCheckedEl());
 										}
 										return "<input type='checkbox' {0} class='group-checkable-sub' name='role' value='{1}' />".format(a.aData['checked']==true?"checked":"",a.aData['roleId']);
 									},
 									"sDefaultContent" : "<input type=\"checkbox\" class=\"group-checkable\" value=\"1\" />"
 								}, {
-									"sTitle" : "编码",
+									"sTitle" : "角色编码",
 									"mData" : "roleId",
 									"bSortable" : false,
 									"sWidth" : 200
@@ -211,19 +211,19 @@ $(document).ready(function() {
 						} ]
 					});
 
-			// 添加资源与权限对应关系  一对一
+			// 添加用户与角色对应关系  一对多
 			$("#save").click(function() {
 						var checklist = [];
-						$("#rolesTable>tbody>tr>td input[type=checkbox]:checked")
+						$("#userTable>tbody>tr>td input[type=checkbox]:checked")
 								.each(function(e) {
 									checklist.push($(this).val());
 						});
 						
 						if(checklist.length == 0){
-							alert('请选择角色');
+							alert('请选择用户');
 							return false;
 						}
-						var roleIds = checklist.join(",");
+						var userIds = checklist.join(",");
 						//alert(roleIds);
 						var selectIds = relobj.getAddEl();
 						var delIds = relobj.getDelEl();
@@ -233,7 +233,7 @@ $(document).ready(function() {
 							async:true,
 							method:'POST',
 							contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-							data:'roleId='+roleIds+"&permIds="+selectIds+"&delIds="+delIds,
+							data:'userId='+userIds+"&roleIds="+selectIds+"&delIds="+delIds,
 							dataType : 'json',
 							error:function(jqXHR,textStatus,errorThrown ){alert(errorThrown)},
 							success:function(resp){

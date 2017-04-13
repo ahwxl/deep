@@ -12,8 +12,8 @@ import com.bplow.deep.authority.PasswordHelper;
 import com.bplow.deep.authority.User;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.stock.domain.SysUser;
-import com.bplow.deep.stock.mapper.SysUserMapper;
 import com.bplow.deep.sysmng.domain.SysUserRole;
+import com.bplow.deep.sysmng.mapper.SysUserMapper;
 import com.bplow.deep.sysmng.mapper.SysUserRoleMapper;
 import com.bplow.deep.sysmng.service.UserService;
 
@@ -89,8 +89,11 @@ public class UserServiceImpl implements UserService {
      * @param username
      * @return
      */
-    public Set<String> findRoles(String username) {
-        return null;
+    public Set<String> findRoles(String userId) {
+        
+        Set<String> roles = sysUserRoleMapper.queryUserRole(userId);
+        
+        return roles;
     }
 
     /**
@@ -98,8 +101,10 @@ public class UserServiceImpl implements UserService {
      * @param username
      * @return
      */
-    public Set<String> findPermissions(String username) {
-        return null;
+    public Set<String> findPermissions(String userId) {
+        
+        Set<String> permissions = sysUserMapper.queryUserPermissions(userId);
+        return permissions;
     }
 
     @Override

@@ -22,6 +22,10 @@ public class SysRole extends PageInfo{
     private Date gmtCreate;
 
     private Date gmtModify;
+    
+    private boolean checked;
+    
+    private String userId;
 
     public String getRoleId() {
         return roleId;
@@ -63,6 +67,22 @@ public class SysRole extends PageInfo{
 
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     /**

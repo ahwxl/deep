@@ -41,7 +41,7 @@
 
 															<div class="controls">
 
-																<input type="text" name="stockId" id="stockId" value="" class="m-wrap" placeholder="">
+																<input type="text" name="roleId" id="roleId" value="" class="m-wrap" placeholder="">
 
 															</div>
 
@@ -59,7 +59,7 @@
 
 															<div class="controls">
 
-																<input type="text" name="ruleId" id="ruleId" value="" class="m-wrap" placeholder="">
+																<input type="text" name="ruleName" id="ruleName" value="" class="m-wrap" placeholder="">
 
 															</div>
 
@@ -126,7 +126,7 @@
 
 	<!-- END PAGE LEVEL PLUGINS -->
 				
-<script type="text/javascript" src="/deep/static/js/module/role.js?20170314"></script>
+<script type="text/javascript" src="/deep/static/js/module/role.js?20170315"></script>
 
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 

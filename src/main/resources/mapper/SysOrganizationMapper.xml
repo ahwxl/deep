@@ -37,6 +37,27 @@
      ORDER BY GMT_MODIFY DESC 
   </select>
   
+  <select id="queryOrgList" parameterType="com.bplow.deep.sysmng.domain.SysOrganization" resultMap="BaseResultMap">
+  select
+    <include refid="Base_Column_List" />
+    from sys_organization
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="organizationId != null and organizationId != ''">
+             organization_id = #{organizationId} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="parentOrgId != null and parentOrgId != ''">
+             parent_org_id = #{parentOrgId}
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -50,10 +71,10 @@
   </delete>
   
   <insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysOrganization">
-    insert into sys_organization (organization_id, organization_name, 
+    insert into sys_organization (organization_id, organization_name, parent_org_id,
       remark, status, gmt_create, 
       gmt_modify)
-    values (#{organizationId,jdbcType=VARCHAR}, #{organizationName,jdbcType=VARCHAR}, 
+    values (#{organizationId,jdbcType=VARCHAR}, #{organizationName,jdbcType=VARCHAR}, #{parentOrgId,jdbcType=VARCHAR},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtModify,jdbcType=TIMESTAMP})
   </insert>

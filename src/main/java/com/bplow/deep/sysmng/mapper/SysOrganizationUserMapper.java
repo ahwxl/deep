@@ -10,4 +10,7 @@ public interface SysOrganizationUserMapper {
     int update(SysOrganizationUser record);
 
     int insert(SysOrganizationUser record);
+    
+    int delete(SysOrganizationUser record);
+    
 }

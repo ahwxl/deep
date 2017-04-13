@@ -29,11 +29,16 @@
      ORDER BY GMT_MODIFY DESC 
   </select>
   
+  <select id="queryUserRole" parameterType="java.lang.String" resultType="java.lang.String">
+  select a.role_id from sys_user_role a
+  where a.user_id =  #{userId} 
+  </select>
+  
   <delete id="delete" parameterType="java.lang.String">
   delete from sys_user_role
     where user_id = #{userId,jdbcType=VARCHAR}
     and role_id in
-		<foreach item="id" index="index" collection="roleIdList" open="("
+		<foreach item="id" index="index" collection="roleIds" open="("
 			separator="," close=")">
 			#{id}
 		</foreach>

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -28,6 +30,7 @@ import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.base.utils.DateUtils;
 import com.bplow.deep.stock.domain.SysUser;
 import com.bplow.deep.sysmng.domain.SysOrganization;
+import com.bplow.deep.sysmng.domain.SysOrganizationUser;
 import com.bplow.deep.sysmng.domain.SysPermission;
 import com.bplow.deep.sysmng.domain.SysPermissionResource;
 import com.bplow.deep.sysmng.domain.SysResource;
@@ -67,6 +70,7 @@ public class SysmngController {
 	UserService userService;
 	
 	//用户
+	@RequiresRoles("123")
 	@RequestMapping(value = "/usersPage")
 	public String userListPage(HttpServletRequest httpRequest, Model view,SysUser user){
 		
@@ -238,6 +242,7 @@ public class SysmngController {
     }
 
 	// 权限
+	@RequiresPermissions("user:list:123")
 	@RequestMapping(value = "/permissionPage")
 	public String permissionListPage(HttpServletRequest httpRequest, Model view) {
 
@@ -246,6 +251,7 @@ public class SysmngController {
 		return "sys/permission";
 	}
 	
+	@RequiresPermissions("sys:list")
 	@RequestMapping(value = "/permissionResPage")
     public String permissionResListPage(HttpServletRequest httpRequest, Model view) {
 
@@ -439,6 +445,7 @@ public class SysmngController {
 	}
 
 	// 机构
+	@RequiresPermissions("user:play")
 	@RequestMapping(value = "/organizationPage")
 	public String organizationListPage(HttpServletRequest httpRequest,
 			Model view) {
@@ -501,11 +508,34 @@ public class SysmngController {
 		return r;
 	}
 	
+	@RequestMapping(value = "/queryOrgTree")
+    @ResponseBody
+    public List<SysOrganization> queryOrgTree(HttpServletRequest httpRequest, Model view,
+            SysOrganization organization) {
+
+	    if(StringUtils.isBlank(organization.getParentOrgId())){
+	        organization.setParentOrgId("0");
+	    }
+        List<SysOrganization> r = organizationService.queryOrgList(organization);
+
+        return r;
+    }
+	
 	@RequestMapping(value = "/organizationUserPage")
     public String organizationUserPage(HttpServletRequest httpRequest, Model view,
             SysOrganization organization) {
 
-        return "organization-user";
+        return "sys/organization-user";
+    }
+	
+	@RequestMapping(value = "/addOrgUser")
+    @ResponseBody
+    public String addOrgUser(HttpServletRequest httpRequest, Model view,
+            SysOrganizationUser orgUser,@RequestParam("userIds") String addUserIds,@RequestParam("delIds")String delIds) {
+
+	    organizationService.addOrganizationUser(orgUser, addUserIds, delIds);
+
+        return "{\"responseMsg\":\"success\"}";
     }
 
 }

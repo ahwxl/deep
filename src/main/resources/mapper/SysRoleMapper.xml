@@ -8,6 +8,7 @@
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+    <result column="checked" jdbcType="INTEGER" property="checked" />
   </resultMap>
   
   <sql id="Base_Column_List">
@@ -19,7 +20,7 @@
     a.*,
     <choose>
     <when test="userId !=null and userId != ''">
-    (select count(1) from sys_role_permission b where b.role_id = a.role_id
+    (select count(1) from sys_user_role b where b.role_id = a.role_id
             and b.user_id = #{userId}
     ) checked
     </when>
@@ -31,7 +32,7 @@
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
-          <if test="roleId != null">
+          <if test="roleId != null and roleId != '' ">
              a.role_id = #{roleId} 
           </if>
         </trim>

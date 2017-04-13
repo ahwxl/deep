@@ -35,6 +35,10 @@ public class SysUser extends PageInfo implements User{
     private Date gmtCreate;
 
     private Date gmtModify;
+    
+    private String organizationId;
+    
+    private boolean checked;
 
     public String getUserId() {
         return userId;
@@ -134,6 +138,22 @@ public class SysUser extends PageInfo implements User{
     @Override
     public String getCredentialsSalt() {
         return this.getUserId()+this.salt;
+    }
+
+    public String getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(String organizationId) {
+        this.organizationId = organizationId;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
 }

@@ -20,8 +20,8 @@
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">
-          <if test="id != null">
-             ID = #{id} 
+          <if test="organizationId != null and organizationId != '' ">
+             organization_id = #{organizationId} 
           </if>
         </trim>
       </trim>
@@ -29,7 +29,15 @@
      ORDER BY GMT_MODIFY DESC 
   </select>
   
-  
+  <delete id="delete">
+  delete from sys_organization_user
+    where organization_id = #{organizationId,jdbcType=VARCHAR}
+    and user_id in
+		<foreach item="id" index="index" collection="userIds" open="("
+			separator="," close=")">
+			#{id}
+		</foreach>
+  </delete>
   
   <insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysOrganizationUser">
     insert into sys_organization_user (organization_id, user_id, gmt_create, 

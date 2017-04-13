@@ -7,6 +7,10 @@ import com.bplow.deep.base.pagination.PageInfo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SkCustomerWarn extends PageInfo{
+    
+    /**  */
+    private static final long serialVersionUID = 7370618433717795490L;
+
     private String id;
 
     private String userId;

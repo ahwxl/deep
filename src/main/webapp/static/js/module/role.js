@@ -23,11 +23,11 @@
                		     		           { "groupId": "^[0-9]", "bEscapeRegex": false }
                		     		  ],
                     "aoColumns": [
-                      { "sTitle": "名称","mData":"roleName","bSortable": false},
-                      { "sTitle": "状态","mData":"status","bSortable": false,"sWidth":50 },
-                      { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false,"sWidth":130 },
+                      { "sTitle": "编号","mData":"roleId","bSortable": false},
+                      { "sTitle": "名称","mData":"roleName","bSortable": false,"sWidth":50 },
+                      { "sTitle": "状态","mData":"status","bSortable": false,"sWidth":130 },
                       { "sTitle": "修改日期","mData":"gmtModify","bSortable": false,"sWidth":130 },
-                      { "sTitle": "操作","mData":"roleId","bSortable": false }
+                      { "sTitle": "操作","mData":"gmtCreate","bSortable": false }
                     ],
                     "aLengthMenu": [
                         [5, 15, 20, -1],
