@@ -67,5 +67,15 @@ public interface UserService {
      * @return
      */
     public Set<String> findPermissions(String username);
+    
+    //激活邮箱
+    public boolean activeEmail(String userName);
+    
+    //创建激活邮箱链接
+    public String createActiveEmailLink(String userName);
+    
+    //创建重置密码链接
+    public String createResetPwdLink(String userName);
+    
 
 }

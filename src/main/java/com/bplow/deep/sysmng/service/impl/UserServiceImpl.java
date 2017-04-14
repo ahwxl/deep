@@ -153,4 +153,22 @@ public class UserServiceImpl implements UserService {
 
     }
 
+	@Override
+	public boolean activeEmail(String userName) {
+		
+		return false;
+	}
+
+	@Override
+	public String createActiveEmailLink(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String createResetPwdLink(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
