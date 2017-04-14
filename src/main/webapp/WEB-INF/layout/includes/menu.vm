@@ -1,0 +1,151 @@
+			<ul class="page-sidebar-menu">
+
+				<li>
+
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+					<div class="sidebar-toggler hidden-phone"></div>
+
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+				</li>
+
+				<li class="start">
+
+					<a href="$cxt">
+
+					<i class="icon-home"></i> 
+
+					<span class="title">首页</span>
+
+					</a>
+
+				</li>
+				
+				<li class=" ">
+
+					<a href="javascript:;">
+
+					<i class="icon-th"></i>
+
+					<span class="title">服务器管理</span>
+
+					<span class="selected"></span>
+
+					<span class="arrow open"></span>
+
+					</a>
+
+					<ul class="sub-menu">
+						<li >
+							<a href="$cxt">端口</a>
+						</li>
+						<li class="">
+							<a href="$cxt">应用管理</a>
+						</li>
+					</ul>
+				</li>
+				<li class="" name="系统管理">
+
+					<a href="javascript:;">
+
+					<i class="icon-link"></i>
+
+					<span class="title" >系统管理</span>
+
+					<span class="selected"></span>
+
+					<span class="arrow open"></span>
+
+					</a>
+
+					<ul class="sub-menu">
+						<li class="" name="部门">
+							<a href="$cxt/sysmng/organizationPage">部门</a>
+						</li>
+						<li name="用户">
+							<a href="$cxt/sysmng/usersPage">用户</a>
+						</li>
+						<li class="" name="角色">
+							<a href="$cxt/sysmng/rolesPage">角色</a>
+						</li>
+						<li name="权限">
+							<a href="$cxt/sysmng/permissionPage">权限</a>
+						</li>
+						<li class="" name="资源">
+							<a href="$cxt/sysmng/resourcePage">资源</a>
+						</li>
+						<li class="" name="机构-用户">
+							<a href="$cxt/sysmng/organizationUserPage">机构-用户</a>
+						</li>
+						<li class="" name="用户-角色">
+							<a href="$cxt/sysmng/userRolePage">用户-角色</a>
+						</li>
+						<li class="" name="角色-权限">
+							<a href="$cxt/sysmng/rolePermissionPage">角色-权限</a>
+						</li>
+						<li class="" name="权限-资源">
+							<a href="$cxt/sysmng/permissionResPage">权限-资源</a>
+						</li>
+					</ul>
+				</li>
+				<li class="">
+
+					<a href="javascript:;">
+
+					<i class="icon-usd"></i>
+
+					<span class="title">调度管理</span>
+
+					<span class="selected"></span>
+
+					<span class="arrow open"></span>
+
+					</a>
+
+					<ul class="sub-menu">
+						<li >
+							<a href="$cxt/job/joblist">任务</a>
+						</li>
+						<li >
+							<a href="$cxt/stock/stockWareHouse">持仓</a>
+						</li>
+						<li >
+							<a href="$cxt/stock/translist">交易记录</a>
+						</li>
+						<li >
+							<a href="$cxt/warn/customerWarnPage">股票规则</a>
+						</li>
+						<li >
+							<a href="$cxt/warn/warnRulePage">规则脚本</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="last ">
+
+					<a href="javascript:;">
+
+					<i class="icon-bar-chart"></i> 
+
+					<span class="title">流程管理</span>
+					
+					<span class="selected"></span>
+                    <span class="arrow "></span>
+					</a>
+					<ul class="sub-menu">
+					    <li>
+							<a href="$cxt/bpm/processType">起草申请</a>
+						</li>
+					    <li>
+							<a href="$cxt/bpm/processInstancePage">流程列表</a>
+						</li>
+						<li>
+							<a href="$cxt/bpm/taskItemPage">任务列表</a>
+						</li>
+						<li>
+							<a href="$cxt/bpm/queryForPage">我的申请</a>
+						</li>
+					</ul>
+				</li>
+			</ul>

@@ -1,0 +1,53 @@
+<html><head>
+<base target="_blank">
+<style type="text/css">
+::-webkit-scrollbar{ display: none; }
+</style>
+<style id="cloudAttachStyle" type="text/css">
+#divNeteaseBigAttach, #divNeteaseBigAttach_bak{display:none;}
+</style>
+
+</head>
+<body tabindex="0" role="listitem">
+
+
+
+
+<p>Hi <a href="mailto:${toEmail}">${toEmail}</a>,</p>
+								 <p>You recently created an account at Homadorma.com with this email. We need to verify your email address to ensure prompt delivery of your email.</p>
+								 <p>----------------------------</p>
+								 <p>Account activation instruction</p>	
+								 <p>----------------------------</p>
+								 <p>Please click on the link or copy and paste it into your browser's address bar to activate your account.</p>	
+								 <p><b><a href="${url}">${url}</a></b></p>
+								 <p>This email is system generated. Please do not reply directly.</p>
+								 <p>Please ignore this emial if you have not created an account at .com.</p>
+								 <p>Thanks for your visit.</p>
+								 <p>.com Management Team</p>
+								 <br>
+								 <br>
+		 					<p><a href="mailto:${toEmail}">${toEmail}</a>, 你好</p>
+								 <p>你收到这封邮件，是由于你在住我家网注册时使用了这个电子邮件地址。我们需要对你的电子邮件地址有效性进行验证以避免垃圾邮件，或地址被滥用。</p>
+								 <p>----------------------------</p>
+								 <p>账号激活说明</p>	
+								 <p>----------------------------</p>
+								 <p>你只需点击下面的链接，或将链接复制到浏览器地址栏访问即可激活你的账号：</p>	
+								 <p><b><a href="${url}">${url}</a></b></p>
+								 <p>此邮件为系统自动发出，请勿直接回复。</p>
+								 <p>如果你并没有访问过住我家网，或没有进行上述操作，请忽略这封邮件。</p>
+								 <p>感谢你的访问，祝你使用愉快</p>
+								 <p>网管理团队</p>
+ 
+
+<style type="text/css">
+body{font-size:14px;font-family:arial,verdana,sans-serif;line-height:1.666;padding:0;margin:0;overflow:auto;white-space:normal;word-wrap:break-word;min-height:100px}
+td, input, button, select, body{font-family:Helvetica, 'Microsoft Yahei', verdana}
+pre {white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word;width:95%}
+th,td{font-family:arial,verdana,sans-serif;line-height:1.666}
+img{ border:0}
+header,footer,section,aside,article,nav,hgroup,figure,figcaption{display:block}
+</style>
+
+<style id="ntes_link_color" type="text/css">a,td a{color:#064977}</style>
+
+</body></html>
