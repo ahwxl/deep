@@ -29,4 +29,6 @@
 	<import resource="spring/webservice/applicationContext-soap-server.xml"/>-->
 	<!-- 消息服务 
 	<import resource="spring/jms/applicationContext-jms-advanced.xml"/>-->
+	
+	<import resource="spring/cxt-email.xml" />
 </beans>

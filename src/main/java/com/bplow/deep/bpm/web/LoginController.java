@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.bplow.deep.authority.User;
-import com.bplow.deep.stock.domain.SysUser;
+import com.bplow.deep.sysmng.domain.SysUser;
 import com.bplow.deep.sysmng.service.UserService;
 
 /**

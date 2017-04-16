@@ -84,7 +84,7 @@
 		</form>
 		<!-- END LOGIN FORM -->        
 		<!-- BEGIN FORGOT PASSWORD FORM -->
-		<form class="form-vertical forget-form" action="/checkLogin.do">
+		<form id="forget-form" class="form-vertical forget-form" action="/checkLogin.do">
 			<h3 class="">Forget Password ?</h3>
 			<p>Enter your e-mail address below to reset your password.</p>
 			<div class="control-group">
@@ -192,7 +192,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="/deep/static/js/app.js" type="text/javascript"></script>
-	<script src="/deep/static/js/login.js?20170328" type="text/javascript"></script>
+	<script src="/deep/static/js/login.js?20170303" type="text/javascript"></script>		<script src="/deep/static/js/module/validater-method.js?20170305" type="text/javascript"></script>
 	<!-- END PAGE LEVEL SCRIPTS --> 
 	<script>
 		jQuery(document).ready(function() {     

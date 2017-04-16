@@ -24,7 +24,6 @@ import com.bplow.deep.stock.domain.SkSendSmsLog;
 import com.bplow.deep.stock.domain.SkWarehousePositon;
 import com.bplow.deep.stock.domain.SkWarnLog;
 import com.bplow.deep.stock.domain.SkWarnRule;
-import com.bplow.deep.stock.domain.SysUser;
 import com.bplow.deep.stock.mapper.SkCustomerWarnMapper;
 import com.bplow.deep.stock.mapper.SkSendSmsLogMapper;
 import com.bplow.deep.stock.mapper.SkWarehousePositonMapper;
@@ -37,6 +36,7 @@ import com.bplow.deep.stock.service.SendMessageService;
 import com.bplow.deep.stock.service.SystemUserService;
 import com.bplow.deep.stock.vo.Message;
 import com.bplow.deep.stock.vo.StockInfo;
+import com.bplow.deep.sysmng.domain.SysUser;
 
 /**
  * @desc   一个任务只能 对于一个用户 和 一个股票

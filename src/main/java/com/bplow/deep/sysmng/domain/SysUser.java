@@ -1,4 +1,4 @@
-package com.bplow.deep.stock.domain;
+package com.bplow.deep.sysmng.domain;
 
 import java.util.Date;
 
@@ -9,18 +9,23 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SysUser extends PageInfo implements User{
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private String userId;
 
     private String userName;
 
+    private String nickName;
+
+    private String realName;
+
     private String password;
 
     private String sex;
+
+    private String birthday;
+
+    private String phone;
 
     private String email;
 
@@ -28,13 +33,23 @@ public class SysUser extends PageInfo implements User{
 
     private String status;
 
+    private Integer districtId;
+
+    private String address;
+
+    private String level;
+
     private String remark;
+
+    private String type;
 
     private String salt;
 
     private Date gmtCreate;
 
     private Date gmtModify;
+
+    private Date latestAccessTime;
     
     private String organizationId;
     
@@ -156,4 +171,76 @@ public class SysUser extends PageInfo implements User{
         this.checked = checked;
     }
 
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Integer getDistrictId() {
+		return districtId;
+	}
+
+	public void setDistrictId(Integer districtId) {
+		this.districtId = districtId;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Date getLatestAccessTime() {
+		return latestAccessTime;
+	}
+
+	public void setLatestAccessTime(Date latestAccessTime) {
+		this.latestAccessTime = latestAccessTime;
+	}
+    
 }

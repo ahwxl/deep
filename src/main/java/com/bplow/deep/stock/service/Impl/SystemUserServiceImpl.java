@@ -6,8 +6,8 @@ package com.bplow.deep.stock.service.Impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bplow.deep.stock.domain.SysUser;
 import com.bplow.deep.stock.service.SystemUserService;
+import com.bplow.deep.sysmng.domain.SysUser;
 import com.bplow.deep.sysmng.mapper.SysUserMapper;
 
 /**

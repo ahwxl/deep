@@ -3,7 +3,7 @@
  */
 package com.bplow.deep.stock.service;
 
-import com.bplow.deep.stock.domain.SysUser;
+import com.bplow.deep.sysmng.domain.SysUser;
 
 /**
  * @desc 

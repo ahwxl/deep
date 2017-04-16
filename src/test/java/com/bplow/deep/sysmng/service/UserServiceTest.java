@@ -1,4 +1,4 @@
-package com.bplow.deep.stock.service;
+package com.bplow.deep.sysmng.service;
 
 import javax.transaction.Transactional;
 
@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.bplow.deep.authority.User;
-import com.bplow.deep.stock.domain.SysUser;
+import com.bplow.deep.sysmng.domain.SysUser;
 import com.bplow.deep.sysmng.service.UserService;
 
 @ContextConfiguration(locations = { "/applicationContext.xml", "/spring/cxt-dao.xml",

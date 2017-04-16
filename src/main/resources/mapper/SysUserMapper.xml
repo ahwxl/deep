@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bplow.deep.sysmng.mapper.SysUserMapper">
   
-  <resultMap id="BaseResultMap" type="com.bplow.deep.stock.domain.SysUser">
+  <resultMap id="BaseResultMap" type="com.bplow.deep.sysmng.domain.SysUser">
     <id column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -22,7 +22,7 @@
     gmt_modify
   </sql>
   
-  <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SysUser" resultMap="BaseResultMap">
+  <select id="queryForPage" parameterType="com.bplow.deep.sysmng.domain.SysUser" resultMap="BaseResultMap">
     select a.*,
     <choose>
     <when test="organizationId !=null and organizationId != ''">
@@ -59,6 +59,26 @@
     where user_id = #{userId,jdbcType=VARCHAR}
   </select>
   
+  <select id="queryUser" parameterType="com.bplow.deep.sysmng.domain.SysUser" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user a
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="userId != null and userId != '' ">
+             a.user_id = #{userId} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="email != null and email != '' ">
+             a.email = #{email}
+          </if>
+        </trim>
+      </trim>
+    </where>
+  </select>
+  
   <select id="queryUserPermissions" parameterType="java.lang.String" resultType="java.lang.String">
   select b.permission_id from sys_user_role a,sys_role_permission b
 	where a.role_id = b.role_id
@@ -71,7 +91,7 @@
     where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
   
-  <insert id="insert" parameterType="com.bplow.deep.stock.domain.SysUser">
+  <insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysUser">
     insert into sys_user (user_id, user_name, password, 
       sex, email, mobile, status, 
       remark, salt, gmt_create, 
@@ -82,7 +102,7 @@
       #{gmtModify,jdbcType=TIMESTAMP})
   </insert>
   
-  <update id="update" parameterType="com.bplow.deep.stock.domain.SysUser">
+  <update id="update" parameterType="com.bplow.deep.sysmng.domain.SysUser">
     update sys_user
     <set>
       <if test="userName != null">

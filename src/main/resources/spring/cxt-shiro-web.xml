@@ -118,6 +118,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 			    /static/** = anon
+			    /user/** = anon
 				/index.jsp = anon
 				/checkLogin.do = anon
 				/register.do = anon

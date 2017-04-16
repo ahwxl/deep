@@ -106,7 +106,7 @@ public class SendMailServiceImpl implements SendMailService{
             Message aimMsg = this.getMessage(msg);
             Transport.send(aimMsg);
         } catch (MessagingException e) {
-            logger.error("发送email"+msg.getTo()[0], e);
+            logger.error("发送email:"+msg.getTo()[0], e);
         }
     }
     

@@ -1,20 +1,25 @@
 package com.bplow.deep.sysmng.service.impl;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import com.bplow.deep.authority.PasswordHelper;
 import com.bplow.deep.authority.User;
 import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.stock.domain.SysUser;
+import com.bplow.deep.sysmng.domain.SysUser;
 import com.bplow.deep.sysmng.domain.SysUserRole;
 import com.bplow.deep.sysmng.mapper.SysUserMapper;
 import com.bplow.deep.sysmng.mapper.SysUserRoleMapper;
+import com.bplow.deep.sysmng.service.SendMailService;
 import com.bplow.deep.sysmng.service.UserService;
 
 @Service("userService")
@@ -28,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordHelper    passwordHelper;
+    
+    @Autowired
+    SendMailService sendMailService;
 
     public void setPasswordHelper(PasswordHelper passwordHelper) {
         this.passwordHelper = passwordHelper;
@@ -166,9 +174,42 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String createResetPwdLink(String userName) {
-		// TODO Auto-generated method stub
+	public String createResetPwdLink(String email) {
+		
+		if(StringUtils.isBlank(email)){
+			return null;
+		}
+		
+		String flag = UUID.randomUUID().toString().replace("-", "");
+		
+		Map map = new HashMap();
+        map.put("toEmail", email);
+        map.put("url", "http://www.techwellglobal.com/deep/user/resetPasswdPage/"+flag);
+        
+       String content = sendMailService.getEmailCnt("emailcxt.vm", map);
+        
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom("tenement_admin@163.com");
+        msg.setSubject("[执行结果通知]");
+        msg.setText(content);
+        msg.setTo(new String[]{email});
+        
+        sendMailService.sendMail(msg);
+		
 		return null;
+	}
+
+	@Override
+	public boolean checkUserValidater(User user) {
+		
+		boolean result = false;
+		User usertmp = sysUserMapper.queryUser(user);
+		
+		if(null != usertmp){
+			result = true;
+		}
+		
+		return result;
 	}
 
 }

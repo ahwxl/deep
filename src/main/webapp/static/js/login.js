@@ -82,7 +82,8 @@ var Login = function () {
 
 	            messages: {
 	                email: {
-	                    required: "Email is required."
+	                    required: "Email is required.",
+	                    email:'邮箱格式不正确'
 	                }
 	            },
 
@@ -105,7 +106,13 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                window.location.href = "index.html";
+	            	var param = $('#forget-form').serialize();
+            		$.post("/deep/user/sendActiveEmail",
+            				param,
+            			function(data){
+            			    window.location.href = "/deep/";
+            		    }
+            		);
 	            }
 	        });
 
@@ -135,7 +142,8 @@ var Login = function () {
 	            ignore: "",
 	            rules: {
 	            	userName: {
-	                    required: true
+	                    required: true,
+	                    checkUserId: true
 	                },
 	                password: {
 	                    required: true
@@ -145,7 +153,8 @@ var Login = function () {
 	                },
 	                email: {
 	                    required: true,
-	                    email: true
+	                    email: true,
+	                    checkEmail:true
 	                },
 	                tnc: {
 	                    required: true

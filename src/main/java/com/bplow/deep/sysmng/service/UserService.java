@@ -23,6 +23,8 @@ public interface UserService {
     public void addUserRole(SysUserRole userRole,String roleIds,String delIds);
     
     public Page<User> queryUserForPage(User user);
+    
+    public boolean checkUserValidater(User user);
 
     /**
      * 修改密码
@@ -75,7 +77,7 @@ public interface UserService {
     public String createActiveEmailLink(String userName);
     
     //创建重置密码链接
-    public String createResetPwdLink(String userName);
+    public String createResetPwdLink(String emailAddr);
     
 
 }

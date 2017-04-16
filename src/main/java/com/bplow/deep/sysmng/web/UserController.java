@@ -5,6 +5,7 @@ package com.bplow.deep.sysmng.web;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -15,10 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bplow.deep.authority.User;
-import com.bplow.deep.stock.domain.SysUser;
+import com.bplow.deep.sysmng.domain.SysUser;
 import com.bplow.deep.sysmng.service.UserService;
 
 /**
@@ -61,7 +63,7 @@ public class UserController {
 		return "{\"responseMsg\":\"success\"}";
 	}
 	
-	
+	//显示用户信息
 	@RequestMapping(value = "/showProfile")
 	public String showProfile(HttpServletRequest httpRequest, Model view,SysUser user){
 		logger.info("显示用户信息");
@@ -76,7 +78,7 @@ public class UserController {
 		
 		return "sys/user-profile";
 	}
-	
+	//修改用户信息
 	@RequestMapping(value = "/changeProfile")
 	@ResponseBody
 	public String changeProfile(HttpServletRequest httpRequest, Model view,SysUser user){
@@ -88,7 +90,18 @@ public class UserController {
 		return "{\"responseMsg\":\"success\"}";
 	}
 	
-	//通过邮箱发送的链接   重置密码
+	//创建重置密码链接 并发送邮件
+	@RequestMapping(value = "/resetPwdActive")
+	@ResponseBody
+	public String resetPasswdActive(HttpServletRequest httpRequest, Model view,SysUser user){
+		logger.info("修改用户信息");
+		
+		userService.createResetPwdLink(user.getEmail());
+		
+		return "{\"responseMsg\":\"success\"}";
+	}
+	
+	//通过邮箱发送的链接   重置密码  进入重置密码页面
 	@RequestMapping(value = "/resetPasswdPage/{flag}")
 	public String resetPasswd(HttpServletRequest httpRequest, Model view,SysUser user,@PathVariable("flag")String flag){
 		logger.info("显示用户信息");
@@ -105,7 +118,7 @@ public class UserController {
 		
 		return "sys/user-profile";
 	}
-	
+	//重置密码
 	@RequestMapping(value = "/resetPasswd")
 	@ResponseBody
 	public String resetPasswdAction(HttpServletRequest httpRequest, Model view,SysUser user){
@@ -122,6 +135,17 @@ public class UserController {
 		return "{\"responseMsg\":\"success\"}";
 	}
 	
+	@RequestMapping(value = "/sendActiveEmail")
+	@ResponseBody
+	public String sendActiveEmail(HttpServletRequest httpRequest, Model view,SysUser user,@RequestParam("email")String email){
+		logger.info("显示用户信息");
+		
+	    userService.createResetPwdLink(email);
+		
+		return "{\"responseMsg\":\"success\"}";
+	}
+	
+	//激活邮箱
 	@RequestMapping(value = "/activeEmail/{flag}")
 	public String activeEmail(HttpServletRequest httpRequest, Model view,SysUser user,@PathVariable("flag")String flag){
 		logger.info("显示用户信息");
@@ -137,6 +161,25 @@ public class UserController {
 		view.addAttribute("user", lguser);
 		
 		return "sys/user-profile";
+	}
+	
+	//校验用户id 和 邮箱 是否可用
+	@RequestMapping(value = "/checkValidater")
+	@ResponseBody
+	public String activeEmail(HttpServletRequest httpRequest, Model view,SysUser user){
+		logger.info("显示用户信息");
+		
+		String responseMsg = null;
+		if(StringUtils.isNotBlank(user.getEmail())){
+			responseMsg = "邮箱不可用";
+		}else if(StringUtils.isNotBlank(user.getUserId())){
+			responseMsg = "该用户名已被使用";
+		}
+		
+	    boolean result = userService.checkUserValidater(user);
+		
+		
+		return String.format("{\"responseMsg\":\"%s\",\"result\":%b}", responseMsg,result);
 	}
 
 }
