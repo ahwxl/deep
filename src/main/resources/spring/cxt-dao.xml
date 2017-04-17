@@ -20,7 +20,7 @@
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-		<property name="basePackage" value="com.bplow.deep.bpm.mapper,com.bplow.deep.stock.mapper,com.bplow.deep.sysmng.mapper" />
+		<property name="basePackage" value="com.bplow.deep.bpm.mapper,com.bplow.deep.stock.mapper,com.bplow.deep.sysmng.mapper,com.bplow.deep.cms.mapper" />
 	</bean>
 
 	<bean name="pageResultInterceptor" class="com.bplow.deep.base.pagination.PageResultInterceptor"></bean>

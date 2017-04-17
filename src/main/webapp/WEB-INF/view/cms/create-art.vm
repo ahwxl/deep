@@ -1,0 +1,186 @@
+<html>
+<head>
+<script type="text/javascript" src="/deep/static/js/ckeditor/ckeditor.js"></script>
+
+</head>
+<body>
+<div class="row-fluid">
+					<div class="span12">
+					</div>
+				</div>
+<div class="portlet box ">
+
+							<div class="portlet-title">
+
+								<div class="caption"><i class="icon-globe">添加文章</i></div>
+								
+								<div class="actions">
+
+									<a href="#" id="mySubmit" class="btn green"><i class="icon-plus"></i> 添加</a>
+
+								</div>
+
+							</div>
+                                        <div class="portlet-body form">
+											<!-- BEGIN FORM-->
+											<form action="#" name="myform" id="myform" class="form-horizontal">
+											
+												<div class="row-fluid">
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label">标题</label>
+															<div class="controls">
+																<input type="text" class="m-wrap span12" placeholder="Chee Kin">
+																<span class="help-block">This is inline help</span>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="span6 ">
+														<div class="control-group error">
+															<label class="control-label">副标题</label>
+															<div class="controls">
+																<input type="text" class="m-wrap span12" placeholder="Lim">
+																<span class="help-block">This field has error.</span>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+												</div>
+												<!--/row-->
+												<div class="row-fluid">
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label">文章类型</label>
+															<div class="controls">
+																<select class="m-wrap span12">
+																	<option value="1">普通文章</option>
+																	<option value="2">活动</option>
+																</select>
+																<span class="help-block">Select your gender.</span>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label" >图片</label>
+															<div class="controls">
+																<input type="text" class="m-wrap span12" placeholder="">
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+												</div>
+												<!--/row-->        
+												<div class="row-fluid">
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label">目录</label>
+															<div class="controls">
+																<select class="span12 select2_category"  data-placeholder="Choose a Category" tabindex="1">
+																	<option value=""></option>
+																	<option value="Category 1">Category 1</option>
+																	<option value="Category 2">Category 2</option>
+																	<option value="Category 3">Category 5</option>
+																	<option value="Category 4">Category 4</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label">简介</label>
+															<div class="controls">                                                
+																<input type="text"  class="m-wrap span12" placeholder="">
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+												</div>
+												<h3 class="form-section">内容</h3>
+												<!--/row-->                   
+												<div class="row-fluid">
+													<div class="span12 ">
+														<div class="control-group">
+															<div id="editor" style="height:600px;width: 65%;"></div>
+														</div>
+													</div>
+												</div>
+											</form>
+											<!-- END FORM-->                
+										</div>
+										
+</div>
+<script>
+
+if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
+	CKEDITOR.tools.enableHtml5Elements( document );
+
+// The trick to keep the editor in the sample quite small
+// unless user specified own height.
+CKEDITOR.config.height = 350;
+CKEDITOR.config.width = 'auto';
+
+var initSample = ( function() {
+	var wysiwygareaAvailable = isWysiwygareaAvailable(),
+		isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
+	wysiwygareaAvailable = true;
+
+	return function() {
+		var editorElement = CKEDITOR.document.getById( 'editor' );
+
+		// :(((
+		if ( isBBCodeBuiltIn ) {
+			editorElement.setHtml(
+				'Hello world!\n\n' +
+				'I\'m an instance of [url=http://ckeditor.com]CKEditor[/url].'
+			);
+		}
+
+		// Depending on the wysiwygare plugin availability initialize classic or inline editor.
+		if ( wysiwygareaAvailable ) {
+			//CKEDITOR.replace( 'editor' );
+			CKEDITOR.replace( 'editor', {
+		    filebrowserBrowseUrl: '/deep/art/image/ckfinderPop',
+		    filebrowserUploadUrl : '/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Files&currentFolder=/archive/',
+	        filebrowserImageUploadUrl : '/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images&currentFolder=/cars/',
+	        filebrowserFlashUploadUrl : '/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash'
+		});
+		} else {
+			editorElement.setAttribute( 'contenteditable', 'true' );
+			CKEDITOR.inline( 'editor' );
+
+			// TODO we can consider displaying some info box that
+			// without wysiwygarea the classic editor may not work.
+		}
+		
+		
+	};
+
+	function isWysiwygareaAvailable() {
+		// If in development mode, then the wysiwygarea must be available.
+		// Split REV into two strings so builder does not replace it :D.
+		if ( CKEDITOR.revision == ( '%RE' + 'V%' ) ) {
+			return true;
+		}
+
+		return !!CKEDITOR.plugins.get( 'wysiwygarea' );
+	}
+} )();
+
+$(document).ready(function () {
+initSample();
+$("#mySubmit").click(function (){
+alert('');
+$("#myform").submit();
+});
+});
+
+
+//var data = CKEDITOR.instances.editor1.getData();
+</script>
+
+</body>
+</html>

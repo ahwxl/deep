@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.cms.mapper.ArticleMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.cms.domain.Article">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="catalog_id" jdbcType="VARCHAR" property="catalogId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="full_title" jdbcType="VARCHAR" property="fullTitle" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="state" jdbcType="CHAR" property="state" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+  </resultMap>
+  
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bplow.deep.cms.domain.Article">
+    <result column="content" jdbcType="LONGVARBINARY" property="content" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, catalog_id, type, title, full_title, intro, images, author, modifier, state, 
+    gmt_create, gmt_modify, times
+  </sql>
+  
+  <sql id="Blob_Column_List">content</sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.cms.domain.Article" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_article
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="id != null">
+             ID = #{id} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from t_article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.cms.domain.Article">
+    insert into t_article (id, catalog_id, type, 
+      title, full_title, intro, 
+      images, author, modifier, 
+      state, gmt_create, gmt_modify, 
+      times, content)
+    values (#{id,jdbcType=INTEGER}, #{catalogId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{fullTitle,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
+      #{images,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, 
+      #{state,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
+      #{times,jdbcType=INTEGER}, #{content,jdbcType=LONGVARBINARY})
+  </insert>
+  
+  <update id="update" parameterType="com.bplow.deep.cms.domain.Article">
+    update t_article
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="catalogId != null">
+        catalog_id = #{catalogId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="fullTitle != null">
+        full_title = #{fullTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null">
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+     WHERE ID = #{id} 
+  </update>
+</mapper>

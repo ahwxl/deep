@@ -12,6 +12,7 @@
 		<pattern>/index.html</pattern>
 		<pattern>/tabs-index.html</pattern>
 		<pattern>/unauthorized</pattern>
+		<pattern>/art/image/*</pattern>
 	</excludes>
 
 <!-- 	<decorator name="default" page="default.vm">

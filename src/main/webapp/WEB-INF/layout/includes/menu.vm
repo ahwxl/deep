@@ -121,6 +121,33 @@
 						</li>
 					</ul>
 				</li>
+				
+				<li class=" " name="内容管理">
+
+					<a href="javascript:;">
+
+					<i class="icon-th"></i>
+
+					<span class="title">内容管理</span>
+
+					<span class="selected"></span>
+
+					<span class="arrow open"></span>
+
+					</a>
+
+					<ul class="sub-menu">
+						<li name="文章管理">
+							<a href="$cxt/art/">文章管理</a>
+						</li>
+						<li class="创建文章" >
+							<a href="$cxt/art/createArticlePage">创建文章</a>
+						</li>
+						<li class="图片管理" >
+							<a href="$cxt/art/imageMng">图片管理</a>
+						</li>
+					</ul>
+				</li>
 
 				<li class="last ">
 
