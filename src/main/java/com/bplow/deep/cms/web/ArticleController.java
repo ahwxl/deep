@@ -37,11 +37,12 @@ public class ArticleController {
         logger.info("创建文章");
         
         
-        return "cms/create-art-frame";
+        return "{\"responseMsg\":\"success\"}";
     }
 
     
     @RequestMapping(value = "/createArticle")
+    @ResponseBody
     public String createArticle(HttpServletRequest httpRequest, Model view,Article article){
         logger.info("创建文章");
         

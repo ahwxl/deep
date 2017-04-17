@@ -30,9 +30,9 @@ public class ArticleServiceTest {
     @Test
     public void testQuery() throws IOException{
         
-       Article art = articleService.queryArticle("1");
+       Article art = articleService.queryArticle("3");
        
-       System.out.println(IOUtils.toString(art.getContent(),"UTF-8"));
+       System.out.println(IOUtils.toString(art.getContent(),"GBK"));
         
     }
     
