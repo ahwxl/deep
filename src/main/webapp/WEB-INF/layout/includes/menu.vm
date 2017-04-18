@@ -138,12 +138,12 @@
 
 					<ul class="sub-menu">
 						<li name="文章管理">
-							<a href="$cxt/art/">文章管理</a>
+							<a href="$cxt/art/article">文章管理</a>
 						</li>
-						<li class="创建文章" >
+						<li class="" name="创建文章">
 							<a href="$cxt/art/createArticlePage">创建文章</a>
 						</li>
-						<li class="图片管理" >
+						<li class="" name="图片管理">
 							<a href="$cxt/art/imageMng">图片管理</a>
 						</li>
 					</ul>
@@ -153,7 +153,7 @@
 
 					<a href="javascript:;">
 
-					<i class="icon-bar-chart"></i> 
+					<i class="icon-bar-chart"></i>
 
 					<span class="title">流程管理</span>
 					

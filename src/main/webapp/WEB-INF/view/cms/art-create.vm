@@ -2,6 +2,7 @@
 <head>
 <script type="text/javascript" src="/deep/static/js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/deep/static/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="/deep/static/js/select2-403.min.js"></script>
 </head>
 <body>
 <div class="row-fluid">
@@ -31,7 +32,6 @@
 															<label class="control-label">标题</label>
 															<div class="controls">
 																<input type="text" name="title" class="m-wrap span12" placeholder="Chee Kin">
-																<span class="help-block">This is inline help</span>
 															</div>
 														</div>
 													</div>
@@ -41,7 +41,6 @@
 															<label class="control-label">副标题</label>
 															<div class="controls">
 																<input type="text" name="fullTitle" class="m-wrap span12" placeholder="Lim">
-																<span class="help-block">This field has error.</span>
 															</div>
 														</div>
 													</div>
@@ -57,7 +56,6 @@
 																	<option value="1">普通文章</option>
 																	<option value="2">活动</option>
 																</select>
-																<span class="help-block">Select your gender.</span>
 															</div>
 														</div>
 													</div>
@@ -78,12 +76,8 @@
 														<div class="control-group">
 															<label class="control-label">目录</label>
 															<div class="controls">
-																<select name="catalogId" class="span12 select2_category"  data-placeholder="Choose a Category" tabindex="1">
+																<select name="catalogId" class="span12 select2_category select2_parent_resource"  tabindex="1">
 																	<option value=""></option>
-																	<option value="Category 1">Category 1</option>
-																	<option value="Category 2">Category 2</option>
-																	<option value="Category 3">Category 5</option>
-																	<option value="Category 4">Category 4</option>
 																</select>
 															</div>
 														</div>
@@ -195,8 +189,24 @@ $('#myform').submit(function() {
         $(this).ajaxSubmit(options); 
         return false;
     }); 
-    
 
+$.ajax({
+    					url:'/deep/sysmng/queryResForSelect',
+    					async:false,
+    					method:'POST',
+    					data:'resourceId=',
+    					dataType : 'json',
+    					error :function(resp){alert(resp)},
+    					success:function(resp){
+    						$(".select2_parent_resource").select2({
+    							  data: resp
+    						});
+    						$(".select2_resourceType").select2();
+    					}
+    				});
+
+$(".page-sidebar-menu li[name='内容管理']").addClass("active");
+$(".page-sidebar-menu li[name='创建文章']").addClass("active");
 
 });
 

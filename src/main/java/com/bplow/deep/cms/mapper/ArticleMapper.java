@@ -13,6 +13,6 @@ public interface ArticleMapper {
 
     int insert(Article record);
 
-    int deleteByPrimaryKey(Integer id);
+    int delete(Integer id);
     
 }

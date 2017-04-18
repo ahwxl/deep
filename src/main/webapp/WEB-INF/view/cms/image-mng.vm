@@ -50,6 +50,8 @@ function showFileInfo( fileUrl, data, allFiles )
 			// The "create" function can also accept an object as the only argument.
 			// CKFinder.create( { basePath : '../', selectActionFunction : showFileInfo } );
 
+$(".page-sidebar-menu li[name='内容管理']").addClass("active");
+$(".page-sidebar-menu li[name='图片管理']").addClass("active");
 </script>
 
 </body>

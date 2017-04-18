@@ -1,0 +1,236 @@
+<html>
+<head>
+<script type="text/javascript" src="/deep/static/js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/deep/static/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="/deep/static/js/select2-403.min.js"></script>
+</head>
+<body>
+<div class="row-fluid">
+					<div class="span12">
+					</div>
+				</div>
+<div class="portlet box ">
+
+							<div class="portlet-title">
+
+								<div class="caption"><i class="icon-globe">修改文章</i></div>
+								
+								<div class="actions">
+
+									<a href="#" id="mySubmit" class="btn green"><i class="icon-plus"></i> 提交</a>
+
+								</div>
+
+							</div>
+                                        <div class="portlet-body form">
+											<!-- BEGIN FORM-->
+											<form action="#" name="myform" id="myform" class="form-horizontal">
+											<input type="hidden" name="id" value="$id" />
+											<input type="hidden" name="content" value="" />
+												<div class="row-fluid">
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label">标题</label>
+															<div class="controls">
+																<input type="text" name="title" class="m-wrap span12" placeholder="Chee Kin">
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label">副标题</label>
+															<div class="controls">
+																<input type="text" name="fullTitle" class="m-wrap span12" placeholder="Lim">
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+												</div>
+												<!--/row-->
+												<div class="row-fluid">
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label">文章类型</label>
+															<div class="controls">
+																<select name="type" class="m-wrap span12">
+																	<option value="1">普通文章</option>
+																	<option value="2">活动</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label" >图片</label>
+															<div class="controls">
+																<input type="text" name="images" class="m-wrap span12" placeholder="">
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+												</div>
+												<!--/row-->        
+												<div class="row-fluid">
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label">目录</label>
+															<div class="controls">
+																<select name="catalogId" class="span12 select2_category select2_parent_resource"  tabindex="1">
+																	<option value=""></option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label">简介</label>
+															<div class="controls">                                                
+																<input type="text" name="intro" class="m-wrap span12" placeholder="">
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+												</div>
+												<h3 class="form-section">内容</h3>
+												<!--/row-->                   
+												<div class="row-fluid">
+													<div class="span12 ">
+														<div class="control-group">
+															<div id="editor" style="height:600px;width: 65%;"></div>
+														</div>
+													</div>
+												</div>
+											</form>
+											<!-- END FORM-->                
+										</div>
+										
+</div>
+<script>
+
+if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
+	CKEDITOR.tools.enableHtml5Elements( document );
+
+// The trick to keep the editor in the sample quite small
+// unless user specified own height.
+CKEDITOR.config.height = 350;
+CKEDITOR.config.width = 'auto';
+
+var initSample = ( function() {
+	var wysiwygareaAvailable = isWysiwygareaAvailable(),
+		isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
+	wysiwygareaAvailable = true;
+
+	return function() {
+		var editorElement = CKEDITOR.document.getById( 'editor' );
+
+		// :(((
+		if ( isBBCodeBuiltIn ) {
+			editorElement.setHtml(
+				'Hello world!\n\n' +
+				'I\'m an instance of [url=http://ckeditor.com]CKEditor[/url].'
+			);
+		}
+
+		// Depending on the wysiwygare plugin availability initialize classic or inline editor.
+		if ( wysiwygareaAvailable ) {
+			//CKEDITOR.replace( 'editor' );
+			CKEDITOR.replace( 'editor', {
+		    filebrowserBrowseUrl: '/deep/art/image/ckfinderPop',
+		    filebrowserUploadUrl : '/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Files&currentFolder=/archive/',
+	        filebrowserImageUploadUrl : '/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images&currentFolder=/cars/',
+	        filebrowserFlashUploadUrl : '/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash'
+		});
+		} else {
+			editorElement.setAttribute( 'contenteditable', 'true' );
+			CKEDITOR.inline( 'editor' );
+
+			// TODO we can consider displaying some info box that
+			// without wysiwygarea the classic editor may not work.
+		}
+		
+		
+	};
+
+	function isWysiwygareaAvailable() {
+		// If in development mode, then the wysiwygarea must be available.
+		// Split REV into two strings so builder does not replace it :D.
+		if ( CKEDITOR.revision == ( '%RE' + 'V%' ) ) {
+			return true;
+		}
+
+		return !!CKEDITOR.plugins.get( 'wysiwygarea' );
+	}
+} )();
+
+$(document).ready(function () {
+initSample();
+$("#mySubmit").click(function (){
+   $("#myform").trigger('submit');
+});
+var options = {
+        //target:        '#output2',
+        //beforeSubmit:  showRequest,
+        success:function(){
+          alert("success");
+        },
+        url:       '/deep/art/modifyArticleById', 
+        type:      'post',
+        dataType:  'json',        // 'xml', 'script', or 'json' (expected server response type) 
+        //clearForm: true        // clear all form fields after successful submit 
+        //resetForm: true        // reset the form after successful submit 
+        timeout:   5000 
+    };
+    
+$('#myform').submit(function() {
+        var data = CKEDITOR.instances.editor.getData();
+        $('#myform input[name="content"]').val(data);
+        $(this).ajaxSubmit(options); 
+        return false;
+    });
+    
+$.ajax({
+    					url:'/deep/sysmng/queryResForSelect',
+    					async:false,
+    					method:'POST',
+    					data:'resourceId=',
+    					dataType : 'json',
+    					error :function(resp){alert(resp)},
+    					success:function(resp){
+    						$(".select2_parent_resource").select2({
+    							  data: resp
+    						});
+    					}
+    				});
+    
+$(".page-sidebar-menu li[name='内容管理']").addClass("active");
+
+$.ajax({
+						url:'/deep/art/queryArticleById',
+						async:true,
+						method:'POST',
+						data:'id=$id',
+						dataType : 'json',
+						error :function(resp){alert(resp)},
+						success:function(resp){
+							$('#myform input[name="title"]').val(resp.title);
+							$('#myform input[name=fullTitle]').val(resp.fullTitle);
+							$('#myform select[name=type]').val(resp.type);
+							$('#myform input[name=images]').val(resp.images);
+							$('#myform select[name=catalogId]').val(resp.catalogId);
+							$('#myform input[name=intro]').val(resp.intro);
+							
+							CKEDITOR.instances.editor.setData(resp.cnt);
+						}
+					});
+
+
+});
+
+
+</script>
+
+</body>
+</html>

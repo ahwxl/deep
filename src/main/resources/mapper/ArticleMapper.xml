@@ -40,6 +40,11 @@
              ID = #{id} 
           </if>
         </trim>
+        <trim prefix="AND">
+          <if test="title != null and title != ''">
+             title like CONCAT(CONCAT('%', #{title}), '%') 
+          </if>
+        </trim>
       </trim>
     </where>
      ORDER BY GMT_MODIFY DESC 
@@ -75,9 +80,6 @@
   <update id="update" parameterType="com.bplow.deep.cms.domain.Article">
     update t_article
     <set>
-      <if test="id != null">
-        id = #{id,jdbcType=INTEGER},
-      </if>
       <if test="catalogId != null">
         catalog_id = #{catalogId,jdbcType=VARCHAR},
       </if>
@@ -105,12 +107,7 @@
       <if test="state != null">
         state = #{state,jdbcType=CHAR},
       </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
+        gmt_modify = now(),
       <if test="times != null">
         times = #{times,jdbcType=INTEGER},
       </if>
