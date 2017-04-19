@@ -210,6 +210,11 @@ var Login = function () {
 	            jQuery('.login-form').show();
 	            jQuery('.register-form').hide();
 	        });
+	        
+	        jQuery(".patchca_image").click(function (){
+	        	var timenow = new Date().getTime();
+	            $(this).attr("src", "/deep/user/patchca?date=" + timenow);
+	        });
         }
 
     };

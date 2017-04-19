@@ -59,7 +59,7 @@
 						<input class="m-wrap placeholder-no-fix" type="password" placeholder="Password" name="password"/>
 					</div>
 				</div>
-			</div>
+			</div>						<div class="control-group">				<label class="control-label visible-ie8 visible-ie9">Password</label>				<div class="controls">					<div class="input-icon left">						<i class="icon-lock"></i>						<input class="small" type="password" placeholder="" name="patchca"/>                        <img alt="" class="patchca_image" src="/deep/user/patchca" />					</div>				</div>			</div>
 			<div class="form-actions">
 				<label class="checkbox">
 				<input type="checkbox" name="remember" value="1"/> Remember me
@@ -192,7 +192,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="/deep/static/js/app.js" type="text/javascript"></script>
-	<script src="/deep/static/js/login.js?20170303" type="text/javascript"></script>		<script src="/deep/static/js/module/validater-method.js?20170305" type="text/javascript"></script>
+	<script src="/deep/static/js/login.js?20170304" type="text/javascript"></script>		<script src="/deep/static/js/module/validater-method.js?20170305" type="text/javascript"></script>
 	<!-- END PAGE LEVEL SCRIPTS --> 
 	<script>
 		jQuery(document).ready(function() {     

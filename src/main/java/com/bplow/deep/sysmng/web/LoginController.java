@@ -1,7 +1,7 @@
 /**
  * www.bplow.com
  */
-package com.bplow.deep.bpm.web;
+package com.bplow.deep.sysmng.web;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,6 +40,7 @@ public class LoginController {
 		String result = "login.jsp";
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String patchca  = request.getParameter("patchca");
 		
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		
@@ -49,6 +50,12 @@ public class LoginController {
                 token.setRememberMe(false);
                 currentUser.login(token);//验证角色和权限
                 Session session = currentUser.getSession(true);
+                String code = (String)session.getAttribute("code");
+                logger.info("图形验证码:{}",code);
+                
+                if(null != patchca && patchca.equals(code)){
+                    
+                }
                 
                 User user = userService.findByUsername(username);
                 
