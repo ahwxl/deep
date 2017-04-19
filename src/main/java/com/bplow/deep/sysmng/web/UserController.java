@@ -28,7 +28,7 @@ import com.bplow.deep.sysmng.domain.SysUser;
 import com.bplow.deep.sysmng.service.UserService;
 
 /**
- * @desc 
+ * @desc 邮箱找回密码、激活邮箱、图形验证码、修改密码
  * @author wangxiaolei
  * @date 2017年4月14日 下午9:09:06
  */
@@ -41,7 +41,7 @@ public class UserController {
     @Autowired
     UserService    userService;
 
-    //修改密码
+    //修改密码页面
     @RequestMapping(value = "/changePasswdPage")
     public String changePassword(HttpServletRequest httpRequest, Model view, SysUser user) {
         logger.info("修改密码");
@@ -98,9 +98,9 @@ public class UserController {
     public String resetPasswdActive(HttpServletRequest httpRequest, Model view, SysUser user) {
         logger.info("修改用户信息");
 
-        userService.createResetPwdLink(user.getEmail());
+        boolean result = userService.createResetPwdLink(user.getEmail());
 
-        return "{\"responseMsg\":\"success\"}";
+        return String.format("{\"responseMsg\":\"%s\",\"result\":%b}",result==true?"发送成功":"发送失败",result);
     }
 
     //通过邮箱发送的链接   重置密码  进入重置密码页面
@@ -110,16 +110,15 @@ public class UserController {
         logger.info("显示用户信息");
 
         //交易链接的有效性
+        
+        boolean result = userService.checkResetPwdLink(flag);
+        
+        if(!result){
+            view.addAttribute("errorMsg", "充值密码链接无效");
+            return "sys/error";
+        }
 
-        Subject currentUser = SecurityUtils.getSubject();
-        Session session = currentUser.getSession();
-        User loginuser = (User) session.getAttribute("lgu");
-
-        User lguser = userService.findByUsername(loginuser.getUserId());
-
-        view.addAttribute("user", lguser);
-
-        return "sys/user-profile";
+        return "sys/user-changer-pwd";
     }
 
     //重置密码

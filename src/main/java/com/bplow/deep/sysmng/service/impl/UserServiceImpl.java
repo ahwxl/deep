@@ -11,31 +11,38 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bplow.deep.authority.PasswordHelper;
 import com.bplow.deep.authority.User;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.sysmng.domain.SysUser;
+import com.bplow.deep.sysmng.domain.SysUserActive;
 import com.bplow.deep.sysmng.domain.SysUserRole;
+import com.bplow.deep.sysmng.mapper.SysUserActiveMapper;
 import com.bplow.deep.sysmng.mapper.SysUserMapper;
 import com.bplow.deep.sysmng.mapper.SysUserRoleMapper;
 import com.bplow.deep.sysmng.service.SendMailService;
 import com.bplow.deep.sysmng.service.UserService;
 
+@Transactional
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private SysUserMapper     sysUserMapper;
+    private SysUserMapper       sysUserMapper;
 
     @Autowired
-    private SysUserRoleMapper sysUserRoleMapper;
+    private SysUserActiveMapper sysUserActiveMapper;
 
     @Autowired
-    private PasswordHelper    passwordHelper;
-    
+    private SysUserRoleMapper   sysUserRoleMapper;
+
     @Autowired
-    SendMailService sendMailService;
+    private PasswordHelper      passwordHelper;
+
+    @Autowired
+    SendMailService             sendMailService;
 
     public void setPasswordHelper(PasswordHelper passwordHelper) {
         this.passwordHelper = passwordHelper;
@@ -98,9 +105,9 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public Set<String> findRoles(String userId) {
-        
+
         Set<String> roles = sysUserRoleMapper.queryUserRole(userId);
-        
+
         return roles;
     }
 
@@ -110,7 +117,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public Set<String> findPermissions(String userId) {
-        
+
         Set<String> permissions = sysUserMapper.queryUserPermissions(userId);
         return permissions;
     }
@@ -161,55 +168,125 @@ public class UserServiceImpl implements UserService {
 
     }
 
-	@Override
-	public boolean activeEmail(String userName) {
-		
-		return false;
-	}
+    @Override
+    public boolean activeEmail(String activeUrl) {
+        boolean result = false;
+        SysUserActive record = sysUserActiveMapper.queryActiveByUrl(activeUrl);
 
-	@Override
-	public String createActiveEmailLink(String userName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        if (null == record) {
+            return result;
+        }
 
-	@Override
-	public String createResetPwdLink(String email) {
-		
-		if(StringUtils.isBlank(email)){
-			return null;
-		}
-		
-		String flag = UUID.randomUUID().toString().replace("-", "");
-		
-		Map map = new HashMap();
-        map.put("toEmail", email);
-        map.put("url", "http://www.techwellglobal.com/deep/user/resetPasswdPage/"+flag);
-        
-       String content = sendMailService.getEmailCnt("emailcxt.vm", map);
-        
+        sysUserMapper.activeEmail(record.getUserId());
+        result = true;
+
+        return result;
+    }
+
+    @Override
+    public String createActiveEmailLink(String email) {
+
+        String activeFlag = UUID.randomUUID().toString().replace("-", "");
+
+        User user = sysUserMapper.selectByPrimaryKey(email);
+
+        if (null == user) {
+            return "用户不存在";
+        }
+        SysUserActive record = new SysUserActive();
+        record.setUserId(user.getUserId());
+        record.setStatus("0");
+        record.setActiveType("0");
+        record.setActiveUrl(activeFlag);
+
+        sysUserActiveMapper.insert(record);
+
+        //发送邮件
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("toEmail", user.getEmail());
+        map.put("url", "http://localhost:8181/user/activeEmail/" + activeFlag);
+
+        String content = sendMailService.getEmailCnt("emailcxt.vm", map);
+
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("tenement_admin@163.com");
         msg.setSubject("[执行结果通知]");
         msg.setText(content);
-        msg.setTo(new String[]{email});
-        
-        sendMailService.sendMail(msg);
-		
-		return null;
-	}
+        msg.setTo(new String[] { "wangxiaolei@shfft.com" });
 
-	@Override
-	public boolean checkUserValidater(User user) {
-		
-		boolean result = false;
-		User usertmp = sysUserMapper.queryUser(user);
-		
-		if(null != usertmp){
-			result = true;
-		}
-		
-		return result;
-	}
+        sendMailService.sendMail(msg);
+
+        return "";
+    }
+
+    @Override
+    public boolean createResetPwdLink(String email) {
+        boolean result = false;
+
+        if (StringUtils.isBlank(email)) {
+            return result;
+        }
+        
+        User user = sysUserMapper.selectByPrimaryKey(email);
+        
+        if(null == user){
+            return result;
+        }
+
+        String flag = UUID.randomUUID().toString().replace("-", "");
+        
+        SysUserActive record = new SysUserActive();
+        record.setUserId(user.getUserId());
+        record.setStatus("0");
+        record.setActiveType("0");
+        record.setActiveUrl(flag);
+
+        sysUserActiveMapper.insert(record);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("toEmail", email);
+        map.put("url", "http://www.techwellglobal.com/deep/user/resetPasswdPage/" + flag);
+
+        String content = sendMailService.getEmailCnt("emailcxt.vm", map);
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom("tenement_admin@163.com");
+        msg.setSubject("[执行结果通知]");
+        msg.setText(content);
+        msg.setTo(new String[] { email });
+
+        sendMailService.sendMail(msg);
+        result = true;
+
+        return result;
+    }
+
+    @Override
+    public boolean checkUserValidater(User user) {
+
+        boolean result = false;
+        User usertmp = sysUserMapper.queryUser(user);
+
+        if (null != usertmp) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean checkResetPwdLink(String linked) {
+        
+        boolean result = false;
+        
+        SysUserActive record = sysUserActiveMapper.queryActiveByUrl(linked);
+
+        if (null == record) {
+            return result;
+        }
+        result = true;
+        
+        return result;
+    }
 
 }

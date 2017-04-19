@@ -15,6 +15,10 @@ public interface SysUserMapper {
     User queryUser(User user);
     
     Set<String> queryUserPermissions(String userId);
+    
+    int activeEmailUrl(String userId);
+    
+    int activeEmail(String userId);
 
     int update(SysUser record);
 

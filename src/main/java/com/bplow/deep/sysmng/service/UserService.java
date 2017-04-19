@@ -74,10 +74,13 @@ public interface UserService {
     public boolean activeEmail(String userName);
     
     //创建激活邮箱链接
-    public String createActiveEmailLink(String userName);
+    public String createActiveEmailLink(String email);
     
     //创建重置密码链接
-    public String createResetPwdLink(String emailAddr);
+    public boolean createResetPwdLink(String emailAddr);
+    
+    //检查重置密码连接
+    public boolean checkResetPwdLink(String linked);
     
 
 }

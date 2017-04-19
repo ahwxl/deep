@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.sysmng.mapper.SysUserActiveMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.sysmng.domain.SysUserActive">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="active_url" jdbcType="VARCHAR" property="activeUrl" />
+    <result column="active_type" jdbcType="VARCHAR" property="activeType" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, user_id, active_url, active_type, status, gmt_create, gmt_modify
+  </sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.sysmng.domain.SysUserActive" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user_active
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="id != null">
+             ID = #{id} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="activeUrl != null and activeUrl != ''">
+             active_url = #{activeUrl} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user_active
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="queryActiveByUrl" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select 
+    <include refid="Base_Column_List" />
+    from sys_user_active 
+    where active_url = #{activeUrl,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from sys_user_active
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysUserActive">
+    insert into sys_user_active (id, user_id, active_url, 
+      active_type, status, gmt_create, 
+      gmt_modify)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{activeUrl,jdbcType=VARCHAR}, 
+      #{activeType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <update id="update" parameterType="com.bplow.deep.sysmng.domain.SysUserActive">
+    update sys_user_active
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="activeUrl != null">
+        active_url = #{activeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="activeType != null">
+        active_type = #{activeType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+        gmt_modify = now()
+    </set>
+     WHERE ID = #{id} 
+  </update>
+</mapper>

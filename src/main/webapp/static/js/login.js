@@ -107,12 +107,21 @@ var Login = function () {
 
 	            submitHandler: function (form) {
 	            	var param = $('#forget-form').serialize();
-            		$.post("/deep/user/sendActiveEmail",
-            				param,
-            			function(data){
-            			    window.location.href = "/deep/";
-            		    }
-            		);
+            		$.ajax({
+						url:'/deep/user/resetPwdActive',
+						async:true,
+						method:'POST',
+						data:param,
+						dataType : 'json',
+						error :function(resp){alert(resp)},
+						success:function(resp){
+							alert(resp.responseMsg);
+							if(resp.result){
+								window.location.href = "/deep/";
+							}
+						}
+					});
+            		
 	            }
 	        });
 

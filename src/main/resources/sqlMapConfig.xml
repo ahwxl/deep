@@ -36,6 +36,7 @@
 		<mapper resource="mapper/SysRolePermissionMapper.xml" />
 		<mapper resource="mapper/SysUserRoleMapper.xml" />
 		<mapper resource="mapper/SysResourceMapper.xml" />
+		<mapper resource="mapper/SysUserActiveMapper.xml" />
 		<mapper resource="mapper/ArticleMapper.xml" />
 	</mappers>
 

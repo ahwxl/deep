@@ -21,5 +21,7 @@ public interface User {
     String getPassword();
     
     String getCredentialsSalt();
+    
+    String getEmail();
 
 }

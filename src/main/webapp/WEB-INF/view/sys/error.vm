@@ -1,0 +1,7 @@
+               <!-- BEGIN PAGE HEADER-->
+				<div class="row-fluid">
+					<div class="span12">$errorMsg</div>
+				</div>
+
+				<!-- END PAGE HEADER-->
+    

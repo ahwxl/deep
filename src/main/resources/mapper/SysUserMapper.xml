@@ -1,136 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bplow.deep.sysmng.mapper.SysUserMapper">
-  
-  <resultMap id="BaseResultMap" type="com.bplow.deep.sysmng.domain.SysUser">
-    <id column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="sex" jdbcType="CHAR" property="sex" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="salt" jdbcType="VARCHAR" property="salt" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
-    <result column="checked" jdbcType="INTEGER" property="checked" />
-  </resultMap>
-  
-  <sql id="Base_Column_List">
-    user_id, user_name, password, sex, email, mobile, status, remark, salt, gmt_create, 
-    gmt_modify
-  </sql>
-  
-  <select id="queryForPage" parameterType="com.bplow.deep.sysmng.domain.SysUser" resultMap="BaseResultMap">
-    select a.*,
-    <choose>
-    <when test="organizationId !=null and organizationId != ''">
-    (select count(1) from sys_organization_user b where b.user_id = a.user_id
-            and b.organization_id = #{organizationId}
-    ) checked
-    </when>
-    <otherwise>
-    0 checked
-    </otherwise>
-    </choose> 
-    from sys_user a
-    <where>
-      <trim prefixOverrides="AND">
-        <trim prefix="AND">
-          <if test="userId != null and userId != ''">
-             a.user_id = #{userId} 
-          </if>
-        </trim>
-        <trim prefix="AND">
-          <if test="userName != null and userName != ''">
-             a.user_name like CONCAT(CONCAT('%', #{userName}), '%') 
-          </if>
-        </trim>
-      </trim>
-    </where>
-     ORDER BY a.GMT_MODIFY DESC 
-  </select>
-  
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_user
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </select>
-  
-  <select id="queryUser" parameterType="com.bplow.deep.sysmng.domain.SysUser" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_user a
-    <where>
-      <trim prefixOverrides="AND">
-        <trim prefix="AND">
-          <if test="userId != null and userId != '' ">
-             a.user_id = #{userId} 
-          </if>
-        </trim>
-        <trim prefix="AND">
-          <if test="email != null and email != '' ">
-             a.email = #{email}
-          </if>
-        </trim>
-      </trim>
-    </where>
-  </select>
-  
-  <select id="queryUserPermissions" parameterType="java.lang.String" resultType="java.lang.String">
-  select b.permission_id from sys_user_role a,sys_role_permission b
-	where a.role_id = b.role_id
-	and a.user_id = #{userId}
-  </select>
-  
-  
-  <delete id="delete" parameterType="java.lang.String">
-    delete from sys_user
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </delete>
-  
-  <insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysUser">
-    insert into sys_user (user_id, user_name, password, 
-      sex, email, mobile, status, 
-      remark, salt, gmt_create, 
-      gmt_modify)
-    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModify,jdbcType=TIMESTAMP})
-  </insert>
-  
-  <update id="update" parameterType="com.bplow.deep.sysmng.domain.SysUser">
-    update sys_user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=CHAR},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null">
-        mobile = #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null">
-        salt = #{salt,jdbcType=VARCHAR},
-      </if>
-        gmt_modify = now()
-    </set>
-     WHERE user_id = #{userId} 
-  </update>
+
+	<resultMap id="BaseResultMap" type="com.bplow.deep.sysmng.domain.SysUser">
+		<id column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="user_name" jdbcType="VARCHAR" property="userName" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="sex" jdbcType="CHAR" property="sex" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="status" jdbcType="CHAR" property="status" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="salt" jdbcType="VARCHAR" property="salt" />
+		<result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+		<result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+		<result column="checked" jdbcType="INTEGER" property="checked" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		user_id, user_name, password, sex, email, mobile, status, remark, salt,
+		gmt_create,
+		gmt_modify
+	</sql>
+
+	<select id="queryForPage" parameterType="com.bplow.deep.sysmng.domain.SysUser"
+		resultMap="BaseResultMap">
+		select a.*,
+		<choose>
+			<when test="organizationId !=null and organizationId != ''">
+				(select count(1) from sys_organization_user b where b.user_id = a.user_id
+				and b.organization_id = #{organizationId}
+				) checked
+			</when>
+			<otherwise>
+				0 checked
+			</otherwise>
+		</choose>
+		from sys_user a
+		<where>
+			<trim prefixOverrides="AND">
+				<trim prefix="AND">
+					<if test="userId != null and userId != ''">
+						a.user_id = #{userId}
+					</if>
+				</trim>
+				<trim prefix="AND">
+					<if test="userName != null and userName != ''">
+						a.user_name like CONCAT(CONCAT('%', #{userName}), '%')
+					</if>
+				</trim>
+			</trim>
+		</where>
+		ORDER BY a.GMT_MODIFY DESC
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_user
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="queryUser" parameterType="com.bplow.deep.sysmng.domain.SysUser"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys_user a
+		<where>
+			<trim prefixOverrides="AND">
+				<trim prefix="AND">
+					<if test="userId != null and userId != '' ">
+						a.user_id = #{userId}
+					</if>
+				</trim>
+				<trim prefix="AND">
+					<if test="email != null and email != '' ">
+						a.email = #{email}
+					</if>
+				</trim>
+			</trim>
+		</where>
+	</select>
+
+	<select id="queryUserPermissions" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select b.permission_id from sys_user_role a,sys_role_permission b
+		where a.role_id = b.role_id
+		and a.user_id = #{userId}
+	</select>
+
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete from sys_user
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insert" parameterType="com.bplow.deep.sysmng.domain.SysUser">
+		insert into sys_user (user_id, user_name, password,
+		sex, email, mobile, status,
+		remark, salt, gmt_create,
+		gmt_modify)
+		values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{sex,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+		#{status,jdbcType=CHAR},
+		#{remark,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP},
+		#{gmtModify,jdbcType=TIMESTAMP})
+	</insert>
+
+	<update id="activeEmail" parameterType="java.lang.String">
+		update sys_user set status = '1', gmt_modify = now()
+		where user_id = #{userId}
+	</update>
+
+	<update id="update" parameterType="com.bplow.deep.sysmng.domain.SysUser">
+		update sys_user
+		<set>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=CHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="salt != null">
+				salt = #{salt,jdbcType=VARCHAR},
+			</if>
+			gmt_modify = now()
+		</set>
+		WHERE user_id = #{userId}
+	</update>
 </mapper>

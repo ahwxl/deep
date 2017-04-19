@@ -16,6 +16,22 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
+create table sys_user_active
+(
+   id                   int not null,
+   user_id              varchar(32) not null,
+   active_url           varchar(64),
+   active_type          varchar(1),
+   status               varchar(1),
+   gmt_create           timestamp,
+   gmt_modify           timestamp,
+   primary key (id)
+);
+
+alter table sys_user_active comment '用户激活';
+ALTER TABLE `sys_user_active`
+	CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT FIRST;
+
 CREATE TABLE `sk_transaction_record` (
 	`id` VARCHAR(32) NOT NULL,
 	`stock_id` VARCHAR(6) NULL DEFAULT NULL,
