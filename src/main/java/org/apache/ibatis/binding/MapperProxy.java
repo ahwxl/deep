@@ -21,7 +21,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.hamcrest.core.IsInstanceOf;
 
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.base.pagination.PageInfo;
@@ -43,7 +42,13 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     if (Object.class.equals(method.getDeclaringClass())) {
       return method.invoke(this, args);
     }
-    Object tmpobj =args[0];
+    
+    Object tmpobj = null;
+    if(null != args && args.length>0){
+        tmpobj =args[0];
+    }else{
+        tmpobj = null;
+    }
     final MapperMethod mapperMethod = cachedMapperMethod(method);
     Class returntype = method.getReturnType();
     if(tmpobj instanceof PageInfo && Page.class.equals(returntype)){
