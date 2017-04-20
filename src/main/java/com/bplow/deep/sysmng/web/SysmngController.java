@@ -28,6 +28,7 @@ import com.bplow.deep.authority.User;
 import com.bplow.deep.base.dto.SelectNode;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.base.utils.DateUtils;
+import com.bplow.deep.base.web.LoginUser;
 import com.bplow.deep.sysmng.domain.SysOrganization;
 import com.bplow.deep.sysmng.domain.SysOrganizationUser;
 import com.bplow.deep.sysmng.domain.SysPermission;
@@ -70,11 +71,10 @@ public class SysmngController {
 	UserService userService;
 	
 	//用户
-	@RequiresRoles("123")
+	//@RequiresRoles("123")
 	@RequestMapping(value = "/usersPage")
-	public String userListPage(HttpServletRequest httpRequest, Model view,SysUser user){
-		
-		logger.info("");
+	public String userListPage(HttpServletRequest httpRequest, Model view,SysUser user,@LoginUser SysUser loginUser){
+		logger.info("当前用户:{}",loginUser.getUserId());
 		
 		return "sys/user";
 	}

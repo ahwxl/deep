@@ -14,15 +14,16 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import com.bplow.deep.authority.User;
+import com.bplow.deep.sysmng.domain.SysUser;
 
 public class LoginUserMethodArgumentResolver implements HandlerMethodArgumentResolver{
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         
-        RequestParam requestParamAnnot = parameter.getParameterAnnotation(RequestParam.class);
+    	LoginUser requestParamAnnot = parameter.getParameterAnnotation(LoginUser.class);
         if (requestParamAnnot != null) {
-            if (Map.class.isAssignableFrom(parameter.getParameterType())) {
+            if (SysUser.class.isAssignableFrom(parameter.getParameterType())) {
                 return !StringUtils.hasText(requestParamAnnot.value());
             }
         }
