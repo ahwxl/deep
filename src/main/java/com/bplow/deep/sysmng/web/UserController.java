@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bplow.deep.authority.User;
 import com.bplow.deep.base.patchca.ValidateCode;
+import com.bplow.deep.base.web.LoginUser;
 import com.bplow.deep.sysmng.domain.SysUser;
 import com.bplow.deep.sysmng.service.UserService;
 
@@ -43,8 +44,9 @@ public class UserController {
 
     //修改密码页面
     @RequestMapping(value = "/changePasswdPage")
-    public String changePassword(HttpServletRequest httpRequest, Model view, SysUser user) {
+    public String changePassword(HttpServletRequest httpRequest, Model view, SysUser user,@LoginUser User loginUser) {
         logger.info("修改密码");
+        
 
         return "sys/user-changer-pwd";
     }

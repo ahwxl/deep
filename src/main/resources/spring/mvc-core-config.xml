@@ -30,6 +30,9 @@
 				<constructor-arg value="UTF-8" />
 			</bean>
 		</mvc:message-converters>
+		<mvc:argument-resolvers>
+		     <bean class ="com.bplow.deep.base.web.LoginUserMethodArgumentResolver"></bean>
+		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
     <!--  all resources inside folder src/main/webapp/resources are mapped so they can be refered to inside JSP files
