@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,9 @@ import com.bplow.deep.sysmng.service.UserService;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
+    @Value("${resetPswUrl}")
+    private String resetPswUrl;
+    
     @Autowired
     private SysUserMapper       sysUserMapper;
 
@@ -204,7 +208,7 @@ public class UserServiceImpl implements UserService {
         //发送邮件
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("toEmail", user.getEmail());
-        map.put("url", "http://localhost:8181/user/activeEmail/" + activeFlag);
+        map.put("url", resetPswUrl + activeFlag);
 
         String content = sendMailService.getEmailCnt("emailcxt.vm", map);
 
@@ -245,13 +249,13 @@ public class UserServiceImpl implements UserService {
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("toEmail", email);
-        map.put("url", "http://www.techwellglobal.com/deep/user/resetPasswdPage/" + flag);
+        map.put("url", resetPswUrl + flag);
 
         String content = sendMailService.getEmailCnt("emailcxt.vm", map);
 
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("tenement_admin@163.com");
-        msg.setSubject("[执行结果通知]");
+        msg.setSubject("[系统通知]");
         msg.setText(content);
         msg.setTo(new String[] { email });
 
