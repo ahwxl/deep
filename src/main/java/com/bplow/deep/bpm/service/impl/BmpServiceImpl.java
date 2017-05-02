@@ -275,7 +275,7 @@ public class BmpServiceImpl implements BmpService {
             autoLayout.execute();
         }
 
-        InputStream is = processDiagramGenerator.generateJpgDiagram(bpmnModel);
+        InputStream is = processDiagramGenerator.generateDiagram(bpmnModel,"jpg","宋体","微软雅黑",null);
         return is;
     }
 

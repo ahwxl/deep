@@ -42,9 +42,10 @@ $('#sample_1').dataTable({
             	$(document).off('click.modal').on('click.modal.data-api', '[1data-toggle="modal"]', function ( e ) {
                 	var procDefId = $(this).attr('procDefId');
                 	//alert(procDefId);
-                	var url = "/deep/bpm/viewProcessDefImage?key="+procDefId;
+                	var d = new Date();
+                	var url = "/deep/bpm/viewProcessDefImage?key="+procDefId+"&d="+d.getTime();
                     $("#myprocessimage").attr("src",url);
-                    $('#stack1').modal('toggle');
+                    $('#stack1').modal({width:900,height:800});//'toggle',
                 })
                 //给2个输入框添加blur事件调用draw方法执行自定义过滤函数
                 $('#min, #max').blur(function () {

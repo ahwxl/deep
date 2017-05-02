@@ -241,7 +241,7 @@ public class BmpController {
     @RequestMapping(value = "/bpm/viewProcessDefImage")
     public void viewProcessDefImage(ProcessInstanceInfo processInfo,
                                       HttpServletRequest httpRequest, HttpServletResponse response) throws IOException {
-        
+        response.setContentType("image/jpeg");
         InputStream input = bmpService.getImageInputStreamById(processInfo);
         
         OutputStream output = response.getOutputStream();
