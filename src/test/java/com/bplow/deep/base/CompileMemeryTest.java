@@ -1,5 +1,8 @@
 package com.bplow.deep.base;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.transaction.Transactional;
@@ -14,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import com.bplow.deep.base.classload.MyPrinter2;
 import com.bplow.deep.base.utils.CompileMemery;
 import com.bplow.deep.base.utils.RefreshBeanService;
 
@@ -61,6 +65,18 @@ public class CompileMemeryTest {
         
         refreshBeanService.fresh("MyPrinter2");
         
+    }
+    
+    @Test
+    public void testBeanInfo() throws Exception{
+        
+        Class beanClass = MyPrinter2.class;
+        
+        System.out.println(beanClass.getClassLoader());
+        
+        BeanInfo beanInfo = Introspector.getBeanInfo(beanClass, Introspector.IGNORE_ALL_BEANINFO);
+        
+        System.out.println(beanInfo);
     }
 
 }

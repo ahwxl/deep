@@ -438,6 +438,11 @@
 			<artifactId>gson</artifactId>
 			<version>2.5</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-server</artifactId>
+		    <version>9.0.2.v20130417</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
