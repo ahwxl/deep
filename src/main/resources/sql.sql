@@ -257,8 +257,18 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
+CREATE TABLE `t_scripte` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`scripte_name` VARCHAR(100) NULL DEFAULT '0',
+	`scripte_cxt` VARCHAR(2000) NULL DEFAULT '0',
+	PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+;
 
 
 
 INSERT INTO `sk_day_swrich` (`id`, `yester_day`, `today`, `tommory`) VALUES ('1', '2017-3-1', '2017-03-05', '11');
 INSERT INTO `sk_warehouse_positon` (`stock_id`, `stock_name`, `amount`, `yester_price`, `today_price`, `market_value`, `sort_by`, `gmt_create`, `gmt_modify`) VALUES ('sh600078', '澄星股份', 10000, 7.136, NULL, NULL, NULL, '2017-03-06 23:04:46', '2017-03-05 17:03:22');
+
+INSERT INTO `t_scripte` (`id`, `scripte_name`, `scripte_cxt`) VALUES (1, 'MyPrinter2', 'import com.bplow.deep.base.utils.Message;\r\n\r\npublic class MyPrinter2 implements  Message{\r\npublic void print() {\r\nSystem.out.println(\\"test2\\");\r\n}}');
