@@ -22,7 +22,7 @@ public class ExcelUtils {
 
     public void read() throws InvalidFormatException, IOException {
 
-        OPCPackage pkg = OPCPackage.open("D:/www/work/G-光大银行/接口改造/报文字段整理.xlsx");
+        OPCPackage pkg = OPCPackage.open("D:/www/work/N-农商行/上海农商行快捷/接口改造整理.xlsx");
         XSSFWorkbook wb = new XSSFWorkbook(pkg);
 
         int sheetsnum = wb.getNumberOfSheets();
