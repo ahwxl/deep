@@ -1,7 +1,6 @@
 package com.bplow.deep.base;
 
 import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.lang.reflect.InvocationTargetException;
 
@@ -17,7 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-import com.bplow.deep.base.classload.MyPrinter2;
 import com.bplow.deep.base.utils.CompileMemery;
 import com.bplow.deep.base.utils.RefreshBeanService;
 
@@ -56,7 +54,9 @@ public class CompileMemeryTest {
             logger.error("", e);
         } catch (InstantiationException e) {
             logger.error("", e);
-        }
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
         
     }
     
@@ -70,7 +70,7 @@ public class CompileMemeryTest {
     @Test
     public void testBeanInfo() throws Exception{
         
-        Class beanClass = MyPrinter2.class;
+        Class beanClass = compileMemery.comppile("MyPrinter2");
         
         System.out.println(beanClass.getClassLoader());
         

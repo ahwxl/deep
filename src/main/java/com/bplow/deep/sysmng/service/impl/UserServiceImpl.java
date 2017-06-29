@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     SendMailService             sendMailService;
-
-    public void setPasswordHelper(PasswordHelper passwordHelper) {
+    
+	public void setPasswordHelper(PasswordHelper passwordHelper) {
         this.passwordHelper = passwordHelper;
     }
 
@@ -210,7 +210,7 @@ public class UserServiceImpl implements UserService {
         map.put("toEmail", user.getEmail());
         map.put("url", resetPswUrl + activeFlag);
 
-        String content = sendMailService.getEmailCnt("emailcxt.vm", map);
+        String content = sendMailService.getEmailCnt("email-active.vm", map);
 
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("tenement_admin@163.com");

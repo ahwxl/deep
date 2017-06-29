@@ -1,10 +1,13 @@
 package com.bplow.deep.base.classload;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.StringTokenizer;
@@ -307,5 +310,26 @@ public class DynamicClassLoader extends URLClassLoader {
         
         return c;
     }
+    
+    public static void main(String[] args) throws Exception {
+	
+    	DynamicClassLoader cl = new DynamicClassLoader();
+    	cl.addClassPath("C:\\log");
+    	
+    	try {
+			Class beanClass = cl.loadClass("com.bplow.deep.base.classload.MyPrinter2");
+			
+			Method m = beanClass.getMethod("print", null);
+	        m.invoke(beanClass.newInstance(), null);
+			
+			BeanInfo beanInfo = Introspector.getBeanInfo(beanClass, Introspector.IGNORE_ALL_BEANINFO);
+	        
+	        System.out.println(beanInfo);
+	        
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+	}
 
 }

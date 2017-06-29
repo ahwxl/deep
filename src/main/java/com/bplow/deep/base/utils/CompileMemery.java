@@ -1,7 +1,6 @@
 package com.bplow.deep.base.utils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.Arrays;
 
@@ -16,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import com.bplow.deep.base.classload.DynamicClassLoader;
+
 
 @Service
 public class CompileMemery {
@@ -25,12 +26,9 @@ public class CompileMemery {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     
-    private ClassLoader classLoader;
+    private DynamicClassLoader classLoader;
 
-    public Class comppile(String className) throws ClassNotFoundException, NoSuchMethodException,
-                                          SecurityException, IllegalAccessException,
-                                          IllegalArgumentException, InvocationTargetException,
-                                          InstantiationException {
+    public Class comppile(String className) throws Exception {
 
         String str = obtainScripte(className);
         //生成源代码的JavaFileObject
@@ -44,9 +42,11 @@ public class CompileMemery {
             Arrays.asList(fileObject));
         task.call();
         //获得ClassLoader，加载class文件
-        this.classLoader = fileManager.getClassLoader(null);
+        this.classLoader = (DynamicClassLoader)fileManager.getClassLoader(null);
+        
+        classLoader.addClassPath("C:\\log");
 
-        Class printerClass = classLoader.loadClass(className);
+        Class printerClass = classLoader.loadClass("com.bplow.deep.base.classload."+className);
 
         /*Method m = printerClass.getMethod("print", null);
         m.invoke(printerClass.newInstance(), null);*/
@@ -95,7 +95,9 @@ public class CompileMemery {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
-        }
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
 
     }
 

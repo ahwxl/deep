@@ -1,6 +1,5 @@
 package com.bplow.deep.base.utils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,5 +66,5 @@ public class RefreshBeanService implements ApplicationContextAware, BeanFactoryA
         msg.print();
 
     }
-
+    
 }
