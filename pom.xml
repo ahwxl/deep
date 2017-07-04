@@ -21,7 +21,7 @@
 	</repositories>
 
 	<properties>
-		<java.version>1.6</java.version>
+		<java.version>1.7</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springframework.version>3.2.17.RELEASE</springframework.version>
 		<freemarker.version>2.3.21</freemarker.version>
@@ -36,6 +36,7 @@
 		<activiti.version>5.16.4</activiti.version>
 		<shiro.version>1.2.3</shiro.version>
 		<spring.session.version>1.3.1.BUILD-SNAPSHOT</spring.session.version>
+		<cxf.version>2.7.11</cxf.version>
 	</properties>
 
 	<dependencies>
@@ -299,17 +300,9 @@
 			<artifactId>shiro-spring</artifactId>
 			<version>${shiro.version}</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-quartz</artifactId>
-			<version>1.3.2</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.opensymphony.quartz</groupId>
-					<artifactId>quartz</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-quartz</artifactId> 
+			<version>1.3.2</version> <exclusions> <exclusion> <groupId>org.opensymphony.quartz</groupId> 
+			<artifactId>quartz</artifactId> </exclusion> </exclusions> </dependency> -->
 		<dependency>
 			<groupId>org.jasig.cas.client</groupId>
 			<artifactId>cas-client-core</artifactId>
@@ -319,12 +312,8 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-ehcache</artifactId>
 			<version>1.3.2</version>
-			<!-- <exclusions>
-				<exclusion>
-					<groupId>net.sf.ehcache</groupId>
-					<artifactId>ehcache-core</artifactId>
-				</exclusion>
-			</exclusions> -->
+			<!-- <exclusions> <exclusion> <groupId>net.sf.ehcache</groupId> <artifactId>ehcache-core</artifactId> 
+				</exclusion> </exclusions> -->
 		</dependency>
 		<dependency>
 			<groupId>org.ehcache</groupId>
@@ -418,9 +407,9 @@
 		</dependency>
 		<!-- ckfinder -->
 		<dependency>
-		    <groupId>org.jboss</groupId>
-		    <artifactId>jboss-vfs</artifactId>
-		    <version>3.2.12.Final</version>
+			<groupId>org.jboss</groupId>
+			<artifactId>jboss-vfs</artifactId>
+			<version>3.2.12.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -439,10 +428,56 @@
 			<version>2.5</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.eclipse.jetty</groupId>
-		    <artifactId>jetty-server</artifactId>
-		    <version>9.0.2.v20130417</version>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>9.0.2.v20130417</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>9.0.2.v20130417</version>
+		</dependency>
+
+		<!-- SOAP begin -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-core</artifactId>
+			<version>${cxf.version}</version>
+			<exclusions>
+				<!-- use javax.mail.mail instead -->
+				<exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-javamail_1.4_spec</artifactId>
+				</exclusion>
+				<!-- use javax.activation.activation instead -->
+				<exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-activation_1.1_spec</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+			<exclusions>
+				<!-- see above -->
+				<exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-javamail_1.4_spec</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-activation_1.1_spec</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<!-- SOAP end -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -478,6 +513,10 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<showWarnings>true</showWarnings>
+					<compilerArguments>
+						<verbose />
+						<bootclasspath>${JAVA_HOME}/jre/lib/rt.jar</bootclasspath>
+					</compilerArguments>
 				</configuration>
 			</plugin>
 			<plugin>

@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.net.URLStreamHandler;
 import java.util.StringTokenizer;
 
 import org.slf4j.Logger;
@@ -35,6 +36,18 @@ public class DynamicClassLoader extends URLClassLoader {
 
     public DynamicClassLoader() {
         this(null);
+        
+        String rootPath = System.getProperty("webapp.root");
+        if(null == rootPath){
+            rootPath = "d:/logs"; 
+        }
+        
+        File file = new File(rootPath);
+        
+        if(!file.exists()){
+            file.mkdir();
+        }
+        
     }
 
     public DynamicClassLoader(ClassLoader parent) {
@@ -54,7 +67,7 @@ public class DynamicClassLoader extends URLClassLoader {
             //Resource resource = Resource.newResource(tokenizer.nextToken());
             String tmpPath = tokenizer.nextToken();
             if (Log.isDebugEnabled())
-                Log.debug("Path resource=" + ""/*resource*/);
+                Log.debug("Path resource=" + tmpPath/*resource*/);
 
             // Resolve file path if possible
             File file = new File(tmpPath)/*resource.getFile()*/;
@@ -171,14 +184,20 @@ public class DynamicClassLoader extends URLClassLoader {
     
     public URL createUrl(String resource) throws Exception{
         
-        File file=new File(resource).getCanonicalFile();
+        /*File file=new File(resource).getCanonicalFile();
         
         StringBuffer buf = encodePath(null,file.toURL().toString());
         String urlstr = buf==null?file.toURL().toString():buf.toString();
         
-        URL url=new URL(urlstr);                    
+        URL url=new URL(urlstr);*/
         
-        return url;
+        URL url1 = null;
+        url1 = new URL("file", null, new File(resource).getCanonicalPath() + File.separator);
+        String repository = url1.toString();
+        URLStreamHandler streamHandler = null;
+        url1 = new URL(null, repository, streamHandler);
+        
+        return url1;
     }
     
     /** Encode a URI path.

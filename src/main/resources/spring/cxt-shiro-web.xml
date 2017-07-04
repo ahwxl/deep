@@ -124,6 +124,7 @@
 				/register.do = anon
 				/resetpass.do = anon
 				/unauthorized.jsp = anon
+				/cxf/** = anon
 				/login.jsp = authc
 				/logout = logout
 				/** = user

@@ -11,17 +11,20 @@ import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jetty.webapp.WebAppClassLoader;
 
 import com.bplow.deep.base.classload.DynamicClassLoader;
 import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
+@SuppressWarnings("rawtypes")
 public class ClassFileManager extends ForwardingJavaFileManager {
 
     private JavaClassFileObject classFileObject;
     
-    private String rootPath ="C:\\log";
+    String rootPath ="d:\\logs\\";
     
-    public static DynamicClassLoader classLoader = new DynamicClassLoader();
+    private WebAppClassLoader classLoader;
 
     /**
      * Creates a new instance of ForwardingJavaFileManager.
@@ -30,12 +33,18 @@ public class ClassFileManager extends ForwardingJavaFileManager {
      */
     protected ClassFileManager(JavaFileManager fileManager) {
         super(fileManager);
-        try {
-			this.classLoader.addClassPath("C:\\log");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
     }
+    
+
+    public ClassFileManager(JavaFileManager fileManager, WebAppClassLoader classLoader,String rootPath) {
+        super(fileManager);
+        this.classLoader = classLoader;
+        if(StringUtils.isNotEmpty(rootPath)){
+            this.rootPath = rootPath;
+        }
+        
+    }
+
 
     /**
      * Gets a JavaFileObject file object for output
@@ -49,17 +58,35 @@ public class ClassFileManager extends ForwardingJavaFileManager {
         return classFileObject;
     }
     
-    public void writeFile() throws IOException{
+    public void writeFile() throws Exception{
     	
     	if(classFileObject == null){
     		return ;
     	}
+    	/*rootPath = this.getClass().getResource("/").getPath();
+    	if(rootPath.startsWith("/")){
+    	    this.classLoader.addClassPath(rootPath.substring(1));
+    	}else{
+    	    this.classLoader.addClassPath(rootPath);
+    	}*/
+    	
+    	System.out.println("编译之后类存放路径:"+rootPath);
     	
     	byte[] classBytes = classFileObject.getClassBytes();
     	ByteInputStream input = new ByteInputStream(classBytes, classBytes.length);
     	FileOutputStream output = null;
     	
-    	File targetClassFile = new File(rootPath + classFileObject.getName());
+    	
+    	String absolutPath = rootPath+ File.separator + classFileObject.getName().substring(classFileObject.getName().lastIndexOf("/")+1);
+    	/*String absoluteFolder = absolutPath.substring(0,absolutPath.lastIndexOf("/"));
+    	
+    	File folderPathFile = new File(absoluteFolder);
+    	
+    	if(!folderPathFile.exists()){
+    	    folderPathFile.mkdir();
+        }*/
+    	
+    	File targetClassFile = new File(absolutPath);
     	
     	try {
 			output = new FileOutputStream(targetClassFile);
@@ -73,6 +100,7 @@ public class ClassFileManager extends ForwardingJavaFileManager {
 		}finally{
 			try {
 				if(output != null){
+				    output.flush();
 					output.close();
 					input.close();
 				}
@@ -91,17 +119,13 @@ public class ClassFileManager extends ForwardingJavaFileManager {
     	
     	try {
 			this.writeFile();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	
         /*return new ClassLoader() {
             @Override
             protected Class<?> findClass(String name) throws ClassNotFoundException {
-            	
-            	if(!name.equals("MyPrinter2")){
-                    return super.loadClass(name);
-            	}
             	
                 byte[] classBytes = classFileObject.getClassBytes();
                 return super.defineClass(name, classBytes, 0, classBytes.length);

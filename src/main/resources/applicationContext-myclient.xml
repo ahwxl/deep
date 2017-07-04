@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
 	<description>导入myclient中的applicationContext文件列表</description>
 
-    <import resource="spring/cxt-dao.xml" />
-    
-    <!-- <import resource="spring/cxt-session.xml" /> -->
+	<import resource="spring/cxt-dao.xml" />
 
-    <!-- <import resource="spring/cxt-shiro.xml" /> -->
-    <import resource="spring/cxt-redis.xml" />
-    
-    <import resource="spring/cxt-shiro-web.xml" />
-    
-    <import resource="spring/cxt-quartz.xml" />
+	<!-- <import resource="spring/cxt-session.xml" /> -->
 
-    <import resource="bpm/applicationContext-bpm.xml" />
-    
-    <!-- <import resource="spring/provider.xml" /> -->
-	<!-- required 
-	<import resource="security/applicationContext-shiro.xml" />-->
+	<!-- <import resource="spring/cxt-shiro.xml" /> -->
+	<import resource="spring/cxt-redis.xml" />
 
-	<!-- optional 
-	<import resource="cache/applicationContext-ehcache.xml" />
-	
-	<import resource="spring/system/applicationContext_system.xml"/>
-	
-	<import resource="spring/webservice/applicationContext-soap-server.xml"/>-->
-	<!-- 消息服务 
-	<import resource="spring/jms/applicationContext-jms-advanced.xml"/>-->
-	
+	<import resource="spring/cxt-shiro-web.xml" />
+
+	<import resource="spring/cxt-quartz.xml" />
+
+	<import resource="bpm/applicationContext-bpm.xml" />
+
+	<!-- <import resource="spring/provider.xml" /> -->
+	<!-- required <import resource="security/applicationContext-shiro.xml" /> -->
+
+	<!-- optional <import resource="cache/applicationContext-ehcache.xml" /> 
+		<import resource="spring/system/applicationContext_system.xml"/> <import 
+		resource="spring/webservice/applicationContext-soap-server.xml"/> -->
+	<!-- 消息服务 <import resource="spring/jms/applicationContext-jms-advanced.xml"/> -->
+
 	<import resource="spring/cxt-email.xml" />
+
+	<import resource="spring/cxt-soap-server.xml" />
+
 </beans>
