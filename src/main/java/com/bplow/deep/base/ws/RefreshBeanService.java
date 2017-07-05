@@ -7,6 +7,6 @@ public interface RefreshBeanService {
     
     public void refreshBeanByName(String name);
     
-    public void print(String name);
+    public String print(String name);
 
 }

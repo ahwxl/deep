@@ -75,12 +75,13 @@ public class ReloadBeanService implements ApplicationContextAware, BeanFactoryAw
 
     }
 
-    public void print(String beanname) {
+    public String print(String beanname) {
 
         Message msg = (Message) applicationContext.getBean(beanname);
 
-        msg.print();
+        String str = msg.print();
 
+        return str;
     }
 
 }

@@ -31,8 +31,8 @@ public class RefreshBeanByNameImpl implements RefreshBeanService {
     }
 
     @Override
-    public void print(String name) {
-        reloadBeanService.print(name);
+    public String print(String name) {
+        return reloadBeanService.print(name);
     }
 
 }

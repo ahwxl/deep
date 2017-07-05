@@ -5,10 +5,11 @@ import com.bplow.deep.base.utils.Message;
 public class MyPrinter3 implements Message{
 
     @Override
-    public void print() {
+    public String print() {
         
         System.out.println("测试中");
         
+        return "";
     }
 
 }
