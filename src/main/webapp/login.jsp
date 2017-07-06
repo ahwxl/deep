@@ -26,7 +26,7 @@
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-<body class="login">
+<body class="login"><script type="text/javascript">	var cxt = '/deep';</script>
 	<!-- BEGIN LOGO -->
 	<div class="logo">
 		<img src="/deep/static/image/logo-big.png" alt="" /> 
@@ -39,7 +39,7 @@
 			<h3 class="form-title">Login to your account</h3>
 			<div class="alert alert-error hide">
 				<button class="close" data-dismiss="alert"></button>
-				<span>Enter any username and password.</span>
+				<span></span>
 			</div>
 			<div class="control-group">
 				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -192,7 +192,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="/deep/static/js/app.js" type="text/javascript"></script>
-	<script src="/deep/static/js/login.js?20170308" type="text/javascript"></script>		<script src="/deep/static/js/module/validater-method.js?20170305" type="text/javascript"></script>
+	<script src="/deep/static/js/login.js?20170309" type="text/javascript"></script>		<script src="/deep/static/js/module/validater-method.js?20170305" type="text/javascript"></script>
 	<!-- END PAGE LEVEL SCRIPTS --> 
 	<script>
 		jQuery(document).ready(function() {     

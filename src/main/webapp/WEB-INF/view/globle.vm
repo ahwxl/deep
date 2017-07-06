@@ -1,0 +1,2 @@
+#set ($cxt=$rc.contextPath)
+##set ($cxt="/deep")

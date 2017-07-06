@@ -49,12 +49,30 @@ var Login = function () {
 
 	            submitHandler: function (form) {
 	            	var param = $('#login-form').serialize();
-            		$.post("/deep/checkLogin.do",
-            				param,
-            			function(data){
-            			    window.location.href = "/deep/";
-            		    }
-            		);
+	            	$.ajax({
+        				url:cxt+'/checkLogin.do',
+        				async:true,
+        				method:'POST',
+        				data:param,
+        				dataType : 'json',
+        				error :function(resp){},
+        				success:function(resp){
+        					
+        					if(resp.result){
+        						var tmpcxt = cxt;
+        						if(tmpcxt == ""){
+        							tmpcxt ="/";
+        						}
+        						if(resp.redirectUrl !=""){
+        							tmpcxt = resp.redirectUrl;
+        						}
+        						window.location.href = tmpcxt;
+        					}else{
+        						$(".alert-error").removeClass("hide");
+        						$(".alert-error >span").html(resp.responseMsg);
+        					}
+        				}
+        			});
 	            }
 	        });
 
