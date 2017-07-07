@@ -162,7 +162,7 @@
 					</a>
 					<ul class="sub-menu">
 					    <li>
-							<a href="$cxt/bpm/processType">起草申请</a>
+							<a href="$cxt/bpm/processType">流程定义</a>
 						</li>
 					    <li>
 							<a href="$cxt/bpm/processInstancePage">流程列表</a>
@@ -171,7 +171,7 @@
 							<a href="$cxt/bpm/taskItemPage">任务列表</a>
 						</li>
 						<li>
-							<a href="$cxt/bpm/queryForPage">我的申请</a>
+							<a href="$cxt/form/index">表单管理</a>
 						</li>
 					</ul>
 				</li>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bplow.deep.bpm.mapper.BpmFormMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bplow.deep.bpm.domain.BpmForm">
+    <id column="form_id" jdbcType="BIGINT" property="formId" />
+    <result column="form_name" jdbcType="VARCHAR" property="formName" />
+    <result column="form_desc" jdbcType="VARCHAR" property="formDesc" />
+    <result column="form_content" jdbcType="VARCHAR" property="formContent" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    form_id, form_name, form_desc, form_content, gmt_create, gmt_modify
+  </sql>
+  
+  <select id="queryForPage" parameterType="com.bplow.deep.bpm.domain.BpmForm" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bpm_form
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="formId != null">
+             form_id = #{formId} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+     ORDER BY GMT_MODIFY DESC 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bpm_form
+    where form_id = #{formId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from bpm_form
+    where form_id = #{formId,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.bplow.deep.bpm.domain.BpmForm">
+    insert into bpm_form (form_id, form_name, form_desc, 
+      form_content, gmt_create, gmt_modify
+      )
+    values (#{formId,jdbcType=BIGINT}, #{formName,jdbcType=VARCHAR}, #{formDesc,jdbcType=VARCHAR}, 
+      #{formContent,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+  <update id="update" parameterType="com.bplow.deep.bpm.domain.BpmForm">
+    update bpm_form
+    <set>
+      <if test="formId != null">
+        form_id = #{formId,jdbcType=BIGINT},
+      </if>
+      <if test="formName != null">
+        form_name = #{formName,jdbcType=VARCHAR},
+      </if>
+      <if test="formDesc != null">
+        form_desc = #{formDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="formContent != null">
+        form_content = #{formContent,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null">
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+     WHERE form_id = #{formId} 
+  </update>
+</mapper>

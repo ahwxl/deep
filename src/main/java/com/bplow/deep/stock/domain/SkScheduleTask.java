@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SkScheduleTask extends PageInfo{
 	
+    /**  */
+    private static final long serialVersionUID = 7563047521605682485L;
+
     private String id;
 
     private String groupId;

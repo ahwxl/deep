@@ -38,6 +38,10 @@
 		<mapper resource="mapper/SysResourceMapper.xml" />
 		<mapper resource="mapper/SysUserActiveMapper.xml" />
 		<mapper resource="mapper/ArticleMapper.xml" />
+		
+		<mapper resource="mapper/BpmFormMapper.xml" />
+		<mapper resource="mapper/BpmProcessDefinedMapper.xml" />
+		<mapper resource="mapper/BpmProcessDefinedSetMapper.xml" />
 	</mappers>
 
 </configuration>

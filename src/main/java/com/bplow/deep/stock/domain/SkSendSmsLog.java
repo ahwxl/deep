@@ -5,6 +5,9 @@ import java.util.Date;
 import com.bplow.deep.base.pagination.PageInfo;
 
 public class SkSendSmsLog extends PageInfo{
+    /**  */
+    private static final long serialVersionUID = 2319825560809292827L;
+
     private String smsId;
 
     private String sendMobile;

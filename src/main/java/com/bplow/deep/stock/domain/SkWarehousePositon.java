@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SkWarehousePositon extends PageInfo{
 	
+    /**  */
+    private static final long serialVersionUID = 4058004332632703728L;
+
     private String stockId;
 
     private String stockName;

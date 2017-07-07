@@ -4,6 +4,9 @@ import com.bplow.deep.base.pagination.PageInfo;
 
 public class SkDaySwrich extends PageInfo{
 	
+    /**  */
+    private static final long serialVersionUID = -5650382747944114821L;
+
     private String id;
 
     private String yesterDay;
