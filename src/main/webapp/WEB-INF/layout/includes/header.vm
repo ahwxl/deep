@@ -91,5 +91,7 @@
 	<!-- END CORE PLUGINS -->
 	$head
 </head>
-
+<script type="text/javascript">
+	var cxt = '$cxt';
+</script>
 <!-- END HEAD -->

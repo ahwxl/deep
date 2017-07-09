@@ -266,6 +266,21 @@ CREATE TABLE `t_scripte` (
 ENGINE=InnoDB
 ;
 
+CREATE TABLE `bpm_form` (
+	`form_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`form_name` VARCHAR(200) NULL DEFAULT NULL,
+	`form_desc` VARCHAR(200) NULL DEFAULT NULL,
+	`form_content` VARCHAR(1000) NULL DEFAULT NULL,
+	`gmt_create` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`gmt_modify` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	PRIMARY KEY (`form_id`)
+)
+COMMENT='流程表单'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2
+;
+
 
 
 INSERT INTO `sk_day_swrich` (`id`, `yester_day`, `today`, `tommory`) VALUES ('1', '2017-3-1', '2017-03-05', '11');

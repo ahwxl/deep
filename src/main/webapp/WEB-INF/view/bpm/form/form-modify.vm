@@ -21,7 +21,7 @@
 								
 								<div class="actions">
 
-									<a href="#" id="mySubmit" class="btn green"><i class="icon-plus"></i> 添加</a>
+									<a href="#" id="mySubmit" class="btn green"><i class="icon-plus"></i> 提交</a>
 
 								</div>
 
@@ -29,6 +29,7 @@
                                         <div class="portlet-body form">
 											<!-- BEGIN FORM-->
 											<form action="#" name="myform" id="myform" class="form-horizontal" enctype="multipart/form-data">
+											<input type="hidden" name="formId" value="${formId}" />
 											<input type="hidden" name="formContent" value="" />
 												<div class="row-fluid">
 													<div class="span6 ">
@@ -96,13 +97,19 @@ var initSample = ( function() {
 	return function() {
 		var editorElement = CKEDITOR.document.getById( 'editor' );
 
-		// :(((
-		if ( isBBCodeBuiltIn ) {
-			editorElement.setHtml(
-				'Hello world!\n\n' +
-				'I\'m an instance of [url=http://ckeditor.com]CKEditor[/url].'
-			);
-		}
+		$.ajax({
+						url:'$cxt/form/queryForm',
+						async:false,
+						method:'POST',
+						data:'formId=$formId',
+						dataType : 'json',
+						error :function(resp){/*alert(resp)*/},
+						success:function(resp){
+							$('#myform input[name="formName"]').val(resp.formName);
+							$('#myform input[name=formDesc]').val(resp.formDesc);
+							editorElement.setHtml(resp.formContent);
+						}
+		});
 
 		// Depending on the wysiwygare plugin availability initialize classic or inline editor.
 		if ( wysiwygareaAvailable ) {
@@ -158,7 +165,7 @@ $(document).ready(function () {
 initSample();
 $("#mySubmit").click(function (){
    var data = CKEDITOR.instances.editor.getData();
-   $('#myform input[name="content"]').val(data);
+   $('#myform input[name="formContent"]').val(data);
    $("#myform").trigger('submit');
 });
 
@@ -174,7 +181,7 @@ $("#myform").ajaxForm({
 	},
 	type:'POST',
 	timeout:   5000,
-	url:cxt+'/form/formAddAction', 
+	url:cxt+'/form/updateFormAction', 
 });
 
 function sysNotify(info){

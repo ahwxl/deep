@@ -23,9 +23,9 @@
                		     		  ],
                     "aoColumns": [
                       { "bSortable": false,"sWidth":20,"sSortDataType": "dom-checkbox","sDefaultContent":"<input type=\"checkbox\" class=\"checkboxes\" value=\"1\" />" },
-                      { "sTitle": "编号","mData":"userId","bSortable": false,"sWidth":100},
-                      { "sTitle": "名称","mData":"userName","bSortable": false,"sWidth":100},
-                      { "sTitle": "描述","mData":"mobile","bSortable": false,"sWidth":100 },
+                      { "sTitle": "编号","mData":"formId","bSortable": false,"sWidth":100},
+                      { "sTitle": "名称","mData":"formName","bSortable": false,"sWidth":100},
+                      { "sTitle": "描述","mData":"formDesc","bSortable": false,"sWidth":100 },
                       { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false,"sWidth":150 },
                       { "sTitle": "操作","mData":"gmtModify","bSortable": false }
                     ],
@@ -49,9 +49,9 @@
                         'aTargets': [0]
                     },{
                             'bSortable': false,
-                            'aTargets': [7],
+                            'aTargets': [5],
                             fnRender: function (setobj, data) {
-                            	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {2}</a>".format(setobj.aData['userId'],"删除","修改");
+                            	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {2}</a>".format(setobj.aData['formId'],"删除","修改");
                             	return delhtml;
                             }
                         }
@@ -81,11 +81,11 @@
             	$(document).off('click.modal2').on('click.modal2.data-api', '[data-toggle="delete"]', function ( e ) {
             		var id = $(this).attr('id');
             		if(confirm('确认删除')){
-            			$.post("/deep/sysmng/delUser",
-                				"userName="+id,
+            			$.post(cxt+"/form/delForm",
+                				"formId="+id,
                 			function(data){
                 			   mygridtab.fnDraw();
-                			   alert(data);
+                			   //alert(data);
                 		    }
                 		);
             		}
@@ -93,35 +93,7 @@
             	//修改资源
             	$(document).off('click.modal3').on('click.modal3.data-api', '[data-toggle="edit"]', function ( e ) {
             		var id = $(this).attr('id');
-            		$('#myform')[0].reset();
-            		
-            		$.ajax({
-						url:'/deep/sysmng/queryUser',
-						async:true,
-						method:'POST',
-						data:'userId='+id,
-						dataType : 'json',
-						error :function(resp){alert(resp)},
-						success:function(resp){
-							$('#myform input[name="userId"]').val(resp.userId);
-							$('#myform input[name=userName]').val(resp.userName);
-							$('#myform input[name=email]').val(resp.email);
-							$('#myform input[name=mobile]').val(resp.mobile);
-						}
-					});
-            		
-            		$('#stack1').modal({
-                    	confirm:function(formvalue){
-                    		var param = $('#myform').serialize();
-                    		$.post("/deep/sysmng/updateUser",
-                    				param,
-                    			function(data){
-                    			   mygridtab.fnDraw();
-                    			   alert(data);
-                    		    }
-                    		);
-                    	}
-                    });
+            		window.location.href = cxt+"/form/updateForm?formId="+id;
             	});
             	
             	//table checkbox全选
@@ -138,6 +110,6 @@
                     jQuery.uniform.update(set);
                 });
             	
-            	$(".page-sidebar-menu li[name='系统管理']").addClass("active");
-            	$(".page-sidebar-menu li[name='用户']").addClass("active");
+            	$(".page-sidebar-menu li[name='流程管理']").addClass("active");
+            	$(".page-sidebar-menu li[name='表单管理']").addClass("active");
             });

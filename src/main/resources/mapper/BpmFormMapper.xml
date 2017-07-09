@@ -31,14 +31,14 @@
      ORDER BY GMT_MODIFY DESC 
   </select>
   
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from bpm_form
     where form_id = #{formId,jdbcType=BIGINT}
   </select>
   
-  <delete id="delete" parameterType="java.lang.Long">
+  <delete id="delete" parameterType="java.lang.Integer">
     delete from bpm_form
     where form_id = #{formId,jdbcType=BIGINT}
   </delete>

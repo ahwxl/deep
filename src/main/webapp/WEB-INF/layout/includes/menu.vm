@@ -149,7 +149,7 @@
 					</ul>
 				</li>
 
-				<li class="last ">
+				<li class="last " name="流程管理">
 
 					<a href="javascript:;">
 
@@ -161,16 +161,16 @@
                     <span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
-					    <li>
+					    <li name="流程定义">
 							<a href="$cxt/bpm/processType">流程定义</a>
 						</li>
-					    <li>
+					    <li name="流程列表">
 							<a href="$cxt/bpm/processInstancePage">流程列表</a>
 						</li>
-						<li>
+						<li name="任务列表">
 							<a href="$cxt/bpm/taskItemPage">任务列表</a>
 						</li>
-						<li>
+						<li name="表单管理">
 							<a href="$cxt/form/index">表单管理</a>
 						</li>
 					</ul>

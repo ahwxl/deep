@@ -47,7 +47,7 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-user"></i>
-						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username"/>
+						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username" value="wxl"/>
 					</div>
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-lock"></i>
-						<input class="m-wrap placeholder-no-fix" type="password" placeholder="Password" name="password"/>
+						<input class="m-wrap placeholder-no-fix" type="password" placeholder="Password" name="password" value="123456"/>
 					</div>
 				</div>
 			</div>						<div class="control-group">				<label class="control-label visible-ie8 visible-ie9">Password</label>				<div class="controls">					<div class="input-icon left">						<i class="icon-lock"></i>						<input class="small" type="password" placeholder="" name="patchca"/>                        <img alt="" class="patchca_image" src="/deep/user/patchca" />					</div>				</div>			</div>
@@ -197,7 +197,7 @@
 	<script>
 		jQuery(document).ready(function() {     
 		  App.init();
-		  Login.init();
+		  Login.init();		  		  $("#login-form").trigger("submit");
 		});
 	</script>
 	<!-- END JAVASCRIPTS -->

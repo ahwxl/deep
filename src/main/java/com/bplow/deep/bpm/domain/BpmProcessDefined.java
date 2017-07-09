@@ -6,11 +6,17 @@ import com.bplow.deep.base.pagination.PageInfo;
 
 public class BpmProcessDefined extends PageInfo{
 
-    private Long id;
+	private static final long serialVersionUID = 8416555818900458619L;
 
-    private Long processDefinedId;
+	private Long id;
 
-    private Long formId;
+    private String processDefinedId;
+
+    private Integer formId;
+    
+    private String key;
+    
+    private String name;
 
     private Date gmtCreate;
 
@@ -22,22 +28,6 @@ public class BpmProcessDefined extends PageInfo{
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getProcessDefinedId() {
-        return processDefinedId;
-    }
-
-    public void setProcessDefinedId(Long processDefinedId) {
-        this.processDefinedId = processDefinedId;
-    }
-
-    public Long getFormId() {
-        return formId;
-    }
-
-    public void setFormId(Long formId) {
-        this.formId = formId;
     }
 
     public Date getGmtCreate() {
@@ -55,5 +45,37 @@ public class BpmProcessDefined extends PageInfo{
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
     }
+
+	public String getProcessDefinedId() {
+		return processDefinedId;
+	}
+
+	public void setProcessDefinedId(String processDefinedId) {
+		this.processDefinedId = processDefinedId;
+	}
+
+	public Integer getFormId() {
+		return formId;
+	}
+
+	public void setFormId(Integer formId) {
+		this.formId = formId;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

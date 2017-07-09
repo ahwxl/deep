@@ -50,9 +50,7 @@ public class FormController {
 
         logger.info("展示表单列表页面");
         
-        bpmFormService.addForm(form);
-
-        return "bpm/form/form";
+        return "bpm/form/form-add";
     }
 
     @RequestMapping(value = "/formAddAction")
@@ -60,8 +58,10 @@ public class FormController {
     public String formAdd(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmForm form) {
 
         logger.info("展示表单列表页面");
+        
+        bpmFormService.addForm(form);
 
-        return "bpm/form/form";
+        return String.format("{\"responseMsg\":\"%s\"}", "添加成功");
     }
 
     //查询
@@ -77,14 +77,24 @@ public class FormController {
     }
     
     @RequestMapping(value = "/updateForm")
-    @ResponseBody
     public String updateForm(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmForm form) {
+
+        logger.info("展示表单列表页面");
+        
+
+        view.addAttribute("formId", form.getFormId());
+        return "bpm/form/form-modify";
+    }
+    
+    @RequestMapping(value = "/updateFormAction")
+    @ResponseBody
+    public String updateFormAction(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmForm form) {
 
         logger.info("展示表单列表页面");
         
         bpmFormService.updateForm(form);
 
-        return "bpm/form/form";
+        return String.format("{\"responseMsg\":\"%s\"}", "成功");
     }
 
     //查询
@@ -96,7 +106,7 @@ public class FormController {
         
         bpmFormService.delForm(form.getFormId());
 
-        return "bpm/form/form";
+        return String.format("{\"responseMsg\":\"%s\"}", "删除成功");
     }
 
 }
