@@ -6,6 +6,7 @@ package com.bplow.deep.bpm.service.impl;
 import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.BpmProcessDefined;
@@ -17,6 +18,7 @@ import com.bplow.deep.bpm.service.ProcessDefinedService;
  * @author wangxiaolei
  * @date 2017年7月9日 下午9:26:37
  */
+@Service
 public class ProcessDefinedServiceImpl implements ProcessDefinedService{
 	
 	

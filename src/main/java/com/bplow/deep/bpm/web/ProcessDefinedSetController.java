@@ -43,5 +43,22 @@ public class ProcessDefinedSetController {
 
         return page;
     }
+	
+	@RequestMapping(value = "/processDefineSetPage")
+	public String processDefineSetPage(BpmProcessDefined defined){
+	    
+	    
+	    
+	    return "bpm/set/process-defined-set";
+	}
+	
+	@RequestMapping(value = "/processDefineSet")
+	@ResponseBody
+    public String processDefineSet(BpmProcessDefined defined){
+        
+        
+        
+        return "bpm/set/process-defined-set";
+    }
 
 }

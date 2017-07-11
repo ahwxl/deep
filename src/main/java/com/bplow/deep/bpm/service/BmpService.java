@@ -20,6 +20,7 @@ public interface BmpService {
 	
 	//部署
 	public String deploy(String xmlPath);
+	public String deploy(String name, InputStream is);
 	//创建流程实例
 	public String startProcessByKey(String key, Map<String, Object> variables);
 	//完成任务

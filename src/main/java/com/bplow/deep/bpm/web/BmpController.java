@@ -123,11 +123,17 @@ public class BmpController {
      * 流程部署
      * 
      * @return
+     * @throws IOException 
      */
     @RequestMapping(value = "/bpm/deployProcess")
-    public String deployProcess(@RequestParam("name") String name,
-                                @RequestParam("file") MultipartFile file) {
+    @ResponseBody
+    public String deployProcess(HttpServletRequest httpRequest, HttpServletResponse response, Model view,@RequestParam("file") MultipartFile file) throws IOException {
 
+        String fileName = file.getOriginalFilename();
+        InputStream in = file.getInputStream();
+        
+        bmpService.deploy(fileName, in);
+        
         return "";
     }
 

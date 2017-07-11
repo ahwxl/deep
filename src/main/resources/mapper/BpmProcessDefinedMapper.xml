@@ -1,73 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bplow.deep.bpm.mapper.BpmProcessDefinedMapper">
-  
-  <resultMap id="BaseResultMap" type="com.bplow.deep.bpm.domain.BpmProcessDefined">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="process_defined_id" jdbcType="BIGINT" property="processDefinedId" />
-    <result column="form_id" jdbcType="BIGINT" property="formId" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
-  </resultMap>
-  
-  <sql id="Base_Column_List">
-    id, process_defined_id, form_id, gmt_create, gmt_modify
-  </sql>
-  
-  <select id="queryForPage" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from bpm_process_defined
-    <where>
-      <trim prefixOverrides="AND">
-        <trim prefix="AND">
-          <if test="id != null">
-             ID = #{id} 
-          </if>
-        </trim>
-      </trim>
-    </where>
-     ORDER BY GMT_MODIFY DESC 
-  </select>
-  
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from bpm_process_defined
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  
-  <delete id="delete" parameterType="java.lang.Long">
-    delete from bpm_process_defined
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  
-  <insert id="insert" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined">
-    insert into bpm_process_defined (id, process_defined_id, form_id, 
-      gmt_create, gmt_modify)
-    values (#{id,jdbcType=BIGINT}, #{processDefinedId,jdbcType=BIGINT}, #{formId,jdbcType=BIGINT}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP})
-  </insert>
-  
-  <update id="update" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined">
-    update bpm_process_defined
-    <set>
-      <if test="id != null">
-        id = #{id,jdbcType=BIGINT},
-      </if>
-      <if test="processDefinedId != null">
-        process_defined_id = #{processDefinedId,jdbcType=BIGINT},
-      </if>
-      <if test="formId != null">
-        form_id = #{formId,jdbcType=BIGINT},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-     WHERE ID = #{id} 
-  </update>
+
+	<resultMap id="BaseResultMap" type="com.bplow.deep.bpm.domain.BpmProcessDefined">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="process_defined_id" jdbcType="VARCHAR" property="processDefinedId" />
+		<result column="KEY_" jdbcType="VARCHAR" property="key" />
+		<result column="NAME_" jdbcType="VARCHAR" property="name" />
+		<result column="form_id" jdbcType="BIGINT" property="formId" />
+		<result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+		<result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, process_defined_id, form_id, gmt_create, gmt_modify
+	</sql>
+
+	<select id="queryForPage" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined"
+		resultMap="BaseResultMap">
+		select a.ID_ process_defined_id,a.NAME_,a.KEY_ ,a.DEPLOYMENT_ID_,b.id 
+		from act_re_procdef a
+		left join bpm_process_defined b on a.DEPLOYMENT_ID_ = b.id
+		<where>
+			<trim prefixOverrides="AND">
+				<trim prefix="AND">
+					<if test="id != null">
+						ID = #{id}
+					</if>
+				</trim>
+			</trim>
+		</where>
+		ORDER BY b.GMT_MODIFY DESC
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bpm_process_defined
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from bpm_process_defined
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined">
+		insert into bpm_process_defined (id, process_defined_id, form_id,
+		gmt_create, gmt_modify)
+		values (#{id,jdbcType=BIGINT}, #{processDefinedId,jdbcType=BIGINT},
+		#{formId,jdbcType=BIGINT},
+		#{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP})
+	</insert>
+
+	<update id="update" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined">
+		update bpm_process_defined
+		<set>
+			<if test="id != null">
+				id = #{id,jdbcType=BIGINT},
+			</if>
+			<if test="processDefinedId != null">
+				process_defined_id = #{processDefinedId,jdbcType=BIGINT},
+			</if>
+			<if test="formId != null">
+				form_id = #{formId,jdbcType=BIGINT},
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtModify != null">
+				gmt_modify = now()
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
 </mapper>
