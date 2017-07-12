@@ -51,12 +51,25 @@
                             'bSortable': false,
                             'aTargets': [5],
                             fnRender: function (setobj, data) {
-                            	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {2}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='set' ><i class='icon-edit'></i> {3}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='reStart' ><i class='icon-edit'></i> {4}</a>".format(setobj.aData['key'],"删除","修改","设置","启动");
+                            	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {2}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='set' ><i class='icon-edit'></i> {3}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='reStart' ><i class='icon-edit'></i> {4}</a>".format(setobj.aData['processDefinedId'],"删除","修改","设置","启动");
                             	return delhtml;
                             }
                         }
                     ]
                 });
+            	
+            	function sysNotify(info){
+
+            		var unique_id = $.gritter.add({
+            					                    position: 'bottom-right',
+            					                    title: '系统通知!',
+            					                    text: info,
+            					                    sticky: false,
+            					                    time: '2000',
+            					                    //class_name: 'my-sticky-class'
+            					                    class_name: 'gritter-success'
+            		 });
+            	}
             	
                 //var table = $('#sample_1').DataTable();
             	//动态创建的元素 通过绑定到 document
@@ -106,7 +119,7 @@
             	//跳转流程启动page
             	$(document).off('click.modal5').on('click.modal5.data-api', '[data-toggle="reStart"]', function ( e ) {
             		var id = $(this).attr('id');
-            		window.location.href = cxt+"/bpm/processStartPage?processDefinedId="+id;
+            		window.location.href = cxt+"/bpm/createProcessInstance?processDefinedId="+id;
             	});
             	
             	//table checkbox全选
@@ -122,6 +135,17 @@
                     });
                     jQuery.uniform.update(set);
                 });
+            	
+            	$("#myform").ajaxForm({
+            		dataType:'json',
+            		error:function (){sysNotify("操作失败，请联系管理员")},
+            		success:function(responseTxt){
+            		  sysNotify(responseTxt.responseMsg);
+            		},
+            		type:'POST',
+            		url:cxt+'/bpm/processDefineSet'
+            	});
+            	
             	
             	$(".page-sidebar-menu li[name='流程管理']").addClass("active");
             	$(".page-sidebar-menu li[name='流程定义']").addClass("active");

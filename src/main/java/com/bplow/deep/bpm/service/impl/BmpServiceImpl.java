@@ -9,6 +9,7 @@ package com.bplow.deep.bpm.service.impl;
  * @date 2016年7月9日 上午10:27:51
  */
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
@@ -25,6 +26,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.impl.RepositoryServiceImpl;
+import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
@@ -44,6 +46,7 @@ import org.springframework.stereotype.Service;
 
 import com.bplow.deep.base.domain.ServiceResult;
 import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.bpm.domain.BpmActivity;
 import com.bplow.deep.bpm.domain.ProcessInstanceInfo;
 import com.bplow.deep.bpm.mapper.BpmServiceMapper;
 import com.bplow.deep.bpm.service.BmpService;
@@ -365,6 +368,29 @@ public class BmpServiceImpl implements BmpService {
 		String formKey = formService.getStartFormData(pd.getId()).getFormKey();
 		
 		return formKey;
+	}
+	
+	public List<BpmActivity> queryAllActivity(String processDefinitionId){
+	    
+	    String procDefId = processDefinitionId;//"leave:1:97557"
+        ProcessDefinitionImpl processDefinitionImpl = (ProcessDefinitionImpl) repositoryService
+                .getProcessDefinition(procDefId);
+        
+        List<ActivityImpl> activities = processDefinitionImpl.getActivities();
+        List<BpmActivity> userTaskActs = new ArrayList<BpmActivity>();
+        
+        for(ActivityImpl act : activities){
+           if(act.getActivityBehavior() instanceof UserTaskActivityBehavior){
+               BpmActivity bpmAct = new BpmActivity();
+               
+               bpmAct.setId(act.getId());
+               bpmAct.setName(act.getId());
+               
+               userTaskActs.add(bpmAct);
+           }
+        }
+	    
+        return userTaskActs;
 	}
 
 }

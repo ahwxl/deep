@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.BpmProcessDefined;
+import com.bplow.deep.bpm.domain.BpmProcessDefinedSet;
 
 /**
  * @desc 
@@ -23,12 +24,13 @@ public interface ProcessDefinedService {
 	//部署流程
 	String deployProcess(String name,InputStream in);
 	
-	//设置表单
 	void updateProcessDefined(BpmProcessDefined processDefined);
 	
 	void addProcessDefined(BpmProcessDefined bpmProcessDefined);
 	
-	//设置角色、用户id
+	//设置表单、角色、用户id
 	
+	void addProcessDefinitionSet(BpmProcessDefinedSet bpmProcessDefinedSet);
 	
+	void updateProcessDefinitionSet(BpmProcessDefinedSet bpmProcessDefinedSet);
 }

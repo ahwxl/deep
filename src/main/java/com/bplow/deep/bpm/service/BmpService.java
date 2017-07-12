@@ -7,8 +7,11 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
+
 import com.bplow.deep.base.domain.ServiceResult;
 import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.bpm.domain.BpmActivity;
 import com.bplow.deep.bpm.domain.ProcessInstanceInfo;
 
 /**
@@ -40,4 +43,6 @@ public interface BmpService {
 	public ProcessInstanceInfo queryTask(ProcessInstanceInfo processInfo);
 	//流程图
 	public InputStream getImageInputStreamById(ProcessInstanceInfo processInfo);
+	//查询所有用户活动列表
+	public List<BpmActivity> queryAllActivity(String processDefinitionId);
 }

@@ -11,7 +11,7 @@ public class BpmProcessDefinedSet extends PageInfo{
 
     private String activityId;
 
-    private Long formId;
+    private Integer formId;
 
     private String userId;
 
@@ -33,11 +33,11 @@ public class BpmProcessDefinedSet extends PageInfo{
         this.activityId = activityId == null ? null : activityId.trim();
     }
 
-    public Long getFormId() {
+    public Integer getFormId() {
         return formId;
     }
 
-    public void setFormId(Long formId) {
+    public void setFormId(Integer formId) {
         this.formId = formId;
     }
 

@@ -13,52 +13,61 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.BpmProcessDefined;
+import com.bplow.deep.bpm.domain.BpmProcessDefinedSet;
 import com.bplow.deep.bpm.service.ProcessDefinedService;
-
 
 @Controller
 @RequestMapping(value = "/bpm/")
 public class ProcessDefinedSetController {
-	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@Autowired
-	private ProcessDefinedService processDefinedService;
-	
-	@RequestMapping(value = "/processDefinePage")
+
+    private Logger                logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private ProcessDefinedService processDefinedService;
+
+    @RequestMapping(value = "/processDefinePage")
     public String index(HttpServletRequest httpRequest, HttpServletResponse response, Model view) {
 
         logger.info("展示定义列表页面");
 
         return "bpm/set/process-defined-list";
     }
-	
-	@RequestMapping(value = "/processDefineList")
-	@ResponseBody
-    public Page<BpmProcessDefined> processDefineList(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmProcessDefined processDefined) {
+
+    @RequestMapping(value = "/processDefineList")
+    @ResponseBody
+    public Page<BpmProcessDefined> processDefineList(HttpServletRequest httpRequest,
+                                                     HttpServletResponse response, Model view,
+                                                     BpmProcessDefined processDefined) {
 
         logger.info("展示流程列表查询");
-        
-        Page<BpmProcessDefined> page =processDefinedService.queryProcessDefineForPage(processDefined);
+
+        Page<BpmProcessDefined> page = processDefinedService
+            .queryProcessDefineForPage(processDefined);
 
         return page;
     }
-	
-	@RequestMapping(value = "/processDefineSetPage")
-	public String processDefineSetPage(BpmProcessDefined defined){
-	    
-	    
-	    
-	    return "bpm/set/process-defined-set";
-	}
-	
-	@RequestMapping(value = "/processDefineSet")
-	@ResponseBody
-    public String processDefineSet(BpmProcessDefined defined){
-        
-        
-        
+
+    @RequestMapping(value = "/processDefineSetPage")
+    public String processDefineSetPage(Model view, BpmProcessDefinedSet defined) {
+
+        view.addAttribute("defined", defined);
+
         return "bpm/set/process-defined-set";
+    }
+
+    @RequestMapping(value = "/processDefineSet")
+    @ResponseBody
+    public String processDefineSet(BpmProcessDefinedSet bpmProcessDefinedSet) {
+        
+        BpmProcessDefined bpmProcessDefined = new BpmProcessDefined();
+        bpmProcessDefined.setProcessDefinedId(bpmProcessDefinedSet.getProcessDefinedId());
+        bpmProcessDefined.setFormId(bpmProcessDefinedSet.getFormId());
+        
+        processDefinedService.addProcessDefined(bpmProcessDefined);
+
+        processDefinedService.addProcessDefinitionSet(bpmProcessDefinedSet);
+
+        return String.format("{\"responseMsg\":\"%s\"}", "成功");
     }
 
 }

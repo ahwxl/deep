@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.bpm.domain.BpmActivity;
 import com.bplow.deep.bpm.domain.ProcessInstanceInfo;
 import com.bplow.deep.bpm.service.BmpService;
 
@@ -146,7 +148,7 @@ public class BmpController {
 
         view.addAttribute("processInfo", processInfo);
         
-       String formKey = bmpService.queryProcessStartForm(processInfo);
+       String formKey = null/*bmpService.queryProcessStartForm(processInfo)*/;
 
         return formKey!= null?"bpm/form/"+formKey:"bpm/createProcessInstance";
     }
@@ -265,6 +267,15 @@ public class BmpController {
 
         return "{\"iTotalRecords\":100,\"iTotalDisplayRecords\":10,\"aaData\": [{\"a\":123,\"b\":568},{\"a\":123,\"b\":568}]"
                + "}";
+    }
+    
+    @RequestMapping(value="/bpm/queryProcessActivity")
+    @ResponseBody
+    public List<BpmActivity> queryActivity(HttpServletRequest httpRequest,String processDefinitionId){
+        
+        List<BpmActivity> list = bmpService.queryAllActivity(processDefinitionId);
+        
+        return list;
     }
 
 }

@@ -7,10 +7,13 @@ import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.BpmProcessDefined;
+import com.bplow.deep.bpm.domain.BpmProcessDefinedSet;
 import com.bplow.deep.bpm.mapper.BpmProcessDefinedMapper;
+import com.bplow.deep.bpm.mapper.BpmProcessDefinedSetMapper;
 import com.bplow.deep.bpm.service.ProcessDefinedService;
 
 /**
@@ -19,48 +22,63 @@ import com.bplow.deep.bpm.service.ProcessDefinedService;
  * @date 2017年7月9日 下午9:26:37
  */
 @Service
-public class ProcessDefinedServiceImpl implements ProcessDefinedService{
-	
-	
-	@Autowired
-	private BpmProcessDefinedMapper bpmProcessDefinedMapper;
+@Transactional
+public class ProcessDefinedServiceImpl implements ProcessDefinedService {
 
-	@Override
-	public Page<BpmProcessDefined> queryProcessDefineForPage(
-			BpmProcessDefined processDefined) {
-		
-		Page<BpmProcessDefined> page = bpmProcessDefinedMapper.queryForPage(processDefined);
-		
-		return page;
-	}
+    @Autowired
+    private BpmProcessDefinedMapper    bpmProcessDefinedMapper;
 
-	@Override
-	public BpmProcessDefined queryProcessDefined(
-			BpmProcessDefined processDefined) {
-		
-		BpmProcessDefined bpmProcessDefined = bpmProcessDefinedMapper.selectByPrimaryKey(processDefined.getId());
-		
-		return bpmProcessDefined;
-	}
+    @Autowired
+    private BpmProcessDefinedSetMapper bpmProcessDefinedSetMapper;
 
-	@Override
-	public String deployProcess(String name, InputStream in) {
-		
-		
-		
-		return null;
-	}
+    @Override
+    public Page<BpmProcessDefined> queryProcessDefineForPage(BpmProcessDefined processDefined) {
 
-	@Override
-	public void updateProcessDefined(BpmProcessDefined processDefined) {
-		// TODO Auto-generated method stub
-		
-	}
+        Page<BpmProcessDefined> page = bpmProcessDefinedMapper.queryForPage(processDefined);
 
-	@Override
-	public void addProcessDefined(BpmProcessDefined bpmProcessDefined) {
-		// TODO Auto-generated method stub
-		
-	}
+        return page;
+    }
+
+    @Override
+    public BpmProcessDefined queryProcessDefined(BpmProcessDefined processDefined) {
+
+        BpmProcessDefined bpmProcessDefined = bpmProcessDefinedMapper
+            .selectByPrimaryKey(processDefined.getId());
+
+        return bpmProcessDefined;
+    }
+
+    @Override
+    public String deployProcess(String name, InputStream in) {
+
+        return null;
+    }
+
+    @Override
+    public void updateProcessDefined(BpmProcessDefined processDefined) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addProcessDefined(BpmProcessDefined bpmProcessDefined) {
+        
+        bpmProcessDefinedMapper.insert(bpmProcessDefined);
+
+    }
+
+    @Override
+    public void addProcessDefinitionSet(BpmProcessDefinedSet bpmProcessDefinedSet) {
+
+        bpmProcessDefinedSetMapper.insert(bpmProcessDefinedSet);
+
+    }
+
+    @Override
+    public void updateProcessDefinitionSet(BpmProcessDefinedSet bpmProcessDefinedSet) {
+
+        bpmProcessDefinedSetMapper.update(bpmProcessDefinedSet);
+
+    }
 
 }

@@ -18,9 +18,9 @@
 
 	<select id="queryForPage" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined"
 		resultMap="BaseResultMap">
-		select a.ID_ process_defined_id,a.NAME_,a.KEY_ ,a.DEPLOYMENT_ID_,b.id 
+		select a.ID_ process_defined_id,a.NAME_,a.KEY_ ,a.DEPLOYMENT_ID_,b.id,b.gmt_create,b.gmt_modify
 		from act_re_procdef a
-		left join bpm_process_defined b on a.DEPLOYMENT_ID_ = b.id
+		left join bpm_process_defined b on a.ID_ = b.process_defined_id
 		<where>
 			<trim prefixOverrides="AND">
 				<trim prefix="AND">
