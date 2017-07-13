@@ -1,3 +1,18 @@
+#parse("././globle.vm" )
+<html>
+<head>
+<title>表单列表</title>
+	<link href="$cxt/static/css/select2.min.css" rel="stylesheet" type="text/css"/>
+	<link href="$cxt/static/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="$cxt/static/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="$cxt/static/js/select2/select2-403.min.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.dataTables.js?20170216"></script>
+	<script type="text/javascript" src="$cxt/static/js/DT_bootstrap.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="$cxt/static/js/module/process-set.js?20170314"></script>
+</head>
+<body>
 <!-- BEGIN PAGE HEADER-->
 <div class="row-fluid">
 	<div class="span12">
@@ -160,3 +175,5 @@
 				</div>
 
 				<!-- END PAGE CONTENT-->
+</body>
+</html>

@@ -8,6 +8,8 @@ public interface BpmProcessDefinedMapper {
     Page<BpmProcessDefined> queryForPage(BpmProcessDefined BpmProcessDefined);
 
     BpmProcessDefined selectByPrimaryKey(Long id);
+    
+    BpmProcessDefined queryBpmProcessDefined(BpmProcessDefined bpmProcessDefined);
 
     int update(BpmProcessDefined record);
 

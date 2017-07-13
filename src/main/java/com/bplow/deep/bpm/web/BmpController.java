@@ -30,16 +30,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.bpm.domain.BpmActivity;
+import com.bplow.deep.bpm.domain.BpmProcessDefined;
 import com.bplow.deep.bpm.domain.ProcessInstanceInfo;
 import com.bplow.deep.bpm.service.BmpService;
+import com.bplow.deep.bpm.service.ProcessDefinedService;
 
 @Controller
 public class BmpController {
 
-    private Logger     logger = LoggerFactory.getLogger(this.getClass());
+    private Logger                logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private BmpService bmpService;
+    private BmpService            bmpService;
+
+    @Autowired
+    private ProcessDefinedService processDefinedService;
 
     /**
      * 流程实例列表
@@ -129,13 +134,15 @@ public class BmpController {
      */
     @RequestMapping(value = "/bpm/deployProcess")
     @ResponseBody
-    public String deployProcess(HttpServletRequest httpRequest, HttpServletResponse response, Model view,@RequestParam("file") MultipartFile file) throws IOException {
+    public String deployProcess(HttpServletRequest httpRequest, HttpServletResponse response,
+                                Model view, @RequestParam("file") MultipartFile file)
+                                                                                     throws IOException {
 
         String fileName = file.getOriginalFilename();
         InputStream in = file.getInputStream();
-        
+
         bmpService.deploy(fileName, in);
-        
+
         return "";
     }
 
@@ -147,10 +154,15 @@ public class BmpController {
     public String createProcessInstancePage(ProcessInstanceInfo processInfo, Model view) {
 
         view.addAttribute("processInfo", processInfo);
-        
-       String formKey = null/*bmpService.queryProcessStartForm(processInfo)*/;
 
-        return formKey!= null?"bpm/form/"+formKey:"bpm/createProcessInstance";
+        BpmProcessDefined processDefined = new BpmProcessDefined();
+        processDefined.setProcessDefinedId(processInfo.getProcessDefineId());
+        BpmProcessDefined bpmProcessDef = processDefinedService.queryProcessDefined(processDefined);
+
+        String formKey = null/*bmpService.queryProcessStartForm(processInfo)*/;
+
+        view.addAttribute("bpmProcessDef", bpmProcessDef);
+        return formKey != null ? "bpm/form/" + formKey : "bpm/createProcessInstance";
     }
 
     /**
@@ -167,14 +179,14 @@ public class BmpController {
         //会签参数处理
         for (Map.Entry<String, String[]> entry : map.entrySet()) {
             System.out.println(entry.getKey() + "--->" + entry.getValue()[0]);
-            if("assigneeList".equalsIgnoreCase(entry.getKey())){
-            	List<String> asignList = new ArrayList<String>();
-            	for(String tmp : entry.getValue()){
-            		asignList.add(tmp);
-            	}
-            	variables.put("assigneeList", asignList);
-            }else{
-            variables.put(entry.getKey(), entry.getValue()[0]);
+            if ("assigneeList".equalsIgnoreCase(entry.getKey())) {
+                List<String> asignList = new ArrayList<String>();
+                for (String tmp : entry.getValue()) {
+                    asignList.add(tmp);
+                }
+                variables.put("assigneeList", asignList);
+            } else {
+                variables.put(entry.getKey(), entry.getValue()[0]);
             }
         }
 
@@ -248,12 +260,13 @@ public class BmpController {
     //流程图
     @RequestMapping(value = "/bpm/viewProcessDefImage")
     public void viewProcessDefImage(ProcessInstanceInfo processInfo,
-                                      HttpServletRequest httpRequest, HttpServletResponse response) throws IOException {
+                                    HttpServletRequest httpRequest, HttpServletResponse response)
+                                                                                                 throws IOException {
         response.setContentType("image/jpeg");
         InputStream input = bmpService.getImageInputStreamById(processInfo);
-        
+
         OutputStream output = response.getOutputStream();
-        
+
         IOUtils.copy(input, output);
         output.flush();
         output.close();
@@ -268,13 +281,14 @@ public class BmpController {
         return "{\"iTotalRecords\":100,\"iTotalDisplayRecords\":10,\"aaData\": [{\"a\":123,\"b\":568},{\"a\":123,\"b\":568}]"
                + "}";
     }
-    
-    @RequestMapping(value="/bpm/queryProcessActivity")
+
+    @RequestMapping(value = "/bpm/queryProcessActivity")
     @ResponseBody
-    public List<BpmActivity> queryActivity(HttpServletRequest httpRequest,String processDefinitionId){
-        
+    public List<BpmActivity> queryActivity(HttpServletRequest httpRequest,
+                                           String processDefinitionId) {
+
         List<BpmActivity> list = bmpService.queryAllActivity(processDefinitionId);
-        
+
         return list;
     }
 

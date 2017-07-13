@@ -1,5 +1,7 @@
 package com.bplow.deep.bpm.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,14 @@ public class BpmFormServiceImpl implements BpmFormService{
     
         bmpFormMapper.delete(formId);
     
+    }
+
+    @Override
+    public List<BpmForm> queryForms(BpmForm form) {
+        
+        List<BpmForm> list = bmpFormMapper.queryForms(form);
+        
+        return list;
     }
 
 }

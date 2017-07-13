@@ -63,6 +63,18 @@
 								<!--/span-->
 							</div>
 							
+							<div class="row-fluid">
+								<div class="span6 ">
+									<div class="control-group">
+										<label class="control-label">审批人</label>
+										<div class="controls">
+											<input type="text" name="userId" class="m-wrap span12" placeholder="选择审批人员">
+										</div>
+									</div>
+								</div>
+								<!--/span-->
+							</div>
+							
 							
 							</form>
 							</div>

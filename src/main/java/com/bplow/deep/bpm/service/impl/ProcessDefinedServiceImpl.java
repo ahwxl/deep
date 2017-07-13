@@ -43,7 +43,7 @@ public class ProcessDefinedServiceImpl implements ProcessDefinedService {
     public BpmProcessDefined queryProcessDefined(BpmProcessDefined processDefined) {
 
         BpmProcessDefined bpmProcessDefined = bpmProcessDefinedMapper
-            .selectByPrimaryKey(processDefined.getId());
+            .queryBpmProcessDefined(processDefined);
 
         return bpmProcessDefined;
     }

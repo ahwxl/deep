@@ -7,10 +7,10 @@
     <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
 
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-        connectionURL="jdbc:mysql://localhost:3306/tenement"
+        connectionURL="jdbc:mysql://localhost:3306/deep"
         userId="root"  password="123456"/>
 
-    <javaModelGenerator targetPackage="com.bplow.deep.stock.domain" targetProject="src/main/java">
+    <javaModelGenerator targetPackage="com.bplow.deep.bpm.domain" targetProject="src/main/java">
       <property name="enableSubPackages" value="true" />
       <property name="trimStrings" value="true" />
     </javaModelGenerator>
@@ -19,10 +19,12 @@
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
    
-    <javaClientGenerator type="XMLMAPPER" targetPackage="com.bplow.deep.stock.mapper"  targetProject="src/main/java/">
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.bplow.deep.bpm.mapper"  targetProject="src/main/java/">
     </javaClientGenerator>
 
-    <table tableName="t_user" />
+    <table tableName="bpm_process_defined_set" />
+    <table tableName="bpm_process_defined" />
+    <table tableName="bpm_form" />
    
   </context>
 </generatorConfiguration>

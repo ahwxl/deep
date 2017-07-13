@@ -4,7 +4,8 @@
 
 	<resultMap id="BaseResultMap" type="com.bplow.deep.bpm.domain.BpmProcessDefined">
 		<id column="id" jdbcType="BIGINT" property="id" />
-		<result column="process_defined_id" jdbcType="VARCHAR" property="processDefinedId" />
+		<result column="process_defined_id" jdbcType="VARCHAR"
+			property="processDefinedId" />
 		<result column="KEY_" jdbcType="VARCHAR" property="key" />
 		<result column="NAME_" jdbcType="VARCHAR" property="name" />
 		<result column="form_id" jdbcType="BIGINT" property="formId" />
@@ -18,7 +19,8 @@
 
 	<select id="queryForPage" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined"
 		resultMap="BaseResultMap">
-		select a.ID_ process_defined_id,a.NAME_,a.KEY_ ,a.DEPLOYMENT_ID_,b.id,b.gmt_create,b.gmt_modify
+		select a.ID_ process_defined_id,a.NAME_,a.KEY_
+		,a.DEPLOYMENT_ID_,b.id,b.gmt_create,b.gmt_modify
 		from act_re_procdef a
 		left join bpm_process_defined b on a.ID_ = b.process_defined_id
 		<where>
@@ -33,6 +35,22 @@
 		ORDER BY b.GMT_MODIFY DESC
 	</select>
 
+	<select id="queryBpmProcessDefined" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bpm_process_defined
+		<where>
+			<trim prefixOverrides="AND">
+				<trim prefix="AND">
+					<if test="processDefinedId != null and processDefinedId != ''">
+						process_defined_id = #{processDefinedId}
+					</if>
+				</trim>
+			</trim>
+		</where>
+	</select>
+
 	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
 		resultMap="BaseResultMap">
 		select
@@ -42,14 +60,18 @@
 	</select>
 
 	<delete id="delete" parameterType="java.lang.Long">
-		delete from bpm_process_defined
+		delete from
+		bpm_process_defined
 		where id = #{id,jdbcType=BIGINT}
 	</delete>
 
 	<insert id="insert" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined">
-		insert into bpm_process_defined (id, process_defined_id, form_id,
-		gmt_create, gmt_modify)
-		values (#{id,jdbcType=BIGINT}, #{processDefinedId,jdbcType=BIGINT},
+		insert into
+		bpm_process_defined (id, process_defined_id, form_id,
+		gmt_create,
+		gmt_modify)
+		values (#{id,jdbcType=BIGINT},
+		#{processDefinedId,jdbcType=BIGINT},
 		#{formId,jdbcType=BIGINT},
 		#{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP})
 	</insert>

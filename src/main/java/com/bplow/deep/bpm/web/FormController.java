@@ -1,5 +1,7 @@
 package com.bplow.deep.bpm.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,8 +21,8 @@ import com.bplow.deep.bpm.service.BpmFormService;
 @RequestMapping(value = "/form")
 public class FormController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+    private Logger         logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private BpmFormService bpmFormService;
 
@@ -34,10 +36,11 @@ public class FormController {
 
     @RequestMapping(value = "/formList")
     @ResponseBody
-    public Page<BpmForm> formItems(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmForm form) {
+    public Page<BpmForm> formItems(HttpServletRequest httpRequest, HttpServletResponse response,
+                                   Model view, BpmForm form) {
 
         logger.info("展示表单列表页面");
-        
+
         Page<BpmForm> page = bpmFormService.queryFormsForPage(form);
 
         return page;
@@ -46,19 +49,20 @@ public class FormController {
     //添加页面
     @RequestMapping(value = "/formAdd")
     public String formAddPage(HttpServletRequest httpRequest, HttpServletResponse response,
-                              Model view,BpmForm form) {
+                              Model view, BpmForm form) {
 
         logger.info("展示表单列表页面");
-        
+
         return "bpm/form/form-add";
     }
 
     @RequestMapping(value = "/formAddAction")
     @ResponseBody
-    public String formAdd(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmForm form) {
+    public String formAdd(HttpServletRequest httpRequest, HttpServletResponse response, Model view,
+                          BpmForm form) {
 
         logger.info("展示表单列表页面");
-        
+
         bpmFormService.addForm(form);
 
         return String.format("{\"responseMsg\":\"%s\"}", "添加成功");
@@ -67,31 +71,33 @@ public class FormController {
     //查询
     @RequestMapping(value = "/queryForm")
     @ResponseBody
-    public BpmForm queryForm(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmForm form) {
+    public BpmForm queryForm(HttpServletRequest httpRequest, HttpServletResponse response,
+                             Model view, BpmForm form) {
 
         logger.info("展示表单列表页面");
 
         BpmForm bpmform = bpmFormService.queryFormById(form.getFormId());
-        
+
         return bpmform;
     }
-    
+
     @RequestMapping(value = "/updateForm")
-    public String updateForm(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmForm form) {
+    public String updateForm(HttpServletRequest httpRequest, HttpServletResponse response,
+                             Model view, BpmForm form) {
 
         logger.info("展示表单列表页面");
-        
 
         view.addAttribute("formId", form.getFormId());
         return "bpm/form/form-modify";
     }
-    
+
     @RequestMapping(value = "/updateFormAction")
     @ResponseBody
-    public String updateFormAction(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmForm form) {
+    public String updateFormAction(HttpServletRequest httpRequest, HttpServletResponse response,
+                                   Model view, BpmForm form) {
 
         logger.info("展示表单列表页面");
-        
+
         bpmFormService.updateForm(form);
 
         return String.format("{\"responseMsg\":\"%s\"}", "成功");
@@ -100,13 +106,24 @@ public class FormController {
     //查询
     @RequestMapping(value = "/delForm")
     @ResponseBody
-    public String delForm(HttpServletRequest httpRequest, HttpServletResponse response, Model view,BpmForm form) {
+    public String delForm(HttpServletRequest httpRequest, HttpServletResponse response, Model view,
+                          BpmForm form) {
 
         logger.info("展示表单列表页面");
-        
+
         bpmFormService.delForm(form.getFormId());
 
         return String.format("{\"responseMsg\":\"%s\"}", "删除成功");
+    }
+
+    //表单列表展示
+    @RequestMapping(value = "/formItem")
+    @ResponseBody
+    public List<BpmForm> getForms(BpmForm form) {
+
+        List<BpmForm> list = bpmFormService.queryForms(form);
+
+        return list;
     }
 
 }
