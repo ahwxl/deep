@@ -37,14 +37,15 @@
 
 	<select id="queryBpmProcessDefined" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefined"
 		resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from bpm_process_defined
+		select a.ID_ process_defined_id,a.NAME_,a.KEY_
+		,a.DEPLOYMENT_ID_,b.id,b.gmt_create,b.gmt_modify,b.form_id
+		from act_re_procdef a
+		left join bpm_process_defined b on a.ID_ = b.process_defined_id
 		<where>
 			<trim prefixOverrides="AND">
 				<trim prefix="AND">
 					<if test="processDefinedId != null and processDefinedId != ''">
-						process_defined_id = #{processDefinedId}
+						a.ID_ = #{processDefinedId}
 					</if>
 				</trim>
 			</trim>

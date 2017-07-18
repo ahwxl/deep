@@ -18,6 +18,8 @@ public class BpmForm extends PageInfo {
     private String            formDesc;
 
     private String            formContent;
+    
+    private Integer           parentFormId;
 
     private Date              gmtCreate;
 
@@ -73,4 +75,13 @@ public class BpmForm extends PageInfo {
         this.gmtModify = gmtModify;
     }
 
+    public Integer getParentFormId() {
+        return parentFormId;
+    }
+
+    public void setParentFormId(Integer parentFormId) {
+        this.parentFormId = parentFormId;
+    }
+
+    
 }

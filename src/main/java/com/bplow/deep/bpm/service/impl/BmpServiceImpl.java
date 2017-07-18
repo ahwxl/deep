@@ -26,6 +26,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.impl.RepositoryServiceImpl;
+import org.activiti.engine.impl.bpmn.behavior.NoneStartEventActivityBehavior;
 import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.interceptor.CommandContext;
@@ -380,7 +381,7 @@ public class BmpServiceImpl implements BmpService {
         List<BpmActivity> userTaskActs = new ArrayList<BpmActivity>();
         
         for(ActivityImpl act : activities){
-           if(act.getActivityBehavior() instanceof UserTaskActivityBehavior){
+           if(act.getActivityBehavior() instanceof UserTaskActivityBehavior || act.getActivityBehavior() instanceof NoneStartEventActivityBehavior ){
                BpmActivity bpmAct = new BpmActivity();
                
                bpmAct.setId(act.getId());

@@ -15,6 +15,7 @@ import com.bplow.deep.bpm.domain.BpmProcessDefinedSet;
 import com.bplow.deep.bpm.mapper.BpmProcessDefinedMapper;
 import com.bplow.deep.bpm.mapper.BpmProcessDefinedSetMapper;
 import com.bplow.deep.bpm.service.ProcessDefinedService;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.BMMimeMultipart;
 
 /**
  * @desc 
@@ -62,15 +63,34 @@ public class ProcessDefinedServiceImpl implements ProcessDefinedService {
 
     @Override
     public void addProcessDefined(BpmProcessDefined bpmProcessDefined) {
-        
-        bpmProcessDefinedMapper.insert(bpmProcessDefined);
+
+        BpmProcessDefined tmpBpmProcessDef = bpmProcessDefinedMapper
+            .queryBpmProcessDefined(bpmProcessDefined);
+
+        if (tmpBpmProcessDef != null) {
+
+            tmpBpmProcessDef.setFormId(bpmProcessDefined.getFormId());
+            bpmProcessDefinedMapper.update(tmpBpmProcessDef);
+        } else {
+            bpmProcessDefinedMapper.insert(bpmProcessDefined);
+        }
 
     }
 
     @Override
     public void addProcessDefinitionSet(BpmProcessDefinedSet bpmProcessDefinedSet) {
 
-        bpmProcessDefinedSetMapper.insert(bpmProcessDefinedSet);
+        BpmProcessDefinedSet tmpBpmProcessDefinedSet = bpmProcessDefinedSetMapper
+            .queryProcessDefSet(bpmProcessDefinedSet);
+
+        if (tmpBpmProcessDefinedSet != null) {
+            tmpBpmProcessDefinedSet.setFormId(bpmProcessDefinedSet.getFormId());
+            tmpBpmProcessDefinedSet.setUserId(bpmProcessDefinedSet.getUserId());
+
+            bpmProcessDefinedSetMapper.update(tmpBpmProcessDefinedSet);
+        } else {
+            bpmProcessDefinedSetMapper.insert(bpmProcessDefinedSet);
+        }
 
     }
 

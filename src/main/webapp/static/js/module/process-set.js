@@ -147,6 +147,89 @@
             	});
             	
             	
+            	// 系统资源树展示
+    			var setting = {
+    				/*check : {
+    					enable : true,
+    					chkboxType: { "Y": "p", "N": "ps" }
+    				},*/
+    				data: {
+    					 simpleData: {
+    						enable: true,
+    						idKey: "formId",
+    						pIdKey: "parentFormId",
+    						rootPId: 0,
+    					 },
+    					 key:{
+    						 name:"formName",
+    						 url:"#"
+    					 }
+    				},
+    				view : {
+    					dblClickExpand : false,
+    					showLine : true,
+    					selectedMulti : false
+    				},
+    				async : {
+    					enable : true,
+    					url : cxt+"/form/formItem",
+    					autoParam : [ "id=formId", "name=n", "level=lv" ],
+    					otherParam : {
+    						"otherParam" : "zTreeAsyncTest"
+    					},
+    					dataFilter : filter
+    				},
+    				callback: {
+    							beforeCheck : function zTreeBeforeCheck(treeId,treeNode) {
+    								var treeObj = $.fn.zTree
+    										.getZTreeObj("formTree");
+    								if (!treeNode.checked) {
+    									treeObj.checkAllNodes(false);
+    								}
+    							},
+    							onCheck: onClick,
+    							onClick: onClick
+    				}
+    			};
+    			
+    			function onClick(event, treeId, treeNode, clickFlag){
+    				event.stopPropagation();
+    				$('#myform input[name=formId]').val(treeNode.formId);
+    				//$("#mySubmit").trigger("click");
+    			}
+    			
+    			function hideMenu() {
+    				$("#menuContent").fadeOut("fast");
+    				$("body").unbind("mousedown", onBodyDown);
+    			}
+    			
+    			$("#formId").click(function () {
+    				var cityObj = $("#formId");
+    				var cityOffset = $("#formId").offset();
+    				$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+
+    				$("body").bind("mousedown", onBodyDown);
+    			});
+    			
+    			function onBodyDown(event) {
+    				if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+    					hideMenu();
+    				}
+    			}
+
+    			function filter(treeId, parentNode, childNodes) {
+    				if (!childNodes)
+    					return null;
+    				for (var i = 0, l = childNodes.length; i < l; i++) {
+    					//childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+    				}
+    				return childNodes;
+    			}
+
+    			//初始化资源树
+    			$.fn.zTree.init($("#formTree"), setting);
+            	
+            	
             	$(".page-sidebar-menu li[name='流程管理']").addClass("active");
             	$(".page-sidebar-menu li[name='流程定义']").addClass("active");
             });

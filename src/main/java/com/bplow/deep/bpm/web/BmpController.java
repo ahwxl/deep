@@ -28,7 +28,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bplow.deep.authority.User;
 import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.base.utils.WebUtils;
 import com.bplow.deep.bpm.domain.BpmActivity;
 import com.bplow.deep.bpm.domain.BpmProcessDefined;
 import com.bplow.deep.bpm.domain.ProcessInstanceInfo;
@@ -151,12 +153,8 @@ public class BmpController {
      * @return
      */
     @RequestMapping(value = "/bpm/createProcessInstance")
-    public String createProcessInstancePage(ProcessInstanceInfo processInfo, Model view) {
+    public String createProcessInstancePage(BpmProcessDefined processDefined, Model view) {
 
-        view.addAttribute("processInfo", processInfo);
-
-        BpmProcessDefined processDefined = new BpmProcessDefined();
-        processDefined.setProcessDefinedId(processInfo.getProcessDefineId());
         BpmProcessDefined bpmProcessDef = processDefinedService.queryProcessDefined(processDefined);
 
         String formKey = null/*bmpService.queryProcessStartForm(processInfo)*/;
@@ -174,6 +172,8 @@ public class BmpController {
     public String createProcessInstanceAction(ProcessInstanceInfo processInfo,
                                               HttpServletRequest httpRequest, Model view) {
 
+        User user = WebUtils.getCurrentUser();
+        
         Map<String, String[]> map = httpRequest.getParameterMap();
         Map<String, Object> variables = new HashMap<String, Object>();
         //会签参数处理
@@ -189,6 +189,7 @@ public class BmpController {
                 variables.put(entry.getKey(), entry.getValue()[0]);
             }
         }
+        variables.put("applyUserId", user.getUserId());
 
         bmpService.startProcessByKey(processInfo.getKey(), variables);
 

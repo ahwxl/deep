@@ -37,6 +37,26 @@
     where process_defined_id = #{processDefinedId,jdbcType=VARCHAR}
   </select>
   
+  <select id="queryProcessDefSet" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefinedSet" resultMap="BaseResultMap">
+  select 
+    <include refid="Base_Column_List" />
+    from bpm_process_defined_set
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="processDefinedId != null and processDefinedId != ''">
+             process_defined_id = #{processDefinedId} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="activityId != null and activityId != ''">
+             activity_id = #{activityId} 
+          </if>
+        </trim>
+      </trim>
+    </where>
+  </select>
+  
   <delete id="delete" parameterType="java.lang.String">
     delete from bpm_process_defined_set
     where process_defined_id = #{processDefinedId,jdbcType=VARCHAR}

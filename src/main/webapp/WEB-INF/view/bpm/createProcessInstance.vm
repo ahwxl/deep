@@ -1,7 +1,7 @@
 #parse("././globle.vm" )
 <html>
 <head>
-<title>表单列表</title>
+<title>启动流程</title>
 	<link href="$cxt/static/css/select2.min.css" rel="stylesheet" type="text/css"/>
 	<link href="$cxt/static/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
 	<script type="text/javascript" src="$cxt/static/js/jquery.gritter.js"></script>
@@ -10,7 +10,6 @@
 	<script type="text/javascript" src="$cxt/static/js/DT_bootstrap.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
-    <script type="text/javascript" src="$cxt/static/js/module/process-set.js?20170314"></script>
 </head>
 <body>
 <!-- BEGIN PAGE HEADER-->
@@ -25,19 +24,13 @@
 
 					<div class="span12">
 
-<div class="portlet box blue">
+                                  <div class="portlet box blue">
 
 										<div class="portlet-title">
 
-											<div class="caption"><i class="icon-reorder"></i>请假申请</div>
+											<div class="caption"><i class="icon-reorder"></i></div>
 
 											<div class="tools">
-
-												<a href="javascript:;" class="collapse"></a>
-
-												<a href="#portlet-config" data-toggle="modal" class="config"></a>
-
-												<a href="javascript:;" class="reload"></a>
 
 												<a href="javascript:;" class="remove"></a>
 
@@ -49,107 +42,12 @@
 
 											<!-- BEGIN FORM-->
 
-											<form action="/deep/bpm/createProcessInstanceAction" method="post" class="horizontal-form">
-											<input type="text" id="key" name="key" value="${processInfo.key}" />
-											<input type="hidden" id="employeeName" name="wangxiaolei" />
+											<form id="myform" name="myform" action="${cxt}/bpm/createProcessInstanceAction" method="post" class="horizontal-form">
+											<input type="text" id="key" name="key" value="${bpmProcessDef.key}" />
+											<input type="text" id="employeeName" name="employeeName" value="wangxiaolei" />
+											<input type="text" id="formId" name="formId" value="${bpmProcessDef.formId}" />
 
-												<h3 class="form-section">请假单</h3>
-
-												<div class="row-fluid">
-
-													<div class="span6 ">
-
-														<div class="control-group">
-
-															<label class="control-label" for="firstName">事由</label>
-
-															<div class="controls">
-
-																<input type="text" id="firstName" name="vacationMotivation" class="m-wrap span12" placeholder="Chee Kin" value="回家探亲">
-
-																<span class="help-block"></span>
-
-															</div>
-
-														</div>
-
-													</div>
-
-													<!--/span-->
-
-													<div class="span6 ">
-
-														<div class="control-group error">
-
-															<label class="control-label" for="lastName">天数</label>
-
-															<div class="controls">
-
-																<input type="text" id="lastName" name="numberOfDays" class="m-wrap span12" placeholder="Lim" value="3">
-
-																<span class="help-block"></span>
-
-															</div>
-
-														</div>
-
-													</div>
-
-													<!--/span-->
-
-												</div>
-
-												<!--/row-->
-
-												<div class="row-fluid">
-
-													<div class="span6 ">
-
-														<div class="control-group">
-
-															<label class="control-label" >类型</label>
-
-															<div class="controls">
-
-																<select  class="m-wrap span12">
-
-																	<option value="">年假</option>
-
-																	<option value="">事假</option>
-
-																</select>
-
-																<span class="help-block">Select your gender.</span>
-
-															</div>
-
-														</div>
-
-													</div>
-
-													<!--/span-->
-
-													<div class="span6 ">
-
-														<div class="control-group">
-
-															<label class="control-label" >Date of Birth</label>
-
-															<div class="controls">
-
-																<input type="text" class="m-wrap span12"  placeholder="dd/mm/yyyy">
-
-															</div>
-
-														</div>
-
-													</div>
-
-													<!--/span-->
-
-												</div>
-
-												<!--/row-->        
+												 <div id="formContent"></div>
 
 												<div class="form-actions">
 
@@ -175,5 +73,27 @@
 				</div>
 
 				<!-- END PAGE CONTENT-->
+				
+<script>
+$(document).ready(function () {
+
+var formId = $("#myform input[name=formId]").val();
+            	$.ajax({
+					url:cxt+'/form/queryForm',
+					async:true,
+					method:'POST',
+					data:'formId='+formId,
+					dataType : 'json',
+					error :function(resp){alert(resp)},
+					success:function(resp){
+						$("#formContent").html(resp.formContent);
+					}
+				});
+
+$(".page-sidebar-menu li[name='流程管理']").addClass("active");
+
+});
+</script>
+
 </body>
 </html>

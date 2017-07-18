@@ -8,6 +8,8 @@ public interface BpmProcessDefinedSetMapper {
     Page<BpmProcessDefinedSet> queryForPage(BpmProcessDefinedSet BpmProcessDefinedSet);
 
     BpmProcessDefinedSet selectByPrimaryKey(String processDefinedId);
+    
+    BpmProcessDefinedSet queryProcessDefSet(BpmProcessDefinedSet bpmProcessDefinedSet);
 
     int update(BpmProcessDefinedSet record);
 

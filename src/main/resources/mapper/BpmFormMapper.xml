@@ -4,6 +4,7 @@
 
 	<resultMap id="BaseResultMap" type="com.bplow.deep.bpm.domain.BpmForm">
 		<id column="form_id" jdbcType="BIGINT" property="formId" />
+		<id column="parent_form_id" jdbcType="BIGINT" property="parentFormId" />
 		<result column="form_name" jdbcType="VARCHAR" property="formName" />
 		<result column="form_desc" jdbcType="VARCHAR" property="formDesc" />
 		<result column="form_content" jdbcType="VARCHAR" property="formContent" />
@@ -12,7 +13,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		form_id, form_name, form_desc, form_content, gmt_create, gmt_modify
+		form_id,parent_form_id, form_name, form_desc, form_content, gmt_create, gmt_modify
 	</sql>
 
 	<select id="queryForPage" parameterType="com.bplow.deep.bpm.domain.BpmForm"
@@ -63,10 +64,10 @@
 	</delete>
 
 	<insert id="insert" parameterType="com.bplow.deep.bpm.domain.BpmForm">
-		insert into bpm_form (form_id, form_name, form_desc,
+		insert into bpm_form (form_id,parent_form_id, form_name, form_desc,
 		form_content, gmt_create, gmt_modify
 		)
-		values (#{formId,jdbcType=BIGINT}, #{formName,jdbcType=VARCHAR},
+		values (#{formId,jdbcType=BIGINT},#{parentFormId,jdbcType=BIGINT}, #{formName,jdbcType=VARCHAR},
 		#{formDesc,jdbcType=VARCHAR},
 		#{formContent,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
 		)
@@ -75,8 +76,8 @@
 	<update id="update" parameterType="com.bplow.deep.bpm.domain.BpmForm">
 		update bpm_form
 		<set>
-			<if test="formId != null">
-				form_id = #{formId,jdbcType=BIGINT},
+			<if test="parentFormId != null">
+				parent_form_id = #{parentFormId,jdbcType=BIGINT},
 			</if>
 			<if test="formName != null">
 				form_name = #{formName,jdbcType=VARCHAR},

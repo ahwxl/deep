@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="$cxt/static/js/DT_bootstrap.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
-    <script type="text/javascript" src="$cxt/static/js/module/process-set.js?20170314"></script>
+    <script type="text/javascript" src="$cxt/static/js/module/process-set.js?20170324"></script>
 </head>
 <body>
                <!-- BEGIN PAGE HEADER-->
@@ -46,7 +46,7 @@
 									<div class="control-group">
 										<label class="control-label">全局表单</label>
 										<div class="controls">
-											<input type="text" name="formId" class="m-wrap span12" placeholder="选择表单">
+											<input type="text" id="formId" name="formId" class="m-wrap span12" placeholder="选择表单" />
 										</div>
 									</div>
 								</div>
@@ -85,26 +85,31 @@
 				</div>
 				
 				<!-- END PAGE CONTENT-->
+				
+<div id="menuContent" class="menuContent" style="display:none; position: absolute;background: #f0f6e4;">
+	<ul id="formTree" class="ztree" style="margin-top:0; width:160px;"></ul>
+</div>
+
 <script>
 
 $(document).ready(function () {
 
 var processDefinedId = $("#myform input[name=processDefinedId]").val();
-            	$.ajax({
-					url:cxt+'/bpm/queryProcessActivity',
-					async:true,
-					method:'POST',
-					data:'processDefinitionId='+processDefinedId,
-					dataType : 'json',
-					error :function(resp){alert(resp)},
-					success:function(resp){
-						$(".select2_activity").select2({
-							  "id": "id",
-							  "text": "name",
-							  "data": resp
-						})
-					}
-				});
+$.ajax({
+	url:cxt+'/bpm/queryProcessActivity',
+	async:true,
+	method:'POST',
+	data:'processDefinitionId='+processDefinedId,
+	dataType : 'json',
+	error :function(resp){alert(resp)},
+	success:function(resp){
+		$(".select2_activity").select2({
+			  "id": "id",
+			  "text": "name",
+			  "data": resp
+		})
+	}
+});
 
 $("#mySubmit").click(function (){
   $("#myform").trigger("submit");
