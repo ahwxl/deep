@@ -1,3 +1,17 @@
+#parse("././globle.vm" )
+<html>
+<head>
+<title>表单列表</title>
+	<link href="$cxt/static/css/select2.min.css" rel="stylesheet" type="text/css"/>
+	<link href="$cxt/static/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="$cxt/static/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="$cxt/static/js/select2/select2-403.min.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.dataTables.js?20170216"></script>
+	<script type="text/javascript" src="$cxt/static/js/DT_bootstrap.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
+</head>
+<body>
 <!-- BEGIN PAGE HEADER-->
 <div class="row-fluid">
 	<div class="span12">
@@ -18,12 +32,6 @@
 
 											<div class="tools">
 
-												<a href="javascript:;" class="collapse"></a>
-
-												<a href="#portlet-config" data-toggle="modal" class="config"></a>
-
-												<a href="javascript:;" class="reload"></a>
-
 												<a href="javascript:;" class="remove"></a>
 
 											</div>
@@ -34,7 +42,8 @@
 
 											<!-- BEGIN FORM-->
 
-											<form action="/deep/bpm/completeTask" method="post" class="horizontal-form">
+											<form id="myform" action="${cxt}/bpm/completeTask" method="post" class="horizontal-form">
+											<input type="text" name="formId" value="$!{bpmProcDefSet.formId}" />
 											<input type="hidden" id="taskId" name="taskId" value="${process.taskId}" />
 											<input type="hidden" id="employeeName" name="wangxiaolei" />
 											
@@ -51,7 +60,7 @@
 
 															<label class="control-label"></label>
 
-															<div class="controls">                                                
+															<div class="controls" id="formContent">                                                
 
 																<label class="radio">
 
@@ -116,103 +125,7 @@
 
 												<!--/row-->
 
-												<h3 class="form-section">请假单</h3>
-
-												<div class="row-fluid">
-
-													<div class="span6 ">
-
-														<div class="control-group">
-
-															<label class="control-label" for="firstName">事由</label>
-
-															<div class="controls">
-
-																<input type="text" id="firstName" name="vacationMotivation" class="m-wrap span12" placeholder="Chee Kin" value="回家探亲">
-
-																<span class="help-block"></span>
-
-															</div>
-
-														</div>
-
-													</div>
-
-													<!--/span-->
-
-													<div class="span6 ">
-
-														<div class="control-group error">
-
-															<label class="control-label" for="lastName">天数</label>
-
-															<div class="controls">
-
-																<input type="text" id="lastName" name="numberOfDays" class="m-wrap span12" placeholder="Lim" value="3">
-
-																<span class="help-block"></span>
-
-															</div>
-
-														</div>
-
-													</div>
-
-													<!--/span-->
-
-												</div>
-
-												<!--/row-->
-
-												<div class="row-fluid">
-
-													<div class="span6 ">
-
-														<div class="control-group">
-
-															<label class="control-label" >类型</label>
-
-															<div class="controls">
-
-																<select  class="m-wrap span12">
-
-																	<option value="">年假</option>
-
-																	<option value="">事假</option>
-
-																</select>
-
-																<span class="help-block">Select your gender.</span>
-
-															</div>
-
-														</div>
-
-													</div>
-
-													<!--/span-->
-
-													<div class="span6 ">
-
-														<div class="control-group">
-
-															<label class="control-label" >请假日期</label>
-
-															<div class="controls">
-
-																<input type="text" class="m-wrap span12"  placeholder="dd/mm/yyyy">
-
-															</div>
-
-														</div>
-
-													</div>
-
-													<!--/span-->
-
-												</div>
-
-												<!--/row-->        
+												<h3 class="form-section">表单</h3>
 
 											</form>
 
@@ -228,3 +141,54 @@
 				</div>
 
 				<!-- END PAGE CONTENT-->
+<script>
+
+$(document).ready(function () {
+
+var formId = $("#myform input[name=formId]").val();
+            	$.ajax({
+					url:cxt+'/form/queryForm',
+					async:true,
+					method:'POST',
+					data:'formId='+formId,
+					dataType : 'json',
+					error :function(resp){alert(resp)},
+					success:function(resp){
+					    //alert(resp);
+					    if(resp != null){
+					       $("#formContent").html(resp.formContent);
+					    }
+					}
+				});
+
+$("#myform").ajaxForm({
+	dataType:'json',
+	error:function (){sysNotify("操作失败，请联系管理员")},
+	success:function(responseTxt){
+	  sysNotify(responseTxt.responseMessage);
+	},
+	type:'POST',
+	url:cxt+'/bpm/completeTask'
+});
+
+});
+
+
+function sysNotify(info){
+
+	var unique_id = $.gritter.add({
+				                    position: 'bottom-right',
+				                    title: '系统通知!',
+				                    text: info,
+				                    sticky: false,
+				                    time: '2000',
+				                    //class_name: 'my-sticky-class'
+				                    class_name: 'gritter-success'
+	 });
+}
+
+$(".page-sidebar-menu li[name='流程管理']").addClass("active");
+
+</script>
+</body>
+</html>

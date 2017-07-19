@@ -153,8 +153,16 @@ public class BmpServiceImpl implements BmpService {
                                       Map<String, Object> taskVariable) {
 
         ServiceResult result = new ServiceResult();
+        result.setResponseCode("1000");
+        result.setResponseMessage("成功");
 
-        taskService.complete(taskId, taskVariable);
+        try {
+            taskService.complete(taskId, taskVariable);
+        } catch (ActivitiException e) {
+            log.error("完成任务[{}]异常",taskId,e);
+            result.setResponseCode("999");
+            result.setResponseMessage(e.getMessage());
+        }
 
         return result;
     }
@@ -346,6 +354,7 @@ public class BmpServiceImpl implements BmpService {
         process.setActiviteName(task.getName());
         process.setProcessInstanceId(task.getProcessInstanceId());
         process.setKey(task.getTaskDefinitionKey());
+        process.setProcessDefineId(task.getProcessDefinitionId());
 
         return process;
     }

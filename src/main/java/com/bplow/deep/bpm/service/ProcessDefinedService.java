@@ -21,6 +21,8 @@ public interface ProcessDefinedService {
 
 	BpmProcessDefined queryProcessDefined(BpmProcessDefined processDefined);
 	
+	BpmProcessDefinedSet queryProcessDefinedSet(BpmProcessDefinedSet bpmProcessDefinedSet);
+	
 	//部署流程
 	String deployProcess(String name,InputStream in);
 	

@@ -37,4 +37,9 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	
 	config.allowedContent=true;
+	config.uiColor = '#f7f5f4';
+
+	config.enterMode = CKEDITOR.ENTER_BR; 
+	config.shiftEnterMode = CKEDITOR.ENTER_P;
+	//config.startupMode = 'source';
 };

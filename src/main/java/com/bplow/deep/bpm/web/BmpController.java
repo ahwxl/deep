@@ -29,10 +29,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bplow.deep.authority.User;
+import com.bplow.deep.base.domain.ServiceResult;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.base.utils.WebUtils;
 import com.bplow.deep.bpm.domain.BpmActivity;
 import com.bplow.deep.bpm.domain.BpmProcessDefined;
+import com.bplow.deep.bpm.domain.BpmProcessDefinedSet;
 import com.bplow.deep.bpm.domain.ProcessInstanceInfo;
 import com.bplow.deep.bpm.service.BmpService;
 import com.bplow.deep.bpm.service.ProcessDefinedService;
@@ -173,7 +175,7 @@ public class BmpController {
                                               HttpServletRequest httpRequest, Model view) {
 
         User user = WebUtils.getCurrentUser();
-        
+
         Map<String, String[]> map = httpRequest.getParameterMap();
         Map<String, Object> variables = new HashMap<String, Object>();
         //会签参数处理
@@ -213,8 +215,17 @@ public class BmpController {
     public String completeTaskPage(ProcessInstanceInfo processInfo, Model view) {
 
         ProcessInstanceInfo process = bmpService.queryTask(processInfo);
-        view.addAttribute("process", process);
 
+        //获取表单id
+        BpmProcessDefinedSet bpmProcessDefinedSet = new BpmProcessDefinedSet();
+        bpmProcessDefinedSet.setActivityId(process.getKey());
+        bpmProcessDefinedSet.setProcessDefinedId(process.getProcessDefineId());
+
+        BpmProcessDefinedSet bpmProcDefSet = processDefinedService
+            .queryProcessDefinedSet(bpmProcessDefinedSet);
+
+        view.addAttribute("bpmProcDefSet", bpmProcDefSet);
+        view.addAttribute("process", process);
         return "bpm/taskComplete";
     }
 
@@ -223,18 +234,26 @@ public class BmpController {
      * @return
      */
     @RequestMapping(value = "/bpm/completeTask")
-    public String completeTask(ProcessInstanceInfo processInfo, HttpServletRequest httpRequest) {
+    @ResponseBody
+    public ServiceResult completeTask(ProcessInstanceInfo processInfo,
+                                      HttpServletRequest httpRequest) {
 
         Map<String, String[]> map = httpRequest.getParameterMap();
         Map<String, Object> taskVariable = new HashMap<String, Object>();
         for (Map.Entry<String, String[]> entry : map.entrySet()) {
             System.out.println(entry.getKey() + "--->" + entry.getValue()[0]);
-            taskVariable.put(entry.getKey(), entry.getValue()[0]);
+            if ("true".equalsIgnoreCase(entry.getValue()[0])) {
+                taskVariable.put(entry.getKey(), true);
+            } else if ("false".equalsIgnoreCase(entry.getValue()[0])) {
+                taskVariable.put(entry.getKey(), false);
+            } else {
+                taskVariable.put(entry.getKey(), entry.getValue()[0]);
+            }
         }
-        bmpService.completeTask(processInfo.getProcessInstanceId(), processInfo.getTaskId(),
-            taskVariable);
+        ServiceResult result = bmpService.completeTask(processInfo.getProcessInstanceId(),
+            processInfo.getTaskId(), taskVariable);
 
-        return "/bpm/processInstanceTaskItem";
+        return result;
     }
 
     /**

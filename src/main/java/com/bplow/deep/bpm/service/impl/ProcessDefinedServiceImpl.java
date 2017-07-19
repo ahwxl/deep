@@ -101,4 +101,13 @@ public class ProcessDefinedServiceImpl implements ProcessDefinedService {
 
     }
 
+    @Override
+    public BpmProcessDefinedSet queryProcessDefinedSet(BpmProcessDefinedSet bpmProcessDefinedSet) {
+        
+        BpmProcessDefinedSet tmpBpmProcessDefinedSet = bpmProcessDefinedSetMapper
+                .queryProcessDefSet(bpmProcessDefinedSet);
+        
+        return tmpBpmProcessDefinedSet;
+    }
+
 }

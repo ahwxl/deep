@@ -5,10 +5,10 @@ $('#sample_1').dataTable({
                 "bLengthChange":false,
                 "sAjaxSource": "/deep/bpm/taskItem",
                 "aoColumns": [
-                  { "sTitle": "主题","mData":"processName","bSortable": false,"sWidth":"400" },
-                  { "sTitle": "申请时间","mData":"startDate","bSortable": false },
-                  { "sTitle": "受理人","mData":"assignee","bSortable": false },
                   { "sTitle": "任务编号","mData":"taskId","bSortable": false },
+                  { "sTitle": "主题","mData":"processName","bSortable": false,"sWidth":"400" },
+                  { "sTitle": "开始时间","mData":"startDate","bSortable": false },
+                  { "sTitle": "受理人","mData":"assignee","bSortable": false },
                   { "sTitle": "操作","mData":"processInstanceId","bSortable": false }
                 ],
                 "aLengthMenu": [
@@ -28,9 +28,9 @@ $('#sample_1').dataTable({
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [3],
+                        'aTargets': [4],
                         fnRender: function (setobj, data ) {
-                            return "<a href='/deep/bpm/taskCompletePage?taskId="+data+"'>"+data+"</a>";
+                            return "<a href='/deep/bpm/taskCompletePage?taskId={0}'>{1}</a>".format(setobj.aData['taskId'],"受理");
                         }
                     }
                 ]
