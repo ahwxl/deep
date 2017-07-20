@@ -42,4 +42,8 @@ $('#sample_1').dataTable({
                 $('#min, #max').blur(function () {
                     table.draw();
                 });
+                
+                $(".page-sidebar-menu li[name='流程管理']").addClass("active");
+            	$(".page-sidebar-menu li[name='任务列表']").addClass("active");
+                
             });

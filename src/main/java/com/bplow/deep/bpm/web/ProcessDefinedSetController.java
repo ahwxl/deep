@@ -50,6 +50,9 @@ public class ProcessDefinedSetController {
     @RequestMapping(value = "/processDefineSetPage")
     public String processDefineSetPage(Model view, BpmProcessDefinedSet defined) {
 
+        
+        
+        
         view.addAttribute("defined", defined);
 
         return "bpm/set/process-defined-set";

@@ -1,4 +1,44 @@
-            $(document).ready(function () {
+'use strict';
+// Define the `phonecatApp` module
+var phonecatApp = angular.module('phonecatApp', []);
+
+phonecatApp.controller('PhoneListController', function PhoneListController($scope,$http) {
+	  
+	  var self = this;
+	  self.orderProp = 'age';
+      
+	  var procDef = {};
+	  procDef.id ="wxl";
+	  $scope.processDef = procDef;
+	  
+	  $scope.processDefinedId = 'vacationRequest:1:2503';
+	  //$scope.queryActivity= function(){
+		  //alert();
+		  $http.get(cxt+'/bpm/queryProcessActivity?processDefinitionId='+$scope.processDefinedId).then(function(rsp) {
+		        $scope.activities = rsp.data;
+		  });
+		  
+	  //}
+	  
+	  
+	  
+	  $scope.toggle = function(activitiId){
+		  //alert(activitiId);
+		  $scope.processDefinedId = 'sssssss';
+		  $scope.processDef.id = activitiId;
+		  $http.get('/search/search?w='+$scope.w).then(function(rsp) {
+		        //self.phones = rsp.data;
+		        $scope.phones = rsp.data.data;
+		        $scope.pageTotals = rsp.data.totals;
+		        $scope.pageNo = rsp.data.pageNo;
+		        $scope.allPages = rsp.data.allPages;
+		        
+		  });
+	  };
+	  
+});
+
+$(document).ready(function () {
             	var mygridtab = $('#transactions').dataTable({
                 	"bProcessing": true,
                     "bServerSide": true,
@@ -228,7 +268,7 @@
 
     			//初始化资源树
     			$.fn.zTree.init($("#formTree"), setting);
-            	
+    			
             	
             	$(".page-sidebar-menu li[name='流程管理']").addClass("active");
             	$(".page-sidebar-menu li[name='流程定义']").addClass("active");
