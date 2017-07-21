@@ -72,12 +72,6 @@
   <update id="update" parameterType="com.bplow.deep.bpm.domain.BpmProcessDefinedSet">
     update bpm_process_defined_set
     <set>
-      <if test="processDefinedId != null">
-        process_defined_id = #{processDefinedId,jdbcType=VARCHAR},
-      </if>
-      <if test="activityId != null">
-        activity_id = #{activityId,jdbcType=VARCHAR},
-      </if>
       <if test="formId != null">
         form_id = #{formId,jdbcType=BIGINT},
       </if>
@@ -88,6 +82,6 @@
         role_id = #{roleId,jdbcType=VARCHAR},
       </if>
     </set>
-     WHERE ID = #{id} 
+     WHERE process_defined_id = #{processDefinedId,jdbcType=VARCHAR} and activity_id = #{activityId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -51,7 +51,7 @@
                             'bSortable': false,
                             'aTargets': [5],
                             fnRender: function (setobj, data) {
-                            	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {2}</a>".format(setobj.aData['formId'],"删除","修改");
+                            	var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i> {1}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {2}</a>&nbsp;<a class='mini purple' id='{0}' data-toggle='edit' ><i class='icon-edit'></i> {3}</a>".format(setobj.aData['formId'],"删除","修改","预览");
                             	return delhtml;
                             }
                         }

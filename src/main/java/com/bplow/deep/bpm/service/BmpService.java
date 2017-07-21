@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
+import org.activiti.engine.history.HistoricTaskInstance;
 
 import com.bplow.deep.base.domain.ServiceResult;
 import com.bplow.deep.base.pagination.Page;
@@ -37,6 +37,8 @@ public interface BmpService {
 	public Page<ProcessInstanceInfo> queryProcessInstanceItem(ProcessInstanceInfo processInfo);
 	//流程实例
 	public ProcessInstanceInfo queryProcessInstance(ProcessInstanceInfo processInfo);
+	//查询历史执行记录
+	public List<HistoricTaskInstance> getHistoryProcess(String processInstanceId);
 	
 	public Page<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo);
 	

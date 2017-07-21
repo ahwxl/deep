@@ -1,5 +1,5 @@
 'use strict';
-// Define the `phonecatApp` module
+
 var phonecatApp = angular.module('phonecatApp', []);
 
 phonecatApp.controller('PhoneListController', function PhoneListController($scope,$http) {
@@ -10,29 +10,26 @@ phonecatApp.controller('PhoneListController', function PhoneListController($scop
 	  var procDef = {};
 	  procDef.id ="wxl";
 	  $scope.processDef = procDef;
+	  $scope.activityId = "";
 	  
-	  $scope.processDefinedId = 'vacationRequest:1:2503';
+	  $scope.processDefinedId = $("#myform input[name=processDefinedId]").val();
 	  //$scope.queryActivity= function(){
 		  //alert();
-		  $http.get(cxt+'/bpm/queryProcessActivity?processDefinitionId='+$scope.processDefinedId).then(function(rsp) {
-		        $scope.activities = rsp.data;
-		  });
-		  
+	  $http.get(cxt+'/bpm/queryProcessActivity?processDefinitionId='+$scope.processDefinedId).then(function(rsp) {
+	        $scope.activities = rsp.data;
+	  });
+
 	  //}
 	  
 	  
 	  
-	  $scope.toggle = function(activitiId){
-		  //alert(activitiId);
-		  $scope.processDefinedId = 'sssssss';
-		  $scope.processDef.id = activitiId;
-		  $http.get('/search/search?w='+$scope.w).then(function(rsp) {
-		        //self.phones = rsp.data;
-		        $scope.phones = rsp.data.data;
-		        $scope.pageTotals = rsp.data.totals;
-		        $scope.pageNo = rsp.data.pageNo;
-		        $scope.allPages = rsp.data.allPages;
-		        
+	  $scope.toggle = function($event){
+		  //alert(this);
+		  var activityId = $($event.target).attr("activityId");
+		  //$scope.processDefinedId = 'sssssss';
+		  $scope.activityId= activityId;
+		  $http.get(cxt+'/bpm/queryProcessDefineSet?processDefinedId='+$scope.processDefinedId+"&activityId="+activityId).then(function(rsp) {
+		        $scope.processDef = rsp.data;
 		  });
 	  };
 	  
@@ -186,6 +183,16 @@ $(document).ready(function () {
             		url:cxt+'/bpm/processDefineSet'
             	});
             	
+            	$("#procDefForm").ajaxForm({
+            		dataType:'json',
+            		error:function (){sysNotify("操作失败，请联系管理员")},
+            		success:function(responseTxt){
+            		  sysNotify(responseTxt.responseMsg);
+            		},
+            		type:'POST',
+            		url:cxt+'/bpm/processDefineSet'
+            	});
+            	
             	
             	// 系统资源树展示
     			var setting = {
@@ -232,9 +239,10 @@ $(document).ready(function () {
     				}
     			};
     			
+    			var cunrentFormName = "";
     			function onClick(event, treeId, treeNode, clickFlag){
     				event.stopPropagation();
-    				$('#myform input[name=formId]').val(treeNode.formId);
+    				$(cunrentFormName+' input[name=formId]').val(treeNode.formId);
     				//$("#mySubmit").trigger("click");
     			}
     			
@@ -244,11 +252,22 @@ $(document).ready(function () {
     			}
     			
     			$("#formId").click(function () {
+    				cunrentFormName = '#myform';
     				var cityObj = $("#formId");
     				var cityOffset = $("#formId").offset();
     				$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
 
     				$("body").bind("mousedown", onBodyDown);
+    			});
+    			
+    			$('#procDefFormId').click(function (){
+    				cunrentFormName = '#procDefForm';
+    				var cityObj = $("#procDefFormId");
+    				var cityOffset = $("#procDefFormId").offset();
+    				$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+
+    				$("body").bind("mousedown", onBodyDown);
+    				
     			});
     			
     			function onBodyDown(event) {

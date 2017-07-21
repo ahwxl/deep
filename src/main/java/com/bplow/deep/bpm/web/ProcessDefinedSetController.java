@@ -47,6 +47,7 @@ public class ProcessDefinedSetController {
         return page;
     }
 
+    //流程设置页面
     @RequestMapping(value = "/processDefineSetPage")
     public String processDefineSetPage(Model view, BpmProcessDefinedSet defined) {
 
@@ -71,6 +72,16 @@ public class ProcessDefinedSetController {
         processDefinedService.addProcessDefinitionSet(bpmProcessDefinedSet);
 
         return String.format("{\"responseMsg\":\"%s\"}", "成功");
+    }
+    
+    //查询流程设置
+    @RequestMapping(value = "/queryProcessDefineSet")
+    @ResponseBody
+    public BpmProcessDefinedSet queryProcessDefineSet(BpmProcessDefinedSet bpmProcessDefinedSet) {
+        
+        BpmProcessDefinedSet set =  processDefinedService.queryProcessDefinedSet(bpmProcessDefinedSet);
+
+        return set==null?new BpmProcessDefinedSet():set;
     }
 
 }

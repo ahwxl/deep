@@ -199,5 +199,14 @@ public class BmpServiceTests {
         
         System.out.println("");
     }
+    
+    @Test
+    public void testGetHistoryTaskInst(){
+        
+        List list = bpmService.getHistoryProcess("112501");
+        
+        log.info("{}", list);
+    }
+    
 
 }

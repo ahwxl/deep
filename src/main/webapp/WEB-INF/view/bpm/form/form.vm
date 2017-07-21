@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="$cxt/static/js/DT_bootstrap.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
-    <script type="text/javascript" src="$cxt/static/js/module/form.js?20170313"></script>
+    <script type="text/javascript" src="$cxt/static/js/module/form.js?20170314"></script>
 </head>
 <body>
                <!-- BEGIN PAGE HEADER-->

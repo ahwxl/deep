@@ -25,6 +25,7 @@ import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.bpmn.behavior.NoneStartEventActivityBehavior;
 import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
@@ -334,11 +335,18 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取历史任务列表
      */
+    public List<HistoricTaskInstance> getHistoryProcess(String processInstanceId){
+        
+        List<HistoricTaskInstance> list = historySerivce.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).orderByTaskCreateTime().asc().list();
+        
+        return list;
+    }
+    
 
     /**
      * 获取流程定义
      */
-    public List getProcesDef(String def) {
+    public List<ProcessDefinition> getProcesDef(String def) {
 
         List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().list();
 
