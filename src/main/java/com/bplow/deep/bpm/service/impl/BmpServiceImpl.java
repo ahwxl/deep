@@ -122,14 +122,21 @@ public class BmpServiceImpl implements BmpService {
 
         /*ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
             key, variables);*/
+        String processName = key;
+        List<ProcessDefinition> pdlist = repositoryService.createProcessDefinitionQuery().processDefinitionId(key).orderByProcessDefinitionVersion().desc().list();
 
+        for(ProcessDefinition pd : pdlist){
+            processName = pd.getName() + "wxl";
+            break;
+        }
+        
         ProcessInstanceBuilder processBuilder = runtimeService.createProcessInstanceBuilder();
         for (Map.Entry<String, Object> entry : variables.entrySet()) {
             processBuilder.addVariable(entry.getKey(), entry.getValue());
         }
 
-        ProcessInstance processInstance = processBuilder.processDefinitionKey(key)
-            .processInstanceName("请假流程-小王").start();
+        ProcessInstance processInstance = processBuilder.processDefinitionId(key)/*processDefinitionKey(key)*/
+            .processInstanceName(processName).start();
 
         return processInstance.getId();
     }

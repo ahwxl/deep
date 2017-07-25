@@ -44,6 +44,7 @@
 
 											<form id="myform" name="myform" action="${cxt}/bpm/createProcessInstanceAction" method="post" class="horizontal-form">
 											<input type="text" id="key" name="key" value="${bpmProcessDef.key}" />
+											<input type-"text" name="processDefineId" value="${bpmProcessDef.processDefinedId}" />
 											<input type="text" id="employeeName" name="employeeName" value="wangxiaolei" />
 											<input type="text" id="formId" name="formId" value="${bpmProcessDef.formId}" />
 

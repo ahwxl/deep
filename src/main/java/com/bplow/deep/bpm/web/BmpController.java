@@ -193,7 +193,7 @@ public class BmpController {
         }
         variables.put("applyUserId", user.getUserId());
 
-        bmpService.startProcessByKey(processInfo.getKey(), variables);
+        bmpService.startProcessByKey(processInfo.getProcessDefineId(), variables);
 
         return "{result:ok}";
     }
