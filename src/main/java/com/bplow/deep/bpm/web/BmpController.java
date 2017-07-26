@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.SecurityUtils;
@@ -31,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bplow.deep.authority.User;
 import com.bplow.deep.base.domain.ServiceResult;
 import com.bplow.deep.base.pagination.Page;
+import com.bplow.deep.base.pagination.Pagination;
 import com.bplow.deep.base.utils.WebUtils;
 import com.bplow.deep.bpm.domain.BpmActivity;
 import com.bplow.deep.bpm.domain.BpmProcessDefined;
@@ -272,9 +274,16 @@ public class BmpController {
      */
     @RequestMapping(value = "/bpm/viewHistoryProcessTask")
     @ResponseBody
-    public String viewHistoryProcessTask() {
+    public Page<HistoricTaskInstance> viewHistoryProcessTask(String processInstanceId) {
+        
+        List<HistoricTaskInstance> list = bmpService.getHistoryProcess(processInstanceId);
+        
+        Page<HistoricTaskInstance> page = new Pagination<HistoricTaskInstance>();
+        page.setDatas(list);
+        page.setPageSize(100);
+        page.setTotals(list.size());
 
-        return "";
+        return page;
     }
 
     //流程图
