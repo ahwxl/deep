@@ -1,7 +1,7 @@
 #parse("././globle.vm" )
 <html>
 <head>
-<title>表单列表</title>
+<title>审批页面</title>
 	<link href="$cxt/static/css/select2.min.css" rel="stylesheet" type="text/css"/>
 	<link href="$cxt/static/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
 	<script type="text/javascript" src="$cxt/static/js/jquery.gritter.js"></script>
@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="$cxt/static/js/DT_bootstrap.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/module/task-complete.js?20170729"></script>
 </head>
 <body>
 <!-- BEGIN PAGE HEADER-->
@@ -24,11 +25,11 @@
 
 					<div class="span12">
 
-<div class="portlet box blue">
+                    <div class="portlet box blue">
 
 										<div class="portlet-title">
 
-											<div class="caption"><i class="icon-reorder"></i>请假申请</div>
+											<div class="caption"><i class="icon-reorder"></i>请假申请[$!{process.processInstanceId}]</div>
 
 											<div class="tools">
 
@@ -41,11 +42,12 @@
 										<div class="portlet-body form">
 
 											<!-- BEGIN FORM-->
-
 											<form id="myform" action="${cxt}/bpm/completeTask" method="post" class="horizontal-form">
 											<input type="text" name="formId" value="$!{bpmProcDefSet.formId}" />
+											<input type="hidden" id="processInstanceId" name="processInstanceId" value="${process.processInstanceId}" />
 											<input type="hidden" id="taskId" name="taskId" value="${process.taskId}" />
 											<input type="hidden" id="employeeName" name="wangxiaolei" />
+											<input type="hidden" id="startFormId" name="startFormId" value="${bpmProcessDefined.formId}" />
 											
 											    <h3 class="form-section">审批</h3>
 											    <!--/row-->
@@ -126,6 +128,11 @@
 												<!--/row-->
 
 												<h3 class="form-section">表单</h3>
+												
+												<div  ng-app="taskcompleteApp"  ng-controller="TaskCompleteController">
+												
+												<div id="startFormContent"></div>
+												</div>
 
 											</form>
 
@@ -146,20 +153,20 @@
 $(document).ready(function () {
 
 var formId = $("#myform input[name=formId]").val();
-            	$.ajax({
-					url:cxt+'/form/queryForm',
-					async:true,
-					method:'POST',
-					data:'formId='+formId,
-					dataType : 'json',
-					error :function(resp){alert(resp)},
-					success:function(resp){
-					    //alert(resp);
-					    if(resp != null){
-					       $("#formContent").html(resp.formContent);
-					    }
-					}
-				});
+$.ajax({
+	url:cxt+'/form/queryForm',
+	async:true,
+	method:'POST',
+	data:'formId='+formId,
+	dataType : 'json',
+	error :function(resp){alert(resp)},
+	success:function(resp){
+	    //alert(resp);
+	    if(resp != null){
+	       $("#formContent").html(resp.formContent);
+	    }
+	}
+});
 
 $("#myform").ajaxForm({
 	dataType:'json',

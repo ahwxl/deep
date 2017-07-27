@@ -38,7 +38,9 @@ public interface BmpService {
 	//流程实例
 	public ProcessInstanceInfo queryProcessInstance(ProcessInstanceInfo processInfo);
 	//查询历史执行记录
-	public List<HistoricTaskInstance> getHistoryProcess(String processInstanceId);
+	public List<ProcessInstanceInfo> getHistoryProcess(String processInstanceId);
+	//表单值
+	public Map queryFormValuesByProcessId(String processInstanceId);
 	
 	public Page<ProcessInstanceInfo> queryTaskItem(ProcessInstanceInfo processInfo);
 	

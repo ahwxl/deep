@@ -10,6 +10,7 @@ package com.bplow.deep.bpm.service.impl;
  */
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
@@ -26,6 +27,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.history.HistoricVariableInstance;
 import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.bpmn.behavior.NoneStartEventActivityBehavior;
 import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
@@ -342,11 +344,25 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 获取历史任务列表
      */
-    public List<HistoricTaskInstance> getHistoryProcess(String processInstanceId){
+    public List<ProcessInstanceInfo> getHistoryProcess(String processInstanceId){
         
         List<HistoricTaskInstance> list = historySerivce.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).orderByTaskCreateTime().asc().list();
+        List<ProcessInstanceInfo> processInsInfoList = new ArrayList<ProcessInstanceInfo>();
+        for(HistoricTaskInstance historicTaskIns : list){
+            ProcessInstanceInfo processIns = new ProcessInstanceInfo();
+            
+            processIns.setProcessInstanceId(historicTaskIns.getProcessInstanceId());
+            processIns.setAssignee(historicTaskIns.getAssignee());
+            processIns.setActiviteName(historicTaskIns.getName());
+            processIns.setStartDate(historicTaskIns.getStartTime());
+            processIns.setEndDate(historicTaskIns.getEndTime());
+            processIns.setProcessStatus(historicTaskIns.getDeleteReason());
+            processIns.setTaskId(historicTaskIns.getId());
+            
+            processInsInfoList.add(processIns);
+        }
         
-        return list;
+        return processInsInfoList;
     }
     
 
@@ -417,5 +433,17 @@ public class BmpServiceImpl implements BmpService {
 	    
         return userTaskActs;
 	}
+
+    @Override
+    public Map queryFormValuesByProcessId(String processInstanceId) {
+        Map<String,Object> map = new HashMap<String,Object>();
+        List<HistoricVariableInstance> list = historySerivce.createHistoricVariableInstanceQuery().processInstanceId(processInstanceId).list();
+        
+        for(HistoricVariableInstance var : list){
+          map.put(var.getVariableName(),var.getValue());
+        }
+        
+        return map;
+    }
 
 }

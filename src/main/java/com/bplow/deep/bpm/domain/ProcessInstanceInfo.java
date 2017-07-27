@@ -71,6 +71,7 @@ public class ProcessInstanceInfo extends PageInfo implements Serializable{
         this.startDate = startDate;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getEndDate() {
         return endDate;
     }

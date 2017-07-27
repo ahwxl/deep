@@ -53,7 +53,7 @@ $(document).ready(function() {
 											'bSortable' : false,
 											'aTargets' : [ 4 ],
 											fnRender : function(setobj, data) {
-												return "<a class='mini purple' name='showProcessImage' id='showProcessImage'  1data-toggle='modal' procDefId='{0}' href='javascript:void(0)'> {1}</a>&nbsp;<a class='mini purple' name='showProcessImage' id='showProcessImage'  2data-toggle='modal' processInstanceId='{2}' href='javascript:void(0)'> {3}</a> {4} {5}"
+												return "<a class='mini purple' name='showProcessImage' id='showProcessImage'  1data-toggle='modal' procDefId='{0}' href='javascript:void(0)'> {1}</a>&nbsp;<a class='mini purple' name='showProcessImage' id='showProcessImage'  2data-toggle='modal' processInstanceId='{2}' href='javascript:void(0)'>{3}</a> {4} {5}"
 														.format(
 																setobj.aData['processDefineId'],'流程',setobj.aData['processInstanceId'],
 																'历史','暂停','删除');
@@ -95,27 +95,25 @@ $(document).ready(function() {
 							"mData" : "processInstanceId",
 							"bSortable" : false
 						},{
-							"sTitle" : "主题",
-							"mData" : "processName",
+							"sTitle" : "活动",
+							"mData" : "activiteName",
 							"bSortable" : false,
-							"sWidth" : "400"
+							"sWidth" : "300"
 						}, {
-							"sTitle" : "申请时间",
+							"sTitle" : "开始时间",
 							"mData" : "startDate",
 							"bSortable" : false
 						}, {
-							"sTitle" : "当前状态",
-							"mData" : "processStatus",
-							"bSortable" : false,
-							"sWidth" : 100
-						}, {
-							"sTitle" : "操作",
+							"sTitle" : "结束时间",
 							"mData" : "endDate",
+							"bSortable" : false
+						}, {
+							"sTitle" : "意见",
+							"mData" : "processStatus",
 							"bSortable" : false
 						} ],
 						"iDisplayLength" : 100,
-						// "sDom":
-						// "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+						"sDom":"<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
 						"sPaginationType" : "bootstrap"
 					});
 					

@@ -11,12 +11,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bplow.deep.authority.User;
 import com.bplow.deep.base.domain.ServiceResult;
@@ -218,7 +214,14 @@ public class BmpController {
 
         ProcessInstanceInfo process = bmpService.queryTask(processInfo);
 
-        //获取表单id
+        //获取流程开始表单
+        BpmProcessDefined bpmProcessDef = new BpmProcessDefined();
+        bpmProcessDef.setProcessDefinedId(process.getProcessDefineId());
+
+        BpmProcessDefined bpmProcessDefined = processDefinedService
+            .queryProcessDefined(bpmProcessDef);
+
+        //获取【审批表单】id
         BpmProcessDefinedSet bpmProcessDefinedSet = new BpmProcessDefinedSet();
         bpmProcessDefinedSet.setActivityId(process.getKey());
         bpmProcessDefinedSet.setProcessDefinedId(process.getProcessDefineId());
@@ -226,6 +229,7 @@ public class BmpController {
         BpmProcessDefinedSet bpmProcDefSet = processDefinedService
             .queryProcessDefinedSet(bpmProcessDefinedSet);
 
+        view.addAttribute("bpmProcessDefined", bpmProcessDefined);
         view.addAttribute("bpmProcDefSet", bpmProcDefSet);
         view.addAttribute("process", process);
         return "bpm/taskComplete";
@@ -263,9 +267,9 @@ public class BmpController {
      * @return
      */
     @RequestMapping(value = "/bpm/viewProcessInstance")
-    public String viewProcessInstance() {
+    public String viewProcessInstance(ProcessInstanceInfo processInstanceInfo) {
 
-        return " ";
+        return "";
     }
 
     /**
@@ -274,11 +278,11 @@ public class BmpController {
      */
     @RequestMapping(value = "/bpm/viewHistoryProcessTask")
     @ResponseBody
-    public Page<HistoricTaskInstance> viewHistoryProcessTask(String processInstanceId) {
-        
-        List<HistoricTaskInstance> list = bmpService.getHistoryProcess(processInstanceId);
-        
-        Page<HistoricTaskInstance> page = new Pagination<HistoricTaskInstance>();
+    public Page<ProcessInstanceInfo> viewHistoryProcessTask(String processInstanceId) {
+
+        List<ProcessInstanceInfo> list = bmpService.getHistoryProcess(processInstanceId);
+
+        Page<ProcessInstanceInfo> page = new Pagination<ProcessInstanceInfo>();
         page.setDatas(list);
         page.setPageSize(100);
         page.setTotals(list.size());
@@ -311,6 +315,7 @@ public class BmpController {
                + "}";
     }
 
+    //查询流程定义 所有活动
     @RequestMapping(value = "/bpm/queryProcessActivity")
     @ResponseBody
     public List<BpmActivity> queryActivity(HttpServletRequest httpRequest,
@@ -319,6 +324,15 @@ public class BmpController {
         List<BpmActivity> list = bmpService.queryAllActivity(processDefinitionId);
 
         return list;
+    }
+
+    @RequestMapping(value = "/bpm/queryFormValuesByProcessId")
+    @ResponseBody
+    public Map<String, Object> queryFormValue(@RequestParam("processInstanceId") String processInstanceId) {
+
+        Map<String, Object> map = bmpService.queryFormValuesByProcessId(processInstanceId);
+
+        return map;
     }
 
 }
