@@ -205,6 +205,25 @@ public class BmpController {
 
         return "";
     }
+    
+    /**
+     * 接受任务
+     * 
+     * @param taskId
+     * @return
+     */
+    @RequestMapping(value="/bpm/claimTask")
+    @ResponseBody
+    public ServiceResult claimTask(@RequestParam("taskId") String taskId){
+        ServiceResult result = new ServiceResult();
+        result.setResponseMessage("操作成功");
+        
+        User user = WebUtils.getCurrentUser();
+        
+        bmpService.claimTask(taskId, user.getUserId());
+        
+        return result;
+    }
 
     /*
      * 任务审核页面
