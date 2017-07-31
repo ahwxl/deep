@@ -20,8 +20,9 @@
   </resultMap>
   
   <select id="queryProcessInstanceItemForPage" parameterType="com.bplow.deep.bpm.domain.ProcessInstanceInfo" resultMap="BaseResultMap">
-    select a.PROC_INST_ID_,a.PROC_DEF_ID_,a.START_TIME_,a.START_USER_ID_,a.NAME_ ,'' proce_status
-          from act_hi_procinst a
+    select a.PROC_INST_ID_,a.PROC_DEF_ID_,a.START_TIME_,a.START_USER_ID_,a.NAME_ ,b.ACT_ID_ proce_status
+          from act_hi_procinst a left join act_ru_execution b 
+           on a.PROC_INST_ID_ = b.PROC_INST_ID_ 
     <where>
       <trim prefixOverrides="AND">
         <trim prefix="AND">

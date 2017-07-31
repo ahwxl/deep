@@ -1,7 +1,7 @@
 $(document)
 		.ready(
 				function() {
-					$('#sample_1')
+					var mygrid = $('#sample_1')
 							.dataTable(
 									{
 										"bProcessing" : true,
@@ -46,7 +46,7 @@ $(document)
 											'bSortable' : false,
 											'aTargets' : [ 4 ],
 											fnRender : function(setobj, data) {
-												return "<a href='/deep/bpm/taskCompletePage?taskId={0}'>{1}</a>&nbsp; {2}"
+												return "<a href='/deep/bpm/taskCompletePage?taskId={0}'><i class='icon-edit'></i>{1}</a>&nbsp; <a class='mini purple' id='{0}' data-toggle='claim' ><i class='icon-ok-sign'></i> {2}</a>"
 														.format(
 																setobj.aData['taskId'],
 																"受理", "接受");
@@ -54,11 +54,31 @@ $(document)
 										} ]
 									});
 
-					var table = $('#sample_1').DataTable();
-					// 给2个输入框添加blur事件调用draw方法执行自定义过滤函数
-					$('#min, #max').blur(function() {
-						table.draw();
-					});
+					// 删除资源
+					$(document).off('click.modal').on(
+							'click.modal.data-api',
+							'[data-toggle="claim"]',
+							function(e) {
+								var id = $(this).attr('id');
+								$.post(cxt + "/bpm/claimTask", "taskId=" + id,
+										function(rsp) {
+									        mygrid.fnDraw();
+											sysNotify(rsp.responseMessage);
+										});
+							});
+
+					function sysNotify(info) {
+
+						var unique_id = $.gritter.add({
+							position : 'bottom-right',
+							title : '系统通知!',
+							text : info,
+							sticky : false,
+							time : '2000',
+							// class_name: 'my-sticky-class'
+							class_name : 'gritter-success'
+						});
+					}
 
 					$(".page-sidebar-menu li[name='流程管理']").addClass("active");
 					$(".page-sidebar-menu li[name='任务列表']").addClass("active");

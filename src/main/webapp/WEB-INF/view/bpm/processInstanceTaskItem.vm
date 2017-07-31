@@ -1,3 +1,15 @@
+#parse("././globle.vm" )
+<html>
+<head>
+<title>任务列表</title>
+    <link href="$cxt/static/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="$cxt/static/js/jquery.gritter.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/select2.min.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/DT_bootstrap.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/module/taskitem.js?verion=20170116"></script>
+</head>
+<body>
                <!-- BEGIN PAGE HEADER-->
 				<div class="row-fluid">
 					<div class="span12">
@@ -90,12 +102,7 @@
 				
 				<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
-
-	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js"></script>
-
-	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
-
-	<!-- END PAGE LEVEL PLUGINS -->
-				
-	<script type="text/javascript" src="/deep/static/js/module/taskitem.js?verion=20170115"></script>
+<script>
+</script>
+</body>
+</html>

@@ -43,7 +43,7 @@
 
 											<!-- BEGIN FORM-->
 											<form id="myform" action="${cxt}/bpm/completeTask" method="post" class="horizontal-form">
-											<input type="text" name="formId" value="$!{bpmProcDefSet.formId}" />
+											<input type="hidden" name="formId" value="$!{bpmProcDefSet.formId}" />
 											<input type="hidden" id="processInstanceId" name="processInstanceId" value="${process.processInstanceId}" />
 											<input type="hidden" id="taskId" name="taskId" value="${process.taskId}" />
 											<input type="hidden" id="employeeName" name="wangxiaolei" />

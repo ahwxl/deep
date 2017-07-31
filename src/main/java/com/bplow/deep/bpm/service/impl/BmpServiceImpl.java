@@ -117,7 +117,7 @@ public class BmpServiceImpl implements BmpService {
     /**
      * 启动流程实例
      * 
-     * @param key   vacationRequest
+     * @param key 流程定义id  leave:1:97557
      * @return
      */
     public String startProcessByKey(String key, Map<String, Object> variables) {
