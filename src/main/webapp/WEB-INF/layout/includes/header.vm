@@ -58,6 +58,7 @@
 
 	<!-- BEGIN CORE PLUGINS -->
     <script type="text/javascript" src="$cxt/static/js/angular158.js"></script>
+    <script type="text/javascript" src="$cxt/static/js/angular-route1.3.13.js"></script>
 	<script src="$cxt/static/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
 	<script src="$cxt/static/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>

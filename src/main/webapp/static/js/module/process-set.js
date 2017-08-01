@@ -1,6 +1,6 @@
 'use strict';
 
-var phonecatApp = angular.module('phonecatApp', []);
+var phonecatApp = angular.module('phonecatApp',['ngRoute']);
 
 phonecatApp.controller('PhoneListController', function PhoneListController($scope,$http) {
 	  
@@ -34,6 +34,14 @@ phonecatApp.controller('PhoneListController', function PhoneListController($scop
 	  };
 	  
 });
+
+phonecatApp.config(['$routeProvider', function($routeProvider){
+    $routeProvider
+    .when('/tab_1_4',{template:'流程定义xml'})
+    .when('/tab_1_1',{template:'基本信息'})
+    .when('/tab_1_3',{template:'流程图'});
+    //.otherwise({redirectTo:'/'})
+}]);
 
 $(document).ready(function () {
             	var mygridtab = $('#transactions').dataTable({

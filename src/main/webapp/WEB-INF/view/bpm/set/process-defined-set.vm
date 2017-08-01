@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="$cxt/static/js/DT_bootstrap.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
-    <script type="text/javascript" src="$cxt/static/js/module/process-set.js?20170310"></script>
+    <script type="text/javascript" src="$cxt/static/js/module/process-set.js?20170311"></script>
 </head>
 <body>
                <!-- BEGIN PAGE HEADER-->
@@ -63,7 +63,7 @@
 							<div class="tab-content">
 
 								<div class="tab-pane row-fluid " id="tab_1_1">
-								
+								<div ng-view=""></div>
 								</div>
 								<div class="tab-pane row-fluid active" id="tab_1_2">
 								
