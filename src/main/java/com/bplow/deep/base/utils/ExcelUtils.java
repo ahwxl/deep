@@ -22,7 +22,7 @@ public class ExcelUtils {
 
     public void read() throws InvalidFormatException, IOException {
 
-        OPCPackage pkg = OPCPackage.open("D:/www/work/N-农商行/上海农商行快捷/接口改造整理.xlsx");
+        OPCPackage pkg = OPCPackage.open("D:/www/work/网联平台/网联报文字段整理2.xlsx");
         XSSFWorkbook wb = new XSSFWorkbook(pkg);
 
         int sheetsnum = wb.getNumberOfSheets();
@@ -36,15 +36,16 @@ public class ExcelUtils {
             DataFormatter formatter = new DataFormatter();
             int rownum = 0;
             for (Row row : sheet) {
-                rownum ++;
-                if(rownum == 1 )continue;
+                rownum++;
+                if (rownum == 1)
+                    continue;
                 //判断是否为最后一空行
                 Cell fieldnameCell = row.getCell(1);
                 String lastrowcell = formatter.formatCellValue(fieldnameCell);
-                if(StringUtils.isBlank(lastrowcell)){
+                if (StringUtils.isBlank(lastrowcell)) {
                     break;
                 }
-                
+
                 Field newField = new Field();
                 newtable.addField(newField);
                 for (Cell cell : row) {
@@ -59,7 +60,7 @@ public class ExcelUtils {
                     }
 
                 }
-                
+
             }
         }
 
@@ -79,11 +80,13 @@ public class ExcelUtils {
             int nums = fields.size();
             int i = 0;
             for (Field field : fields) {
-                sql.append(field.getName()).append(" VARCHAR(32) ");
+                sql.append(changerName(field.getName())).append(" VARCHAR(32) ");
                 sql.append(" COMMENT '").append(field.getComment());
                 i++;
-                if(i<nums) sql.append("',\n");
-                else sql.append("'");
+                if (i < nums)
+                    sql.append("',\n");
+                else
+                    sql.append("'");
             }
 
             sql.append(");");
@@ -91,10 +94,10 @@ public class ExcelUtils {
 
         return sql.toString();
     }
-    
-    public String printTableNames(){
+
+    public String printTableNames() {
         StringBuilder sql = new StringBuilder();
-        
+
         for (Table tmptable : tables) {
             sql.append("<table tableName=\"").append(tmptable.getName()).append("\" />\n");
         }
@@ -175,13 +178,35 @@ public class ExcelUtils {
 
     }
 
+    public String changerName(String original) {
+
+        String txt = original;
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        while (i < txt.length()) {
+            char tmp = txt.charAt(i);
+            if (i == 0) {
+                sb.append(tmp);
+            } else {
+                if (Character.isUpperCase(tmp)) {
+                    sb.append("_").append(Character.toLowerCase(tmp));
+                } else {
+                    sb.append(tmp);
+                }
+            }
+            i++;
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         ExcelUtils e = new ExcelUtils();
         try {
             e.read();
             String sql = e.getTableDml();
             System.out.println(sql);
-            
+
             e.printTableNames();
         } catch (InvalidFormatException e1) {
             e1.printStackTrace();

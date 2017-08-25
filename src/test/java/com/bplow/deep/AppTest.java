@@ -52,4 +52,27 @@ public class AppTest
             e.printStackTrace();
         }
     }
+    
+    public void testChar(){
+        
+        String txt = "ABcDeFF";
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        while(i < txt.length()){
+            char tmp = txt.charAt(i);
+            if(i == 0){
+                sb.append(tmp);
+            }else{
+                if(Character.isUpperCase(tmp)){
+                    sb.append("_").append(Character.toLowerCase(tmp));
+                }else{
+                    sb.append(tmp);
+                }
+            }
+            i++;
+        }
+        
+        System.out.println(sb.toString());
+    }
+    
 }
