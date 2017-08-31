@@ -20,6 +20,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ import com.bplow.deep.stock.vo.StockInfo;
  */
 @Service("QueryStockPriceRealTimeSerivce")
 public class QueryStockPriceRealTimeServiceImpl implements
-		QueryStockPriceRealTimeSerivce {
+		QueryStockPriceRealTimeSerivce,InitializingBean {
 
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
@@ -44,8 +45,17 @@ public class QueryStockPriceRealTimeServiceImpl implements
 
 	private String url = "http://hq.sinajs.cn/list=";
 	
+	private HttpClient client;
+	
 	@Autowired
 	private StockWareHouseService stockWareHouseService;
+	
+	@Override
+    public void afterPropertiesSet() throws Exception {
+	    
+	    client = new HttpClient();
+	    
+    }
 
 	@Override
 	public StockInfo queryPrice(StockInfo stockInfo) {
@@ -130,9 +140,7 @@ public class QueryStockPriceRealTimeServiceImpl implements
 	}
 
 	public String request(String url) {
-
 		String responseMsg = null;
-		HttpClient client = new HttpClient();
 		GetMethod method = new GetMethod(url);
 
 		method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,

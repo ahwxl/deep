@@ -114,7 +114,7 @@
 			<version>5.1.43</version>
 		</dependency>
 		<dependency>
-			<groupId>org.lucee</groupId>
+			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
@@ -139,6 +139,14 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>dubbo</artifactId>
 			<version>2.5.3</version>
+			<exclusions>
+				<exclusion>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</dependency>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.101tec</groupId>
