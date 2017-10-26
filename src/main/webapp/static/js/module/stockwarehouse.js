@@ -106,10 +106,10 @@ $(document)
 											'bSortable' : false,
 											'aTargets' : [ 7 ],
 											fnRender : function(setobj, data) {
-												var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'>{1}</i></a>&nbsp;<a class='' id='{0}' data-toggle='edit' ><i class='icon-edit'>{2}</i></a>"
+												var delhtml = "<a class='mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'>{1}</i></a>&nbsp;<a class='' id='{0}' data-toggle='edit' ><i class='icon-edit'>{2}</i></a>&nbsp;<a class='' id='{0}' userId='{4}' data-toggle='set' ><i class='icon-edit'>{3}</i></a>"
 														.format(
 																setobj.aData['stockId'],
-																"删除", "修改");
+																"删除", "修改", "设置",setobj.aData['userId']);
 												return delhtml;
 											}
 										} ]
@@ -153,20 +153,16 @@ $(document)
 					//修改持仓
 	            	$(document).off('click.modal3').on('click.modal3.data-api', '[data-toggle="edit"]', function ( e ) {
 	            		var id = $(this).attr('id');
+	            		var userId = $(this).attr('userId');
 	            		$.ajax({
 							url:cxt +'/stock/queryStock',
 							async:true,
 							method:'POST',
-							data:'stockId='+id,
+							data:'stockId='+id+"&userId="+userId,
 							dataType : 'json',
 							error :function(resp){alert(resp)},
 							success:function(resp){
-								$('#myform input[name="stockId"]').val(resp.stockId);
-								$('#myform input[name="stockName"]').val(resp.stockName);
-								$('#myform input[name="amount"]').val(resp.amount);
-								$('#myform input[name="todayPrice"]').val(resp.todayPrice);
-								$('#myform input[name="exceptPrice"]').val(resp.exceptPrice);
-								$('#myform input[name="exceptAmount"]').val(resp.exceptAmount);
+								
 							}
 						});
 	            		//打开修改窗口
@@ -177,6 +173,31 @@ $(document)
 	                    	
 	                    });
 	            		
+	            	});
+	            	
+	            	//设置股票提醒
+	            	$(document).off('click.modal4').on('click.modal4.data-api', '[data-toggle="set"]', function ( e ) {
+	            		var id = $(this).attr('id');
+	            		
+	            		$.ajax({
+							url:cxt +'/warn/queryCustomerWarns',
+							async:true,
+							method:'POST',
+							data:'userId='+id,
+							dataType : 'json',
+							error :function(resp){alert(resp)},
+							success:function(resp){
+								$('#myform input[name="stockId"]').val(resp.stockId);
+								$('#myform input[name="stockName"]').val(resp.stockName);
+							}
+						});
+	            		
+	            		$('#stack2').modal({
+	                    	confirm:function(formvalue){
+	                    		$('#myform2').attr("action",cxt + "/stock/modifyStock").trigger("submit");
+	                    	}
+	                    	
+	                    });
 	            	});
 					
 					var form1 = $('#myform');

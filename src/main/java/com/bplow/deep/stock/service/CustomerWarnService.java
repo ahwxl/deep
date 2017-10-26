@@ -1,5 +1,7 @@
 package com.bplow.deep.stock.service;
 
+import java.util.List;
+
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.stock.domain.SkCustomerWarn;
 
@@ -14,6 +16,8 @@ public interface CustomerWarnService {
     Page<SkCustomerWarn> queryCustomerWarns(SkCustomerWarn warn);
     
     SkCustomerWarn queryCustomerWarn(SkCustomerWarn warn);
+    
+    List<SkCustomerWarn> queryCustomerWarnList(SkCustomerWarn warn);
     
     int createCustomerWarn(SkCustomerWarn warn);
     

@@ -1,6 +1,7 @@
 package com.bplow.deep.stock.service.Impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class CustomerWarnServiceImpl implements CustomerWarnService{
     @Override
     public SkCustomerWarn queryCustomerWarn(SkCustomerWarn warn) {
         
-        SkCustomerWarn customerWarn = skCustomerWarnMapper.selectByPrimaryKey(warn.getId());
+        SkCustomerWarn customerWarn = skCustomerWarnMapper.selectByPrimaryKey(warn);
         
         return customerWarn;
     }
@@ -60,8 +61,17 @@ public class CustomerWarnServiceImpl implements CustomerWarnService{
     @Override
     public int updateCustomerWarn(SkCustomerWarn warn) {
         
+        skCustomerWarnMapper.update(warn);
         
         return 0;
+    }
+
+    @Override
+    public List<SkCustomerWarn> queryCustomerWarnList(SkCustomerWarn warn) {
+        
+        List<SkCustomerWarn> warns = skCustomerWarnMapper.selectCustomerWarns(warn.getUserId(),warn.getStockId());
+        
+        return warns;
     }
 
 }

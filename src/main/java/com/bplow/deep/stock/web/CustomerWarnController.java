@@ -1,5 +1,7 @@
 package com.bplow.deep.stock.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -40,6 +42,16 @@ public class CustomerWarnController {
     	return page;
     }
     
+    @RequestMapping(value="/queryCustomerWarns")
+    @ResponseBody
+    public List<SkCustomerWarn> queryCustomerwarns(HttpServletRequest httpRequest, Model view,SkCustomerWarn warn){
+        
+        
+        List<SkCustomerWarn> warns = customerWarnService.queryCustomerWarnList(warn);
+        
+        return warns;
+    }
+    
     @RequestMapping(value="/createCustomerWarn")
     @ResponseBody
     public String addCustomerWarn(HttpServletRequest httpRequest, Model view,SkCustomerWarn warn){
@@ -58,6 +70,15 @@ public class CustomerWarnController {
     	return "删除成功";
     }
     
+    
+    @RequestMapping(value="/modifyCustomerWarn")
+    @ResponseBody
+    public String modifyCustomerWarn(HttpServletRequest httpRequest, Model view,SkCustomerWarn warn){
+        
+        customerWarnService.updateCustomerWarn(warn);
+        
+        return "删除成功";
+    }
     
 
 }

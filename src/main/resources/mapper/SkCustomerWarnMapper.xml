@@ -7,13 +7,14 @@
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="rule_id" jdbcType="VARCHAR" property="ruleId" />
     <result column="stock_id" jdbcType="VARCHAR" property="stockId" />
+    <result column="value" jdbcType="DOUBLE" property="value" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, user_id, rule_id, stock_id, status, gmt_create
+    id, user_id, rule_id, stock_id,value, status, gmt_create
   </sql>
   
   <select id="queryForPage" parameterType="com.bplow.deep.stock.domain.SkCustomerWarn" resultMap="BaseResultMap">
@@ -32,11 +33,36 @@
      ORDER BY GMT_MODIFY DESC 
   </select>
   
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectCustomerWarns" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sk_customer_warn
-    where id = #{id,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR} and stock_id = #{stockId,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="com.bplow.deep.stock.domain.SkCustomerWarn" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sk_customer_warn
+    <where>
+      <trim prefixOverrides="AND">
+        <trim prefix="AND">
+          <if test="id != null">
+             ID = #{id} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="userId != null">
+             user_id = #{userId} 
+          </if>
+        </trim>
+        <trim prefix="AND">
+          <if test="stockId != null">
+             stock_id = #{stockId} 
+          </if>
+        </trim>
+      </trim>
+    </where>
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -46,10 +72,10 @@
   
   <insert id="insert" parameterType="com.bplow.deep.stock.domain.SkCustomerWarn">
     insert into sk_customer_warn (id, user_id, rule_id, 
-      stock_id, status, gmt_create,gmt_modify
+      stock_id,value, status, gmt_create,gmt_modify
       )
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{ruleId,jdbcType=VARCHAR}, 
-      #{stockId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
+      #{stockId,jdbcType=VARCHAR}, #{value,jdbcType=DOUBLE}, #{status,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
       )
   </insert>
   
@@ -67,6 +93,9 @@
       </if>
       <if test="stockId != null">
         stock_id = #{stockId,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},

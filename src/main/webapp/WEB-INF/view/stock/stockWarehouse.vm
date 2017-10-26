@@ -7,7 +7,7 @@
 <script type="text/javascript" src="${cxt}/static/js/DT_bootstrap.js"></script>
 <script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
-<script type="text/javascript" src="${cxt}/static/js/module/stockwarehouse.js?20170323"></script>
+<script type="text/javascript" src="${cxt}/static/js/module/stockwarehouse.js?20170324"></script>
 </head>
 <body>
                <!-- BEGIN PAGE HEADER-->
@@ -208,6 +208,64 @@
 					<div class="controls">
 						<input type="text" class="" name="exceptAmount" value=""> 
 					</div>
+				</div>
+
+			</form>
+
+			<!-- END FORM-->  
+
+		</div>
+
+	</div>
+
+	<div class="modal-footer">
+
+		<button type="button" data-dismiss="modal" class="btn">Close</button>
+
+		<button type="button" data-dismiss="confirm" class="btn red">Ok</button>
+
+	</div>
+
+</div>
+
+
+<div id="stack2" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
+
+	<div class="modal-header">
+
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+		<h3>设置提醒</h3>
+
+	</div>
+
+	<div class="modal-body">
+	
+	<div class="form">
+
+			<!-- BEGIN FORM-->
+
+			<form action="#" name="myform2" id="myform2" class="form-horizontal">
+
+				<div class="control-group">
+					<label class="control-label"><input type="checkbox" class="" name="wave" value="true" />开盘后股价涨跌幅度超过</label>
+                    <div class="controls controls-row">
+					   <input type="text" class="span1" name="waveValue" value=""/>%
+                    </div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label"><input type="checkbox" class="span1" name="high" value="true" />股价上涨达到或高于</label>
+                    <div class="controls controls-row">
+					   <input type="text" class="span1" name="highValue" value=""/>元
+                    </div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label"><input type="checkbox" class="span1" name="lower" value="true" />股价下跌达到或低于</label>
+                    <div class="controls controls-row">
+					   <input type="text" class="span1" name="lowerValue" value=""/>元
+                    </div>
 				</div>
 
 			</form>
