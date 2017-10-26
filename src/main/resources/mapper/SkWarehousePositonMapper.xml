@@ -79,6 +79,12 @@
       <if test="marketValue != null">
         market_value = #{marketValue,jdbcType=DOUBLE},
       </if>
+      <if test="exceptAmount != null">
+        except_amount = #{exceptAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="exceptPrice != null">
+        except_price = #{exceptPrice,jdbcType=DOUBLE},
+      </if>
       <if test="sortBy != null">
         sort_by = #{sortBy,jdbcType=BIGINT},
       </if>

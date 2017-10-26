@@ -46,6 +46,7 @@
 
 	<link rel="stylesheet" href="$cxt/static/css/DT_bootstrap.css" />
 	<link rel="stylesheet" href="$cxt/static/css/process-style.css?20170408" />
+	<link rel="stylesheet" href="$cxt/static/css/jquery.gritter.css"  type="text/css"/>
 
 	<!-- END PAGE LEVEL STYLES -->
 
@@ -92,7 +93,7 @@
 	<script src="$cxt/static/js/ztree/jquery.ztree.core.min.js" type="text/javascript" ></script>
 	<script src="$cxt/static/js/ztree/jquery.ztree.excheck.min.js" type="text/javascript" ></script>
 	<link rel="stylesheet" href="$cxt/static/js/ztree/metroStyle/metroStyle.css" />
-
+    <script type="text/javascript" src="$cxt/static/js/jquery.gritter.js"></script>
 	<!-- END CORE PLUGINS -->
 	$head
 </head>

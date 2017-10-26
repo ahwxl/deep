@@ -37,6 +37,19 @@
 		   App.init();
 
 		   //TableManaged.init();
+		   
+		   App.sysNotify =function(info){
+
+var unique_id = $.gritter.add({
+			                    position: 'bottom-right',
+			                    title: '系统通知!',
+			                    text: info,
+			                    sticky: false,
+			                    time: '2000',
+			                    //class_name: 'my-sticky-class'
+			                    class_name: 'gritter-success'
+ });
+}
 
 		});
 

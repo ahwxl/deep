@@ -5,7 +5,9 @@
 <script type="text/javascript" src="${cxt}/static/js/select2.min.js"></script>
 <script type="text/javascript" src="${cxt}/static/js/jquery.dataTables.js?20170316"></script>
 <script type="text/javascript" src="${cxt}/static/js/DT_bootstrap.js"></script>
-<script type="text/javascript" src="${cxt}/static/js/module/stockwarehouse.js?20170321"></script>
+<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="${cxt}/static/js/module/stockwarehouse.js?20170323"></script>
 </head>
 <body>
                <!-- BEGIN PAGE HEADER-->

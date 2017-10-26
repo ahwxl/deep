@@ -72,7 +72,7 @@ public class StockController {
         
         stockWareHouseService.updateWarehouse(record);
         
-        return "{\"responseMessage\":\"修改成功！\"}";
+        return "{\"responseMsg\":\"修改成功！\"}";
         
     }
     

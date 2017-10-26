@@ -154,16 +154,19 @@ $(document)
 	            	$(document).off('click.modal3').on('click.modal3.data-api', '[data-toggle="edit"]', function ( e ) {
 	            		var id = $(this).attr('id');
 	            		$.ajax({
-							url:cxt +'/warn/queryWarnRule',
+							url:cxt +'/stock/queryStock',
 							async:true,
 							method:'POST',
-							data:'ruleId='+id,
+							data:'stockId='+id,
 							dataType : 'json',
 							error :function(resp){alert(resp)},
 							success:function(resp){
 								$('#myform input[name="stockId"]').val(resp.stockId);
-								$('#myform textarea[name="stockName"]').val(resp.stockName);
-								$('#myform textarea[name="ruleMsg"]').val(resp.ruleMsg);
+								$('#myform input[name="stockName"]').val(resp.stockName);
+								$('#myform input[name="amount"]').val(resp.amount);
+								$('#myform input[name="todayPrice"]').val(resp.todayPrice);
+								$('#myform input[name="exceptPrice"]').val(resp.exceptPrice);
+								$('#myform input[name="exceptAmount"]').val(resp.exceptAmount);
 							}
 						});
 	            		//打开修改窗口
@@ -233,7 +236,7 @@ $(document)
 	                    		success:function(responseTxt){
 	                    			mygridtab.fnDraw();
 	                    			success1.hide();
-	                    			alert(responseTxt.responseMsg);
+	                    			App.sysNotify(responseTxt.responseMsg);
 	                    		},
 	                    		type:'POST',
 	                    		url:form.action
