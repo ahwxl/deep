@@ -34,6 +34,16 @@ public class StockTransactionRecordController {
 
         return page;
     }
+    
+    @RequestMapping(value = "/queryTransaction")
+    @ResponseBody
+    public SkTransactionRecord queryTransaction(HttpServletRequest httpRequest, Model view,
+                                               SkTransactionRecord record) {
+
+        SkTransactionRecord transaction = transactionRecordService.querySkTransactionRecord(record);
+
+        return transaction;
+    }
 
     @RequestMapping(value = "/createTrans")
     @ResponseBody
@@ -53,6 +63,16 @@ public class StockTransactionRecordController {
         transactionRecordService.deleteTransactionRecord(record);
 
         return "删除成功";
+    }
+    
+    @RequestMapping(value = "/modifyTrans")
+    @ResponseBody
+    public String modifyTransRecord(HttpServletRequest httpRequest, Model view,
+                                 SkTransactionRecord record) {
+
+        transactionRecordService.updateTransactionRecord(record);
+
+        return "{\"responseMsg\":\"修改成功\"}";
     }
 
 }

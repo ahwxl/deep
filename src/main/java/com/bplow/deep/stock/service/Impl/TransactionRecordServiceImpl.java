@@ -51,4 +51,19 @@ public class TransactionRecordServiceImpl implements TransactionRecordService{
         return page;
     }
 
+    @Override
+    public SkTransactionRecord querySkTransactionRecord(SkTransactionRecord record) {
+        
+        SkTransactionRecord skTransactionRecord = transactionRecordMapper.selectByPrimaryKey(record.getId());
+        
+        return skTransactionRecord;
+    }
+
+    @Override
+    public void updateTransactionRecord(SkTransactionRecord record) {
+        
+        transactionRecordMapper.update(record);
+        
+    }
+
 }

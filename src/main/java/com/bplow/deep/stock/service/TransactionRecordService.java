@@ -9,6 +9,10 @@ public interface TransactionRecordService {
 
     public void deleteTransactionRecord(SkTransactionRecord record);
     
+    public void updateTransactionRecord(SkTransactionRecord record);
+    
     public Page<SkTransactionRecord> queryForPage(SkTransactionRecord record);
+    
+    public SkTransactionRecord querySkTransactionRecord(SkTransactionRecord record);
     
 }

@@ -73,9 +73,6 @@
   <update id="update" parameterType="com.bplow.deep.stock.domain.SkTransactionRecord">
     update sk_transaction_record
     <set>
-      <if test="id != null">
-        id = #{id,jdbcType=VARCHAR},
-      </if>
       <if test="stockId != null">
         stock_id = #{stockId,jdbcType=VARCHAR},
       </if>
@@ -91,12 +88,13 @@
       <if test="transactionType != null">
         transaction_type = #{transactionType,jdbcType=VARCHAR},
       </if>
+      <if test="transactionDate != null">
+        transaction_date = #{transactionDate,jdbcType=VARCHAR},
+      </if>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
+        gmt_modify = now()
     </set>
      WHERE ID = #{id} 
   </update>
