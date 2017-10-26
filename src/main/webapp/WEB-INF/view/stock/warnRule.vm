@@ -1,3 +1,15 @@
+#parse("././globle.vm" )
+<html>
+<head>
+<title>规则脚本</title>
+	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
+	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170216"></script>
+	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="/deep/static/js/module/warnrules.js?20170321"></script>
+</head>
+<body>
                <!-- BEGIN PAGE HEADER-->
 
 				<div class="row-fluid">
@@ -121,18 +133,7 @@
 				</div>
 				
 				<!-- END PAGE CONTENT-->
-				
-				<!-- BEGIN PAGE LEVEL PLUGINS -->
-
-	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
-
-	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170216"></script>
-
-	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
-
-	<!-- END PAGE LEVEL PLUGINS -->
-				
-<script type="text/javascript" src="/deep/static/js/module/warnrules.js?20170316"></script>
+<!-- 窗口添加脚本 -->
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
@@ -199,3 +200,6 @@
 									</div>
 
 								</div>
+								
+</body>
+</html>

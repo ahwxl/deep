@@ -57,5 +57,23 @@ public class WarnRuleController {
     	
     	return "删除成功";
     }
+    
+    @RequestMapping(value="/modifyWarnRule")
+    @ResponseBody
+    public String editerCustomerWarn(HttpServletRequest httpRequest, Model view,SkWarnRule rule){
+        
+        warnRuleService.updateWarnRule(rule);
+        
+        return "{\"responseMsg\":\"修改成功\"}";
+    }
+    
+    @RequestMapping(value="/queryWarnRule")
+    @ResponseBody
+    public SkWarnRule queryCustomerWarn(HttpServletRequest httpRequest, Model view,SkWarnRule rule){
+        
+        SkWarnRule warnRule = warnRuleService.queryWarnRule(rule);
+        
+        return warnRule;
+    }
 
 }

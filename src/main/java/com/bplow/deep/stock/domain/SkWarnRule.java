@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class SkWarnRule extends PageInfo{
 	
+    /**  */
+    private static final long serialVersionUID = -1134052972438641122L;
+
     private String ruleId;
 
     private String scripte;

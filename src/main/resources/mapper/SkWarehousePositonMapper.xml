@@ -64,9 +64,6 @@
   <update id="update" parameterType="com.bplow.deep.stock.domain.SkWarehousePositon">
     update sk_warehouse_positon
     <set>
-      <if test="stockId != null">
-        stock_id = #{stockId,jdbcType=VARCHAR},
-      </if>
       <if test="stockName != null">
         stock_name = #{stockName,jdbcType=VARCHAR},
       </if>
@@ -85,13 +82,8 @@
       <if test="sortBy != null">
         sort_by = #{sortBy,jdbcType=BIGINT},
       </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
+        gmt_modify = now()
     </set>
-     WHERE ID = #{id} 
+     WHERE stock_id = #{stockId} 
   </update>
 </mapper>

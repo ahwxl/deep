@@ -89,7 +89,7 @@
 						</li>
 					</ul>
 				</li>
-				<li class="">
+				<li class="" name="调度管理">
 
 					<a href="javascript:;">
 
@@ -104,19 +104,19 @@
 					</a>
 
 					<ul class="sub-menu">
-						<li >
+						<li name="任务">
 							<a href="$cxt/job/joblist">任务</a>
 						</li>
-						<li >
+						<li name="持仓">
 							<a href="$cxt/stock/stockWareHouse">持仓</a>
 						</li>
-						<li >
+						<li name="交易记录">
 							<a href="$cxt/stock/translist">交易记录</a>
 						</li>
-						<li >
+						<li name="股票规则">
 							<a href="$cxt/warn/customerWarnPage">股票规则</a>
 						</li>
-						<li >
+						<li name="规则脚本">
 							<a href="$cxt/warn/warnRulePage">规则脚本</a>
 						</li>
 					</ul>

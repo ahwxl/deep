@@ -39,6 +39,15 @@ public class StockController {
     	return page;
     }
     
+    @RequestMapping(value = "/queryStock")
+    @ResponseBody
+    public SkWarehousePositon queryStock(HttpServletRequest httpRequest, Model view,SkWarehousePositon record){
+        
+        SkWarehousePositon skWarehousePositon = stockWareHouseService.queryWarehouseById(record);
+        
+        return skWarehousePositon;
+    }
+    
     @RequestMapping(value = "/addStock")
     @ResponseBody
     public String addStock(HttpServletRequest httpRequest, Model view,SkWarehousePositon record){
@@ -55,6 +64,16 @@ public class StockController {
     	stockWareHouseService.deleleWarehouse(record);
         
         return "刪除成功！";
+    }
+    
+    @RequestMapping(value = "/modifyStock")
+    @ResponseBody
+    public String modifyStock(HttpServletRequest httpRequest, Model view,SkWarehousePositon record){
+        
+        stockWareHouseService.updateWarehouse(record);
+        
+        return "{\"responseMessage\":\"修改成功！\"}";
+        
     }
     
 }

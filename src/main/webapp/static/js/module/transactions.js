@@ -1,3 +1,4 @@
+$(document).ready(function () {
 var mygridtab = $('#transactions').dataTable({
             	"bProcessing": true,
                 "bServerSide": true,
@@ -64,7 +65,7 @@ var mygridtab = $('#transactions').dataTable({
                 ]
             });
             
-            $(document).ready(function () {
+            
                 //var table = $('#sample_1').DataTable();
             	//动态创建的元素 通过绑定到 document
             	$(document).off('click.modal').on('click.modal.data-api', '[1data-toggle^="modal"]', function ( e ) {
@@ -101,4 +102,6 @@ var mygridtab = $('#transactions').dataTable({
             	if (jQuery().datepicker) {
                     $('.date-picker').datepicker('yyyy-mm-dd');
                 }
+            	$(".page-sidebar-menu li[name='调度管理']").addClass("active");
+            	$(".page-sidebar-menu li[name='交易记录']").addClass("active");
             });

@@ -55,9 +55,6 @@
   <update id="update" parameterType="com.bplow.deep.stock.domain.SkWarnRule">
     update sk_warn_rule
     <set>
-      <if test="ruleId != null">
-        rule_id = #{ruleId,jdbcType=VARCHAR},
-      </if>
       <if test="scripte != null">
         scripte = #{scripte,jdbcType=VARCHAR},
       </if>
@@ -71,9 +68,9 @@
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
       <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP}
       </if>
     </set>
-     WHERE ID = #{id} 
+     WHERE rule_id = #{ruleId} 
   </update>
 </mapper>

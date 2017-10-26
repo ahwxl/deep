@@ -1,3 +1,13 @@
+#parse("././globle.vm" )
+<html>
+<head>
+<title>任务列表</title>
+	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
+	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170215"></script>
+	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
+    <script type="text/javascript" src="/deep/static/js/module/joblist.js?20170330"></script>
+</head>
+<body>
                <!-- BEGIN PAGE HEADER-->
 
 				<div class="row-fluid">
@@ -132,17 +142,6 @@
 				
 				<!-- END PAGE CONTENT-->
 				
-				<!-- BEGIN PAGE LEVEL PLUGINS -->
-
-	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
-
-	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170215"></script>
-
-	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
-
-	<!-- END PAGE LEVEL PLUGINS -->
-				
-<script type="text/javascript" src="/deep/static/js/module/joblist.js?20170329"></script>
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
@@ -304,3 +303,5 @@
 									</div>
 
 								</div>
+</body>
+</html>

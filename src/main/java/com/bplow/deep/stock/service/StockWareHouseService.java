@@ -16,7 +16,11 @@ public interface StockWareHouseService {
     
     SkWarehousePositon createWarehouse(SkWarehousePositon position);
     
+    SkWarehousePositon queryWarehouseById(SkWarehousePositon position);
+    
     void deleleWarehouse(SkWarehousePositon position);
+    
+    void updateWarehouse(SkWarehousePositon position);
     
 
 }

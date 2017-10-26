@@ -41,4 +41,18 @@ public class StockWareHouseServiceImpl implements StockWareHouseService{
     	
     }
 
+    @Override
+    public void updateWarehouse(SkWarehousePositon position) {
+        
+        skWarehousePositonMapper.update(position);
+    }
+
+    @Override
+    public SkWarehousePositon queryWarehouseById(SkWarehousePositon position) {
+        
+        SkWarehousePositon skWarehousePositon = skWarehousePositonMapper.selectByPrimaryKey(position.getStockId());
+        
+        return skWarehousePositon;
+    }
+
 }

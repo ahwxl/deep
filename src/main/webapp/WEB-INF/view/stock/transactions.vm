@@ -1,3 +1,17 @@
+#parse("././globle.vm" )
+<html>
+<head>
+<title>交易记录</title>
+	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
+	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170216"></script>
+	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
+	<script type="text/javascript" src="/deep/static/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="/deep/static/js/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="/deep/static/js/module/transactions.js?20170317"></script>
+</head>
+<body>
                <!-- BEGIN PAGE HEADER-->
 
 				<div class="row-fluid">
@@ -149,20 +163,6 @@
 				
 				<!-- END PAGE CONTENT-->
 				
-				<!-- BEGIN PAGE LEVEL PLUGINS -->
-
-	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
-
-	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170216"></script>
-
-	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
-
-	<!-- END PAGE LEVEL PLUGINS -->
-	<script type="text/javascript" src="/deep/static/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="/deep/static/js/jquery.fancybox.pack.js"></script>
-	
-				
-<script type="text/javascript" src="/deep/static/js/module/transactions.js?20170315"></script>
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
@@ -261,3 +261,5 @@
 									</div>
 
 								</div>
+</body>
+</html>

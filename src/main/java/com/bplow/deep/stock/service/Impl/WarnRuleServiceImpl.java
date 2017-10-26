@@ -57,4 +57,12 @@ public class WarnRuleServiceImpl implements WarnRuleService{
         return warnRule;
     }
 
+    @Override
+    public int updateWarnRule(SkWarnRule rule) {
+        
+        skWarnRuleMapper.update(rule);
+        
+        return 1;
+    }
+
 }

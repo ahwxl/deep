@@ -11,6 +11,8 @@ public interface WarnRuleService {
     
     int deleteWarnRule(SkWarnRule rule);
     
+    int updateWarnRule(SkWarnRule rule);
+    
     SkWarnRule queryWarnRule(SkWarnRule rule);
 
 }

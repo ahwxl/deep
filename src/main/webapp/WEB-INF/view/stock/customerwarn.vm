@@ -1,3 +1,13 @@
+#parse("././globle.vm" )
+<html>
+<head>
+<title>客户规则</title>
+	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
+	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170216"></script>
+	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
+    <script type="text/javascript" src="/deep/static/js/module/customerwarn.js?20170314"></script>
+</head>
+<body>
                <!-- BEGIN PAGE HEADER-->
 
 				<div class="row-fluid">
@@ -116,17 +126,6 @@
 				
 				<!-- END PAGE CONTENT-->
 				
-				<!-- BEGIN PAGE LEVEL PLUGINS -->
-
-	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
-
-	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170216"></script>
-
-	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
-
-	<!-- END PAGE LEVEL PLUGINS -->
-				
-<script type="text/javascript" src="/deep/static/js/module/customerwarn.js?20170312"></script>
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
 
 									<div class="modal-header">
@@ -189,3 +188,5 @@
 									</div>
 
 								</div>
+</body>
+</html>
