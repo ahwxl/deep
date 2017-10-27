@@ -1,5 +1,6 @@
 package com.bplow.deep.stock.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.bplow.deep.base.jackson.CustomDateSerializer;
@@ -35,11 +36,11 @@ public class SkCustomerWarn extends PageInfo{
     
     private boolean lower;
     
-    private float   waveValue;
+    private BigDecimal   waveValue;
     
-    private float   highValue;
+    private BigDecimal   highValue;
     
-    private float   lowerValue;
+    private BigDecimal   lowerValue;
 
     public String getId() {
         return id;
@@ -131,28 +132,28 @@ public class SkCustomerWarn extends PageInfo{
         this.lower = lower;
     }
 
-    public float getWaveValue() {
+    public BigDecimal getWaveValue() {
         return waveValue;
     }
 
-    public void setWaveValue(float waveValue) {
+    public void setWaveValue(BigDecimal waveValue) {
         this.waveValue = waveValue;
     }
 
-    public float getHighValue() {
+    public BigDecimal getHighValue() {
         return highValue;
     }
 
-    public void setHighValue(float highValue) {
+    public void setHighValue(BigDecimal highValue) {
         this.highValue = highValue;
     }
 
-    public float getLowerValue() {
+    public BigDecimal getLowerValue() {
         return lowerValue;
     }
 
-    public void setLowerValue(float lowerValue) {
+    public void setLowerValue(BigDecimal lowerValue) {
         this.lowerValue = lowerValue;
     }
-
+    
 }

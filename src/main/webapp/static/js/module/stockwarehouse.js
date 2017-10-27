@@ -162,7 +162,12 @@ $(document)
 							dataType : 'json',
 							error :function(resp){alert(resp)},
 							success:function(resp){
-								
+								$('#myform input[name="stockId"]').val(resp.stockId);
+								$('#myform input[name="stockName"]').val(resp.stockName);
+								$('#myform input[name="amount"]').val(resp.amount);
+								$('#myform input[name="todayPrice"]').val(resp.todayPrice);
+								$('#myform input[name="exceptPrice"]').val(resp.exceptPrice);
+								$('#myform input[name="exceptAmount"]').val(resp.exceptAmount);
 							}
 						});
 	            		//打开修改窗口
@@ -178,23 +183,39 @@ $(document)
 	            	//设置股票提醒
 	            	$(document).off('click.modal4').on('click.modal4.data-api', '[data-toggle="set"]', function ( e ) {
 	            		var id = $(this).attr('id');
-	            		
+	            		var userId = $(this).attr('userId');
+	            		$('#myform2')[0].reset();
 	            		$.ajax({
 							url:cxt +'/warn/queryCustomerWarns',
 							async:true,
 							method:'POST',
-							data:'userId='+id,
+							data:"stockId="+id+"&userId="+userId,
 							dataType : 'json',
 							error :function(resp){alert(resp)},
 							success:function(resp){
-								$('#myform input[name="stockId"]').val(resp.stockId);
-								$('#myform input[name="stockName"]').val(resp.stockName);
+								
+								$("input[name='userId']").val(userId);
+								$("input[name='stockId']").val(id);
+								
+								$.each( resp, function(i, n){
+									  //alert( "Item #" + i + ": " + n );
+									  if(n.ruleId == "101"){
+										  $("input[name='wave']").attr("checked",true);
+										  $("input[name='waveValue']").val(n.value);
+									  }else if(n.ruleId == "102"){
+										  $("input[name='high']").attr("checked",true);
+										  $("input[name='highValue']").val(n.value);
+									  }else if(n.ruleId == "103"){
+										  $("input[name='lower']").attr("checked",true);
+										  $("input[name='lowerValue']").val(n.value);
+									  }
+								});
 							}
 						});
 	            		
 	            		$('#stack2').modal({
 	                    	confirm:function(formvalue){
-	                    		$('#myform2').attr("action",cxt + "/stock/modifyStock").trigger("submit");
+	                    		$('#myform2').attr("action",cxt + "/warn/modifyCustomerWarn").trigger("submit");
 	                    	}
 	                    	
 	                    });
@@ -257,6 +278,71 @@ $(document)
 	                    		success:function(responseTxt){
 	                    			mygridtab.fnDraw();
 	                    			success1.hide();
+	                    			App.sysNotify(responseTxt.responseMsg);
+	                    		},
+	                    		type:'POST',
+	                    		url:form.action
+	                    	});
+	                    }
+	                });
+	                
+	                var form2 = $('#myform2');
+	            	var error2 = $('.alert-error', form1);
+	                var success2 = $('.alert-success', form1);
+	                form2.validate({
+	                    errorElement: 'span', //default input error message container
+	                    errorClass: 'help-inline', // default input error message class
+	                    focusInvalid: false, // do not focus the last invalid input
+	                    ignore: "",
+	                    rules: {
+	                    	ruleId:{
+	                    		required: true
+	                    	},
+	                    	scripte: {
+	                    		required: true
+	                        },
+	                        ruleMsg: {
+	                            required: true
+	                        }
+	                    },
+	                    
+	                    messages: {
+	                    	stockId: {
+	                    		required:"请输入股票编号"
+	                    	},
+	                    	stockName:"请输入股票名称"
+	                    },
+
+	                    invalidHandler: function (event, validator) {
+	                        success2.hide();
+	                        error2.show();
+	                    },
+
+	                    highlight: function (element) {
+	                        $(element)
+	                            .closest('.help-inline').removeClass('ok');
+	                        $(element)
+	                            .closest('.control-group').removeClass('success').addClass('error');
+	                    },
+
+	                    unhighlight: function (element) {
+	                        $(element)
+	                            .closest('.control-group').removeClass('error');
+	                    },
+
+	                    success: function (label) {
+	                        label
+	                            .addClass('valid').addClass('help-inline ok')
+	                        .closest('.control-group').removeClass('error').addClass('success');
+	                    },
+
+	                    submitHandler: function (form) {
+	                    	$("#myform2").ajaxSubmit({
+	                    		dataType:'json',
+	                    		error:function (){alert("操作失败，请联系管理员")},
+	                    		success:function(responseTxt){
+	                    			mygridtab.fnDraw();
+	                    			success2.hide();
 	                    			App.sysNotify(responseTxt.responseMsg);
 	                    		},
 	                    		type:'POST',

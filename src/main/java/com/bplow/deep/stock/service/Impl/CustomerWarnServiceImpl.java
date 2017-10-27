@@ -1,6 +1,5 @@
 package com.bplow.deep.stock.service.Impl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,8 +42,6 @@ public class CustomerWarnServiceImpl implements CustomerWarnService{
     public int createCustomerWarn(SkCustomerWarn warn) {
         
     	warn.setId(UUID.randomUUID().toString().replace("-", ""));
-    	warn.setStatus("0");
-    	warn.setGmtModify(new Date());
         skCustomerWarnMapper.insert(warn);
         
         return 0;
