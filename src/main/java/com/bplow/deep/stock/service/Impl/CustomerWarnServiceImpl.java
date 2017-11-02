@@ -14,60 +14,68 @@ import com.bplow.deep.stock.mapper.SkCustomerWarnMapper;
 import com.bplow.deep.stock.service.CustomerWarnService;
 
 @Service
-public class CustomerWarnServiceImpl implements CustomerWarnService{
+public class CustomerWarnServiceImpl implements CustomerWarnService {
 
-    Logger logger =LoggerFactory.getLogger(this.getClass());
-    
+    Logger               logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     SkCustomerWarnMapper skCustomerWarnMapper;
-    
+
     @Override
     public Page<SkCustomerWarn> queryCustomerWarns(SkCustomerWarn warn) {
-        
+
         Page<SkCustomerWarn> page = skCustomerWarnMapper.queryForPage(warn);
-        
-        
+
         return page;
     }
 
     @Override
     public SkCustomerWarn queryCustomerWarn(SkCustomerWarn warn) {
-        
+
         SkCustomerWarn customerWarn = skCustomerWarnMapper.selectByPrimaryKey(warn);
-        
+
         return customerWarn;
     }
 
     @Override
     public int createCustomerWarn(SkCustomerWarn warn) {
-        
-    	warn.setId(UUID.randomUUID().toString().replace("-", ""));
+
+        warn.setId(UUID.randomUUID().toString().replace("-", ""));
         skCustomerWarnMapper.insert(warn);
-        
+
         return 0;
     }
 
     @Override
     public int deleteCustomerWarn(SkCustomerWarn warn) {
-        
+
         skCustomerWarnMapper.deleteByPrimaryKey(warn.getId());
-        
+
         return 0;
     }
 
     @Override
     public int updateCustomerWarn(SkCustomerWarn warn) {
-        
+
         skCustomerWarnMapper.update(warn);
-        
+
         return 0;
     }
 
     @Override
     public List<SkCustomerWarn> queryCustomerWarnList(SkCustomerWarn warn) {
-        
-        List<SkCustomerWarn> warns = skCustomerWarnMapper.selectCustomerWarns(warn.getUserId(),warn.getStockId());
-        
+
+        List<SkCustomerWarn> warns = skCustomerWarnMapper.selectCustomerWarns(warn.getUserId(),
+            warn.getStockId());
+
+        return warns;
+    }
+
+    @Override
+    public List<SkCustomerWarn> obtainAllUserStockId() {
+
+        List<SkCustomerWarn> warns = skCustomerWarnMapper.obtainAllUserStockId();
+
         return warns;
     }
 

@@ -7,6 +7,7 @@ import org.quartz.SchedulerContext;
 import org.quartz.SchedulerException;
 import org.springframework.context.ApplicationContext;
 
+import com.bplow.deep.stock.service.DispatchService;
 import com.bplow.deep.stock.service.ObserverService;
 
 public class ObserverJob implements Job{
@@ -24,9 +25,13 @@ public class ObserverJob implements Job{
 			
 			ApplicationContext appCtx = (ApplicationContext)schCtx.get("applicationContext");
 			
-			ObserverService service = (ObserverService)appCtx.getBean("observerService");
+            /*ObserverService service = (ObserverService)appCtx.getBean("observerService");
+            
+            service.observer(userId,stockId);*/
 			
-			service.observer(userId,stockId);
+			DispatchService dispatchService = (DispatchService) appCtx.getBean("dispatchService");
+			
+			dispatchService.dispatchAction();
 			
 		} catch (SchedulerException e) {
 			e.printStackTrace();

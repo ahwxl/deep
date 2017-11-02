@@ -19,6 +19,8 @@ public interface CustomerWarnService {
     
     List<SkCustomerWarn> queryCustomerWarnList(SkCustomerWarn warn);
     
+    List<SkCustomerWarn> obtainAllUserStockId();
+    
     int createCustomerWarn(SkCustomerWarn warn);
     
     int deleteCustomerWarn(SkCustomerWarn warn);

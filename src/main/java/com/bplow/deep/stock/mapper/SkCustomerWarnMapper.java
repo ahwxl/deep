@@ -14,6 +14,8 @@ public interface SkCustomerWarnMapper {
     
     List<SkCustomerWarn> selectCustomerWarns(@Param("userId")String userId,@Param("stockId")String stockId);
 
+    List<SkCustomerWarn> obtainAllUserStockId();
+    
     int update(SkCustomerWarn record);
 
     int insert(SkCustomerWarn record);

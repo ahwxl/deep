@@ -184,7 +184,7 @@ $(document)
 	            	$(document).off('click.modal4').on('click.modal4.data-api', '[data-toggle="set"]', function ( e ) {
 	            		var id = $(this).attr('id');
 	            		var userId = $(this).attr('userId');
-	            		$('#myform2')[0].reset();
+	            		
 	            		$.ajax({
 							url:cxt +'/warn/queryCustomerWarns',
 							async:true,
@@ -193,21 +193,23 @@ $(document)
 							dataType : 'json',
 							error :function(resp){alert(resp)},
 							success:function(resp){
-								
+								$('#myform2')[0].reset();
+								$("#myform2 input[type=checkbox]").parent().removeClass("checked");
 								$("input[name='userId']").val(userId);
 								$("input[name='stockId']").val(id);
 								
 								$.each( resp, function(i, n){
-									  //alert( "Item #" + i + ": " + n );
-									  if(n.ruleId == "101"){
-										  $("input[name='wave']").attr("checked",true);
+									  if(n.ruleId == "101" && n.status =='1'){
+										  $("#myform2 input[name='wave']").attr("checked",true).parent().addClass("checked");
 										  $("input[name='waveValue']").val(n.value);
-									  }else if(n.ruleId == "102"){
-										  $("input[name='high']").attr("checked",true);
+									  }else if(n.ruleId == "102" && n.status =='1' ){
+										  $("input[name='high']").attr("checked",true).parent().addClass("checked");
 										  $("input[name='highValue']").val(n.value);
-									  }else if(n.ruleId == "103"){
-										  $("input[name='lower']").attr("checked",true);
+									  }else if(n.ruleId == "103" && n.status =='1'){
+										  $("input[name='lower']").attr("checked",true).parent().addClass("checked");
 										  $("input[name='lowerValue']").val(n.value);
+									  }else{
+										  $("input[ruleId="+n.ruleId+"]").attr("checked",false).parent().removeClass("checked");
 									  }
 								});
 							}

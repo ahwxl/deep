@@ -96,10 +96,10 @@ public class CustomerWarnController {
                     skCustomerWarn.setValue(warn.getWaveValue().doubleValue());
                 } else if (ruleId.equals("102") && warn.isHigh() == true) {
                     skCustomerWarn.setStatus("1");
-                    skCustomerWarn.setValue(warn.getWaveValue().doubleValue());
+                    skCustomerWarn.setValue(warn.getHighValue().doubleValue());
                 } else if (ruleId.equals("103") && warn.isLower() == true) {
                     skCustomerWarn.setStatus("1");
-                    skCustomerWarn.setValue(warn.getWaveValue().doubleValue());
+                    skCustomerWarn.setValue(warn.getLowerValue().doubleValue());
                 } else {
                     skCustomerWarn.setStatus("0");
                     skCustomerWarn.setValue(0d);

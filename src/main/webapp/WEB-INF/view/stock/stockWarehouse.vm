@@ -7,7 +7,7 @@
 <script type="text/javascript" src="${cxt}/static/js/DT_bootstrap.js"></script>
 <script type="text/javascript" src="$cxt/static/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="$cxt/static/js/jquery.form.min.js"></script>
-<script type="text/javascript" src="${cxt}/static/js/module/stockwarehouse.js?20170403"></script>
+<script type="text/javascript" src="${cxt}/static/js/module/stockwarehouse.js?20170413"></script>
 </head>
 <body>
                <!-- BEGIN PAGE HEADER-->
@@ -249,21 +249,19 @@
                 <input type="hidden" class="" name="stockId" value=""/>
                 <input type="hidden" class="" name="userId" value=""/>
 				<div class="control-group">
-					<label class="control-label"><input type="checkbox" class="" name="wave" value="true" />开盘后股价涨跌幅度超过</label>
-                    <div class="controls controls-row">
-					   <input type="text" class="span1" name="waveValue" value=""/>%
-                    </div>
+					<label class="control-label"><input type="checkbox" ruleId='101' name="wave" />开盘后股价涨跌幅度超过</label>
+                    <div class='controls controls-row'><input type="text" class="span1" name="waveValue" value="" />%</div>
 				</div>
 				
 				<div class="control-group">
-					<label class="control-label"><input type="checkbox" class="span1" name="high" value="true" />股价上涨达到或高于</label>
+					<label class="control-label"><input type="checkbox" class="span1" ruleId='102' name="high" value="true" />股价上涨达到或高于</label>
                     <div class="controls controls-row">
 					   <input type="text" class="span1" name="highValue" value=""/>元
                     </div>
 				</div>
 				
 				<div class="control-group">
-					<label class="control-label"><input type="checkbox" class="span1" name="lower" value="true" />股价下跌达到或低于</label>
+					<label class="control-label"><input type="checkbox" class="span1" ruleId='103' name="lower" value="true" />股价下跌达到或低于</label>
                     <div class="controls controls-row">
 					   <input type="text" class="span1" name="lowerValue" value=""/>元
                     </div>
