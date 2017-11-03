@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bplow.deep.base.pagination.Page;
 import com.bplow.deep.stock.domain.SkCustomerWarn;
 import com.bplow.deep.stock.service.CustomerWarnService;
+import com.bplow.deep.stock.service.ObserverService;
 
 @Controller
 @RequestMapping("warn")
@@ -24,6 +25,9 @@ public class CustomerWarnController {
 
     @Autowired
     CustomerWarnService customerWarnService;
+    
+    @Autowired
+    ObserverService observerService;
 
     @RequestMapping(value = "/customerWarnPage")
     public String jobPage(HttpServletRequest httpRequest, Model view) {
@@ -57,6 +61,8 @@ public class CustomerWarnController {
     public String addCustomerWarn(HttpServletRequest httpRequest, Model view, SkCustomerWarn warn) {
 
         customerWarnService.createCustomerWarn(warn);
+        
+        observerService.refresh();
 
         return "添加成功";
     }
@@ -66,6 +72,8 @@ public class CustomerWarnController {
     public String delCustomerWarn(HttpServletRequest httpRequest, Model view, SkCustomerWarn warn) {
 
         customerWarnService.deleteCustomerWarn(warn);
+        
+        observerService.refresh();
 
         return "删除成功";
     }
@@ -140,6 +148,8 @@ public class CustomerWarnController {
                 customerWarnService.updateCustomerWarn(customerWarn);
             }
         }
+        
+        observerService.refresh();
 
         return "{\"responseMsg\":\"修改成功\"}";
     }

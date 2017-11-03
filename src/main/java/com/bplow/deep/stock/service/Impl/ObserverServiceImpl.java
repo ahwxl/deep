@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -50,9 +51,9 @@ public class ObserverServiceImpl implements ObserverService, InitializingBean {
     private Logger                         logger          = LoggerFactory.getLogger(this
                                                                .getClass());
 
-    Map<String, List<SkCustomerWarn>>      customerWarnMap = new HashMap<String, List<SkCustomerWarn>>();
+    Map<String, List<SkCustomerWarn>>      customerWarnMap = new ConcurrentHashMap<String, List<SkCustomerWarn>>();
 
-    Map<String, SkWarnRule>                rulesMap        = new HashMap<String, SkWarnRule>();
+    Map<String, SkWarnRule>                rulesMap        = new ConcurrentHashMap<String, SkWarnRule>();
 
     @Autowired
     private ScriptService                  scriptService;
@@ -115,10 +116,11 @@ public class ObserverServiceImpl implements ObserverService, InitializingBean {
 
         parament.put("currentPrice", aimStock.getCurrentPrice());
         parament.put("wave", aimStock.getWave().abs());
+        parament.put("waveValue", aimStock.getWave());
 
         if (null != customerRules) {
             for (SkCustomerWarn skCustomerWarn : customerRules) {
-                if ("1".equals(skCustomerWarn.getStatus())) {//该规则已命中，跳到下一个规则
+                if ("0".equals(skCustomerWarn.getStatus())) {//该规则已命中，跳到下一个规则
                     continue;
                 }
                 //获取规则
@@ -127,43 +129,45 @@ public class ObserverServiceImpl implements ObserverService, InitializingBean {
                 if (null == warnRule || StringUtils.isBlank(warnRule.getScripte())) {
                     break;
                 }
-                parament.put("exceptPrice", skCustomerWarn.getValue());
+                parament.put("exceptValue", skCustomerWarn.getValue());
 
                 boolean result = scriptService.executeScripte(warnRule.getScripte(), parament);
 
                 if (result) {//命中规则
-                    skCustomerWarn.setStatus("1");
+                    skCustomerWarn.setStatus("0");
 
                     //发送短信
-                    if (null == user || StringUtils.isNotBlank(user.getMobile())) {
+                    if (null != user && StringUtils.isNotBlank(user.getMobile())) {
+                        //短信描述信息
+                        String message = VelocityUtils.evaluate(parament, warnRule.getRuleMsg());
                         SkSendSmsLog smsLog = new SkSendSmsLog();
+
                         smsLog.setSmsId(UUID.randomUUID().toString().replace("-", ""));
                         smsLog.setSendMobile(user.getMobile());
-                        smsLog.setSendCnt(warnRule.getRuleMsg());
+                        smsLog.setSendCnt(message);
                         skSendSmsLogMapper.insert(smsLog);
 
                         Message msg = new Message();
                         msg.setMobile(user.getMobile());
 
                         Map<String, Serializable> smsParam = new HashMap<String, Serializable>();
-                        //短信描述信息
-                        String message = VelocityUtils.evaluate(parament, warnRule.getRuleMsg());
 
                         smsParam.put("taskId", "ds" + stockId);
                         smsParam.put("taskName", message);
                         smsParam.put("date", DateUtils.getShortDay());
                         msg.setParament(smsParam);
 
-                        //sendMessageService.sendMessage(msg);
+                        sendMessageService.sendMessage(msg);
+
+                        //记录日志
+                        SkWarnLog skWarnLog = new SkWarnLog();
+                        skWarnLog.setId(UUID.randomUUID().toString().replace("-", ""));
+                        skWarnLog.setUserId(userId);
+                        skWarnLog.setStockId(stockId);
+                        skWarnLog.setRuleId(skCustomerWarn.getRuleId());
+                        skWarnLog.setWarnMsg(message);
+                        skWarnLogMapper.insert(skWarnLog);
                     }
-
-                    //记录日志
-                    SkWarnLog skWarnLog = new SkWarnLog();
-                    skWarnLog.setId(UUID.randomUUID().toString().replace("-", ""));
-                    skWarnLog.setUserId(userId);
-                    skWarnLog.setRuleId(skCustomerWarn.getRuleId());
-                    skWarnLogMapper.insert(skWarnLog);
-
                 }
 
             }
@@ -176,16 +180,7 @@ public class ObserverServiceImpl implements ObserverService, InitializingBean {
 
         refresh();
 
-        //获取所有规则定义
-        SkWarnRule skWarnRule = new SkWarnRule();
-        skWarnRule.setPageSize(10000);
-        Page<SkWarnRule> rulePage = skWarnRuleMapper.queryForPage(skWarnRule);
-
-        List<SkWarnRule> warnRules = rulePage.getDatas();
-
-        for (SkWarnRule rule : warnRules) {
-            rulesMap.put(rule.getRuleId(), rule);
-        }
+        refreshRules();
 
     }
 
@@ -209,6 +204,21 @@ public class ObserverServiceImpl implements ObserverService, InitializingBean {
                     customers);
             }
             customers.add(customer);
+        }
+    }
+
+    @Override
+    public void refreshRules() {
+
+        //获取所有规则定义
+        SkWarnRule skWarnRule = new SkWarnRule();
+        skWarnRule.setPageSize(10000);
+        Page<SkWarnRule> rulePage = skWarnRuleMapper.queryForPage(skWarnRule);
+
+        List<SkWarnRule> warnRules = rulePage.getDatas();
+
+        for (SkWarnRule rule : warnRules) {
+            rulesMap.put(rule.getRuleId(), rule);
         }
     }
 

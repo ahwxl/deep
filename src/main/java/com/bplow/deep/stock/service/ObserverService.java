@@ -13,5 +13,7 @@ public interface ObserverService {
 	public void observer(String taskId,String stockId);
 	
 	public void refresh();
+	
+	public void refreshRules();
 
 }

@@ -10,8 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-
-@ContextConfiguration(locations = { "/applicationContext.xml","/applicationContext-myclient.xml" })
+@ContextConfiguration(locations = { "/applicationContext.xml", "/applicationContext-myclient.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
@@ -19,13 +18,18 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 public class ObserverServiceTest {
 
     @Autowired
-    private ObserverService observerService;
-    
+    private QueryStockPriceRealTimeSerivce queryStockPriceRealTimeSerivce;
+
+    @Autowired
+    private ObserverService                observerService;
+
     @Test
-    public void testObserver(){
-        
-        observerService.observer("wxl","sh600078");
-        
+    public void testObserver() {
+
+        queryStockPriceRealTimeSerivce.queryPrice("");
+
+        observerService.observer("wxl", "sh600078");
+
     }
-    
+
 }
