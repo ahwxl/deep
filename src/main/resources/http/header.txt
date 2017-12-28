@@ -1,0 +1,10 @@
+authority:sycm.taobao.com
+method:GET
+path:/ipoll/live/visitor/getRtVisitor.json?device=2&limit=20&page=1&token=aaf65d00e1&type=Y&_=1514444693085
+scheme:https
+accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+accept-encoding:gzip, deflate, br
+accept-language:zh-CN,zh;q=0.9
+cache-control:max-age=0
+upgrade-insecure-requests:1
+user-agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36

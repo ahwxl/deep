@@ -157,7 +157,7 @@ public class ObserverServiceImpl implements ObserverService, InitializingBean {
                         smsParam.put("date", DateUtils.getShortDay());
                         msg.setParament(smsParam);
 
-                        sendMessageService.sendMessage(msg);
+                        //sendMessageService.sendMessage(msg);
 
                         //记录日志
                         SkWarnLog skWarnLog = new SkWarnLog();

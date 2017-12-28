@@ -128,7 +128,7 @@ public class Message {
         @JsonIgnoreProperties(ignoreUnknown = true)
         @JsonProperty("list")
         @JsonSubTypes({ @JsonSubTypes.Type(value = Data.class) })
-        public List<Data> datas = new ArrayList<Data>();
+        public List<Data> list;
         @JsonProperty("totalRecord")
         public int        totalRecord;
 
@@ -153,20 +153,20 @@ public class Message {
             this.totalPage = totalPage;
         }
 
-        public List<Data> getDatas() {
-            return datas;
-        }
-
-        public void setDatas(List<Data> datas) {
-            this.datas = datas;
-        }
-
         public int getTotalRecord() {
             return totalRecord;
         }
 
         public void setTotalRecord(int totalRecord) {
             this.totalRecord = totalRecord;
+        }
+
+        public List<Data> getList() {
+            return list;
+        }
+
+        public void setList(List<Data> list) {
+            this.list = list;
         }
 
     }
