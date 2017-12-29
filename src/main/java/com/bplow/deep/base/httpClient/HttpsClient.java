@@ -5,17 +5,12 @@ package com.bplow.deep.base.httpClient;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
 import java.security.KeyStore;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -28,31 +23,24 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.base.pagination.PageInfo;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -98,7 +86,7 @@ public class HttpsClient {
         System.setProperty("javax.net.ssl.trustStore", sslTrustStore);
         System.setProperty("javax.net.ssl.trustStorePassword", sslTrustStorePassword);
 
-        testHttpsClient();
+        //testHttpsClient();
     }
 
     @Test
@@ -121,13 +109,18 @@ public class HttpsClient {
 
             CookieStore cookieStore = addCookie();
 
-            httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
+            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+                sslContext,
+                new String[] { "TLSv1" },
+                null,
+                SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+            httpClient = HttpClients.custom().setDefaultCookieStore(cookieStore).setSSLSocketFactory(sslsf).build();
 
-            SSLSocketFactory socketFactory = new SSLSocketFactory(sslContext);
+            /*SSLSocketFactory socketFactory = new SSLSocketFactory(sslContext);
             Scheme sch = new Scheme("https", 443, socketFactory);
-            httpClient.getConnectionManager().getSchemeRegistry().register(sch);
+            httpClient.getConnectionManager().getSchemeRegistry().register(sch);*/
             
-            //query(httpUrl);
+            query(httpUrl);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,11 +130,15 @@ public class HttpsClient {
 
     private CookieStore addCookie() {
         CookieStore cookieStore = new BasicCookieStore();
-        //BasicClientCookie cookie = new BasicClientCookie("MEIQIA_EXTRA_TRACK_ID", "f473bf74238411e7bf2602356707f53e");
-        //cookie.setDomain(".mycompany.com");
-        //cookie.setPath("/");
-        //cookieStore.addCookie(cookie);
-        cookieStore.addCookie(new BasicClientCookie("TawkConnectionTime", "0"));
+        
+        BasicClientCookie uc3cookie = new BasicClientCookie("uc3", "sg2=UU6oKN6CHlzaNUjjLjJ0fGWG8WmkyUtbqJ0QerQ0hf0%3D&nk2=CdKE71Qlfw%3D%3D&id2=UNiDS05we6k%3D&vt3=F8dBzLeMUtuDb2k4nz0%3D&lg2=W5iHLLyFOGW7aA%3D%3D");
+        uc3cookie.setDomain("");
+        cookieStore.addCookie(uc3cookie);
+        
+        BasicClientCookie uc1cookie = new BasicClientCookie("uc1", "cookie14=UoTdf1Q%2FZh847w%3D%3D&lng=zh_CN&cookie16=VFC%2FuZ9az08KUQ56dCrZDlbNdA%3D%3D&existShop=true&cookie21=UtASsssmfaCOMId3WwGQmg%3D%3D&tag=8&cookie15=WqG3DMC9VAQiUQ%3D%3D&pas=0");
+        uc1cookie.setDomain("");
+        cookieStore.addCookie(uc1cookie);
+        
         InputStream in = this.getClass().getResourceAsStream("/http/cookies.txt");
 
         BufferedReader reader = null;
@@ -152,7 +149,10 @@ public class HttpsClient {
             while ((lineStr = reader.readLine()) != null) {
                 String[] value = lineStr.split("=");
                 if (value != null && value.length > 1) {
-                    cookieStore.addCookie(new BasicClientCookie(value[0], value[1]));
+                    BasicClientCookie tmpcookie = new BasicClientCookie(value[0], value[1]);
+                    System.out.println(value[0]+"="+java.net.URLDecoder.decode(value[1]));
+                    tmpcookie.setDomain("");
+                    cookieStore.addCookie(tmpcookie);
                 }
             }
 
@@ -174,13 +174,14 @@ public class HttpsClient {
 
     public String query(String queryUrl) throws Exception {
 
-        HttpPost httpPost = createHttpPost(queryUrl);
+       // HttpPost httpPost = createHttpPost(queryUrl);
+        HttpGet httpGet  = createHttpGet(queryUrl);
 
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
         //			nvps.add(new BasicNameValuePair("user", "abin"));
         //			nvps.add(new BasicNameValuePair("pwd", "abing"));
-        httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-        HttpResponse httpResponse = httpClient.execute(httpPost);
+        //httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+        HttpResponse httpResponse = httpClient.execute(httpGet);
         String spt = System.getProperty("line.separator");
         BufferedReader buffer = new BufferedReader(new InputStreamReader(httpResponse.getEntity()
             .getContent()));
@@ -190,7 +191,7 @@ public class HttpsClient {
             stb.append(line);
         }
         buffer.close();
-        httpPost.completed();
+        httpGet.completed();
         String result = stb.toString();
         System.out.println("result=" + result);
         return result;
@@ -241,6 +242,53 @@ public class HttpsClient {
         }
 
         return httpPost;
+    }
+    
+    private HttpGet createHttpGet(String queryUrl) {
+        HttpGet httpGet = new HttpGet(queryUrl);
+
+        //httpPost.setHeader("Accept",
+        //   "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+        /*httpPost.setHeader("Accept-Encoding", "gzip, deflate, sdch, br");
+        httpPost.setHeader("Accept-Language", "zh-CN,zh;q=0.8");
+        httpPost.setHeader("Cache-Control", "max-age=0");
+        httpPost.setHeader("Connection", "keep-alive");
+        httpPost.setHeader("Host", "www.homadorma.com");
+        httpPost.setHeader("Upgrade-Insecure-Requests", "1");
+        httpPost.setHeader("Content-Type", "text/html; charset=UTF-8");
+        httpPost
+            .setHeader(
+                "User-Agent",
+                "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");*/
+
+        InputStream in = this.getClass().getResourceAsStream("/http/header.txt");
+
+        BufferedReader reader = null;
+        reader = new BufferedReader(new InputStreamReader(in));
+
+        try {
+            String lineStr = null;
+            while ((lineStr = reader.readLine()) != null) {
+                String[] value = lineStr.split(":");
+                if (value != null && value.length > 1) {
+                    httpGet.setHeader(value[0], value[1]);
+                }
+            }
+
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                }
+            }
+        }
+
+        return httpGet;
     }
 
     public JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
