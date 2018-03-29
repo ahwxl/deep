@@ -1,4 +1,4 @@
-package com.bplow.deep.bpm.web;
+package com.bplow.deep.maintain.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.bpm.domain.AutoAppInfo;
-import com.bplow.deep.bpm.service.ApplicationInfoService;
+import com.bplow.deep.maintain.domain.AutoAppInfo;
+import com.bplow.deep.maintain.service.ApplicationInfoService;
 
 
 @Controller
@@ -26,7 +26,7 @@ public class ApplicationInfoController {
     @RequestMapping(value="/app/index")
     public String index(){
         
-        return "";
+        return "maintain/app-list";
     }
     
     @RequestMapping(value="/app/queryForPage")
@@ -38,7 +38,7 @@ public class ApplicationInfoController {
         
         session.setAttribute("wxl", "汪小二");
      
-        autoAppInfo.setAppCode(autoAppInfo.getsSearch());
+        //autoAppInfo.setAppCode(autoAppInfo.getsSearch());
         Page<AutoAppInfo> page = applicationInfoService.queryForList(autoAppInfo);
         
         return page;

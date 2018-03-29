@@ -1,13 +1,12 @@
-package com.bplow.deep.bpm.service.impl;
+package com.bplow.deep.maintain.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.base.pagination.Pagination;
-import com.bplow.deep.bpm.domain.AutoAppInfo;
-import com.bplow.deep.bpm.mapper.AutoAppInfoMapper;
-import com.bplow.deep.bpm.service.ApplicationInfoService;
+import com.bplow.deep.maintain.domain.AutoAppInfo;
+import com.bplow.deep.maintain.mapper.AutoAppInfoMapper;
+import com.bplow.deep.maintain.service.ApplicationInfoService;
 
 @Service
 public class ApplicationInfoServiceImpl implements ApplicationInfoService{

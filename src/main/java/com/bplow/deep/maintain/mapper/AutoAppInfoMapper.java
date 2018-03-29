@@ -1,9 +1,9 @@
-package com.bplow.deep.bpm.mapper;
+package com.bplow.deep.maintain.mapper;
 
 import java.util.List;
 
 import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.bpm.domain.AutoAppInfo;
+import com.bplow.deep.maintain.domain.AutoAppInfo;
 
 public interface AutoAppInfoMapper extends Page<Object>{
 	

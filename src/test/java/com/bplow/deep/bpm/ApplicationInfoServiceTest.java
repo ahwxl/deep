@@ -16,8 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.bpm.domain.AutoAppInfo;
-import com.bplow.deep.bpm.mapper.AutoAppInfoMapper;
+import com.bplow.deep.maintain.domain.AutoAppInfo;
+import com.bplow.deep.maintain.mapper.AutoAppInfoMapper;
 
 /**
  * @desc 

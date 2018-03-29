@@ -1,8 +1,7 @@
-package com.bplow.deep.bpm.service;
+package com.bplow.deep.maintain.service;
 
 import com.bplow.deep.base.pagination.Page;
-import com.bplow.deep.base.pagination.Pagination;
-import com.bplow.deep.bpm.domain.AutoAppInfo;
+import com.bplow.deep.maintain.domain.AutoAppInfo;
 
 public interface ApplicationInfoService {
     

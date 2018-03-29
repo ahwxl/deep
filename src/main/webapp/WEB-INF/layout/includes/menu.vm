@@ -22,7 +22,7 @@
 
 				</li>
 				
-				<li class=" ">
+				<li class=" " name="服务器管理">
 
 					<a href="javascript:;">
 
@@ -37,11 +37,11 @@
 					</a>
 
 					<ul class="sub-menu">
-						<li >
-							<a href="$cxt">端口</a>
+						<li name="端口">
+							<a href="$cxt/app/index">端口</a>
 						</li>
-						<li class="">
-							<a href="$cxt">应用管理</a>
+						<li class="" name="应用管理">
+							<a href="$cxt/app/index">应用管理</a>
 						</li>
 					</ul>
 				</li>

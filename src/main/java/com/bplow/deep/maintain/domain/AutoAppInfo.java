@@ -1,4 +1,4 @@
-package com.bplow.deep.bpm.domain;
+package com.bplow.deep.maintain.domain;
 
 import java.io.Serializable;
 import java.util.Date;

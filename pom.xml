@@ -538,7 +538,17 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.44</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId> 
+            <artifactId>groovy</artifactId> 
+            <version>2.4.14</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hidetake</groupId>
+		    <artifactId>groovy-ssh</artifactId>
+		    <version>2.9.0</version>
+		    <scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
