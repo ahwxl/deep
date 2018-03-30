@@ -22,9 +22,9 @@ public class ApplicationInfoController {
 
     @Autowired
     private ApplicationInfoService applicationInfoService;
-    
+
     @Autowired
-    private MaintainService maintainService;
+    private MaintainService        maintainService;
 
     @RequestMapping(value = "/app/index")
     public String index() {
@@ -52,32 +52,35 @@ public class ApplicationInfoController {
     public String deploy(HttpServletRequest httpRequest) {
 
         String str = maintainService.deploy();
-        
+
         return str;
     }
-    
+
     @RequestMapping(value = "/app/stop")
     @ResponseBody
-    public String stop(HttpServletRequest httpRequest){
-        
-        
-        return "";
+    public String stop(HttpServletRequest httpRequest) {
+
+        String str = maintainService.stop();
+
+        return str;
     }
-    
+
     @RequestMapping(value = "/app/start")
     @ResponseBody
-    public String start(){
-        
-        
-        return "";
+    public String start() {
+
+        String str = maintainService.start();
+
+        return str;
     }
-    
+
     @RequestMapping(value = "/app/reStart")
     @ResponseBody
-    public String reStart(){
-        
-        
-        return "";
+    public String reStart() {
+
+        String str = maintainService.restart();
+
+        return str;
     }
 
 }

@@ -22,6 +22,10 @@ public class MaintainServiceImpl implements MaintainService {
     @Qualifier("stopCommand")
     private Command stop;
 
+    @Autowired
+    @Qualifier("restartCommand")
+    private Command restart;
+
     @Override
     public String deploy() {
 
@@ -32,17 +36,26 @@ public class MaintainServiceImpl implements MaintainService {
 
     @Override
     public String start() {
-        return null;
+
+        String out = start.execute();
+
+        return out;
     }
 
     @Override
     public String stop() {
-        return null;
+
+        String out = stop.execute();
+
+        return out;
     }
 
     @Override
     public String restart() {
-        return null;
+        
+        String out = restart.execute();
+        
+        return out;
     }
 
 }
