@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:lang="http://www.springframework.org/schema/lang"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/lang
+				http://www.springframework.org/schema/lang/spring-lang-3.0.xsd"
+		default-autowire="byName"
+		>
+
+	<lang:defaults refresh-check-delay="5000"/>
+
+	<lang:groovy id="deployCommand" refresh-check-delay="-1" 
+			script-source="classpath:com/bplow/deep/maintain/script/DeployCommand.groovy"/>
+			
+	<lang:groovy id="startCommand" refresh-check-delay="-1" 
+			script-source="classpath:com/bplow/deep/maintain/script/StartCommand.groovy"/>
+
+    <lang:groovy id="stopCommand" refresh-check-delay="-1" 
+			script-source="classpath:com/bplow/deep/maintain/script/StopCommand.groovy"/>
+
+
+</beans>

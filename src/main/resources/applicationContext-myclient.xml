@@ -29,5 +29,7 @@
 	<import resource="spring/cxt-email.xml" />
 
 	<import resource="spring/cxt-soap-server.xml" />
+	
+	<import resource="spring/cxt-script.xml"/>
 
 </beans>

@@ -40,6 +40,12 @@
 
 									<a href="#" 1data-toggle='modal' class="btn yellow"><i class="icon-print"></i> 添加</a>
 
+                                    <a href="#" data-toggle='deploy' class="btn red"><i class="icon-print"></i> 部署</a>
+                                    
+                                    <a href="#" data-toggle='start' class="btn red"><i class="icon-print"></i> 启动</a>
+                                    
+                                    <a href="#" data-toggle='stop' class="btn red"><i class="icon-print"></i> 关闭</a>
+                                    
 								</div>
 
 							</div>
