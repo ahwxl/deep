@@ -544,11 +544,17 @@
             <version>2.4.14</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.hidetake</groupId>
-		    <artifactId>groovy-ssh</artifactId>
-		    <version>2.9.0</version>
-		    <scope>runtime</scope>
+		    <groupId>com.jcraft</groupId>
+		    <artifactId>jsch</artifactId>
+		    <version>0.1.54</version>
 		</dependency>
+		<dependency>
+		    <groupId>javax</groupId>
+		    <artifactId>javaee-api</artifactId>
+		    <version>7.0</version>
+		    <scope>provided</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
