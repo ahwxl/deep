@@ -7,7 +7,9 @@
 权限管理 shiro
 调度任务 quartz
 本地缓存 ehcashe
+DAL   mybatis
 工作流     activity
+日志        slf4j
 
 前端UI bootstrap
 表格列表           jquery.dataTables.js
