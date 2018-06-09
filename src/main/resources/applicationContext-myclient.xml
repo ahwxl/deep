@@ -6,6 +6,8 @@
 	<description>导入myclient中的applicationContext文件列表</description>
 
 	<import resource="spring/cxt-dao.xml" />
+	
+	<import resource="spring/cxt-validator.xml"/>
 
 	<!-- <import resource="spring/cxt-session.xml" /> -->
 
