@@ -22,23 +22,49 @@
 	<beans profile="development">
 		<context:property-placeholder location="classpath*:*.properties" />
 
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+		<!-- <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
 			destroy-method="close">
-			<!-- Connection Info -->
+			Connection Info
 			<property name="driverClassName" value="${jdbc.driver}" />
 			<property name="url" value="${jdbc.url}" />
 			<property name="username" value="${jdbc.username}" />
 			<property name="password" value="${jdbc.password}" />
-			<!-- Connection Pooling Info -->
+			Connection Pooling Info
 			<property name="maxActive" value="${jdbc.pool.maxActive}" />
 			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
 			<property name="minIdle" value="0" />
 			<property name="defaultAutoCommit" value="false" />
-			<!-- 心跳验证 -->
+			心跳验证
 			<property name="validationQuery" value="SELECT 1"></property>
 			<property name="testOnBorrow" value="true" />
 			<property name="testWhileIdle" value="true" />
-		</bean>
+		</bean> -->
+		
+		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		     <property name="driverClassName" value="${jdbc.driver}" />
+		     <property name="url" value="${jdbc.url}" />
+		     <property name="username" value="${jdbc.username}" />
+		     <property name="password" value="${jdbc.password}" />
+		
+		     <property name="filters" value="stat" />
+		
+		     <property name="maxActive" value="20" />
+		     <property name="initialSize" value="1" />
+		     <property name="maxWait" value="60000" />
+		     <property name="minIdle" value="1" />
+		
+		     <property name="timeBetweenEvictionRunsMillis" value="60000" />
+		     <property name="minEvictableIdleTimeMillis" value="300000" />
+		
+		     <property name="testWhileIdle" value="true" />
+		     <property name="testOnBorrow" value="false" />
+		     <property name="testOnReturn" value="false" />
+		
+		     <property name="poolPreparedStatements" value="true" />
+		     <property name="maxOpenPreparedStatements" value="20" />
+		
+		     <property name="asyncInit" value="true" />
+		 </bean>
 
 		<!-- MYBATIS <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
 			<property name="dataSource" ref="dataSource" /> <property name="configLocation" 
@@ -86,23 +112,49 @@
 		<context:property-placeholder
 			ignore-resource-not-found="true" location="classpath*:/application.properties" />
 
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+		<!-- <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
 			destroy-method="close">
-			<!-- Connection Info -->
+			Connection Info
 			<property name="driverClassName" value="${jdbc.driver}" />
 			<property name="url" value="${jdbc.url}" />
 			<property name="username" value="${jdbc.username}" />
 			<property name="password" value="${jdbc.password}" />
-			<!-- Connection Pooling Info -->
+			Connection Pooling Info
 			<property name="maxActive" value="${jdbc.pool.maxActive}" />
 			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
 			<property name="minIdle" value="0" />
 			<property name="defaultAutoCommit" value="false" />
-			<!-- 心跳验证 -->
+			心跳验证
 			<property name="validationQuery" value="SELECT 1"></property>
 			<property name="testOnBorrow" value="true" />
 			<property name="testWhileIdle" value="true" />
-		</bean>
+		</bean> -->
+		
+		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		     <property name="driverClassName" value="${jdbc.driver}" />
+		     <property name="url" value="${jdbc.url}" />
+		     <property name="username" value="${jdbc.username}" />
+		     <property name="password" value="${jdbc.password}" />
+		
+		     <property name="filters" value="stat" />
+		
+		     <property name="maxActive" value="5" />
+		     <property name="initialSize" value="1" />
+		     <property name="maxWait" value="60000" />
+		     <property name="minIdle" value="1" />
+		
+		     <property name="timeBetweenEvictionRunsMillis" value="60000" />
+		     <property name="minEvictableIdleTimeMillis" value="300000" />
+		
+		     <property name="testWhileIdle" value="true" />
+		     <property name="testOnBorrow" value="false" />
+		     <property name="testOnReturn" value="false" />
+		
+		     <property name="poolPreparedStatements" value="true" />
+		     <property name="maxOpenPreparedStatements" value="20" />
+		
+		     <property name="asyncInit" value="true" />
+		 </bean>
 
 		<!-- MYBATIS <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
 			<property name="dataSource" ref="dataSource" /> <property name="configLocation" 
