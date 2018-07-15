@@ -151,10 +151,9 @@
 			<version>2.5.3</version>
 			<exclusions>
 				<exclusion>
-					<dependency>
-						<groupId>org.springframework</groupId>
-			            <artifactId>spring</artifactId>
-					</dependency>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring</artifactId>
+					<version>2.5.6.SEC03</version>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -545,35 +544,35 @@
 			<version>1.2.44</version>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.groovy</groupId> 
-            <artifactId>groovy</artifactId> 
-            <version>2.4.14</version>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>2.4.14</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.jcraft</groupId>
-		    <artifactId>jsch</artifactId>
-		    <version>0.1.54</version>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
 		</dependency>
 		<dependency>
-		    <groupId>javax</groupId>
-		    <artifactId>javaee-api</artifactId>
-		    <version>7.0</version>
-		    <scope>provided</scope>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-validator</artifactId>
-		    <version>4.3.2.Final</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.2.Final</version>
 		</dependency>
 		<dependency>
-		    <groupId>javax.validation</groupId>
-		    <artifactId>validation-api</artifactId>
-		    <version>1.1.0.Final</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>druid</artifactId>
-		    <version>1.1.6</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.6</version>
 		</dependency>
 
 		<dependency>
