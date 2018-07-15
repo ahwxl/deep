@@ -149,8 +149,14 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>dubbo</artifactId>
 			<version>2.5.3</version>
-			<!-- <exclusions> <exclusion> <dependency> <groupId>org.springframework</groupId> 
-				<artifactId>spring</artifactId> </dependency> </exclusion> </exclusions> -->
+			<exclusions>
+				<exclusion>
+					<dependency>
+						<groupId>org.springframework</groupId>
+			            <artifactId>spring</artifactId>
+					</dependency>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.101tec</groupId>
