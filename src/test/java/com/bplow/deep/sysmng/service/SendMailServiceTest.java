@@ -38,7 +38,7 @@ public class SendMailServiceTest {
         msg.setFrom("tenement_admin@163.com");
         msg.setSubject("[执行结果通知]");
         msg.setText(content);
-        msg.setTo(new String[]{"wangxiaolei@shfft.com"});
+        msg.setTo(new String[]{"tenement_admin2222@163.com"});
         
         sendMailService.sendMail(msg);
         
