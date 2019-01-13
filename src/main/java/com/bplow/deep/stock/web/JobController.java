@@ -63,9 +63,27 @@ public class JobController {
 		return page;
 	}
 	
+	@RequestMapping(value = "/job/queryJob")
+	@ResponseBody
+	public SkScheduleTask queryJob(HttpServletRequest httpRequest, Model view,SkScheduleTask task){
+	    HttpSession session = httpRequest.getSession();
+        String wxl = (String)session.getAttribute("wxl");
+        logger.info("查询任务列表:sessionId:{}:{}",session.getId(),wxl);
+        
+        Subject subject =SecurityUtils.getSubject(); 
+        Session shiroSession = subject.getSession();
+        String userId = (String)shiroSession.getAttribute("userId");
+        task.setUserId(userId);
+        SkScheduleTask skScheduleTask = jobService.queryJob(task);
+		
+		return skScheduleTask;
+	}
+	
 	@RequestMapping(value = "/job/createJob")
 	@ResponseBody
 	public String createJob(SkScheduleTask task,HttpServletRequest httpRequest, Model view){
+		
+		logger.info("任务创建请求:{}",task);
 		
 		task.setStatus("1");
 		jobService.createJob(task);
@@ -73,6 +91,16 @@ public class JobController {
 		return "创建成功！";
 	}
 	
+	@RequestMapping(value = "/job/editerJob")
+	@ResponseBody
+	public String editerJob(SkScheduleTask task,HttpServletRequest httpRequest, Model view){
+		
+		logger.info("任务修改请求:{}",task);
+		
+		jobService.editerJob(task);
+		
+		return "修改成功！";
+	}
 	
 	@RequestMapping(value = "/job/delJob")
 	@ResponseBody
@@ -83,12 +111,32 @@ public class JobController {
 		return "删除成功";
 	}
 	
+	@RequestMapping(value = "/job/executeJob")
+	@ResponseBody
+	public String executeJob(SkScheduleTask task,HttpServletRequest httpRequest, Model view){
+		
+		boolean result = jobService.triggerJob(task);
+		
+		return result==true?"成功":"失败";
+	}
+	
+	
 	@RequestMapping(value = "/job/pauseJob")
     @ResponseBody
 	public String pauseJob(SkScheduleTask task,HttpServletRequest httpRequest, Model view){
 	    
+		boolean result = jobService.pauseJob(task);
 	    
-	    return "";
+	    return result==true?"成功":"失败";
+	}
+	
+	@RequestMapping(value = "/job/resumeJob")
+    @ResponseBody
+	public String resumeJob(SkScheduleTask task,HttpServletRequest httpRequest, Model view){
+	    
+		boolean result = jobService.resumeJob(task);
+	    
+	    return result==true?"成功":"失败";
 	}
 
 }

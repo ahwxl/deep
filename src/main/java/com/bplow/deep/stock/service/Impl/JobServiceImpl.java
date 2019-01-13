@@ -93,4 +93,85 @@ public class JobServiceImpl implements JobService{
 		return task;
 	}
 
+
+	@Override
+	public boolean triggerJob(SkScheduleTask task) {
+		
+		SkScheduleTask scheduleTask = skScheduleTaskMapper.selectByPrimaryKey(task.getId());
+		
+		try {
+			
+			taskSheduleService.triggerJob(scheduleTask.getJobId(), scheduleTask.getGroupId());
+			
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public void editerJob(SkScheduleTask task) {
+		
+		SkScheduleTask scheduleTask = skScheduleTaskMapper.selectByPrimaryKey(task.getId());
+		
+		try {
+			taskSheduleService.editerCronTrigger(scheduleTask.getTriggerName(),scheduleTask.getGroupId(),task.getTriggerName(),task.getGroupId(),task.getCron() );
+		
+			skScheduleTaskMapper.update(task);
+			
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public boolean pauseJob(SkScheduleTask task) {
+		
+		try {
+			SkScheduleTask scheduleTask = skScheduleTaskMapper.selectByPrimaryKey(task.getId());
+			
+			taskSheduleService.pauseJob(scheduleTask.getJobId(), scheduleTask.getGroupId());
+			
+			task.setStatus("2");//暫停
+			skScheduleTaskMapper.updateStatus(task);
+			
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public SkScheduleTask queryJob(SkScheduleTask task) {
+		
+		SkScheduleTask scheduleTask = skScheduleTaskMapper.selectByPrimaryKey(task.getId());
+		
+		return scheduleTask;
+	}
+
+	@Override
+	public boolean resumeJob(SkScheduleTask task) {
+		
+		SkScheduleTask scheduleTask = skScheduleTaskMapper.selectByPrimaryKey(task.getId());
+		
+		try {
+			
+			taskSheduleService.resumeJob(scheduleTask.getJobId(), scheduleTask.getGroupId());
+			
+			task.setStatus("1");
+			skScheduleTaskMapper.updateStatus(task);
+			
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+
 }

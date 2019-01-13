@@ -32,11 +32,11 @@ var mygridtab = $('#sample_1').dataTable({
            		     		           { "groupId": "^[0-9]", "bEscapeRegex": false }
            		     		  ],
                 "aoColumns": [
-                  { "sTitle": "组名称","mData":"groupId","bSortable": false,"sWidth":"300",height:"20"},
+                  { "sTitle": "组名称","mData":"groupId","bSortable": false,"sWidth":"100",height:"20"},
                   { "sTitle": "任务名称","mData":"jobId","bSortable": false,"sWidth":100 },
-                  { "sTitle": "出发器名称","mData":"triggerName","bSortable": false },
+                  { "sTitle": "出发器名称","mData":"triggerName","bSortable": false,"sWidth":100 },
                   { "sTitle": "创建日期","mData":"gmtCreate","bSortable": false,"sWidth":150 },
-                  { "sTitle": "操作","mData":"status","bSortable": false,"sWidth":110 }
+                  { "sTitle": "操作","mData":"status","bSortable": false,"sWidth":190 }
                 ],
                 "aLengthMenu": [
                     [5, 15, 20, -1],
@@ -57,9 +57,17 @@ var mygridtab = $('#sample_1').dataTable({
                         'bSortable': false,
                         'aTargets': [4],
                         fnRender: function (setobj, data) {
-                        	var htmlstr = "<a class=' mini purple' name='showProcessImage' id='showProcessImage'  1data-toggle='modal' procDefId='"+setobj.aData['processDefineId']+"' href='javascript:void(0)'><i class='icon-edit'></i>修改</a>";
+                        	var htmlstr = "<a class=' mini purple' id='{0}' data-toggle='editer' href='javascript:void(0)'><i class='icon-edit'></i>{1}</a>".format(setobj.aData['id'],"修改");
+                        	var pause =   "<a class=' mini purple' id='{0}'   data-toggle='pause' ><i class='icon-trash'></i>{1}</a>".format(setobj.aData['id'],"暂停");
                         	var delhtml = "<a class=' mini purple' id='{0}' data-toggle='delete' ><i class='icon-trash'></i>{1}</a>".format(setobj.aData['id'],"删除");
-                        	return htmlstr+delhtml;
+                        	var execute = "<a class=' mini purple' id='{0}' data-toggle='execute' ><i class='icon-trash'></i>{1}</a>".format(setobj.aData['id'],"执行");
+                        	var resume = "<a class=' mini purple' id='{0}' data-toggle='resume' ><i class='icon-trash'></i>{1}</a>".format(setobj.aData['id'],"开始");
+                        	
+                        	if("2" == setobj.aData['status']){
+                        		pause = resume;
+                        	}
+                        	
+                        	return htmlstr+pause+delhtml+execute;
                         }
                     }
                 ]
@@ -67,9 +75,9 @@ var mygridtab = $('#sample_1').dataTable({
             
                 //var table = $('#sample_1').DataTable();
             	//动态创建的元素 通过绑定到 document
-            	$(document).off('click.modal').on('click.modal.data-api', '[1data-toggle^="modal"]', function ( e ) {
+                //添加
+            	$(document).off('click.modal1').on('click.modal.data-api', '[1data-toggle^="modal"]', function ( e ) {
                 	//var procDefId = $(this).attr('procDefId');
-                	//alert(procDefId);
                     $('#stack1').modal({
                     	confirm:function(formvalue){
                     		var param = $('#myform').serialize();
@@ -85,10 +93,87 @@ var mygridtab = $('#sample_1').dataTable({
                     });
                 });
             	
-            	$(document).off('click.modal2').on('click.modal2.data-api', '[data-toggle="delete"]', function ( e ) {
+            	//修改
+            	$(document).off('click.modal2').on('click.modal1.data-api', '[data-toggle="editer"]', function ( e ) {
+                	var id = $(this).attr('id');
+                	
+                    $('#myform')[0].reset();
+            		
+            		$.ajax({
+						url:'/deep/job/queryJob',
+						async:true,
+						method:'POST',
+						data:'id='+id,
+						dataType : 'json',
+						error :function(resp){alert(resp)},
+						success:function(resp){
+							$('#myform input[name="id"]').val(resp.id);
+							$('#myform input[name=taskParam]').val(resp.taskParam);
+							$('#myform input[name=triggerName]').val(resp.triggerName);
+							$('#myform input[name=jobId]').val(resp.jobId);
+						}
+					});
+                	
+                    $('#stack1').modal({
+                    	confirm:function(formvalue){
+                    		var param = $('#myform').serialize();
+                    		$.post("/deep/job/editerJob",
+                    				param,
+                    			function(data){
+                    			   mygridtab.fnDraw();
+                    			   alert(data);
+                    		    }
+                    		);
+                    	}
+                    	
+                    });
+                });
+            	
+            	
+            	//删除任务
+            	$(document).off('click.modal3').on('click.modal2.data-api', '[data-toggle="delete"]', function ( e ) {
             		var id = $(this).attr('id');
             		
             		$.post("/deep/job/delJob",
+            				"id="+id,
+            			function(data){
+            			   mygridtab.fnDraw();
+            			   alert(data);
+            		    }
+            		);
+            		
+            	});
+            	//执行
+            	$(document).off('click.modal4').on('click.modal3.data-api', '[data-toggle="execute"]', function ( e ) {
+            		var id = $(this).attr('id');
+            		
+            		$.post("/deep/job/executeJob",
+            				"id="+id,
+            			function(data){
+            			   mygridtab.fnDraw();
+            			   alert(data);
+            		    }
+            		);
+            		
+            	});
+            	
+            	$(document).off('click.modal5').on('click.modal3.data-api', '[data-toggle="pause"]', function ( e ) {
+            		var id = $(this).attr('id');
+            		
+            		$.post("/deep/job/pauseJob",
+            				"id="+id,
+            			function(data){
+            			   mygridtab.fnDraw();
+            			   alert(data);
+            		    }
+            		);
+            		
+            	});
+            	
+            	$(document).off('click.modal6').on('click.modal3.data-api', '[data-toggle="resume"]', function ( e ) {
+            		var id = $(this).attr('id');
+            		
+            		$.post("/deep/job/resumeJob",
             				"id="+id,
             			function(data){
             			   mygridtab.fnDraw();

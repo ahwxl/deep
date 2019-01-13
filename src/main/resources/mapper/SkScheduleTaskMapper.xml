@@ -100,4 +100,15 @@
     </set>
      WHERE ID = #{id} 
   </update>
+  
+  <update id="updateStatus" parameterType="com.bplow.deep.stock.domain.SkScheduleTask">
+    update sk_schedule_task
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+     WHERE ID = #{id} 
+  </update>
+  
 </mapper>

@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="/deep/static/js/select2.min.js"></script>
 	<script type="text/javascript" src="/deep/static/js/jquery.dataTables.js?20170215"></script>
 	<script type="text/javascript" src="/deep/static/js/DT_bootstrap.js"></script>
-    <script type="text/javascript" src="/deep/static/js/module/joblist.js?20170330"></script>
+    <script type="text/javascript" src="/deep/static/js/module/joblist.js?20190330"></script>
 </head>
 <body>
                <!-- BEGIN PAGE HEADER-->
@@ -158,6 +158,7 @@
 											<!-- BEGIN FORM-->
 
 											<form action="#" name="myform" id="myform" class="form-horizontal">
+											<input type="hidden" name="id" value="" />
 
 												<div class="control-group">
 
@@ -244,6 +245,8 @@
 															<option value="com.bplow.deep.quartz.job.PriceRefreshJob">价格刷新</option>
 															
 															<option value="com.bplow.deep.quartz.job.DaySwitchJob">日切</option>
+															
+															<option value="com.bplow.deep.quartz.job.TestJob">测试</option>
 															
 															<option value="">----</option>
 

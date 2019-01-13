@@ -9,6 +9,8 @@ public interface SkScheduleTaskMapper {
     SkScheduleTask selectByPrimaryKey(String id);
 
     int update(SkScheduleTask record);
+    
+    int updateStatus(SkScheduleTask record);
 
     int insert(SkScheduleTask record);
 

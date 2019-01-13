@@ -32,7 +32,8 @@ public class TaskSheduleService {
     @Qualifier("clusterQuartzScheduler")
     SchedulerFactoryBean clusterQuartzScheduler;
 
-    public List queryTaskList() throws SchedulerException {
+    @SuppressWarnings("unchecked")
+	public List<Trigger> queryTaskList() throws SchedulerException {
         JobKey jobkey = new JobKey("job1", "group1");
         List<Trigger> list = (List<Trigger>) clusterQuartzScheduler.getScheduler()
             .getTriggersOfJob(jobkey);
@@ -83,13 +84,13 @@ public class TaskSheduleService {
      * @param triggerGroup
      * @throws SchedulerException
      */
-    public void editerCronTrigger(String triggerName, String triggerGroup)
+    public void editerCronTrigger(String triggerName, String triggerGroup,String newTriggerName,String newTriggerGroup,String cron)
                                                                           throws SchedulerException {
 
         TriggerKey tkey = new TriggerKey(triggerName, triggerGroup);
         CronTrigger newtrigger = (CronTrigger) TriggerBuilder.newTrigger()
-            .withIdentity("trigger2", "group1")
-            .withSchedule(CronScheduleBuilder.cronSchedule("0/30 * * * * ?")).build();
+            .withIdentity(newTriggerName, newTriggerGroup)
+            .withSchedule(CronScheduleBuilder.cronSchedule(cron)).build();//"0/30 * * * * ?"
 
         clusterQuartzScheduler.getScheduler().rescheduleJob(tkey, newtrigger);
     }
