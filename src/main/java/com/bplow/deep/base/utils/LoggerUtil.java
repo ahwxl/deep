@@ -1,7 +1,3 @@
-/**
- * Alipay.com Inc.
- * Copyright (c) 2004-2010 All Rights Reserved.
- */
 package com.bplow.deep.base.utils;
 
 import org.slf4j.Logger;
