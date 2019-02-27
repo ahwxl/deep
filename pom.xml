@@ -407,13 +407,13 @@
 			<artifactId>quartz</artifactId>
 			<version>2.2.3</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.taobao</groupId>
 			<artifactId>taobao-sdk-java-auto_1455552377940</artifactId>
 			<version>20160607</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/taobao-sdk-java-auto_1455552377940-20160607.jar</systemPath>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -578,11 +578,11 @@
 			<artifactId>druid</artifactId>
 			<version>1.1.6</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 		    <groupId>com.oracle</groupId>
 		    <artifactId>ojdbc6</artifactId>
 		    <version>12.1.0.1-atlassian-hosted</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-asm</artifactId>
@@ -592,6 +592,12 @@
 		    <groupId>cglib</groupId>
 		    <artifactId>cglib</artifactId>
 		    <version>2.2.2</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.aliyun</groupId>
+		  <artifactId>aliyun-java-sdk-core</artifactId>
+		  <version>4.0.3</version>
 		</dependency>
 
 		<dependency>

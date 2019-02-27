@@ -14,16 +14,16 @@ public class MaintainServiceImpl implements MaintainService {
     @Qualifier("deployCommand")
     private Command deploy;
 
-    @Autowired
-    @Qualifier("startCommand")
+   // @Autowired
+    //@Qualifier("startCommand")
     private Command start;
 
-    @Autowired
-    @Qualifier("stopCommand")
+    //@Autowired
+    //@Qualifier("stopCommand")
     private Command stop;
 
-    @Autowired
-    @Qualifier("restartCommand")
+    //@Autowired
+    //@Qualifier("restartCommand")
     private Command restart;
 
     @Override
