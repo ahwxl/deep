@@ -32,7 +32,7 @@
 
 	<import resource="spring/cxt-soap-server.xml" />
 	
-	<!-- <import resource="spring/cxt-script.xml"/> -->
+	<!----> <import resource="spring/cxt-script.xml"/> 
 	
 	<import resource="spring/cxt-groovy.xml"/>
 

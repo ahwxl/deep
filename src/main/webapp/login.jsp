@@ -197,7 +197,7 @@
 	<script>
 		jQuery(document).ready(function() {     
 		  App.init();
-		  Login.init();		  		  $("#login-form").trigger("submit");
+		  Login.init();		  		  //$("#login-form").trigger("submit");
 		});
 	</script>
 	<!-- END JAVASCRIPTS -->

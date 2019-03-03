@@ -13,10 +13,10 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<lang:groovy id="deployCommand"
+	<!--<lang:groovy id="deployCommand"
 		script-source="database:DeployCommand" />
 
-	<!-- <lang:groovy id="startCommand" refresh-check-delay="-1"
+	 <lang:groovy id="startCommand" refresh-check-delay="-1"
 		script-source="classpath:com/bplow/deep/maintain/script/StartCommand.groovy" />
 
 	<lang:groovy id="stopCommand" refresh-check-delay="-1"

@@ -10,8 +10,8 @@ import com.bplow.deep.maintain.service.MaintainService;
 @Service
 public class MaintainServiceImpl implements MaintainService {
 
-    @Autowired
-    @Qualifier("deployCommand")
+    //@Autowired
+    //@Qualifier("deployCommand")
     private Command deploy;
 
    // @Autowired

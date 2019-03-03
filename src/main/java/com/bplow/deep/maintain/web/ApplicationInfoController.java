@@ -18,69 +18,69 @@ import com.bplow.deep.maintain.service.MaintainService;
 @Controller
 public class ApplicationInfoController {
 
-    private Logger                 logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private ApplicationInfoService applicationInfoService;
+	@Autowired
+	private ApplicationInfoService applicationInfoService;
 
-    @Autowired
-    private MaintainService        maintainService;
+	@Autowired
+	private MaintainService maintainService;
 
-    @RequestMapping(value = "/app/index")
-    public String index() {
+	@RequestMapping(value = "/app/index")
+	public String index() {
 
-        return "maintain/app-list";
-    }
+		return "maintain/app-list";
+	}
 
-    @RequestMapping(value = "/app/queryForPage")
-    @ResponseBody
-    public Page<AutoAppInfo> applist(AutoAppInfo autoAppInfo, HttpServletRequest httpRequest) {
+	@RequestMapping(value = "/app/queryForPage")
+	@ResponseBody
+	public Page<AutoAppInfo> applist(AutoAppInfo autoAppInfo, HttpServletRequest httpRequest) {
 
-        HttpSession session = httpRequest.getSession();
-        logger.info("sessionId:{}", session.getId());
+		HttpSession session = httpRequest.getSession();
+		logger.info("sessionId:{}", session.getId());
 
-        session.setAttribute("wxl", "汪小二");
+		session.setAttribute("wxl", "汪小二");
 
-        //autoAppInfo.setAppCode(autoAppInfo.getsSearch());
-        Page<AutoAppInfo> page = applicationInfoService.queryForList(autoAppInfo);
+		// autoAppInfo.setAppCode(autoAppInfo.getsSearch());
+		Page<AutoAppInfo> page = applicationInfoService.queryForList(autoAppInfo);
 
-        return page;
-    }
+		return page;
+	}
 
-    @RequestMapping(value = "/app/deploy")
-    @ResponseBody
-    public String deploy(HttpServletRequest httpRequest) {
+	@RequestMapping(value = "/app/deploy")
+	@ResponseBody
+	public String deploy(HttpServletRequest httpRequest) {
 
-        String str = maintainService.deploy();
+		String str = maintainService.deploy();
 
-        return str;
-    }
+		return str;
+	}
 
-    @RequestMapping(value = "/app/stop")
-    @ResponseBody
-    public String stop(HttpServletRequest httpRequest) {
+	@RequestMapping(value = "/app/stop")
+	@ResponseBody
+	public String stop(HttpServletRequest httpRequest) {
 
-        String str = maintainService.stop();
+		String str = maintainService.stop();
 
-        return str;
-    }
+		return str;
+	}
 
-    @RequestMapping(value = "/app/start")
-    @ResponseBody
-    public String start() {
+	@RequestMapping(value = "/app/start")
+	@ResponseBody
+	public String start() {
 
-        String str = maintainService.start();
+		String str = maintainService.start();
 
-        return str;
-    }
+		return str;
+	}
 
-    @RequestMapping(value = "/app/reStart")
-    @ResponseBody
-    public String reStart() {
+	@RequestMapping(value = "/app/reStart")
+	@ResponseBody
+	public String reStart() {
 
-        String str = maintainService.restart();
+		String str = maintainService.restart();
 
-        return str;
-    }
+		return str;
+	}
 
 }
